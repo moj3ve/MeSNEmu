@@ -16,7 +16,7 @@
 {
   LMEmulatorControllerView* _customView;
   
-  UIActionSheet* _actionSheet;
+  UIAlertController* _actionSheet;
   
   volatile NSThread* _emulationThread;
   

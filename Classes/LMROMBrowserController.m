@@ -246,7 +246,7 @@ static int const LMFileOrganizationVersionNumber = 1;
       {
         lastChar = firstLetter;
         [tempSectionTitles addObject:[NSString stringWithCharacters:&lastChar length:1]];
-        [tempSectionMarkers addObject:[NSNumber numberWithInt:[tempRomList count]]];
+        [tempSectionMarkers addObject:[NSNumber numberWithInt:(int)[tempRomList count]]];
       }
       [tempRomList addObject:file];
     }
@@ -262,7 +262,7 @@ static int const LMFileOrganizationVersionNumber = 1;
     if([fm fileExistsAtPath:romPath] == YES)
     {
       [tempSectionTitles addObject:NSLocalizedString(@"CARTRIDGE_FILES", nil)];
-      [tempSectionMarkers addObject:[NSNumber numberWithInt:[itemsList count]]];
+      [tempSectionMarkers addObject:[NSNumber numberWithInt:(int)[itemsList count]]];
       LMFileListItem* romItem = [[LMFileListItem alloc] init];
       romItem.displayName = _detailsItem.displayName;
       //romItem.displayName = NSLocalizedString(@"GAME_FILE", nil);
@@ -396,7 +396,7 @@ static int const LMFileOrganizationVersionNumber = 1;
 
 #pragma mark UISearchDisplayControllerDelegate
 
-- (BOOL)searchDisplayController:(UISearchDisplayController*)controller shouldReloadTableForSearchString:(NSString*)searchString
+- (BOOL)searchDisplayController:(UISearchController*)controller shouldReloadTableForSearchString:(NSString*)searchString
 {
   [self LM_reloadROMList:NO];
   return YES;
