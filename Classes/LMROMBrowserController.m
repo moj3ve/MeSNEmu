@@ -381,7 +381,7 @@ static int const LMFileOrganizationVersionNumber = 1;
 
 - (LMFileListItem*)LM_romItemForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
 {
-  int index = indexPath.row;
+  int index = (int)indexPath.row;
   if(tableView == self.searchDisplayController.searchResultsTableView)
   {
     index += [[_filteredSectionMarkers objectAtIndex:indexPath.section] intValue];
