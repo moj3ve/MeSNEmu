@@ -285,7 +285,7 @@ typedef enum _LMSettingsSections
     else if(row == 1)
     {
       cell.textLabel.text = NSLocalizedString(@"Core", nil);
-      cell.detailTextLabel.text = [NSString stringWithFormat:@"Snes9X %@ Plus", [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
+      cell.detailTextLabel.text = [NSString stringWithFormat:@"Snes9X %@", [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
     }
     else if(row == 2)
     {
