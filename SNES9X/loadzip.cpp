@@ -215,14 +215,14 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 		if ((int) info.uncompressed_size > filesize)
 		{
 			strcpy(filename, name);
-			filesize = info.uncompressed_size;
+			filesize = (int)info.uncompressed_size;
 		}
 
-		int	len = strlen(name);
+		int	len = (int)strlen(name);
 		if (len > 2 && name[len - 2] == '.' && name[len - 1] == '1')
 		{
 			strcpy(filename, name);
-			filesize = info.uncompressed_size;
+			filesize = (int)info.uncompressed_size;
 			break;
 		}
 
@@ -289,7 +289,7 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 		if (ptr - Memory.ROM < CMemory::MAX_ROM_SIZE + 512)
 		{
 			if (ext == tmp)
-				len = strlen(filename);
+				len = (int)strlen(filename);
 			else
 				len = ext - filename - 1;
 
