@@ -246,7 +246,7 @@ static int const LMFileOrganizationVersionNumber = 1;
       {
         lastChar = firstLetter;
         [tempSectionTitles addObject:[NSString stringWithCharacters:&lastChar length:1]];
-        [tempSectionMarkers addObject:[NSNumber numberWithInt:(int)[tempRomList count]]];
+        [tempSectionMarkers addObject:[NSNumber numberWithInt:[tempRomList count]]];
       }
       [tempRomList addObject:file];
     }
@@ -262,7 +262,7 @@ static int const LMFileOrganizationVersionNumber = 1;
     if([fm fileExistsAtPath:romPath] == YES)
     {
       [tempSectionTitles addObject:NSLocalizedString(@"CARTRIDGE_FILES", nil)];
-      [tempSectionMarkers addObject:[NSNumber numberWithInt:(int)[itemsList count]]];
+      [tempSectionMarkers addObject:[NSNumber numberWithInt:[itemsList count]]];
       LMFileListItem* romItem = [[LMFileListItem alloc] init];
       romItem.displayName = _detailsItem.displayName;
       //romItem.displayName = NSLocalizedString(@"GAME_FILE", nil);
@@ -291,7 +291,7 @@ static int const LMFileOrganizationVersionNumber = 1;
         if(hasSaves == NO)
         {
           [tempSectionTitles addObject:NSLocalizedString(@"SAVE_POINTS", nil)];
-          [tempSectionMarkers addObject:[NSNumber numberWithInt:(int)[itemsList count]]];
+          [tempSectionMarkers addObject:[NSNumber numberWithInt:[itemsList count]]];
           hasSaves = YES;
         }
         LMFileListItem* saveItem = [[LMFileListItem alloc] init];
@@ -381,7 +381,7 @@ static int const LMFileOrganizationVersionNumber = 1;
 
 - (LMFileListItem*)LM_romItemForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
 {
-  int index = (int)indexPath.row;
+  int index = indexPath.row;
   if(tableView == self.searchDisplayController.searchResultsTableView)
   {
     index += [[_filteredSectionMarkers objectAtIndex:indexPath.section] intValue];
@@ -396,7 +396,7 @@ static int const LMFileOrganizationVersionNumber = 1;
 
 #pragma mark UISearchDisplayControllerDelegate
 
-- (BOOL)searchDisplayController:(UISearchController*)controller shouldReloadTableForSearchString:(NSString*)searchString
+- (BOOL)searchDisplayController:(UISearchDisplayController*)controller shouldReloadTableForSearchString:(NSString*)searchString
 {
   [self LM_reloadROMList:NO];
   return YES;
@@ -455,14 +455,14 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(tableView == self.searchDisplayController.searchResultsTableView)
   {
     sectionStart = [[_filteredSectionMarkers objectAtIndex:section] intValue];
-    sectionEnd = (int)[_filteredRomList count];
+    sectionEnd = [_filteredRomList count];
     if(section < [_filteredSectionMarkers count]-1)
       sectionEnd = [[_filteredSectionMarkers objectAtIndex:(section+1)] intValue];
   }
   else
   {
     sectionStart = [[_sectionMarkers objectAtIndex:section] intValue];
-    sectionEnd = (int)[_romList count];
+    sectionEnd = [_romList count];
     if(section < [_sectionMarkers count]-1)
       sectionEnd = [[_sectionMarkers objectAtIndex:(section+1)] intValue];
   }
@@ -532,7 +532,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(editingStyle == UITableViewCellEditingStyleDelete)
   {
     // Delete the row from the data source
-    int amount = (int)[self tableView:tableView numberOfRowsInSection:indexPath.section];
+    int amount = [self tableView:tableView numberOfRowsInSection:indexPath.section];
     LMFileListItem* item = [self LM_romItemForTableView:tableView indexPath:indexPath];
     [[NSFileManager defaultManager] removeItemAtPath:[_romPath stringByAppendingPathComponent:item.fileName] error:nil];
     [self LM_reloadROMList:NO];
@@ -602,7 +602,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   else
     self.title = _detailsItem.displayName;
   
-  UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIBarButtonItemStylePlain target:self action:@selector(LM_settingsTapped)];
+  UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(LM_settingsTapped)];
   self.navigationItem.rightBarButtonItem = settingsButton;
   [settingsButton release];
   

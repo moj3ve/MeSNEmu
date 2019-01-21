@@ -176,7 +176,7 @@ typedef enum _LMEmulatorAlert
   if(_actionSheet != actionSheet)
     return;
   
-    NSLog(@"UIActionSheet button index: %li", (long)buttonIndex);
+  NSLog(@"UIActionSheet button index: %i", buttonIndex);
   int resetIndex = 1;
 #ifdef SI_ENABLE_SAVES
   int loadIndex = 2;
@@ -461,9 +461,9 @@ typedef enum _LMEmulatorAlert
   else
     [_customView setMinMagFilter:kCAFilterNearest];
   SISetAutoFrameskip([defaults boolForKey:kLMSettingsAutoFrameskip]);
-  SISetFrameskip((int)[defaults integerForKey:kLMSettingsFrameskipValue]);
+  SISetFrameskip([defaults integerForKey:kLMSettingsFrameskipValue]);
   
-  _customView.iCadeControlView.controllerType = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsBluetoothController];
+  _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsBluetoothController];
   // TODO: support custom key layouts
   
   SIUpdateSettings();
