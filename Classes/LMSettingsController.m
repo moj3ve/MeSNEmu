@@ -256,7 +256,7 @@ typedef enum _LMSettingsSections
       c.maximumValue = 9;
       c.suffix = NSLocalizedString(@"FRAMES", nil);
       c.allowsDefault = NO;
-      c.value = [[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsFrameskipValue];
+      c.value = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsFrameskipValue];
       c.delegate = self;
     }
   }
@@ -268,7 +268,7 @@ typedef enum _LMSettingsSections
       cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier] autorelease];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
    
-    int row = indexPath.row;
+    int row = (int)indexPath.row;
     if(row == 0)
     {
       cell.textLabel.text = NSLocalizedString(@"VERSION", nil);

@@ -291,7 +291,7 @@ static int const LMFileOrganizationVersionNumber = 1;
         if(hasSaves == NO)
         {
           [tempSectionTitles addObject:NSLocalizedString(@"SAVE_POINTS", nil)];
-          [tempSectionMarkers addObject:[NSNumber numberWithInt:[itemsList count]]];
+          [tempSectionMarkers addObject:[NSNumber numberWithInt:(int)[itemsList count]]];
           hasSaves = YES;
         }
         LMFileListItem* saveItem = [[LMFileListItem alloc] init];
@@ -455,14 +455,14 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(tableView == self.searchDisplayController.searchResultsTableView)
   {
     sectionStart = [[_filteredSectionMarkers objectAtIndex:section] intValue];
-    sectionEnd = [_filteredRomList count];
+    sectionEnd = (int)[_filteredRomList count];
     if(section < [_filteredSectionMarkers count]-1)
       sectionEnd = [[_filteredSectionMarkers objectAtIndex:(section+1)] intValue];
   }
   else
   {
     sectionStart = [[_sectionMarkers objectAtIndex:section] intValue];
-    sectionEnd = [_romList count];
+    sectionEnd = (int)[_romList count];
     if(section < [_sectionMarkers count]-1)
       sectionEnd = [[_sectionMarkers objectAtIndex:(section+1)] intValue];
   }
@@ -532,7 +532,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(editingStyle == UITableViewCellEditingStyleDelete)
   {
     // Delete the row from the data source
-    int amount = [self tableView:tableView numberOfRowsInSection:indexPath.section];
+    int amount = (int)[self tableView:tableView numberOfRowsInSection:indexPath.section];
     LMFileListItem* item = [self LM_romItemForTableView:tableView indexPath:indexPath];
     [[NSFileManager defaultManager] removeItemAtPath:[_romPath stringByAppendingPathComponent:item.fileName] error:nil];
     [self LM_reloadROMList:NO];
@@ -602,7 +602,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   else
     self.title = _detailsItem.displayName;
   
-  UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIBarButtonItemStyleBordered target:self action:@selector(LM_settingsTapped)];
+  UIBarButtonItem* settingsButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIBarButtonItemStylePlain target:self action:@selector(LM_settingsTapped)];
   self.navigationItem.rightBarButtonItem = settingsButton;
   [settingsButton release];
   
