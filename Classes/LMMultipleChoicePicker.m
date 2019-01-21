@@ -59,7 +59,7 @@
 {
   // Navigation logic may go here. Create and push another view controller.
   [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_pickedIndex inSection:0]].accessoryType = UITableViewCellAccessoryNone;
-  _pickedIndex = indexPath.row;
+  _pickedIndex = (int)indexPath.row;
   UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
   cell.accessoryType = UITableViewCellAccessoryCheckmark;
   [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
