@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26AEE2B021F75BCF00DD9D5E /* ButtonDarkPurple2.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2AF21F75BCF00DD9D5E /* ButtonDarkPurple2.png */; };
+		26AEE2B221F7609400DD9D5E /* ABButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B121F7609400DD9D5E /* ABButton.png */; };
+		26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B321F7622A00DD9D5E /* PurpleButton.png */; };
+		26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */; };
 		66C1BD601866ACA800E5A833 /* LMGameControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C1BD5F1866ACA800E5A833 /* LMGameControllerManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		66C1BD621866AF9E00E5A833 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C1BD611866AF9E00E5A833 /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A00403C114BE3E4D00FE28CE /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401E514BE3E4D00FE28CE /* apu.cpp */; };
@@ -144,6 +148,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26AEE2AF21F75BCF00DD9D5E /* ButtonDarkPurple2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonDarkPurple2.png; sourceTree = "<group>"; };
+		26AEE2B121F7609400DD9D5E /* ABButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ABButton.png; sourceTree = "<group>"; };
+		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
+		26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
 		66C1BD5E1866ACA800E5A833 /* LMGameControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LMGameControllerManager.h; path = Classes/LMGameControllerManager.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		66C1BD5F1866ACA800E5A833 /* LMGameControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LMGameControllerManager.m; path = Classes/LMGameControllerManager.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		66C1BD611866AF9E00E5A833 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
@@ -704,6 +712,10 @@
 		A0B8685814BE25F900663EBE /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */,
+				26AEE2B321F7622A00DD9D5E /* PurpleButton.png */,
+				26AEE2B121F7609400DD9D5E /* ABButton.png */,
+				26AEE2AF21F75BCF00DD9D5E /* ButtonDarkPurple2.png */,
 				A0B8685914BE25F900663EBE /* ButtonDarkPurple.png */,
 				A0B8685F14BE2C9500663EBE /* ButtonDarkPurple@2x.png */,
 				A0E0DC3F19EF03F400D8EBF4 /* ButtonDarkPurple@3x.png */,
@@ -861,13 +873,16 @@
 				A0DF88EA19EEBB580070326B /* Images.xcassets in Resources */,
 				A0E0DC3C19EF032B00D8EBF4 /* ButtonGrey@3x.png in Resources */,
 				A0B8685C14BE25F900663EBE /* ButtonDarkPurple.png in Resources */,
+				26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */,
 				A0B8686014BE2C9500663EBE /* ButtonDarkPurple@2x.png in Resources */,
 				A0F1F125184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png in Resources */,
 				A0B8685D14BE25F900663EBE /* ButtonLightPurple.png in Resources */,
+				26AEE2B021F75BCF00DD9D5E /* ButtonDarkPurple2.png in Resources */,
 				A0E0DC4E19EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png in Resources */,
 				A0E0DC4419EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png in Resources */,
 				A0B8686214BE2C9900663EBE /* ButtonLightPurple@2x.png in Resources */,
 				A0B8685E14BE25F900663EBE /* ButtonWide.png in Resources */,
+				26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */,
 				A0F1F122184D5A6B000D6CE9 /* ButtonNumberMinusDown-7.png in Resources */,
 				A0B8686414BE2C9E00663EBE /* ButtonWide@2x.png in Resources */,
 				A0B8686714BE391300663EBE /* ButtonDPad.png in Resources */,
@@ -885,6 +900,7 @@
 				A0F1F128184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png in Resources */,
 				A0F1F118184D5A6B000D6CE9 /* ButtonNumberDefault-7.png in Resources */,
 				A0F1F11C184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7.png in Resources */,
+				26AEE2B221F7609400DD9D5E /* ABButton.png in Resources */,
 				A0F1F124184D5A6B000D6CE9 /* ButtonNumberPlus-7.png in Resources */,
 				A0F1F11E184D5A6B000D6CE9 /* ButtonNumberMinus-7.png in Resources */,
 				A0E0DC3A19EF00D600D8EBF4 /* ButtonDPad@3x.png in Resources */,

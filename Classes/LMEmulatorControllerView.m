@@ -48,8 +48,8 @@
 
 - (LMButtonView*)LM_buttonWithButton:(int)buttonMap
 {
-  int side = 50;
-  side = 60;
+  int side = 70;
+  side = 70;
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     side = 70;
   LMButtonView* button = [[LMButtonView alloc] initWithFrame:(CGRect){0,0, side,side}];
@@ -57,7 +57,7 @@
   button.label.font = [UIFont boldSystemFontOfSize:27.0];
   if(buttonMap == SI_BUTTON_A || buttonMap == SI_BUTTON_B)
   {
-    button.image = [UIImage imageNamed:@"ButtonDarkPurple.png"];
+    button.image = [UIImage imageNamed:@"PurpleButton.png"];
     button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
     button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
     button.label.shadowOffset = CGSizeMake(0, 1);
@@ -68,7 +68,7 @@
   }
   else if(buttonMap == SI_BUTTON_X || buttonMap == SI_BUTTON_Y)
   {
-    button.image = [UIImage imageNamed:@"ButtonLightPurple.png"];
+    button.image = [UIImage imageNamed:@"LightPurpleButton.png"];
     button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
     button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
     button.label.shadowOffset = CGSizeMake(0, 1);
@@ -434,19 +434,19 @@
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
         {
             int buttonSize = _aButton.frame.size.width;
-            _aButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize-screenBorderY, _aButton.frame.size};
+            _aButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*2-screenBorderY-buttonSpacing, _aButton.frame.size};
             _aButton.alpha = controlsAlpha;
-            _bButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize-screenBorderY, _bButton.frame.size};
+            _bButton.frame = (CGRect){size.width-buttonSize*1.5-screenBorderX-buttonSpacing, size.height-buttonSize-screenBorderY, _bButton.frame.size};
             _bButton.alpha = controlsAlpha;
-            _xButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*2-screenBorderY-buttonSpacing, _xButton.frame.size};
+            _xButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*3-screenBorderY-buttonSpacing, _xButton.frame.size};
             _xButton.alpha = controlsAlpha;
             _yButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*2-screenBorderY-buttonSpacing, _yButton.frame.size};
             _yButton.alpha = controlsAlpha;
             
             _lButton.alpha = controlsAlpha;
-            _lButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*3-screenBorderY-buttonSpacing, _yButton.frame.size};
+            _lButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*4-screenBorderY-buttonSpacing, _yButton.frame.size};
             _rButton.alpha = controlsAlpha;
-            _rButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*3-screenBorderY-buttonSpacing, _xButton.frame.size};
+            _rButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*4-screenBorderY-buttonSpacing, _xButton.frame.size};
         }
         else
         {
@@ -509,12 +509,12 @@
             // portrait - full screen
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
             {
-                _dPadView.frame = (CGRect){screenBorderX,size.height-150-screenBorderY, _dPadView.image.size};
+                _dPadView.frame = (CGRect){screenBorderX,size.height-175-screenBorderY, _dPadView.image.size};
                 _dPadView.alpha = controlsAlpha;
             }
             else
             {
-                _dPadView.frame = (CGRect){screenBorderX,size.height-150-screenBorderY, _dPadView.image.size};
+                _dPadView.frame = (CGRect){screenBorderX,size.height-175-screenBorderY, _dPadView.image.size};
                 _dPadView.alpha = controlsAlpha;
             }
     }
