@@ -290,7 +290,7 @@
   CGSize size = self.bounds.size;
   int screenBorderX = 8;
   int screenBorderY = 30;
-  int buttonSpacing = 10;
+  int buttonSpacing = 7;
   int smallButtonsOriginX = 0;
   int smallButtonsOriginY = 0;
   int smallButtonsSpacing = 5;
@@ -408,9 +408,8 @@
     yOffset = _startButton.frame.size.height+smallButtonsSpacing;
   else
     xOffset = _startButton.frame.size.width+smallButtonsSpacing;
-  _startButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _startButton.frame.size};
-  _selectButton.frame = (CGRect){smallButtonsOriginX+xOffset,smallButtonsOriginY+yOffset, _selectButton.frame.size};
-  _optionsButton.frame = (CGRect){smallButtonsOriginX+2*xOffset,smallButtonsOriginY+2*yOffset, _selectButton.frame.size};
+
+  _optionsButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _selectButton.frame.size};
   
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
   {
@@ -434,19 +433,22 @@
         if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
         {
             int buttonSize = _aButton.frame.size.width;
-            _aButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*2-screenBorderY-buttonSpacing, _aButton.frame.size};
+            _aButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*2.4-screenBorderY, _aButton.frame.size};
             _aButton.alpha = controlsAlpha;
-            _bButton.frame = (CGRect){size.width-buttonSize*1.5-screenBorderX-buttonSpacing, size.height-buttonSize-screenBorderY, _bButton.frame.size};
+            _bButton.frame = (CGRect){size.width-buttonSize*1.9-screenBorderX, size.height-buttonSize*1.5-screenBorderY, _bButton.frame.size};
             _bButton.alpha = controlsAlpha;
-            _xButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*3-screenBorderY-buttonSpacing, _xButton.frame.size};
+            _xButton.frame = (CGRect){size.width-buttonSize*1.9-screenBorderX, size.height-buttonSize*3.3-screenBorderY, _xButton.frame.size};
             _xButton.alpha = controlsAlpha;
-            _yButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*2-screenBorderY-buttonSpacing, _yButton.frame.size};
+            _yButton.frame = (CGRect){size.width-buttonSize*2.8-screenBorderX, size.height-buttonSize*2.4-screenBorderY, _yButton.frame.size};
             _yButton.alpha = controlsAlpha;
             
             _lButton.alpha = controlsAlpha;
-            _lButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*4-screenBorderY-buttonSpacing, _yButton.frame.size};
+            _lButton.frame = (CGRect){size.width-buttonSize*2.5-screenBorderX-buttonSpacing, size.height-buttonSize*4-screenBorderY-buttonSpacing, _yButton.frame.size};
             _rButton.alpha = controlsAlpha;
-            _rButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*4-screenBorderY-buttonSpacing, _xButton.frame.size};
+            _rButton.frame = (CGRect){size.width-buttonSize*1.2-screenBorderX, size.height-buttonSize*4-screenBorderY-buttonSpacing, _xButton.frame.size};
+            
+            _startButton.frame = (CGRect){size.width-buttonSize*2.8-screenBorderX, size.height-45, _startButton.frame.size};
+            _selectButton.frame = (CGRect){size.width-buttonSize*3.5-screenBorderX, size.height-45, _selectButton.frame.size};
         }
         else
         {
