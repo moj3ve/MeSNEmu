@@ -48,7 +48,7 @@
 
 - (LMButtonView*)LM_buttonWithButton:(int)buttonMap
 {
-  int side = 70;
+  int side = 60;
   side = 70;
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
     side = 70;
@@ -408,8 +408,6 @@
     yOffset = _startButton.frame.size.height+smallButtonsSpacing;
   else
     xOffset = _startButton.frame.size.width+smallButtonsSpacing;
-
-  _optionsButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _selectButton.frame.size};
   
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
   {
@@ -449,6 +447,7 @@
             
             _startButton.frame = (CGRect){size.width-buttonSize*2.9-screenBorderX, size.height-45, _startButton.frame.size};
             _selectButton.frame = (CGRect){size.width-buttonSize*3.6-screenBorderX, size.height-45, _selectButton.frame.size};
+            _optionsButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _selectButton.frame.size};
         }
         else
         {
@@ -469,40 +468,30 @@
             
             _startButton.frame = (CGRect){size.width-buttonSize*2.9-screenBorderX, size.height-45, _startButton.frame.size};
             _selectButton.frame = (CGRect){size.width-buttonSize*3.6-screenBorderX, size.height-45, _selectButton.frame.size};
+            _optionsButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _selectButton.frame.size};
         }
     }
     else
     {
-        // landscape
         int buttonSize = _aButton.frame.size.width;
-        _aButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize-screenBorderY, _aButton.frame.size};
+        _aButton.frame = (CGRect){size.width-buttonSize*1-screenBorderX, size.height-buttonSize*1.8-screenBorderY, _aButton.frame.size};
         _aButton.alpha = controlsAlpha;
-        _bButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize-screenBorderY, _bButton.frame.size};
+        _bButton.frame = (CGRect){size.width-buttonSize*1.73-screenBorderX, size.height-buttonSize*1-screenBorderY, _bButton.frame.size};
         _bButton.alpha = controlsAlpha;
-        _xButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*2-screenBorderY-buttonSpacing, _xButton.frame.size};
+        _xButton.frame = (CGRect){size.width-buttonSize*1.73-screenBorderX, size.height-buttonSize*2.6-screenBorderY, _xButton.frame.size};
         _xButton.alpha = controlsAlpha;
-        _yButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*2-screenBorderY-buttonSpacing, _yButton.frame.size};
+        _yButton.frame = (CGRect){size.width-buttonSize*2.5-screenBorderX, size.height-buttonSize*1.8-screenBorderY, _yButton.frame.size};
         _yButton.alpha = controlsAlpha;
         
         _lButton.alpha = controlsAlpha;
-        _lButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*3-screenBorderY-buttonSpacing, _yButton.frame.size};
+        _lButton.frame = (CGRect){size.width-buttonSize*2.3-screenBorderX-buttonSpacing, size.height-buttonSize*3.8-screenBorderY-buttonSpacing, _yButton.frame.size};
         _rButton.alpha = controlsAlpha;
-        _rButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*3-screenBorderY-buttonSpacing, _xButton.frame.size};
+        _rButton.frame = (CGRect){size.width-buttonSize*1.1-screenBorderX, size.height-buttonSize*3.8-screenBorderY-buttonSpacing, _xButton.frame.size};
+        
+        _startButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _startButton.frame.size};
+        _selectButton.frame = (CGRect){smallButtonsOriginX+xOffset,smallButtonsOriginY+yOffset, _selectButton.frame.size};
+        _optionsButton.frame = (CGRect){smallButtonsOriginX+2*xOffset,smallButtonsOriginY+2*yOffset, _selectButton.frame.size};
     }
-  /* int buttonSize = _aButton.frame.size.width;
-  _aButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize-screenBorderY, _aButton.frame.size};
-  _aButton.alpha = controlsAlpha;
-  _bButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize-screenBorderY, _bButton.frame.size};
-  _bButton.alpha = controlsAlpha;
-  _xButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*2-screenBorderY-buttonSpacing, _xButton.frame.size};
-  _xButton.alpha = controlsAlpha;
-  _yButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*2-screenBorderY-buttonSpacing, _yButton.frame.size};
-  _yButton.alpha = controlsAlpha;
-  
-  _lButton.alpha = controlsAlpha;
-  _lButton.frame = (CGRect){size.width-buttonSize*2-screenBorderX-buttonSpacing, size.height-buttonSize*3-screenBorderY-buttonSpacing, _yButton.frame.size};
-  _rButton.alpha = controlsAlpha;
-  _rButton.frame = (CGRect){size.width-buttonSize-screenBorderX, size.height-buttonSize*3-screenBorderY-buttonSpacing, _xButton.frame.size}; */
   
   // layout d-pad
     // dPadView.frame = (CGRect){screenBorderX,size.height-_dPadView.image.size.height-screenBorderY, _dPadView.image.size};
@@ -514,12 +503,12 @@
             // portrait - full screen
             if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
             {
-                _dPadView.frame = (CGRect){screenBorderX,size.height-212-screenBorderY, _dPadView.image.size};
+                _dPadView.frame = (CGRect){screenBorderX,size.height-210-screenBorderY, _dPadView.image.size};
                 _dPadView.alpha = controlsAlpha;
             }
             else
             {
-                _dPadView.frame = (CGRect){screenBorderX,size.height-175-screenBorderY, _dPadView.image.size};
+                _dPadView.frame = (CGRect){screenBorderX,size.height-210-screenBorderY, _dPadView.image.size};
                 _dPadView.alpha = controlsAlpha;
             }
     }
