@@ -130,7 +130,7 @@
   {
     self.userInteractionEnabled = YES;
     
-    self.image = [UIImage imageNamed:@"ButtonDPad.png"];
+    self.image = [UIImage imageNamed:@"DPadButton.png"];
     self.contentMode = UIViewContentModeCenter;
   }
   return self;

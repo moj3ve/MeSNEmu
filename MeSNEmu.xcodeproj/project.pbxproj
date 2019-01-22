@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		26AEE2B021F75BCF00DD9D5E /* ButtonDarkPurple2.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2AF21F75BCF00DD9D5E /* ButtonDarkPurple2.png */; };
-		26AEE2B221F7609400DD9D5E /* ABButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B121F7609400DD9D5E /* ABButton.png */; };
+		26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78821F77DBC00E05B50 /* DPadButton.png */; };
+		26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78921F77DBC00E05B50 /* LRButton.png */; };
 		26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B321F7622A00DD9D5E /* PurpleButton.png */; };
 		26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */; };
 		66C1BD601866ACA800E5A833 /* LMGameControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C1BD5F1866ACA800E5A833 /* LMGameControllerManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -100,14 +100,7 @@
 		A0995F8614B6884F00F7C44F /* SIScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0995F8514B6883E00F7C44F /* SIScreenDelegate.m */; };
 		A0A8A0FA14B25401003C5688 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A8A0F914B25401003C5688 /* AudioToolbox.framework */; };
 		A0A8A0FC14B25409003C5688 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A8A0FB14B25409003C5688 /* libz.dylib */; };
-		A0B8685C14BE25F900663EBE /* ButtonDarkPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8685914BE25F900663EBE /* ButtonDarkPurple.png */; };
-		A0B8685D14BE25F900663EBE /* ButtonLightPurple.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8685A14BE25F900663EBE /* ButtonLightPurple.png */; };
 		A0B8685E14BE25F900663EBE /* ButtonWide.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8685B14BE25F900663EBE /* ButtonWide.png */; };
-		A0B8686014BE2C9500663EBE /* ButtonDarkPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8685F14BE2C9500663EBE /* ButtonDarkPurple@2x.png */; };
-		A0B8686214BE2C9900663EBE /* ButtonLightPurple@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8686114BE2C9900663EBE /* ButtonLightPurple@2x.png */; };
-		A0B8686414BE2C9E00663EBE /* ButtonWide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8686314BE2C9E00663EBE /* ButtonWide@2x.png */; };
-		A0B8686714BE391300663EBE /* ButtonDPad.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8686514BE391300663EBE /* ButtonDPad.png */; };
-		A0B8686814BE391300663EBE /* ButtonDPad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8686614BE391300663EBE /* ButtonDPad@2x.png */; };
 		A0B8686B14BE3B3100663EBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686914BE3B3100663EBE /* main.m */; };
 		A0B8687E14BE3B6800663EBE /* LMDPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686E14BE3B6600663EBE /* LMDPadView.m */; };
 		A0B8687F14BE3B6800663EBE /* LMEmulatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686F14BE3B6600663EBE /* LMEmulatorController.m */; };
@@ -117,15 +110,8 @@
 		A0B8688414BE3B6800663EBE /* LMPixelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687914BE3B6700663EBE /* LMPixelLayer.m */; };
 		A0B8688514BE3B6800663EBE /* LMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687C14BE3B6800663EBE /* LMAppDelegate.m */; };
 		A0BB592614E84BC000D12F97 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0BB592814E84BC000D12F97 /* Localizable.strings */; };
-		A0BF018E14E98A19006534F2 /* ButtonGrey.png in Resources */ = {isa = PBXBuildFile; fileRef = A0BF018C14E98A19006534F2 /* ButtonGrey.png */; };
-		A0BF018F14E98A19006534F2 /* ButtonGrey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0BF018D14E98A19006534F2 /* ButtonGrey@2x.png */; };
 		A0D287B8172959A300CD6C6A /* iCadeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D287B6172959A300CD6C6A /* iCadeReaderView.m */; };
 		A0DF88EA19EEBB580070326B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DF88E919EEBB580070326B /* Images.xcassets */; };
-		A0E0DC3A19EF00D600D8EBF4 /* ButtonDPad@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC3919EF00D600D8EBF4 /* ButtonDPad@3x.png */; };
-		A0E0DC3C19EF032B00D8EBF4 /* ButtonGrey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC3B19EF032B00D8EBF4 /* ButtonGrey@3x.png */; };
-		A0E0DC3E19EF039500D8EBF4 /* ButtonWide@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC3D19EF039500D8EBF4 /* ButtonWide@3x.png */; };
-		A0E0DC4019EF03F400D8EBF4 /* ButtonDarkPurple@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC3F19EF03F400D8EBF4 /* ButtonDarkPurple@3x.png */; };
-		A0E0DC4219EF03FD00D8EBF4 /* ButtonLightPurple@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4119EF03FD00D8EBF4 /* ButtonLightPurple@3x.png */; };
 		A0E0DC4419EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4319EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png */; };
 		A0E0DC4A19EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4519EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png */; };
 		A0E0DC4B19EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4619EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png */; };
@@ -148,8 +134,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		26AEE2AF21F75BCF00DD9D5E /* ButtonDarkPurple2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonDarkPurple2.png; sourceTree = "<group>"; };
-		26AEE2B121F7609400DD9D5E /* ABButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ABButton.png; sourceTree = "<group>"; };
+		26AAB78821F77DBC00E05B50 /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
+		26AAB78921F77DBC00E05B50 /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
 		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
 		26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
 		66C1BD5E1866ACA800E5A833 /* LMGameControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LMGameControllerManager.h; path = Classes/LMGameControllerManager.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -344,14 +330,7 @@
 		A0995F8514B6883E00F7C44F /* SIScreenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SIScreenDelegate.m; path = SNES9XBridge/SIScreenDelegate.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0A8A0F914B25401003C5688 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A0A8A0FB14B25409003C5688 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A0B8685914BE25F900663EBE /* ButtonDarkPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonDarkPurple.png; sourceTree = "<group>"; };
-		A0B8685A14BE25F900663EBE /* ButtonLightPurple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonLightPurple.png; sourceTree = "<group>"; };
 		A0B8685B14BE25F900663EBE /* ButtonWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonWide.png; sourceTree = "<group>"; };
-		A0B8685F14BE2C9500663EBE /* ButtonDarkPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonDarkPurple@2x.png"; sourceTree = "<group>"; };
-		A0B8686114BE2C9900663EBE /* ButtonLightPurple@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonLightPurple@2x.png"; sourceTree = "<group>"; };
-		A0B8686314BE2C9E00663EBE /* ButtonWide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonWide@2x.png"; sourceTree = "<group>"; };
-		A0B8686514BE391300663EBE /* ButtonDPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonDPad.png; sourceTree = "<group>"; };
-		A0B8686614BE391300663EBE /* ButtonDPad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonDPad@2x.png"; sourceTree = "<group>"; };
 		A0B8686914BE3B3100663EBE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = Classes/main.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8686A14BE3B3100663EBE /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Prefix.pch; path = Classes/Prefix.pch; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8686E14BE3B6600663EBE /* LMDPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LMDPadView.m; path = Classes/LMDPadView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -371,17 +350,10 @@
 		A0B8688914BE3BE300663EBE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		A0BB592714E84BC000D12F97 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
 		A0BB592914E84BD100D12F97 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; lineEnding = 0; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.simpleColoring; };
-		A0BF018C14E98A19006534F2 /* ButtonGrey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonGrey.png; sourceTree = "<group>"; };
-		A0BF018D14E98A19006534F2 /* ButtonGrey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonGrey@2x.png"; sourceTree = "<group>"; };
 		A0D287B5172959A300CD6C6A /* iCadeReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCadeReaderView.h; sourceTree = "<group>"; };
 		A0D287B6172959A300CD6C6A /* iCadeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCadeReaderView.m; sourceTree = "<group>"; };
 		A0D287B7172959A300CD6C6A /* iCadeState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCadeState.h; sourceTree = "<group>"; };
 		A0DF88E919EEBB580070326B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MeSNEmu/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		A0E0DC3919EF00D600D8EBF4 /* ButtonDPad@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonDPad@3x.png"; sourceTree = "<group>"; };
-		A0E0DC3B19EF032B00D8EBF4 /* ButtonGrey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonGrey@3x.png"; sourceTree = "<group>"; };
-		A0E0DC3D19EF039500D8EBF4 /* ButtonWide@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonWide@3x.png"; sourceTree = "<group>"; };
-		A0E0DC3F19EF03F400D8EBF4 /* ButtonDarkPurple@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonDarkPurple@3x.png"; sourceTree = "<group>"; };
-		A0E0DC4119EF03FD00D8EBF4 /* ButtonLightPurple@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonLightPurple@3x.png"; sourceTree = "<group>"; };
 		A0E0DC4319EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7@3x.png"; sourceTree = "<group>"; };
 		A0E0DC4519EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7@3x.png"; sourceTree = "<group>"; };
 		A0E0DC4619EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7@3x.png"; sourceTree = "<group>"; };
@@ -712,25 +684,11 @@
 		A0B8685814BE25F900663EBE /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				26AAB78821F77DBC00E05B50 /* DPadButton.png */,
+				26AAB78921F77DBC00E05B50 /* LRButton.png */,
 				26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */,
 				26AEE2B321F7622A00DD9D5E /* PurpleButton.png */,
-				26AEE2B121F7609400DD9D5E /* ABButton.png */,
-				26AEE2AF21F75BCF00DD9D5E /* ButtonDarkPurple2.png */,
-				A0B8685914BE25F900663EBE /* ButtonDarkPurple.png */,
-				A0B8685F14BE2C9500663EBE /* ButtonDarkPurple@2x.png */,
-				A0E0DC3F19EF03F400D8EBF4 /* ButtonDarkPurple@3x.png */,
-				A0B8686514BE391300663EBE /* ButtonDPad.png */,
-				A0B8686614BE391300663EBE /* ButtonDPad@2x.png */,
-				A0E0DC3919EF00D600D8EBF4 /* ButtonDPad@3x.png */,
-				A0BF018C14E98A19006534F2 /* ButtonGrey.png */,
-				A0BF018D14E98A19006534F2 /* ButtonGrey@2x.png */,
-				A0E0DC3B19EF032B00D8EBF4 /* ButtonGrey@3x.png */,
-				A0B8685A14BE25F900663EBE /* ButtonLightPurple.png */,
-				A0B8686114BE2C9900663EBE /* ButtonLightPurple@2x.png */,
-				A0E0DC4119EF03FD00D8EBF4 /* ButtonLightPurple@3x.png */,
 				A0B8685B14BE25F900663EBE /* ButtonWide.png */,
-				A0B8686314BE2C9E00663EBE /* ButtonWide@2x.png */,
-				A0E0DC3D19EF039500D8EBF4 /* ButtonWide@3x.png */,
 				A0F1F105184D5A6A000D6CE9 /* NumberControl */,
 			);
 			path = Artwork;
@@ -869,44 +827,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0F1F123184D5A6B000D6CE9 /* ButtonNumberMinusDown-7@2x.png in Resources */,
-				A0E0DC4219EF03FD00D8EBF4 /* ButtonLightPurple@3x.png in Resources */,
 				A0DF88EA19EEBB580070326B /* Images.xcassets in Resources */,
-				A0E0DC3C19EF032B00D8EBF4 /* ButtonGrey@3x.png in Resources */,
-				A0B8685C14BE25F900663EBE /* ButtonDarkPurple.png in Resources */,
 				26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */,
-				A0B8686014BE2C9500663EBE /* ButtonDarkPurple@2x.png in Resources */,
 				A0F1F125184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png in Resources */,
-				A0B8685D14BE25F900663EBE /* ButtonLightPurple.png in Resources */,
-				26AEE2B021F75BCF00DD9D5E /* ButtonDarkPurple2.png in Resources */,
 				A0E0DC4E19EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png in Resources */,
 				A0E0DC4419EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png in Resources */,
-				A0B8686214BE2C9900663EBE /* ButtonLightPurple@2x.png in Resources */,
 				A0B8685E14BE25F900663EBE /* ButtonWide.png in Resources */,
 				26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */,
 				A0F1F122184D5A6B000D6CE9 /* ButtonNumberMinusDown-7.png in Resources */,
-				A0B8686414BE2C9E00663EBE /* ButtonWide@2x.png in Resources */,
-				A0B8686714BE391300663EBE /* ButtonDPad.png in Resources */,
 				A0E0DC4A19EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png in Resources */,
-				A0B8686814BE391300663EBE /* ButtonDPad@2x.png in Resources */,
 				A0E0DC4D19EF075D00D8EBF4 /* ButtonNumberPlus-7@3x.png in Resources */,
 				A0F1F11F184D5A6B000D6CE9 /* ButtonNumberMinus-7@2x.png in Resources */,
 				A0F1F129184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png in Resources */,
 				A0F1F119184D5A6B000D6CE9 /* ButtonNumberDefault-7@2x.png in Resources */,
+				26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */,
 				A0BB592614E84BC000D12F97 /* Localizable.strings in Resources */,
-				A0BF018E14E98A19006534F2 /* ButtonGrey.png in Resources */,
 				A0E0DC4C19EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png in Resources */,
 				A0F1F11D184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7@2x.png in Resources */,
-				A0BF018F14E98A19006534F2 /* ButtonGrey@2x.png in Resources */,
 				A0F1F128184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png in Resources */,
 				A0F1F118184D5A6B000D6CE9 /* ButtonNumberDefault-7.png in Resources */,
+				26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */,
 				A0F1F11C184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7.png in Resources */,
-				26AEE2B221F7609400DD9D5E /* ABButton.png in Resources */,
 				A0F1F124184D5A6B000D6CE9 /* ButtonNumberPlus-7.png in Resources */,
 				A0F1F11E184D5A6B000D6CE9 /* ButtonNumberMinus-7.png in Resources */,
-				A0E0DC3A19EF00D600D8EBF4 /* ButtonDPad@3x.png in Resources */,
 				A0E0DC4B19EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png in Resources */,
-				A0E0DC3E19EF039500D8EBF4 /* ButtonWide@3x.png in Resources */,
-				A0E0DC4019EF03F400D8EBF4 /* ButtonDarkPurple@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
