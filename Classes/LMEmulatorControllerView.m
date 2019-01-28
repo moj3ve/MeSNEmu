@@ -404,10 +404,10 @@
   // start, select, menu buttons
   int xOffset = 0;
   int yOffset = 0;
-  if(smallButtonsVertical == YES)
+  /* if(smallButtonsVertical == YES)
     yOffset = _startButton.frame.size.height+smallButtonsSpacing;
   else
-    xOffset = _startButton.frame.size.width+smallButtonsSpacing;
+    xOffset = _startButton.frame.size.width+smallButtonsSpacing; */
   
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
   {
