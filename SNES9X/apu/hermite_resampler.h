@@ -1,5 +1,3 @@
-/* Simple resampler based on bsnes's ruby audio library */
-
 #ifndef __HERMITE_RESAMPLER_H
 #define __HERMITE_RESAMPLER_H
 

@@ -33,7 +33,7 @@
 #endif
   
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-  
+  self.window.frame = [[UIScreen mainScreen] bounds];
   LMROMBrowserController* romBrowser = [[LMROMBrowserController alloc] init];
   UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:romBrowser];
   self.viewController = nav;
