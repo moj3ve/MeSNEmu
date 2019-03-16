@@ -1049,7 +1049,7 @@
 					"\"$(SRCROOT)/SNES9X/macosx\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu1;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu;
 				PRODUCT_NAME = MeSNEmu;
 				SNES_CFLAGS = "-funsigned-char -ffast-math -fexpensive-optimizations -falign-functions=32 -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fstrength-reduce -funroll-loops -fstrict-aliasing";
 				WRAPPER_EXTENSION = app;
@@ -1071,7 +1071,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/SNES9X/macosx\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu1;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu;
 				PRODUCT_NAME = MeSNEmu;
 				SNES_CFLAGS = "-funsigned-char -ffast-math -fexpensive-optimizations -falign-functions=32 -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fstrength-reduce -funroll-loops -fstrict-aliasing";
 				WRAPPER_EXTENSION = app;
