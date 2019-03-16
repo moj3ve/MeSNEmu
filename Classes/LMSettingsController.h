@@ -16,6 +16,7 @@ extern NSString* const kLMSettingsBluetoothController;
 
 extern NSString* const kLMSettingsSmoothScaling;
 extern NSString* const kLMSettingsFullScreen;
+extern NSString* const kLMSettingsDarkMode;
 
 extern NSString* const kLMSettingsSound;
 extern NSString* const kLMSettingsAutoFrameskip;
@@ -38,7 +39,8 @@ extern NSString* const kLMSettingsFrameskipValue;
   
   NSIndexPath* _smoothScalingIndexPath;
   NSIndexPath* _fullScreenIndexPath;
-  
+  NSIndexPath* _darkModeIndexPath;
+
   NSIndexPath* _soundIndexPath;
   NSIndexPath* _autoFrameskipIndexPath;
   NSIndexPath* _frameskipValueIndexPath;

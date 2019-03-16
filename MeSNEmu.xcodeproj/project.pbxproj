@@ -303,7 +303,7 @@
 		A027AC1814C78F3C00F177F7 /* LMSaveManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; name = LMSaveManager.mm; path = Classes/LMSaveManager.mm; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A027AC2D14C8456D00F177F7 /* SISaveDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SISaveDelegate.h; path = SNES9XBridge/SISaveDelegate.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A027AC2E14C8456D00F177F7 /* SISaveDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SISaveDelegate.m; path = SNES9XBridge/SISaveDelegate.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		A03C087214BF7AB2003FAEB9 /* LMSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LMSettingsController.h; path = Classes/LMSettingsController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A03C087214BF7AB2003FAEB9 /* LMSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LMSettingsController.h; path = Classes/LMSettingsController.h; sourceTree = SOURCE_ROOT; };
 		A03C087314BF7AB2003FAEB9 /* LMSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LMSettingsController.m; path = Classes/LMSettingsController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A03C087614BF7E43003FAEB9 /* LMTableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = LMTableViewSwitchCell.h; path = Classes/LMTableViewSwitchCell.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A03C087714BF7E43003FAEB9 /* LMTableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = LMTableViewSwitchCell.m; path = Classes/LMTableViewSwitchCell.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1049,7 +1049,7 @@
 					"\"$(SRCROOT)/SNES9X/macosx\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu1;
 				PRODUCT_NAME = MeSNEmu;
 				SNES_CFLAGS = "-funsigned-char -ffast-math -fexpensive-optimizations -falign-functions=32 -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fstrength-reduce -funroll-loops -fstrict-aliasing";
 				WRAPPER_EXTENSION = app;
@@ -1071,7 +1071,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/SNES9X/macosx\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu;
+				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu1;
 				PRODUCT_NAME = MeSNEmu;
 				SNES_CFLAGS = "-funsigned-char -ffast-math -fexpensive-optimizations -falign-functions=32 -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fstrength-reduce -funroll-loops -fstrict-aliasing";
 				WRAPPER_EXTENSION = app;

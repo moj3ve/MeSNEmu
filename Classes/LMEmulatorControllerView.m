@@ -275,7 +275,7 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  
+  BOOL fullScreen = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsFullScreen];
   UIColor* plasticColor = [UIColor colorWithRed:195/255.0 green:198/255.0 blue:205/255.0 alpha:1];
   UIColor* blackColor = [UIColor blackColor];
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
@@ -319,22 +319,43 @@
     }
     else
     {
-      // portrait - screen or screen+controller mode
-      // portrait - full screen
-        width = size.width;
-        height = (int)(width/(double)originalWidth*originalHeight);
-        
-        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        // portrait - screen or screen+controller mode
+        if(fullScreen == YES)
         {
-          smallButtonsVertical = NO;
-          smallButtonsOriginX = smallButtonsSpacing;
-          smallButtonsOriginY = height+smallButtonsSpacing;
+            // portrait - full screen
+            width = size.width;
+            height = (int)(width/(double)originalWidth*originalHeight);
+            
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            {
+                smallButtonsVertical = NO;
+                smallButtonsOriginX = smallButtonsSpacing;
+                smallButtonsOriginY = height+smallButtonsSpacing;
+            }
+            else
+            {
+                smallButtonsVertical = YES;
+                smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
+                smallButtonsOriginY = size.height-_dPadView.image.size.height;
+            }
         }
         else
         {
-          smallButtonsVertical = YES;
-          smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
-          smallButtonsOriginY = size.height-_dPadView.image.size.height;
+            // portrait - 1:1
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            {
+                screenOffsetY = (int)((size.width-width)/4);
+                smallButtonsVertical = NO;
+                smallButtonsOriginX = (size.width-(_startButton.frame.size.width*3+smallButtonsSpacing*2))/2;
+                smallButtonsOriginY = screenOffsetY+height+smallButtonsSpacing;
+            }
+            else
+            {
+                screenOffsetY = -2;
+                smallButtonsVertical = YES;
+                smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
+                smallButtonsOriginY = size.height-_dPadView.image.size.height;
+            }
         }
     }
   }
