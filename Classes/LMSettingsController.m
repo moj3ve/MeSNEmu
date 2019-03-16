@@ -247,7 +247,7 @@ typedef enum _LMSettingsSections
             
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"Dark Mode", nil);
+            c.textLabel.text = NSLocalizedString(@"Dark Mode (Coming Soon)", nil);
         }
     }
     else if(section == LMSettingsSectionEmulation)
@@ -296,7 +296,7 @@ typedef enum _LMSettingsSections
             {
                 versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
             }
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@-B1",
                                          kLMEmulatorPortName,
                                          versionString];
         }

@@ -302,98 +302,120 @@
     screenBorderY = 90;
   }
   
-  if(size.height > size.width)
-  {
-    // portrait
-    self.backgroundColor = plasticColor;
-    
-    if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+    if(size.height > size.width)
     {
-      // portrait - controller mode
-      width = height = 0;
-      int dpadHeight = _dPadView.image.size.height;
-      screenBorderY = size.height*0.5-dpadHeight*0.5;
-      smallButtonsVertical = NO;
-      smallButtonsOriginY = size.height-smallButtonsSpacing-_startButton.image.size.height;
-      smallButtonsOriginX = size.width*0.5-_startButton.image.size.width*1.5-smallButtonsSpacing;
-    }
-    else
-    {
-        // portrait - screen or screen+controller mode
-        if(fullScreen == YES)
+        // portrait
+        self.backgroundColor = plasticColor;
+        
+        if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
         {
-            // portrait - full screen
-            width = size.width;
-            height = (int)(width/(double)originalWidth*originalHeight);
-            
-            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            {
-                smallButtonsVertical = NO;
-                smallButtonsOriginX = smallButtonsSpacing;
-                smallButtonsOriginY = height+smallButtonsSpacing;
-            }
-            else
-            {
-                smallButtonsVertical = YES;
-                smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
-                smallButtonsOriginY = size.height-_dPadView.image.size.height;
-            }
+            // portrait - controller mode
+            width = height = 0;
+            int dpadHeight = _dPadView.image.size.height;
+            screenBorderY = size.height*0.5-dpadHeight*0.5;
+            smallButtonsVertical = NO;
+            smallButtonsOriginY = size.height-smallButtonsSpacing-_startButton.image.size.height;
+            smallButtonsOriginX = size.width*0.5-_startButton.image.size.width*1.5-smallButtonsSpacing;
         }
         else
         {
-            // portrait - 1:1
-            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+            // portrait - screen or screen+controller mode
+            if(fullScreen == YES)
             {
-                screenOffsetY = (int)((size.width-width)/4);
-                smallButtonsVertical = NO;
-                smallButtonsOriginX = (size.width-(_startButton.frame.size.width*3+smallButtonsSpacing*2))/2;
-                smallButtonsOriginY = screenOffsetY+height+smallButtonsSpacing;
+                // portrait - full screen
+                width = size.width;
+                height = (int)(width/(double)originalWidth*originalHeight);
+                
+                if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+                {
+                    smallButtonsVertical = NO;
+                    smallButtonsOriginX = smallButtonsSpacing;
+                    smallButtonsOriginY = height+smallButtonsSpacing;
+                }
+                else
+                {
+                    smallButtonsVertical = YES;
+                    smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
+                    smallButtonsOriginY = size.height-_dPadView.image.size.height;
+                }
             }
             else
             {
-                screenOffsetY = -2;
-                smallButtonsVertical = YES;
-                smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
-                smallButtonsOriginY = size.height-_dPadView.image.size.height;
+                // portrait - 1:1
+                if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+                {
+                    screenOffsetY = (int)((size.width-width)/4);
+                    smallButtonsVertical = NO;
+                    smallButtonsOriginX = (size.width-(_startButton.frame.size.width*3+smallButtonsSpacing*2))/2;
+                    smallButtonsOriginY = screenOffsetY+height+smallButtonsSpacing;
+                }
+                else
+                {
+                    screenOffsetY = -2;
+                    smallButtonsVertical = YES;
+                    smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
+                    smallButtonsOriginY = size.height-_dPadView.image.size.height;
+                }
             }
         }
     }
-  }
-  else
-  {
-    // landscape
-    if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
-    {
-      // landscape - controller mode
-      self.backgroundColor = plasticColor;
-      width = height = 0;
-      int dpadHeight = _dPadView.image.size.height;
-      screenBorderY = size.height*0.5-dpadHeight*0.5;
-      smallButtonsVertical = NO;
-      smallButtonsOriginY = size.height-smallButtonsSpacing-_startButton.image.size.height;
-      smallButtonsOriginX = size.width*0.5-_startButton.image.size.width*1.5-smallButtonsSpacing;
-      if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-        screenBorderX = 30;
-    }
     else
     {
-      // landscape - screen only or screen+controller mode
-      // landscape - full screen
-        self.backgroundColor = blackColor;
-        
-        height = size.height;
-        width = (int)(height/(double)originalHeight*originalWidth);
-        
-        smallButtonsVertical = YES;
-        smallButtonsOriginX = ((size.width-width)/2-_startButton.frame.size.width)/2;
-        smallButtonsOriginY = smallButtonsOriginX;
-        
-        if(_hideUI == NO)
-          controlsAlpha = 0.5;
+        // landscape
+        if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+        {
+            // landscape - controller mode
+            self.backgroundColor = plasticColor;
+            width = height = 0;
+            int dpadHeight = _dPadView.image.size.height;
+            screenBorderY = size.height*0.5-dpadHeight*0.5;
+            smallButtonsVertical = NO;
+            smallButtonsOriginY = size.height-smallButtonsSpacing-_startButton.image.size.height;
+            smallButtonsOriginX = size.width*0.5-_startButton.image.size.width*1.5-smallButtonsSpacing;
+            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+                screenBorderX = 30;
+        }
         else
-          controlsAlpha = 0;
+        {
+            // landscape - screen only or screen+controller mode
+            if(fullScreen == YES)
+            {
+                // landscape - full screen
+                self.backgroundColor = blackColor;
+                
+                height = size.height;
+                width = (int)(height/(double)originalHeight*originalWidth);
+                
+                smallButtonsVertical = YES;
+                smallButtonsOriginX = ((size.width-width)/2-_startButton.frame.size.width)/2;
+                smallButtonsOriginY = smallButtonsOriginX;
+                
+                if(_hideUI == NO)
+                    controlsAlpha = 0.5;
+                else
+                    controlsAlpha = 0;
+            }
+            else
+            {
+                // landscape - 1:1
+                self.backgroundColor = plasticColor;
+                
+                if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+                {
+                    smallButtonsVertical = YES;
+                    smallButtonsOriginX = ((size.width-width)/2-_startButton.frame.size.width)/2;
+                    smallButtonsOriginY = smallButtonsOriginX;
+                }
+                else
+                {
+                    screenOffsetY = -2;
+                    smallButtonsVertical = YES;
+                    smallButtonsOriginX = (size.width-_startButton.frame.size.width)/2;
+                    smallButtonsOriginY = size.height-_dPadView.image.size.height;
+                }
+            }
+        }
     }
-  }
   
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
     controlsAlpha = 0;

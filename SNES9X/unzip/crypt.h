@@ -1,23 +1,3 @@
-/* crypt.h -- base code for crypt/uncrypt ZIPfile
- Version 1.01h, December 28th, 2009
- Copyright (C) 1998-2009 Gilles Vollant
- This code is a modified version of crypting code in Infozip distribution
- The encryption/decryption parts of this source code (as opposed to the
- non-echoing password parts) were originally written in Europe.  The
- whole source package can be freely distributed, including from the USA.
- (Prior to January 2000, re-export from the US was a violation of US law.)
- This encryption code is a direct transcription of the algorithm from
- Roger Schlafly, described by Phil Katz in the file appnote.txt.  This
- file (appnote.txt) is distributed with the PKZIP program (even in the
- version without encryption capabilities).
- If you don't need crypting in your application, just define symbols
- NOCRYPT and NOUNCRYPT.
- This code support the "Traditional PKWARE Encryption".
- The new AES encryption added on Zip format by Winzip (see the page
- http://www.winzip.com/aes_info.htm ) and PKWare PKZip 5.x Strong
- Encryption is not supported.
- */
-
 #define CRC32(c, b) ((*(pcrc_32_tab+(((int)(c) ^ (b)) & 0xff))) ^ ((c) >> 8))
 
 /***********************************************************************
@@ -42,7 +22,7 @@ static int update_keys(unsigned long* pkeys,const unsigned long* pcrc_32_tab,int
     (*(pkeys+1)) += (*(pkeys+0)) & 0xff;
     (*(pkeys+1)) = (*(pkeys+1)) * 134775813L + 1;
     {
-        int keyshift = (int)((*(pkeys+1)) >> 24);
+        register int keyshift = (int)((*(pkeys+1)) >> 24);
         (*(pkeys+2)) = CRC32((*(pkeys+2)), keyshift);
     }
     return c;
