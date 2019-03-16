@@ -296,7 +296,7 @@ typedef enum _LMSettingsSections
             {
                 versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
             }
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@-B1",
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
                                          kLMEmulatorPortName,
                                          versionString];
         }
