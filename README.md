@@ -5,7 +5,7 @@ Download: [Releases](https://github.com/SarahH12099/MeSNEmu/releases)
 <br>
 
 Notice:<br>
-- Due to a codesigning error right now, you must sign the ipa yourself using a signing service for roms to appear unfortunately. If you install the ipa using Filza or AppInst, imported roms won't appear.
+- Due to a codesigning error right now, you must sign the ipa yourself using a signing service for roms to appear unfortunately. If you install the ipa using Filza or AppInst without signing, imported roms won't appear.
 
 <br>
 
@@ -17,6 +17,19 @@ How to import roms:<br>
 Known Bugs:<br>
 - When not codesigned roms aren't visible <br>
 - When signed using reprovision, e3tender, extender, appsigner, import roms only works through browser, not through Filza or any other way <br>
+
+<br>
+
+Features:<br>
+- Auto save on rom close <br>
+- Save state/load state <br>
+- Reset game <br>
+- Frameskipping <br>
+- Smooth scaling <br>
+- MFI support <br>
+- NControl support <br>
+- Full screen/disable full screen <br>
+- Option to disable/enable sound <br>
 
 <br>
 
