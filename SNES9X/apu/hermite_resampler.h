@@ -1,3 +1,5 @@
+/* Simple resampler based on bsnes's ruby audio library */
+
 #ifndef __HERMITE_RESAMPLER_H
 #define __HERMITE_RESAMPLER_H
 
@@ -60,7 +62,7 @@ class HermiteResampler : public Resampler
         void
         clear (void)
         {
-            ring_buffer::clear ();
+            // ring_buffer::clear ();
             r_frac = 1.0;
             r_left [0] = r_left [1] = r_left [2] = r_left [3] = 0;
             r_right[0] = r_right[1] = r_right[2] = r_right[3] = 0;

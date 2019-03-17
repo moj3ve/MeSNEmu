@@ -1767,7 +1767,7 @@ static void DrawBackgroundOffsetMosaic (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 			s1 += (HOffsetRow & 0x1f) << 5;
 			s2 += (HOffsetRow & 0x1f) << 5;
 			s = ((VOffsetRow & 0x20) ? BPS2 : BPS0) + ((VOffsetRow & 0x1f) << 5);
-			long	VOffsetOffset = s - s1;
+			int32	VOffsetOffset = s - s1;
 
 			uint32	Left =  GFX.Clip[bg].Left[clip];
 			uint32	Right = GFX.Clip[bg].Right[clip];

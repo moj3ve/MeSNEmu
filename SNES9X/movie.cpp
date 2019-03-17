@@ -397,7 +397,7 @@ static void reserve_buffer_space (uint32 space_needed)
 {
 	if (space_needed > Movie.InputBufferSize)
 	{
-		long ptr_offset   = Movie.InputBufferPtr - Movie.InputBuffer;
+		uint32 ptr_offset   = Movie.InputBufferPtr - Movie.InputBuffer;
 		uint32 alloc_chunks = space_needed / BUFFER_GROWTH_SIZE;
 
 		Movie.InputBufferSize = BUFFER_GROWTH_SIZE * (alloc_chunks + 1);

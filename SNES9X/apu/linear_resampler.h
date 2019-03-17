@@ -1,3 +1,5 @@
+/* Simple fixed-point linear resampler by BearOso*/
+
 #ifndef __LINEAR_RESAMPLER_H
 #define __LINEAR_RESAMPLER_H
 
@@ -40,7 +42,7 @@ class LinearResampler : public Resampler
         void
         clear (void)
         {
-            ring_buffer::clear ();
+            // ring_buffer::clear ();
             f__r_frac = 0;
             r_left = 0;
             r_right = 0;
