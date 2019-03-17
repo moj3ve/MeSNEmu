@@ -10,7 +10,8 @@ Notice:<br>
 <br>
 
 How to import roms:<br>
-- You need to download roms to your idevice using Safari or Filza and press open in MeSNEmu and that will import them into the app 
+- Download rom via Safari or other app and then press the open in button and press open in MeSNEmu <br>
+- If jailbroken, you can use Filza to add roms, click the favourites (star shape) button, then click apps manager. Scroll till you see MeSNEmu, click on MeSNEmu and open Documents folder, you can import your roms in this folder <br>
 
 <br>
 
