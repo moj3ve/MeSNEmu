@@ -24,8 +24,8 @@ Requirements For Building IPA:<br>
 
 Building IPA: 
 1) Clone project (git clone --recursive 'clone url') <br>
-2) Run ./genipa.sh in terminal or the start button in Xcode
+2) Run ./genipa.sh in terminal
 
-<br><br>
+<br>
 
 We have a Discord for MeSNEmu too [Join Discord Server](https://discord.gg/Pnjd2xs)
