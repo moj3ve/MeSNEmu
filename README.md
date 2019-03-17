@@ -14,6 +14,12 @@ How to import roms:<br>
 
 <br>
 
+Known Bugs:<br>
+- When not codesigned roms aren't visible <br>
+- When signed using reprovision, e3tender, extender, appsigner, import roms only works through browser, not through Filza or any other way <br>
+
+<br>
+
 Requirements For Building IPA:<br>
 - ldid <br>
 - homebrew <br>
