@@ -17,6 +17,13 @@ How to import roms:<br>
 
 <br>
 
+Support Filetypes:<br>
+- Zip <br>
+- Smc <br>
+- Sfc <br>
+
+<br>
+
 Known Bugs:<br>
 - When not codesigned roms aren't visible <br>
 - When signed using reprovision, e3tender, extender, appsigner, import roms only works through browser, not through Filza or any other way <br>
