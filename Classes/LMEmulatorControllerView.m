@@ -276,6 +276,7 @@
 {
   [super layoutSubviews];
   BOOL fullScreen = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsFullScreen];
+  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
   UIColor* plasticColor = [UIColor colorWithRed:195/255.0 green:198/255.0 blue:205/255.0 alpha:1];
   UIColor* blackColor = [UIColor blackColor];
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
@@ -305,7 +306,12 @@
     if(size.height > size.width)
     {
         // portrait
-        self.backgroundColor = plasticColor;
+        if (darkMode == YES) {
+            self.backgroundColor = blackColor;
+        }
+        else {
+            self.backgroundColor = plasticColor;
+        }
         
         if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
         {

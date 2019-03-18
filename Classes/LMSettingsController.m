@@ -221,7 +221,7 @@ typedef enum _LMSettingsSections
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     UITableViewCell* cell = nil;
-    
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
     NSInteger section = indexPath.section;
     if(section == LMSettingsSectionScreen)
     {
@@ -232,6 +232,9 @@ typedef enum _LMSettingsSections
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsSmoothScaling];
             [c.switchView addTarget:self action:@selector(LM_toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"SMOOTH_SCALING", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
         }
         else if([indexPath compare:_fullScreenIndexPath] == NSOrderedSame)
         {
@@ -240,6 +243,9 @@ typedef enum _LMSettingsSections
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsFullScreen];
             [c.switchView addTarget:self action:@selector(LM_toggleFullScreen:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"Full Screen", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
         }
         else if([indexPath compare:_darkModeIndexPath] == NSOrderedSame)
         {
@@ -247,7 +253,10 @@ typedef enum _LMSettingsSections
             
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"Dark Mode (Coming Soon)", nil);
+            c.textLabel.text = NSLocalizedString(@"Dark Mode (Beta)", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
         }
     }
     else if(section == LMSettingsSectionEmulation)
@@ -256,6 +265,9 @@ typedef enum _LMSettingsSections
         {
             LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
             c.textLabel.text = NSLocalizedString(@"SOUND", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsSound];
             [c.switchView addTarget:self action:@selector(LM_toggleSound:) forControlEvents:UIControlEventValueChanged];
         }
@@ -263,6 +275,9 @@ typedef enum _LMSettingsSections
         {
             LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
             c.textLabel.text = NSLocalizedString(@"Auto Frameskip", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsAutoFrameskip];
             [c.switchView addTarget:self action:@selector(LM_toggleAutoFrameskip:) forControlEvents:UIControlEventValueChanged];
         }
@@ -270,6 +285,9 @@ typedef enum _LMSettingsSections
         {
             LMTableViewNumberCell* c = (LMTableViewNumberCell*)(cell = [self LM_numberCell]);
             c.textLabel.text = NSLocalizedString(@"Skip Every", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
             c.minimumValue = 0;
             c.maximumValue = 9;
             c.suffix = NSLocalizedString(@"Frames", nil);
