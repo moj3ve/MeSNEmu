@@ -7,6 +7,7 @@
 //
 
 #import "LMTableViewSwitchCell.h"
+#import "LMSettingsController.h"
 
 @implementation LMTableViewSwitchCell(Privates)
 
@@ -34,6 +35,10 @@
     _switch = [[UISwitch alloc] initWithFrame:(CGRect){0,0, 0,0}];
     self.accessoryView = _switch;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+    if (darkMode == YES) {
+        self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+    }
   }
   return _switch;
 }
@@ -52,6 +57,10 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {
+  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+  if (darkMode == YES) {
+    self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+  }
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self)
   {
