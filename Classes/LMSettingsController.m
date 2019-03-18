@@ -223,8 +223,10 @@ typedef enum _LMSettingsSections
 
 - (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
 {
-    if(section == LMSettingsSectionEmulation)
-        return NSLocalizedString(@"AUTO_FRAMESKIP_EXPLANATION", nil);
+    if(section == LMSettingsSectionScreen)
+        return NSLocalizedString(@"Enabling Dark Mode requires you to restart the app for it to fully work", nil);
+    else if(section == LMSettingsSectionEmulation)
+        return NSLocalizedString(@"Auto Frameskip may appear slower due to a more inconsistent skip rate", nil);
     return nil;
 }
 
