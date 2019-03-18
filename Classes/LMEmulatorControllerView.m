@@ -58,13 +58,13 @@
   button.label.font = [UIFont boldSystemFontOfSize:27.0];
   if(buttonMap == SI_BUTTON_A)
   {
-      if (rygbButtons == YES) {
-          // button.label.textColor = [UIColor whiteColor];
-          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
-      }
-      else {
-          button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
-      }
+    if (rygbButtons == YES) {
+        // button.label.textColor = [UIColor whiteColor];
+        button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+    }
+    else {
+        button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+    }
     button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
     button.label.shadowOffset = CGSizeMake(0, 1);
     button.label.text = @"A";
