@@ -475,6 +475,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   if (darkMode == YES) {
       cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
       cell.textLabel.textColor = [UIColor whiteColor];
+      cell.detailTextLabel.textColor = [UIColor whiteColor];
   }
   cell.detailTextLabel.text = item.displayDetails;
   if(item.hasDetails)
