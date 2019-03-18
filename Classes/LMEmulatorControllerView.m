@@ -58,7 +58,13 @@
   button.label.font = [UIFont boldSystemFontOfSize:27.0];
   if(buttonMap == SI_BUTTON_A)
   {
-    button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+      if (rygbButtons == YES) {
+          // button.label.textColor = [UIColor whiteColor];
+          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+      }
+      else {
+          button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+      }
     button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
     button.label.shadowOffset = CGSizeMake(0, 1);
     button.label.text = @"A";
@@ -71,7 +77,13 @@
   }
   else if(buttonMap == SI_BUTTON_B)
   {
-      button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+      if (rygbButtons == YES) {
+          // button.label.textColor = [UIColor whiteColor];
+          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+      }
+      else {
+          button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+      }
       button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
       button.label.shadowOffset = CGSizeMake(0, 1);
       button.label.text = @"B";
@@ -84,7 +96,13 @@
   }
   else if(buttonMap == SI_BUTTON_X)
   {
-      button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
+      if (rygbButtons == YES) {
+          // button.label.textColor = [UIColor whiteColor];
+          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+      }
+      else {
+          button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
+      }
       button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
       button.label.shadowOffset = CGSizeMake(0, 1);
       button.label.text = @"X";
@@ -97,7 +115,13 @@
   }
   else if(buttonMap == SI_BUTTON_Y)
   {
-      button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
+      if (rygbButtons == YES) {
+          // button.label.textColor = [UIColor whiteColor];
+          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+      }
+      else {
+          button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
+      }
       button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
       button.label.shadowOffset = CGSizeMake(0, 1);
       button.label.text = @"Y";
@@ -338,7 +362,7 @@
     {
         // portrait
         if (darkMode == YES) {
-            self.backgroundColor = blackColor;
+            self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:1.0];
         }
         else {
             self.backgroundColor = plasticColor;

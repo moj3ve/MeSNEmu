@@ -243,7 +243,7 @@ typedef enum _LMSettingsSections
             [c.switchView addTarget:self action:@selector(LM_toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"SMOOTH_SCALING", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
         }
         else if([indexPath compare:_fullScreenIndexPath] == NSOrderedSame)
@@ -254,7 +254,7 @@ typedef enum _LMSettingsSections
             [c.switchView addTarget:self action:@selector(LM_toggleFullScreen:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"Full Screen", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
         }
         else if([indexPath compare:_darkModeIndexPath] == NSOrderedSame)
@@ -265,7 +265,7 @@ typedef enum _LMSettingsSections
             [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"Dark Mode (Beta)", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
         }
         else if([indexPath compare:_rygbButtonsIndexPath] == NSOrderedSame)
@@ -276,7 +276,7 @@ typedef enum _LMSettingsSections
             [c.switchView addTarget:self action:@selector(LM_toggleRYGBButtons:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"RYGB Buttons", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
         }
     }
@@ -287,7 +287,7 @@ typedef enum _LMSettingsSections
             LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
             c.textLabel.text = NSLocalizedString(@"SOUND", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsSound];
             [c.switchView addTarget:self action:@selector(LM_toggleSound:) forControlEvents:UIControlEventValueChanged];
@@ -297,7 +297,7 @@ typedef enum _LMSettingsSections
             LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
             c.textLabel.text = NSLocalizedString(@"Auto Frameskip", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsAutoFrameskip];
             [c.switchView addTarget:self action:@selector(LM_toggleAutoFrameskip:) forControlEvents:UIControlEventValueChanged];
@@ -307,7 +307,7 @@ typedef enum _LMSettingsSections
             LMTableViewNumberCell* c = (LMTableViewNumberCell*)(cell = [self LM_numberCell]);
             c.textLabel.text = NSLocalizedString(@"Skip Every", nil);
             if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor cyanColor];
+                c.textLabel.textColor = [UIColor whiteColor];
             }
             c.minimumValue = 0;
             c.maximumValue = 9;
@@ -338,16 +338,25 @@ typedef enum _LMSettingsSections
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
                                          kLMEmulatorPortName,
                                          versionString];
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+            }
         }
         else if(row == 1)
         {
             cell.textLabel.text = NSLocalizedString(@"Core", nil);
             cell.detailTextLabel.text = [NSString stringWithFormat:@"Snes9X %@", [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+            }
         }
         else if(row == 2)
         {
             cell.textLabel.text = NSLocalizedString(@"BY", nil);
             cell.detailTextLabel.text = @"SarahH12099";
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+            }
         }
     }
     
