@@ -47,7 +47,7 @@ Features:<br>
 <br>
 
 About iPhone X and above support:<br>
-- Unfortunately I don't have an iPhone X or above iDevice, so I have no way of testing & updating the ui for those iDevices, if another developer has an iPhone X or above helps me added iPhone X and above support, then it will be added. <br>
+- Unfortunately I don't have an iPhone X or above iDevice, so I have no way of testing & updating the ui for those iDevices, if another developer has an iPhone X or above helps me added iPhone X and above support, then it will be added <br>
 
 <br>
 
