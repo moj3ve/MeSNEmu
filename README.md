@@ -1,6 +1,7 @@
 # MeSNEmu
 
-Download: [Releases](https://github.com/SarahH12099/MeSNEmu/releases)
+Download: [Releases](https://github.com/SarahH12099/MeSNEmu/releases) <br>
+Developers Twitter: [SarahH12099](https://twitter.com/SarahH12099) <br>
 
 <br>
 
