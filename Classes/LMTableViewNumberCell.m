@@ -1,11 +1,3 @@
-//
-//  LMTableViewNumberCell.m
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 7/8/11.
-//  Copyright 2011 Lucas Menge. All rights reserved.
-//
-
 #import "LMTableViewNumberCell.h"
 
 @interface LMTableViewNumberCell(Privates)
