@@ -22,6 +22,7 @@ NSString* const kLMSettingsBluetoothController = @"BluetoothController";
 NSString* const kLMSettingsSmoothScaling = @"SmoothScaling";
 NSString* const kLMSettingsFullScreen = @"FullScreen";
 NSString* const kLMSettingsDarkMode = @"DarkMode";
+NSString* const kLMSettingsRYGBButtons = @"RYGBButtons";
 
 NSString* const kLMSettingsSound = @"Sound";
 NSString* const kLMSettingsAutoFrameskip = @"AutoFrameskip";
@@ -66,6 +67,12 @@ typedef enum _LMSettingsSections
 {
     _changed = YES;
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
+}
+
+- (void)LM_toggleRYGBButtons:(UISwitch*)sender
+{
+    _changed = YES;
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsRYGBButtons];
 }
 
 - (void)LM_toggleSound:(UISwitch*)sender
@@ -157,6 +164,9 @@ typedef enum _LMSettingsSections
     if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsDarkMode] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsDarkMode];
     
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsRYGBButtons] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsRYGBButtons];
+    
     if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsSound] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLMSettingsSound];
     
@@ -193,7 +203,7 @@ typedef enum _LMSettingsSections
 {
     // Return the number of rows in the section.
     if(section == LMSettingsSectionScreen)
-        return 3;
+        return 4;
     else if(section == LMSettingsSectionEmulation)
     {
         if(_soundIndexPath == nil)
@@ -254,6 +264,17 @@ typedef enum _LMSettingsSections
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"Dark Mode (Beta)", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor cyanColor];
+            }
+        }
+        else if([indexPath compare:_rygbButtonsIndexPath] == NSOrderedSame)
+        {
+            LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
+            
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsRYGBButtons];
+            [c.switchView addTarget:self action:@selector(LM_toggleRYGBButtons:) forControlEvents:UIControlEventValueChanged];
+            c.textLabel.text = NSLocalizedString(@"RYGB Buttons", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor cyanColor];
             }
@@ -360,6 +381,7 @@ typedef enum _LMSettingsSections
     _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionScreen] retain];
     _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionScreen] retain];
     _darkModeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionScreen] retain];
+    _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionScreen] retain];
     
     if(_hideSettingsThatRequireReset == NO)
     {
@@ -441,6 +463,8 @@ typedef enum _LMSettingsSections
     _fullScreenIndexPath = nil;
     [_darkModeIndexPath release];
     _darkModeIndexPath = nil;
+    [_rygbButtonsIndexPath release];
+    _rygbButtonsIndexPath = nil;
     
     [_soundIndexPath release];
     _soundIndexPath = nil;

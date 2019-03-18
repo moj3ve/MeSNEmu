@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26210DA4223F26F0009708E9 /* YellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA0223F26F0009708E9 /* YellowButton.png */; };
+		26210DA5223F26F0009708E9 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA1223F26F0009708E9 /* RedButton.png */; };
+		26210DA6223F26F0009708E9 /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA2223F26F0009708E9 /* GreenButton.png */; };
+		26210DA7223F26F0009708E9 /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA3223F26F0009708E9 /* BlueButton.png */; };
 		26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78821F77DBC00E05B50 /* DPadButton.png */; };
 		26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78921F77DBC00E05B50 /* LRButton.png */; };
 		26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B321F7622A00DD9D5E /* PurpleButton.png */; };
@@ -134,6 +138,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26210DA0223F26F0009708E9 /* YellowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowButton.png; sourceTree = "<group>"; };
+		26210DA1223F26F0009708E9 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
+		26210DA2223F26F0009708E9 /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButton.png; sourceTree = "<group>"; };
+		26210DA3223F26F0009708E9 /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
 		26AAB78821F77DBC00E05B50 /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
 		26AAB78921F77DBC00E05B50 /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
 		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
@@ -684,6 +692,10 @@
 		A0B8685814BE25F900663EBE /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
+				26210DA3223F26F0009708E9 /* BlueButton.png */,
+				26210DA2223F26F0009708E9 /* GreenButton.png */,
+				26210DA1223F26F0009708E9 /* RedButton.png */,
+				26210DA0223F26F0009708E9 /* YellowButton.png */,
 				26AAB78821F77DBC00E05B50 /* DPadButton.png */,
 				26AAB78921F77DBC00E05B50 /* LRButton.png */,
 				26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */,
@@ -829,6 +841,7 @@
 				A0F1F123184D5A6B000D6CE9 /* ButtonNumberMinusDown-7@2x.png in Resources */,
 				A0DF88EA19EEBB580070326B /* Images.xcassets in Resources */,
 				26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */,
+				26210DA6223F26F0009708E9 /* GreenButton.png in Resources */,
 				A0F1F125184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png in Resources */,
 				A0E0DC4E19EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png in Resources */,
 				A0E0DC4419EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png in Resources */,
@@ -841,6 +854,7 @@
 				A0F1F129184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png in Resources */,
 				A0F1F119184D5A6B000D6CE9 /* ButtonNumberDefault-7@2x.png in Resources */,
 				26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */,
+				26210DA4223F26F0009708E9 /* YellowButton.png in Resources */,
 				A0BB592614E84BC000D12F97 /* Localizable.strings in Resources */,
 				A0E0DC4C19EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png in Resources */,
 				A0F1F11D184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7@2x.png in Resources */,
@@ -850,6 +864,8 @@
 				A0F1F11C184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7.png in Resources */,
 				A0F1F124184D5A6B000D6CE9 /* ButtonNumberPlus-7.png in Resources */,
 				A0F1F11E184D5A6B000D6CE9 /* ButtonNumberMinus-7.png in Resources */,
+				26210DA7223F26F0009708E9 /* BlueButton.png in Resources */,
+				26210DA5223F26F0009708E9 /* RedButton.png in Resources */,
 				A0E0DC4B19EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
