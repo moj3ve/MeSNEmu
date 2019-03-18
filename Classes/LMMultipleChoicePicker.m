@@ -1,11 +1,3 @@
-//
-//  CKMultipleChoicePicker.m
-//  carte
-//
-//  Created by Lucas Menge on 6/30/11.
-//  Copyright 2011 Lucas Menge. All rights reserved.
-//
-
 #import "LMMultipleChoicePicker.h"
 
 @implementation LMMultipleChoicePicker

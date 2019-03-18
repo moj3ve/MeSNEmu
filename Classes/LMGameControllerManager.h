@@ -1,11 +1,3 @@
-//
-//  LMGameControllerManager.h
-//  MeSNEmu
-//
-//  Created by Adam Bell on 12/22/2013.
-//
-//
-
 @class LMGameControllerManager;
 
 @protocol LMGameControllerManagerDelegate <NSObject>

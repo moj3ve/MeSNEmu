@@ -1,11 +1,3 @@
-//
-//  LMROMBrowserController.m
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/3/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #import "LMROMBrowserController.h"
 
 #import "../SNES9XBridge/Snes9xMain.h"

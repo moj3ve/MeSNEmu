@@ -1,11 +1,3 @@
-//
-//  LMGameControllerManager.m
-//  MeSNEmu
-//
-//  Created by Adam Bell on 12/22/2013.
-//
-//
-
 #import "LMGameControllerManager.h"
 
 #import <GameController/GameController.h>

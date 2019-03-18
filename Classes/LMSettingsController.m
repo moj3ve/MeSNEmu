@@ -1,11 +1,3 @@
-//
-//  LMSettingsController.m
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/12/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #import "LMSettingsController.h"
 
 #import "../SNES9X/snes9x.h"

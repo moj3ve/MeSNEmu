@@ -1,11 +1,3 @@
-//
-//  LMEmulatorControllerView.h
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 8/28/13.
-//  Copyright (c) 2013 Lucas Menge. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 @class LMBTControllerView;
