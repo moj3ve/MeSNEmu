@@ -310,6 +310,7 @@ typedef enum _LMSettingsSections
             c.textLabel.text = NSLocalizedString(@"Skip Every", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
+                c.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
             }
             c.minimumValue = 0;
             c.maximumValue = 9;
@@ -331,6 +332,11 @@ typedef enum _LMSettingsSections
         if(row == 0)
         {
             cell.textLabel.text = NSLocalizedString(@"VERSION", nil);
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+            }
             NSString* versionString = [NSString stringWithFormat:@"(%s)", __DATE__];
             NSString* bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
             if([bundleName isEqualToString:kLMEmulatorPortName] == YES)
@@ -340,25 +346,26 @@ typedef enum _LMSettingsSections
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
                                          kLMEmulatorPortName,
                                          versionString];
-            if (darkMode == YES) {
-                cell.detailTextLabel.textColor = [UIColor whiteColor];
-            }
         }
         else if(row == 1)
         {
             cell.textLabel.text = NSLocalizedString(@"Core", nil);
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"Snes9X %@", [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
             }
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Snes9X %@", [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
         }
         else if(row == 2)
         {
             cell.textLabel.text = NSLocalizedString(@"BY", nil);
-            cell.detailTextLabel.text = @"SarahH12099";
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
             }
+            cell.detailTextLabel.text = @"SarahH12099";
         }
     }
     
