@@ -469,10 +469,10 @@ static int const LMFileOrganizationVersionNumber = 1;
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if(cell == nil)
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-  
   LMFileListItem* item = [self LM_romItemForTableView:tableView indexPath:indexPath];
   cell.textLabel.text = item.displayName;
   if (darkMode == YES) {
+      self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
       cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
       cell.textLabel.textColor = [UIColor whiteColor];
       cell.detailTextLabel.textColor = [UIColor whiteColor];
