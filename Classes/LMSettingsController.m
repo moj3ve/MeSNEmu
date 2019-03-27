@@ -227,6 +227,9 @@ typedef enum _LMSettingsSections
     UITableViewCell* cell = nil;
     BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
     NSInteger section = indexPath.section;
+    if (darkMode == YES) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+    }
     if(section == LMSettingsSectionScreen)
     {
         if([indexPath compare:_smoothScalingIndexPath] == NSOrderedSame)
