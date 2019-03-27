@@ -386,8 +386,14 @@ typedef enum _LMSettingsSections
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"SETTINGS", nil);
-    
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
     UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(LM_done)];
+    if (darkMode == YES) {
+        [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    }
     self.navigationItem.rightBarButtonItem = doneButton;
     [doneButton release];
     
