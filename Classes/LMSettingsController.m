@@ -260,7 +260,7 @@ typedef enum _LMSettingsSections
             
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"Dark Mode (Beta)", nil);
+            c.textLabel.text = NSLocalizedString(@"Dark Mode", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -392,7 +392,7 @@ typedef enum _LMSettingsSections
         [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     }
     self.navigationItem.rightBarButtonItem = doneButton;
     [doneButton release];

@@ -563,6 +563,13 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(self)
   {
     // Custom initialization
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+    if (darkMode == YES) {
+        [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+    }
   }
   return self;
 }
@@ -586,8 +593,12 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(_detailsItem == nil)
   {
     self.title = NSLocalizedString(@"ROMS", nil);
-    
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
     UISearchBar* searchbar = [[UISearchBar alloc] init];
+    if (darkMode == YES) {
+        searchbar.barTintColor = [UIColor blackColor];
+        searchbar.keyboardAppearance = [UIColor blackColor];
+    }
     [searchbar sizeToFit];
     self.tableView.tableHeaderView = searchbar;
     [searchbar release];
