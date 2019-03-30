@@ -49,7 +49,9 @@ Requirements For Building IPA:<br>
 
 Building IPA: 
 1) Clone project (git clone --recursive 'clone url') <br>
-2) Run ./genipa.sh in terminal <br>
+2) Open MeSNEmu.xcodeproj <br>
+3) Change Bundle Identifier in Xcode <br>
+4) Run ./genipa.sh in Terminal <br>
 
 <br>
 
