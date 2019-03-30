@@ -59,6 +59,7 @@ typedef enum _LMSettingsSections
 {
     _changed = YES;
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
+    [[NSThread mainThread] exit];
 }
 
 - (void)LM_toggleRYGBButtons:(UISwitch*)sender
