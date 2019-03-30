@@ -41,9 +41,9 @@ About iPhone X and above support:<br>
 <br>
 
 Requirements For Building IPA:<br>
-- homebrew <br>
-- xcode <br>
-- xcpretty <br>
+- [Homebrew](https://brew.sh/) <br>
+- [Xcode](https://developer.apple.com/xcode/) <br>
+- [Xcpretty](https://github.com/xcpretty/xcpretty) <br>
 
 <br>
 
