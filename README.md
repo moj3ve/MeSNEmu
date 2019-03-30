@@ -5,11 +5,6 @@ Developers Twitter: [SarahH12099](https://twitter.com/SarahH12099) <br>
 
 <br>
 
-Notice:<br>
-- Due to a codesigning error right now, you must sign the ipa yourself using a signing service for roms to appear unfortunately. If you install the ipa using Filza or AppInst without signing, imported roms won't appear <br>
-
-<br>
-
 How to import roms:<br>
 - Download rom via Safari or other app and then press the open in button and press open in MeSNEmu <br>
 - If jailbroken, you can use Filza to add roms, click the favourites (star shape) button, then click apps manager. Scroll till you see MeSNEmu, click on MeSNEmu and open Documents folder, you can import your roms in this folder <br>
@@ -22,12 +17,6 @@ Support Filetypes:<br>
 - Zip <br>
 - Smc <br>
 - Sfc <br>
-
-<br>
-
-Known Bugs:<br>
-- When not codesigned roms aren't visible <br>
-- When signed using reprovision, e3tender, extender, appsigner, import roms only works through browser, not through Filza or any other way <br>
 
 <br>
 
@@ -52,7 +41,6 @@ About iPhone X and above support:<br>
 <br>
 
 Requirements For Building IPA:<br>
-- ldid <br>
 - homebrew <br>
 - xcode <br>
 - xcpretty <br>
