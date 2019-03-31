@@ -70,7 +70,7 @@ typedef enum _LMSettingsSections
     [alert show];
     [alert release];
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:(UISwitch*)sender.on forKey:kLMSettingsDarkMode];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
 }
 
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {

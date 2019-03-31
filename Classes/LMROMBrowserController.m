@@ -569,6 +569,7 @@ static int const LMFileOrganizationVersionNumber = 1;
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
         [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
+        self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
     }
   }
   return self;
