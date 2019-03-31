@@ -62,7 +62,7 @@ typedef enum _LMSettingsSections
 - (void)LM_toggleDarkMode:(UISwitch*)sender
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notice"
-                                          message:@"MeSNEmu will close for Dark Mode to turn on/off"
+                                          message:@"MeSNEmu will now close for Dark Mode to turn on/off"
                                           delegate:self
                                           cancelButtonTitle:nil
                                           otherButtonTitles:@"OK", nil];
@@ -162,6 +162,18 @@ typedef enum _LMSettingsSections
         _soundIndexPath = nil;
         [self.tableView reloadData];
     }
+    if(_darkModeIndexPath != nil)
+    {
+        [_darkModeIndexPath release];
+        _darkModeIndexPath = nil;
+        [self.tableView reloadData];
+    }
+    if(_rygbButtonsIndexPath != nil)
+    {
+        [_rygbButtonsIndexPath release];
+        _rygbButtonsIndexPath = nil;
+        [self.tableView reloadData];
+    }
 }
 
 + (void)setDefaultsIfNotDefined
@@ -217,7 +229,10 @@ typedef enum _LMSettingsSections
 {
     // Return the number of rows in the section.
     if(section == LMSettingsSectionScreen)
-        return 4;
+        if(_darkModeIndexPath == nil && _rygbButtonsIndexPath == nil)
+            return 2;
+        else
+            return 4;
     else if(section == LMSettingsSectionEmulation)
     {
         if(_soundIndexPath == nil)
@@ -419,19 +434,22 @@ typedef enum _LMSettingsSections
     self.navigationItem.rightBarButtonItem = doneButton;
     [doneButton release];
     
-    _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionScreen] retain];
-    _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionScreen] retain];
-    _darkModeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionScreen] retain];
-    _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionScreen] retain];
-    
     if(_hideSettingsThatRequireReset == NO)
     {
+        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionScreen] retain];
+        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionScreen] retain];
+        _darkModeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionScreen] retain];
+        _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionScreen] retain];
+        
         _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionEmulation] retain];
         _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionEmulation] retain];
         _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionEmulation] retain];
     }
     else
     {
+        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionScreen] retain];
+        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionScreen] retain];
+        
         _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionEmulation] retain];
         _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionEmulation] retain];
     }
