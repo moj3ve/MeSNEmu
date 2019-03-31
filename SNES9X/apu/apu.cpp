@@ -275,7 +275,7 @@ bool8 S9xInitSound (int buffer_ms, int lag_ms)
 	   arguments. Use 2x in the resampler for buffer leveling with SoundSync */
 	if (!spc::resampler)
 	{
-        spc::resampler = new Resampler(sample_count >> (Settings.SoundSync ? 0 : 1));
+        spc::resampler = new Resampler(spc::buffer_size >> (Settings.SoundSync ? 0 : 1));
         if (!spc::resampler)
             return (FALSE);
 	}
@@ -406,17 +406,17 @@ void S9xAPUEndScanline (void)
 
 void S9xAPUTimingSetSpeedup (int ticks)
 {
-	if (ticks != 0)
-		printf("APU speedup hack: %d\n", ticks);
-
-	spc::timing_hack_denominator = SNES_SPC::tempo_unit - ticks;
-	spc_core->set_tempo(spc::timing_hack_denominator);
-
-	spc::ratio_numerator = Settings.PAL ? APU_NUMERATOR_PAL : APU_NUMERATOR_NTSC;
-	spc::ratio_denominator = Settings.PAL ? APU_DENOMINATOR_PAL : APU_DENOMINATOR_NTSC;
-	spc::ratio_denominator = spc::ratio_denominator * spc::timing_hack_denominator / spc::timing_hack_numerator;
-
-	UpdatePlaybackRate();
+    if (ticks != 0)
+        printf("APU speedup hack: %d\n", ticks);
+    
+    spc::timing_hack_denominator = 256 - ticks;
+    spc_core->set_tempo(spc::timing_hack_denominator);
+    
+    spc::ratio_numerator = Settings.PAL ? APU_NUMERATOR_PAL : APU_NUMERATOR_NTSC;
+    spc::ratio_denominator = Settings.PAL ? APU_DENOMINATOR_PAL : APU_DENOMINATOR_NTSC;
+    spc::ratio_denominator = spc::ratio_denominator * spc::timing_hack_denominator / spc::timing_hack_numerator;
+    
+    UpdatePlaybackRate();
 }
 
 void S9xAPUAllowTimeOverflow (bool allow)
