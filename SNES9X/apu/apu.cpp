@@ -275,12 +275,9 @@ bool8 S9xInitSound (int buffer_ms, int lag_ms)
 	   arguments. Use 2x in the resampler for buffer leveling with SoundSync */
 	if (!spc::resampler)
 	{
-		spc::resampler = new APU_DEFAULT_RESAMPLER(spc::buffer_size >> (Settings.SoundSync ? 0 : 1));
-		if (!spc::resampler)
-		{
-			delete[] spc::landing_buffer;
-			return (FALSE);
-		}
+        spc::resampler = new Resampler(sample_count >> (Settings.SoundSync ? 0 : 1));
+        if (!spc::resampler)
+            return (FALSE);
 	}
 	else
 		spc::resampler->resize(spc::buffer_size >> (Settings.SoundSync ? 0 : 1));
