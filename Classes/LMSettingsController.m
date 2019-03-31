@@ -55,12 +55,33 @@ typedef enum _LMSettingsSections
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsFullScreen];
 }
 
+// Dark Mode Switch Start
+
+#define myAlertViewsTag 0
+
 - (void)LM_toggleDarkMode:(UISwitch*)sender
 {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notice"
+                                          message:@"MeSNEmu will close for Dark Mode to turn on/off"
+                                          delegate:self
+                                          cancelButtonTitle:nil
+                                          otherButtonTitles:@"OK", nil];
+    alert.tag = myAlertViewsTag;
+    [alert show];
+    [alert release];
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
-    [[NSThread mainThread] exit];
+    [[NSUserDefaults standardUserDefaults] setBool:(UISwitch*)sender.on forKey:kLMSettingsDarkMode];
 }
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == myAlertViewsTag) {
+        if (buttonIndex == 0) {
+            [[NSThread mainThread] exit];
+        }
+    }
+}
+
+// Dark Mode Switch End
 
 - (void)LM_toggleRYGBButtons:(UISwitch*)sender
 {
