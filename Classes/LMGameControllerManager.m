@@ -101,19 +101,11 @@
       else {
         SISetControllerReleaseButton(SI_BUTTON_START);
       }
-      
-      // This feels super awkward
-      /*
-       if (extendedGamepad.buttonX.pressed) {
-       padInput |= NestopiaPadInputStart;
-       }
-       if (extendedGamepad.buttonY.pressed) {
-       padInput |= NestopiaPadInputSelect;
-       }
-       */
-      
-      // Extended Gamepad gets a thumbstick as well
+        // Extended Gamepad gets a thumbstick as well
         if (extendedGamepad.leftThumbstick.up.pressed) {
+            SISetControllerPushButton(SI_BUTTON_UP);
+        }
+        else if (extendedGamepad.dpad.up.pressed) {
             SISetControllerPushButton(SI_BUTTON_UP);
         }
         else {
@@ -122,16 +114,25 @@
         if (extendedGamepad.leftThumbstick.down.pressed) {
             SISetControllerPushButton(SI_BUTTON_DOWN);
         }
+        else if (extendedGamepad.dpad.down.pressed) {
+            SISetControllerPushButton(SI_BUTTON_DOWN);
+        }
         else {
             SISetControllerReleaseButton(SI_BUTTON_DOWN);
         }
         if (extendedGamepad.leftThumbstick.left.pressed) {
             SISetControllerPushButton(SI_BUTTON_LEFT);
         }
+        else if (extendedGamepad.dpad.left.pressed) {
+            SISetControllerPushButton(SI_BUTTON_LEFT);
+        }
         else {
             SISetControllerReleaseButton(SI_BUTTON_LEFT);
         }
         if (extendedGamepad.leftThumbstick.right.pressed) {
+            SISetControllerPushButton(SI_BUTTON_RIGHT);
+        }
+        else if (extendedGamepad.dpad.right.pressed) {
             SISetControllerPushButton(SI_BUTTON_RIGHT);
         }
         else {
@@ -149,32 +150,7 @@
         else {
             SISetControllerReleaseButton(SI_BUTTON_SELECT);
         }
-      /* if (extendedGamepad.dpad.up.pressed || extendedGamepad.leftThumbstick.up.pressed) {
-        SISetControllerPushButton(SI_BUTTON_UP);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_UP);
-      }
-      if (extendedGamepad.dpad.down.pressed || extendedGamepad.leftThumbstick.down.pressed) {
-        SISetControllerPushButton(SI_BUTTON_DOWN);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_DOWN);
-      }
-      if (extendedGamepad.dpad.left.pressed || extendedGamepad.leftThumbstick.left.pressed) {
-        SISetControllerPushButton(SI_BUTTON_LEFT);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_LEFT);
-      }
-      if (extendedGamepad.dpad.right.pressed || extendedGamepad.leftThumbstick.right.pressed) {
-        SISetControllerPushButton(SI_BUTTON_RIGHT);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_RIGHT);
-      } */
-      
-      extendedGamepad.controller.controllerPausedHandler = ^(GCController *controller) {
+        extendedGamepad.controller.controllerPausedHandler = ^(GCController *controller) {
         if (extendedGamepad.leftShoulder.pressed) {
             SISetControllerPushButton(SI_BUTTON_SELECT);
             // Release button after a delay otherwise it will get stuck or not register at all
@@ -186,7 +162,8 @@
             [self performSelector:@selector(releaseStart) withObject:nil afterDelay:0.1];
         }
       };
-    } /* else if(_gameController.gamepad)
+    }
+    /* else if(_gameController.gamepad)
     {
       GCGamepad* gamepad = _gameController.gamepad;
       
