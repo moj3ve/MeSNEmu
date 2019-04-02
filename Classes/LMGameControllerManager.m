@@ -113,7 +113,43 @@
        */
       
       // Extended Gamepad gets a thumbstick as well
-      if (extendedGamepad.dpad.up.pressed || extendedGamepad.leftThumbstick.up.pressed) {
+        if (extendedGamepad.leftThumbstick.up.pressed) {
+            SISetControllerPushButton(SI_BUTTON_UP);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_UP);
+        }
+        if (extendedGamepad.leftThumbstick.down.pressed) {
+            SISetControllerPushButton(SI_BUTTON_DOWN);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_DOWN);
+        }
+        if (extendedGamepad.leftThumbstick.left.pressed) {
+            SISetControllerPushButton(SI_BUTTON_LEFT);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_LEFT);
+        }
+        if (extendedGamepad.leftThumbstick.right.pressed) {
+            SISetControllerPushButton(SI_BUTTON_RIGHT);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_RIGHT);
+        }
+        if (extendedGamepad.leftThumbstickButton.pressed) {
+            SISetControllerPushButton(SI_BUTTON_START);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_START);
+        }
+        if (extendedGamepad.rightThumbstickButton.pressed) {
+            SISetControllerPushButton(SI_BUTTON_SELECT);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_SELECT);
+        }
+      /* if (extendedGamepad.dpad.up.pressed || extendedGamepad.leftThumbstick.up.pressed) {
         SISetControllerPushButton(SI_BUTTON_UP);
       }
       else {
@@ -136,7 +172,7 @@
       }
       else {
         SISetControllerReleaseButton(SI_BUTTON_RIGHT);
-      }
+      } */
       
       extendedGamepad.controller.controllerPausedHandler = ^(GCController *controller) {
         if (extendedGamepad.leftShoulder.pressed) {
@@ -150,7 +186,7 @@
             [self performSelector:@selector(releaseStart) withObject:nil afterDelay:0.1];
         }
       };
-    } else if(_gameController.gamepad)
+    } /* else if(_gameController.gamepad)
     {
       GCGamepad* gamepad = _gameController.gamepad;
       
@@ -232,7 +268,7 @@
               [self performSelector:@selector(releaseStart) withObject:nil afterDelay:0.1];
           }
       };
-    }
+    } */
   }
 }
 
