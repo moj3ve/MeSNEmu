@@ -46,62 +46,8 @@
   {
     if(_gameController.extendedGamepad)
     {
-      GCExtendedGamepad* extendedGamepad = _gameController.extendedGamepad;
-      
-      // You should swap A+B / X+Y because it feels awkward on Gamepad
-      if (extendedGamepad.buttonA.pressed) {
-        SISetControllerPushButton(SI_BUTTON_B);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_B);
-      }
-      if (extendedGamepad.buttonB.pressed) {
-        SISetControllerPushButton(SI_BUTTON_A);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_A);
-      }
-      if (extendedGamepad.buttonX.pressed) {
-        SISetControllerPushButton(SI_BUTTON_Y);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_Y);
-      }
-      if (extendedGamepad.buttonY.pressed) {
-        SISetControllerPushButton(SI_BUTTON_X);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_X);
-      }
-      
-      if (extendedGamepad.leftShoulder.pressed) {
-        SISetControllerPushButton(SI_BUTTON_L);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_L);
-      }
-      
-      if (extendedGamepad.rightShoulder.pressed) {
-        SISetControllerPushButton(SI_BUTTON_R);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_R);
-      }
-
-      if (extendedGamepad.leftTrigger.pressed) {
-        SISetControllerPushButton(SI_BUTTON_SELECT);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_SELECT);
-      }
-
-      if (extendedGamepad.rightTrigger.pressed) {
-        SISetControllerPushButton(SI_BUTTON_START);
-      }
-      else {
-        SISetControllerReleaseButton(SI_BUTTON_START);
-      }
-        // Extended Gamepad gets a thumbstick as well
+        GCExtendedGamepad* extendedGamepad = _gameController.extendedGamepad;
+        
         if (extendedGamepad.leftThumbstick.up.pressed) {
             SISetControllerPushButton(SI_BUTTON_UP);
         }
@@ -149,6 +95,56 @@
         }
         else {
             SISetControllerReleaseButton(SI_BUTTON_SELECT);
+        }
+        if (extendedGamepad.buttonA.pressed) {
+            SISetControllerPushButton(SI_BUTTON_B);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_B);
+        }
+        if (extendedGamepad.buttonB.pressed) {
+            SISetControllerPushButton(SI_BUTTON_A);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_A);
+        }
+        if (extendedGamepad.buttonX.pressed) {
+            SISetControllerPushButton(SI_BUTTON_Y);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_Y);
+        }
+        if (extendedGamepad.buttonY.pressed) {
+            SISetControllerPushButton(SI_BUTTON_X);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_X);
+        }
+        
+        if (extendedGamepad.leftShoulder.pressed) {
+            SISetControllerPushButton(SI_BUTTON_L);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_L);
+        }
+        
+        if (extendedGamepad.rightShoulder.pressed) {
+            SISetControllerPushButton(SI_BUTTON_R);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_R);
+        }
+        if (extendedGamepad.leftTrigger.pressed) {
+            SISetControllerPushButton(SI_BUTTON_SELECT);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_SELECT);
+        }
+        if (extendedGamepad.rightTrigger.pressed) {
+            SISetControllerPushButton(SI_BUTTON_START);
+        }
+        else {
+            SISetControllerReleaseButton(SI_BUTTON_START);
         }
         extendedGamepad.controller.controllerPausedHandler = ^(GCController *controller) {
         if (extendedGamepad.leftShoulder.pressed) {
