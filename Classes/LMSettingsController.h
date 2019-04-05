@@ -12,6 +12,7 @@ extern NSString* const kLMSettingsDarkMode;
 extern NSString* const kLMSettingsRYGBButtons;
 
 extern NSString* const kLMSettingsSound;
+extern NSString* const kLMSettingsLRThree;
 extern NSString* const kLMSettingsAutoFrameskip;
 extern NSString* const kLMSettingsFrameskipValue;
 
@@ -36,6 +37,7 @@ extern NSString* const kLMSettingsFrameskipValue;
   NSIndexPath* _rygbButtonsIndexPath;
 
   NSIndexPath* _soundIndexPath;
+  NSIndexPath* _lrThreeIndexPath;
   NSIndexPath* _autoFrameskipIndexPath;
   NSIndexPath* _frameskipValueIndexPath;
   

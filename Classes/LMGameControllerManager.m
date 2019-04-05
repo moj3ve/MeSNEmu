@@ -1,7 +1,6 @@
 #import "LMGameControllerManager.h"
-
+#import "LMSettingsController.h"
 #import <GameController/GameController.h>
-
 #import "../SNES9XBridge/Snes9xMain.h"
 
 @implementation LMGameControllerManager(Privates)
@@ -120,23 +119,40 @@
             else {
                 SISetControllerReleaseButton(SI_BUTTON_R);
             }
-            if (extendedGamepad.leftTrigger.pressed) {
-                SISetControllerPushButton(SI_BUTTON_SELECT);
-            }
-            else if (extendedGamepad.rightThumbstickButton.pressed) {
-                SISetControllerPushButton(SI_BUTTON_SELECT);
+            BOOL lrThree = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsLRThree];
+            if (lrThree == YES) {
+                if (extendedGamepad.leftTrigger.pressed) {
+                    SISetControllerPushButton(SI_BUTTON_SELECT);
+                }
+                else if (extendedGamepad.rightThumbstickButton.pressed) {
+                    SISetControllerPushButton(SI_BUTTON_SELECT);
+                }
+                else {
+                    SISetControllerReleaseButton(SI_BUTTON_SELECT);
+                }
+                if (extendedGamepad.rightTrigger.pressed) {
+                    SISetControllerPushButton(SI_BUTTON_START);
+                }
+                else if (extendedGamepad.leftThumbstickButton.pressed) {
+                    SISetControllerPushButton(SI_BUTTON_START);
+                }
+                else {
+                    SISetControllerReleaseButton(SI_BUTTON_START);
+                }
             }
             else {
-                SISetControllerReleaseButton(SI_BUTTON_SELECT);
-            }
-            if (extendedGamepad.rightTrigger.pressed) {
-                SISetControllerPushButton(SI_BUTTON_START);
-            }
-            else if (extendedGamepad.leftThumbstickButton.pressed) {
-                SISetControllerPushButton(SI_BUTTON_START);
-            }
-            else {
-                SISetControllerReleaseButton(SI_BUTTON_START);
+                if (extendedGamepad.leftTrigger.pressed) {
+                    SISetControllerPushButton(SI_BUTTON_SELECT);
+                }
+                else {
+                    SISetControllerReleaseButton(SI_BUTTON_SELECT);
+                }
+                if (extendedGamepad.rightTrigger.pressed) {
+                    SISetControllerPushButton(SI_BUTTON_START);
+                }
+                else {
+                    SISetControllerReleaseButton(SI_BUTTON_START);
+                }
             }
             extendedGamepad.controller.controllerPausedHandler = ^(GCController *controller) {
                 if (extendedGamepad.leftShoulder.pressed) {

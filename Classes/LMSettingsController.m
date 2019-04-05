@@ -17,6 +17,7 @@ NSString* const kLMSettingsDarkMode = @"DarkMode";
 NSString* const kLMSettingsRYGBButtons = @"RYGBButtons";
 
 NSString* const kLMSettingsSound = @"Sound";
+NSString* const kLMSettingsLRThree = @"LRThree";
 NSString* const kLMSettingsAutoFrameskip = @"AutoFrameskip";
 NSString* const kLMSettingsFrameskipValue = @"FrameskipValue";
 
@@ -95,6 +96,12 @@ typedef enum _LMSettingsSections
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsSound];
 }
 
+- (void)LM_toggleLRThree:(UISwitch*)sender
+{
+    _changed = YES;
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsLRThree];
+}
+
 - (void)LM_toggleAutoFrameskip:(UISwitch*)sender
 {
     _changed = YES;
@@ -156,12 +163,6 @@ typedef enum _LMSettingsSections
 - (void)hideSettingsThatRequireReset
 {
     _hideSettingsThatRequireReset = YES;
-    if(_soundIndexPath != nil)
-    {
-        [_soundIndexPath release];
-        _soundIndexPath = nil;
-        [self.tableView reloadData];
-    }
     if(_darkModeIndexPath != nil)
     {
         [_darkModeIndexPath release];
@@ -172,6 +173,18 @@ typedef enum _LMSettingsSections
     {
         [_rygbButtonsIndexPath release];
         _rygbButtonsIndexPath = nil;
+        [self.tableView reloadData];
+    }
+    if(_soundIndexPath != nil)
+    {
+        [_soundIndexPath release];
+        _soundIndexPath = nil;
+        [self.tableView reloadData];
+    }
+    if(_lrThreeIndexPath != nil)
+    {
+        [_lrThreeIndexPath release];
+        _lrThreeIndexPath = nil;
         [self.tableView reloadData];
     }
 }
@@ -195,6 +208,9 @@ typedef enum _LMSettingsSections
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsSound] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLMSettingsSound];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsLRThree] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsLRThree];
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsAutoFrameskip] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsAutoFrameskip];
@@ -235,10 +251,10 @@ typedef enum _LMSettingsSections
             return 4;
     else if(section == LMSettingsSectionEmulation)
     {
-        if(_soundIndexPath == nil)
+        if(_soundIndexPath == nil && _lrThreeIndexPath == nil)
             return 2;
         else
-            return 3;
+            return 4;
     }
     else if(section == LMSettingsSectionAbout)
     {
@@ -253,7 +269,7 @@ typedef enum _LMSettingsSections
 - (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
 {
     if(section == LMSettingsSectionScreen)
-        return NSLocalizedString(@"Enabling Dark Mode requires you to restart the app for it to fully work", nil);
+        return NSLocalizedString(@"Dark Mode requires you to restart the app for it to fully work", nil);
     else if(section == LMSettingsSectionEmulation)
         return NSLocalizedString(@"Auto Frameskip may appear slower due to a more inconsistent skip rate", nil);
     return nil;
@@ -325,6 +341,16 @@ typedef enum _LMSettingsSections
             }
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsSound];
             [c.switchView addTarget:self action:@selector(LM_toggleSound:) forControlEvents:UIControlEventValueChanged];
+        }
+        else if([indexPath compare:_lrThreeIndexPath] == NSOrderedSame)
+        {
+            LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
+            c.textLabel.text = NSLocalizedString(@"Enable L3/R3", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor whiteColor];
+            }
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsLRThree];
+            [c.switchView addTarget:self action:@selector(LM_toggleLRThree:) forControlEvents:UIControlEventValueChanged];
         }
         else if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
         {
@@ -442,8 +468,9 @@ typedef enum _LMSettingsSections
         _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionScreen] retain];
         
         _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionEmulation] retain];
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionEmulation] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionEmulation] retain];
+        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionEmulation] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionEmulation] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionEmulation] retain];
     }
     else
     {
@@ -527,6 +554,8 @@ typedef enum _LMSettingsSections
     
     [_soundIndexPath release];
     _soundIndexPath = nil;
+    [_lrThreeIndexPath release];
+    _lrThreeIndexPath = nil;
     [_autoFrameskipIndexPath release];
     _autoFrameskipIndexPath = nil;
     [_frameskipValueIndexPath release];
