@@ -52,7 +52,3 @@ Building IPA:
 2) Open MeSNEmu.xcodeproj <br>
 3) Change Bundle Identifier in Xcode <br>
 4) Run ./genipa.sh in Terminal <br>
-
-<br>
-
-We have a Discord for MeSNEmu too [Join Discord Server](https://discord.gg/Pnjd2xs)
