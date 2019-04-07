@@ -15,7 +15,6 @@
   NSString* _romFileName;
   NSString* _initialSaveFileName;
   
-  // handling external screens
   BOOL _isMirror;
   UIWindow* _externalWindow;
   LMEmulatorController* _externalEmulator;

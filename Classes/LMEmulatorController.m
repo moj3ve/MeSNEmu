@@ -141,7 +141,6 @@ typedef enum _LMEmulatorAlert
   }
   else
   {
-    // kind of hacky to figure out the slot number, but it suffices right now, since saves are always in a known place and I REALLY wanted to pass the path for the save, for some reason
     int slot = [[[_initialSaveFileName stringByDeletingPathExtension] pathExtension] intValue];
     if(slot == 0)
       [LMSaveManager loadRunningStateForROMNamed:_romFileName];
@@ -419,12 +418,10 @@ typedef enum _LMEmulatorAlert
     if(_externalWindow == nil)
     {
       UIScreen* screen = [[UIScreen screens] objectAtIndex:1];
-      // TODO: pick the best display mode (lowest resolution preferred)
       UIWindow* window = [[UIWindow alloc] initWithFrame:screen.bounds];
       window.screen = screen;
       window.backgroundColor = [UIColor redColor];
       
-      // create our mirror controller
       _externalEmulator = [[LMEmulatorController alloc] initMirrorOf:self];
       window.rootViewController = _externalEmulator;
       
@@ -439,7 +436,6 @@ typedef enum _LMEmulatorAlert
   }
   else
   {
-    // switch back to us and dismantle
     [self LM_dismantleExternalScreen];
   }
 }
@@ -456,7 +452,6 @@ typedef enum _LMEmulatorAlert
   SISetFrameskip([defaults integerForKey:kLMSettingsFrameskipValue]);
   
   _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsBluetoothController];
-  // TODO: support custom key layouts
   
   SIUpdateSettings();
   
@@ -535,7 +530,6 @@ typedef enum _LMEmulatorAlert
     
     if([LMGameControllerManager gameControllersMightBeAvailable] == YES)
     {
-      // set up game controllers if available
       LMGameControllerManager* gameControllerManager = [LMGameControllerManager sharedInstance];
       gameControllerManager.delegate = self;
       [_customView setControlsHidden:gameControllerManager.gameControllerConnected animated:NO];
@@ -594,7 +588,6 @@ typedef enum _LMEmulatorAlert
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  // Return YES for supported orientations
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
   else
@@ -633,8 +626,7 @@ typedef enum _LMEmulatorAlert
     SISetScreenDelegate(nil);
     SISetSaveDelegate(nil);
   }
-  
-  // this is released upon showing
+    
   _actionSheet = nil;
   
   [self LM_dismantleExternalScreen];
