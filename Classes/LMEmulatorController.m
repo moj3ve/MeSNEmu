@@ -97,6 +97,18 @@ typedef enum _LMEmulatorAlert
 
 - (void)LM_options:(UIButton*)sender
 {
+    int resetIndex = 1;
+    
+    #ifdef SI_ENABLE_SAVES
+        int loadIndex = 2;
+        int saveIndex = 3;
+        int settingsIndex = 4;
+    #else
+        int loadIndex = -1
+        int saveIndex = -1;
+        int settingsIndex = 2;
+    #endif
+    
     SISetEmulationPaused(1);
   
     _customView.iCadeControlView.active = NO;
@@ -152,55 +164,92 @@ typedef enum _LMEmulatorAlert
         [alert addAction:yesButton];
         
         [self presentViewController:alert animated:YES completion:nil];
-        /* UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RESET_GAME?", nil)
-                                                        message:NSLocalizedString(@"RESET_CONSEQUENCES", nil)
-                                                       delegate:self
-                                              cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                              otherButtonTitles:NSLocalizedString(@"RESET", nil), nil];
-        alert.tag = LMEmulatorAlertReset;
-        [alert show];
-        [alert release];
-        SIReset(); */
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOAD_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"LOAD_SAVE?", nil)
+                                     message:NSLocalizedString(@"EXIT_CONSEQUENCES", nil)
+                                     preferredStyle:UIAlertControllerStyleAlert];
         
-        // OK button tapped.
+        UIView *firstSubview = alert.view.subviews.firstObject;
         
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.8];
+            }
+        }
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"CANCEL", nil)
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       SISetEmulationPaused(0);
+                                   }];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:NSLocalizedString(@"LOAD", nil)
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        SISetEmulationPaused(1);
+                                        SIWaitForPause();
+                                        [LMSaveManager loadStateForROMNamed:_romFileName slot:1];
+                                        SISetEmulationPaused(0);
+                                    }];
+        
+        [alert addAction:noButton];
+        [alert addAction:yesButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SAVE_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"SAVE_SAVE?", nil)
+                                     message:NSLocalizedString(@"SAVE_CONSEQUENCES", nil)
+                                     preferredStyle:UIAlertControllerStyleAlert];
         
-        // OK button tapped.
+        UIView *firstSubview = alert.view.subviews.firstObject;
         
-        [self dismissViewControllerAnimated:YES completion:^{
-        }];
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.8];
+            }
+        }
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"CANCEL", nil)
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       SISetEmulationPaused(0);
+                                   }];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:NSLocalizedString(@"SAVE", nil)
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        SISetEmulationPaused(1);
+                                        SIWaitForPause();
+                                        [LMSaveManager saveStateForROMNamed:_romFileName slot:1];
+                                        SISetEmulationPaused(0);
+                                    }];
+        
+        [alert addAction:noButton];
+        [alert addAction:yesButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         [self LM_showSettings];
     }]];
     
-    // Present action sheet.
     [self presentViewController:actionSheet animated:YES completion:nil];
-  
-  /* UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                     delegate:self
-                                            cancelButtonTitle:NSLocalizedString(@"BACK_TO_GAME", nil)
-                                       destructiveButtonTitle:NSLocalizedString(@"EXIT_GAME", nil)
-                                            otherButtonTitles:
-                          NSLocalizedString(@"RESET", nil),
-#ifdef SI_ENABLE_SAVES
-                          NSLocalizedString(@"LOAD_STATE", nil),
-                          NSLocalizedString(@"SAVE_STATE", nil),
-#endif
-                          NSLocalizedString(@"SETTINGS", nil),
-                          nil];
-  _actionSheet = sheet;
-  [sheet showInView:self.view];
-  [sheet autorelease];*/
+    _customView.iCadeControlView.active = YES;
 }
 
 #pragma mark SIScreenDelegate
@@ -239,102 +288,6 @@ typedef enum _LMEmulatorAlert
   [LMSaveManager saveRunningStateForROMNamed:_romFileName];
   NSLog(@"Saved!");
 #endif
-}
-
-#pragma mark UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet*)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-  if(_actionSheet != actionSheet)
-    return;
-  
-  NSLog(@"UIActionSheet button index: %i", buttonIndex);
-  int resetIndex = 1;
-#ifdef SI_ENABLE_SAVES
-  int loadIndex = 2;
-  int saveIndex = 3;
-  int settingsIndex = 4;
-#else
-  int loadIndex = -1
-  int saveIndex = -1;
-  int settingsIndex = 2;
-#endif
-  if(buttonIndex == resetIndex)
-  {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RESET_GAME?", nil)
-                                                    message:NSLocalizedString(@"RESET_CONSEQUENCES", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                          otherButtonTitles:NSLocalizedString(@"RESET", nil), nil];
-    alert.tag = LMEmulatorAlertReset;
-    [alert show];
-    [alert release];
-  }
-  else if(buttonIndex == loadIndex)
-  {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOAD_SAVE?", nil)
-                                                    message:NSLocalizedString(@"EXIT_CONSEQUENCES", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                          otherButtonTitles:NSLocalizedString(@"LOAD", nil), nil];
-    alert.tag = LMEmulatorAlertLoad;
-    [alert show];
-    [alert release];
-  }
-  else if(buttonIndex == saveIndex)
-  {
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SAVE_SAVE?", nil)
-                                                    message:NSLocalizedString(@"SAVE_CONSEQUENCES", nil)
-                                                   delegate:self
-                                          cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
-                                          otherButtonTitles:NSLocalizedString(@"SAVE", nil), nil];
-    alert.tag = LMEmulatorAlertSave;
-    [alert show];
-    [alert release];
-  }
-  else
-  {
-    _customView.iCadeControlView.active = YES;
-    SISetEmulationPaused(0);
-  }
-  _actionSheet = nil;
-}
-
-#pragma mark UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-  if(alertView.tag == LMEmulatorAlertReset)
-  {
-    if(buttonIndex == alertView.cancelButtonIndex)
-      SISetEmulationPaused(0);
-    else
-      SIReset();
-  }
-  else if(alertView.tag == LMEmulatorAlertLoad)
-  {
-    if(buttonIndex == alertView.cancelButtonIndex)
-      SISetEmulationPaused(0);
-    else
-    {
-      SISetEmulationPaused(1);
-      SIWaitForPause();
-      [LMSaveManager loadStateForROMNamed:_romFileName slot:1];
-      SISetEmulationPaused(0);
-    }
-  }
-  else if(alertView.tag == LMEmulatorAlertSave)
-  {
-    if(buttonIndex == alertView.cancelButtonIndex)
-      SISetEmulationPaused(0);
-    else
-    {
-      SISetEmulationPaused(1);
-      SIWaitForPause();
-      [LMSaveManager saveStateForROMNamed:_romFileName slot:1];
-      SISetEmulationPaused(0);
-    }
-  }
 }
 
 #pragma mark LMSettingsControllerDelegate
