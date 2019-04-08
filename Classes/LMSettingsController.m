@@ -65,6 +65,16 @@ typedef enum _LMSettingsSections
                                  message:@"MeSNEmu will now close for Dark Mode to turn on/off"
                                  preferredStyle:UIAlertControllerStyleAlert];
     
+    UIView *firstSubview = alert.view.subviews.firstObject;
+    
+    UIView *alertContentView = firstSubview.subviews.firstObject;
+    for (UIView *subSubView in alertContentView.subviews) { //This is main catch
+        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+        if (darkMode == YES) {
+            subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.8];
+        }
+    }
+    
     UIAlertAction* noButton = [UIAlertAction
                                 actionWithTitle:@"Cancel"
                                 style:UIAlertActionStyleDefault
