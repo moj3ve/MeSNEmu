@@ -68,7 +68,7 @@ typedef enum _LMSettingsSections
     UIView *firstSubview = alert.view.subviews.firstObject;
     
     UIView *alertContentView = firstSubview.subviews.firstObject;
-    for (UIView *subSubView in alertContentView.subviews) { //This is main catch
+    for (UIView *subSubView in alertContentView.subviews) {
         BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
         if (darkMode == YES) {
             subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.8];
@@ -90,7 +90,7 @@ typedef enum _LMSettingsSections
                                 }];
     
     UIAlertAction* yesButton = [UIAlertAction
-                               actionWithTitle:@"Okay, Close App"
+                               actionWithTitle:@"Okay"
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
                                    _changed = YES;

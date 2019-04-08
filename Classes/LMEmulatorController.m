@@ -97,15 +97,96 @@ typedef enum _LMEmulatorAlert
 
 - (void)LM_options:(UIButton*)sender
 {
-  SISetEmulationPaused(1);
+    SISetEmulationPaused(1);
   
-  _customView.iCadeControlView.active = NO;
-  if([LMGameControllerManager gameControllersMightBeAvailable] == YES)
-    [_customView setControlsHidden:[LMGameControllerManager sharedInstance].gameControllerConnected animated:NO];
-  else
-    [_customView setControlsHidden:NO animated:YES];
+    _customView.iCadeControlView.active = NO;
+    if([LMGameControllerManager gameControllersMightBeAvailable] == YES)
+      [_customView setControlsHidden:[LMGameControllerManager sharedInstance].gameControllerConnected animated:NO];
+    else
+        [_customView setControlsHidden:NO animated:YES];
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"BACK_TO_GAME", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+         SISetEmulationPaused(0);
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"EXIT_GAME", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [self LM_dismantleExternalScreen];
+        SISetEmulationRunning(0);
+        SIWaitForEmulationEnd();
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"RESET", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"RESET_GAME?", nil)
+                                     message:NSLocalizedString(@"RESET_CONSEQUENCES", nil)
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIView *firstSubview = alert.view.subviews.firstObject;
+        
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.8];
+            }
+        }
+        
+        UIAlertAction* noButton = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"CANCEL", nil)
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       SISetEmulationPaused(0);
+                                   }];
+        
+        UIAlertAction* yesButton = [UIAlertAction
+                                    actionWithTitle:NSLocalizedString(@"RESET", nil)
+                                    style:UIAlertActionStyleDefault
+                                    handler:^(UIAlertAction * action) {
+                                        SIReset();
+                                    }];
+        
+        [alert addAction:noButton];
+        [alert addAction:yesButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        /* UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RESET_GAME?", nil)
+                                                        message:NSLocalizedString(@"RESET_CONSEQUENCES", nil)
+                                                       delegate:self
+                                              cancelButtonTitle:NSLocalizedString(@"CANCEL", nil)
+                                              otherButtonTitles:NSLocalizedString(@"RESET", nil), nil];
+        alert.tag = LMEmulatorAlertReset;
+        [alert show];
+        [alert release];
+        SIReset(); */
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOAD_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        // OK button tapped.
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SAVE_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        // OK button tapped.
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+        }];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self LM_showSettings];
+    }]];
+    
+    // Present action sheet.
+    [self presentViewController:actionSheet animated:YES completion:nil];
   
-  UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil
+  /* UIActionSheet* sheet = [[UIActionSheet alloc] initWithTitle:nil
                                                      delegate:self
                                             cancelButtonTitle:NSLocalizedString(@"BACK_TO_GAME", nil)
                                        destructiveButtonTitle:NSLocalizedString(@"EXIT_GAME", nil)
@@ -119,7 +200,7 @@ typedef enum _LMEmulatorAlert
                           nil];
   _actionSheet = sheet;
   [sheet showInView:self.view];
-  [sheet autorelease];
+  [sheet autorelease];*/
 }
 
 #pragma mark SIScreenDelegate
@@ -178,14 +259,7 @@ typedef enum _LMEmulatorAlert
   int saveIndex = -1;
   int settingsIndex = 2;
 #endif
-  if(buttonIndex == actionSheet.destructiveButtonIndex)
-  {
-    [self LM_dismantleExternalScreen];
-    SISetEmulationRunning(0);
-    SIWaitForEmulationEnd();
-    [self dismissViewControllerAnimated:YES completion:nil];
-  }
-  else if(buttonIndex == resetIndex)
+  if(buttonIndex == resetIndex)
   {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"RESET_GAME?", nil)
                                                     message:NSLocalizedString(@"RESET_CONSEQUENCES", nil)
@@ -217,10 +291,6 @@ typedef enum _LMEmulatorAlert
     alert.tag = LMEmulatorAlertSave;
     [alert show];
     [alert release];
-  }
-  else if(buttonIndex == settingsIndex)
-  {
-    [self LM_showSettings];
   }
   else
   {
