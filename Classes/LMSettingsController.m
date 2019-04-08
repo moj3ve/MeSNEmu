@@ -58,28 +58,40 @@ typedef enum _LMSettingsSections
 
 // Dark Mode Switch Start
 
-#define myAlertViewsTag 0
-
 - (void)LM_toggleDarkMode:(UISwitch*)sender
 {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notice"
-                                          message:@"MeSNEmu will now close for Dark Mode to turn on/off"
-                                          delegate:self
-                                          cancelButtonTitle:nil
-                                          otherButtonTitles:@"OK", nil];
-    alert.tag = myAlertViewsTag;
-    [alert show];
-    [alert release];
-    _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
-}
-
--(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (alertView.tag == myAlertViewsTag) {
-        if (buttonIndex == 0) {
-            [[NSThread mainThread] exit];
-        }
-    }
+    UIAlertController * alert = [UIAlertController
+                                 alertControllerWithTitle:@"Notice"
+                                 message:@"MeSNEmu will now close for Dark Mode to turn on/off"
+                                 preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* noButton = [UIAlertAction
+                                actionWithTitle:@"Cancel"
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    if (sender.isOn == 0) {
+                                        _changed = YES;
+                                        [sender setOn:YES animated:YES];
+                                    }
+                                    else {
+                                        _changed = YES;
+                                        [sender setOn:FALSE animated:YES];
+                                    }
+                                }];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                               actionWithTitle:@"Okay, Close App"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction * action) {
+                                   _changed = YES;
+                                   [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
+                                   [[NSThread mainThread] exit];
+                               }];
+    
+    [alert addAction:noButton];
+    [alert addAction:yesButton];
+    
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 // Dark Mode Switch End
