@@ -9,12 +9,11 @@
 
 - (void)LM_setupController
 {
-  if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f)
-  {
-    NSArray* controllers = [GCController controllers];
-    // Grab first controller
-    // TODO: Add support for multiple controllers
-    _gameController = [controllers firstObject];
+   if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f)
+   {
+      NSArray* controllers = [GCController controllers];
+      _gameController = [controllers firstObject];
+      _gameController.playerIndex = 0;
       
       if (_gameController) {
           [self.delegate gameControllerManagerGamepadDidConnect:self];
@@ -22,15 +21,15 @@
           [self.delegate gameControllerManagerGamepadDidDisconnect:self];
       }
     
-    __weak id weakSelf = self;
+      __weak id weakSelf = self;
     
-    _gameController.gamepad.valueChangedHandler = ^(GCGamepad* gamepad, GCControllerElement* element) {
-      [weakSelf LM_getCurrentControllerInput];
-    };
-    _gameController.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad* gamepad, GCControllerElement* element) {
-      [weakSelf LM_getCurrentControllerInput];
-    };
-  }
+      _gameController.gamepad.valueChangedHandler = ^(GCGamepad* gamepad, GCControllerElement* element) {
+          [weakSelf LM_getCurrentControllerInput];
+      };
+      _gameController.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad* gamepad, GCControllerElement* element) {
+          [weakSelf LM_getCurrentControllerInput];
+      };
+   }
 }
 
 - (void)LM_controllerConnected:(NSNotification*)notification
