@@ -1536,7 +1536,7 @@ again:
 		lo_score = ScoreLoROM(FALSE);
 	}
 
-	CalculatedSize = (totalFileSize / 0x2000) * 0x2000;
+	CalculatedSize = ((totalFileSize + 0x1fff) / 0x2000) * 0x2000;
 
 	if (CalculatedSize > 0x400000 &&
 		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x4332 && // exclude S-DD1
