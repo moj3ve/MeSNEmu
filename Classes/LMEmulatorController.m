@@ -125,7 +125,7 @@ typedef enum _LMEmulatorAlert
     for (UIView *subSubView in alertContentView.subviews) {
         BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
         if (darkMode == YES) {
-            subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
+            subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.1];
         }
     }
     
