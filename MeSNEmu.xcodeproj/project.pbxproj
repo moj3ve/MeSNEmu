@@ -808,11 +808,6 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = SarahH12099;
-				TargetAttributes = {
-					A050660614B21C7F003E0C5E = {
-						DevelopmentTeam = 883K4M2NLH;
-					};
-				};
 			};
 			buildConfigurationList = A050660114B21C7E003E0C5E /* Build configuration list for PBXProject "MeSNEmu" */;
 			compatibilityVersion = "Xcode 10.0";
