@@ -1,11 +1,3 @@
-//
-//  SISaveDelegate.h
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/19/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 // Posted when the emulator wants to load the running save state
 extern NSString* const SILoadRunningStateNotification;
 // Posted when the emulator wants to save the running save state

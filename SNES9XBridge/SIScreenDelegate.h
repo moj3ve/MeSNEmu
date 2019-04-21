@@ -1,11 +1,3 @@
-//
-//  SIScreenDelegate.h
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/2/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #pragma mark Delegates
 
 // Delegate for the class that will handle screen update notifications from the emulator

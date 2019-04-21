@@ -1,11 +1,3 @@
-//
-//  iOSAudio.h
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/2/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #ifndef MeSNEmu_iOSAudio_h
 #define MeSNEmu_iOSAudio_h
 

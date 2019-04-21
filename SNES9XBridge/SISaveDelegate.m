@@ -1,11 +1,3 @@
-//
-//  SISaveDelegate.m
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/19/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #import "SISaveDelegate.h"
 
 NSString* const SILoadRunningStateNotification = @"SILoadRunningStateNotification";

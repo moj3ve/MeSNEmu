@@ -1,11 +1,3 @@
-//
-//  Snes9xMain.h
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/2/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #ifndef MeSNEmu_Snes9xMain_h
 #define MeSNEmu_Snes9xMain_h
 

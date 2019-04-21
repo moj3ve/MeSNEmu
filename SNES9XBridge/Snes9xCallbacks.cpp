@@ -1,11 +1,3 @@
-//
-//  Snes9xCallbacks.cpp
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 1/5/12.
-//  Copyright (c) 2012 Lucas Menge. All rights reserved.
-//
-
 #include "Snes9xCallbacks.h"
 
 #include <sys/time.h>
