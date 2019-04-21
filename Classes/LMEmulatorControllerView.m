@@ -51,7 +51,6 @@
   if(buttonMap == SI_BUTTON_A)
   {
     if (rygbButtons == YES) {
-        // button.label.textColor = [UIColor whiteColor];
         button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
     }
     else {
@@ -70,7 +69,6 @@
   else if(buttonMap == SI_BUTTON_B)
   {
       if (rygbButtons == YES) {
-          // button.label.textColor = [UIColor whiteColor];
           button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
       }
       else {
@@ -89,7 +87,6 @@
   else if(buttonMap == SI_BUTTON_X)
   {
       if (rygbButtons == YES) {
-          // button.label.textColor = [UIColor whiteColor];
           button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
       }
       else {
@@ -108,7 +105,6 @@
   else if(buttonMap == SI_BUTTON_Y)
   {
       if (rygbButtons == YES) {
-          // button.label.textColor = [UIColor whiteColor];
           button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
       }
       else {
