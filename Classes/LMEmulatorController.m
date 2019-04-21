@@ -119,6 +119,16 @@ typedef enum _LMEmulatorAlert
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
+    UIView *firstSubview = actionSheet.view.subviews.firstObject;
+    
+    UIView *alertContentView = firstSubview.subviews.firstObject;
+    for (UIView *subSubView in alertContentView.subviews) {
+        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+        if (darkMode == YES) {
+            subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
+        }
+    }
+    
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"BACK_TO_GAME", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
          SISetEmulationPaused(0);
     }]];
@@ -142,7 +152,7 @@ typedef enum _LMEmulatorAlert
         for (UIView *subSubView in alertContentView.subviews) {
             BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             if (darkMode == YES) {
-                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.4];
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
         }
         
@@ -178,7 +188,7 @@ typedef enum _LMEmulatorAlert
         for (UIView *subSubView in alertContentView.subviews) {
             BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             if (darkMode == YES) {
-                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.4];
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
         }
         
@@ -217,7 +227,7 @@ typedef enum _LMEmulatorAlert
         for (UIView *subSubView in alertContentView.subviews) {
             BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             if (darkMode == YES) {
-                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.4];
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
         }
         
