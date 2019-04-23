@@ -128,7 +128,7 @@
             if (lrThree == YES) {
                 if (@available(iOS 12.1, *)) {
                     if (extendedGamepad.leftTrigger.pressed) {
-                    SISetControllerPushButton(SI_BUTTON_SELECT);
+                        SISetControllerPushButton(SI_BUTTON_SELECT);
                     }
                     else if (extendedGamepad.rightThumbstickButton.pressed) {
                         SISetControllerPushButton(SI_BUTTON_SELECT);

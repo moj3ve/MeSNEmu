@@ -2,9 +2,6 @@
 
 #import "LMROMBrowserController.h"
 
-// TODO: LM: Better save UI to allow for multiple slots
-// TODO: LM: save/show screenshots for save states in the save state manager
-
 @implementation LMAppDelegate
 
 @synthesize window = _window;
@@ -12,29 +9,27 @@
 
 - (void)dealloc
 {
-  [_window release];
-  [_viewController release];
-  [super dealloc];
+    [_window release];
+    [_viewController release];
+    [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if TARGET_IPHONE_SIMULATOR
-  // where are we?
-  NSLog(@"\nDocuments Directory:\n%@\n\n", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]);
-#endif
+    #if TARGET_IPHONE_SIMULATOR
+        NSLog(@"\nDocuments Directory:\n%@\n\n", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]);
+    #endif
   
-  self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-  self.window.frame = [[UIScreen mainScreen] bounds];
-  LMROMBrowserController* romBrowser = [[LMROMBrowserController alloc] init];
-  UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:romBrowser];
-  self.viewController = nav;
-  [nav release];
-  [romBrowser release];
-
-  self.window.rootViewController = self.viewController;
-  [self.window makeKeyAndVisible];
-  return YES;
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window.frame = [[UIScreen mainScreen] bounds];
+    LMROMBrowserController* romBrowser = [[LMROMBrowserController alloc] init];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:romBrowser];
+    self.viewController = nav;
+    [nav release];
+    [romBrowser release];
+    self.window.rootViewController = self.viewController;
+    [self.window makeKeyAndVisible];
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
