@@ -18,13 +18,11 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-  // Return the number of sections.
   return 1;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-  // Return the number of rows in the section.
   return [_optionNames count];
 }
 
@@ -49,7 +47,6 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  // Navigation logic may go here. Create and push another view controller.
   [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_pickedIndex inSection:0]].accessoryType = UITableViewCellAccessoryNone;
   _pickedIndex = (int)indexPath.row;
   UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
@@ -74,7 +71,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  // Return YES for supported orientations
   if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
   else

@@ -126,23 +126,39 @@
             }
             BOOL lrThree = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsLRThree];
             if (lrThree == YES) {
-                if (extendedGamepad.leftTrigger.pressed) {
+                if (@available(iOS 12.1, *)) {
+                    if (extendedGamepad.leftTrigger.pressed) {
                     SISetControllerPushButton(SI_BUTTON_SELECT);
-                }
-                else if (extendedGamepad.rightThumbstickButton.pressed) {
-                    SISetControllerPushButton(SI_BUTTON_SELECT);
+                    }
+                    else if (extendedGamepad.rightThumbstickButton.pressed) {
+                        SISetControllerPushButton(SI_BUTTON_SELECT);
+                    }
+                    else {
+                        SISetControllerReleaseButton(SI_BUTTON_SELECT);
+                    }
+                    if (extendedGamepad.rightTrigger.pressed) {
+                        SISetControllerPushButton(SI_BUTTON_START);
+                    }
+                    else if (extendedGamepad.leftThumbstickButton.pressed) {
+                        SISetControllerPushButton(SI_BUTTON_START);
+                    }
+                    else {
+                        SISetControllerReleaseButton(SI_BUTTON_START);
+                    }
                 }
                 else {
-                    SISetControllerReleaseButton(SI_BUTTON_SELECT);
-                }
-                if (extendedGamepad.rightTrigger.pressed) {
-                    SISetControllerPushButton(SI_BUTTON_START);
-                }
-                else if (extendedGamepad.leftThumbstickButton.pressed) {
-                    SISetControllerPushButton(SI_BUTTON_START);
-                }
-                else {
-                    SISetControllerReleaseButton(SI_BUTTON_START);
+                    if (extendedGamepad.leftTrigger.pressed) {
+                        SISetControllerPushButton(SI_BUTTON_SELECT);
+                    }
+                    else {
+                        SISetControllerReleaseButton(SI_BUTTON_SELECT);
+                    }
+                    if (extendedGamepad.rightTrigger.pressed) {
+                        SISetControllerPushButton(SI_BUTTON_START);
+                    }
+                    else {
+                        SISetControllerReleaseButton(SI_BUTTON_START);
+                    }
                 }
             }
             else {

@@ -292,14 +292,12 @@ typedef enum _LMSettingsSections
     self = [super initWithStyle:style];
     if (self)
     {
-        // Custom initialization
     }
     return self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-    // Return the number of sections.
     return 3;
 }
 
