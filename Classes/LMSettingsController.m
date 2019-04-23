@@ -81,7 +81,7 @@ typedef enum _LMSettingsSections
                                 handler:^(UIAlertAction * action) {
                                     if (sender.isOn == 0) {
                                         _changed = YES;
-                                        [sender setOn:YES animated:YES];
+                                        [sender setOn:TRUE animated:YES];
                                     }
                                     else {
                                         _changed = YES;
@@ -118,11 +118,51 @@ typedef enum _LMSettingsSections
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsSound];
 }
 
+// L3/R3 Switch Start
+
 - (void)LM_toggleLRThree:(UISwitch*)sender
 {
-    _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsLRThree];
+    if (@available(iOS 12.1, *)) {
+        _changed = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsLRThree];
+    }
+    else {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Notice"
+                                     message:@"L3 & R3 Is Only Available For iOS 12.1+"
+                                     preferredStyle:UIAlertControllerStyleAlert];
+    
+        UIView *firstSubview = alert.view.subviews.firstObject;
+    
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
+            }
+        }
+    
+        UIAlertAction* okayButton = [UIAlertAction
+                                   actionWithTitle:@"Okay"
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction * action) {
+                                       if (sender.isOn == 1) {
+                                           _changed = YES;
+                                           [sender setOn:FALSE animated:YES];
+                                       }
+                                       else {
+                                           _changed = YES;
+                                           [sender setOn:FALSE animated:YES];
+                                       }
+                                   }];
+    
+        [alert addAction:okayButton];
+    
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
+
+// L3/R3 Switch End
 
 - (void)LM_toggleAutoFrameskip:(UISwitch*)sender
 {
