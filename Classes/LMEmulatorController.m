@@ -431,9 +431,11 @@ typedef enum _LMEmulatorAlert
 
 - (void)LM_didBecomeActive
 {
-  if(_actionSheet == nil)
-    [self LM_options:nil];
-  [self LM_screensChanged];
+    if(_actionSheet == nil)
+    {
+        [self LM_options:nil];
+    }
+    [self LM_screensChanged];
 }
 
 - (void)LM_screensChanged
