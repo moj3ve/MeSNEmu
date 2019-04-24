@@ -1,3 +1,8 @@
+// UIAlertController
+"NOTICE" = "Notice";
+"DARK_MODE_NOTICE" = "MeSNEmu will now close for Dark Mode to turn on/off";
+"LRTHREE_NOTICE" = "L3 & R3 Is Only Available For iOS 12.1+";
+
 // LMROMBrowserController
 "ROMS" = "Games";
 "CARTRIDGE_FILES" = "Cartridge";
@@ -25,18 +30,18 @@
 "DEVELOPER" = "Developer";
 
 // LMEmulatorController
-"BACK_TO_GAME" = "Back to game";
-"EXIT_GAME" = "Exit game";
+"BACK_TO_GAME" = "Back To Game";
+"EXIT_GAME" = "Exit Game";
 "RESET" = "Reset";
-"LOAD_STATE" = "Load state";
-"SAVE_STATE" = "Save state";
-"LOAD_SAVE?" = "Load state?";
+"LOAD_STATE" = "Load State";
+"SAVE_STATE" = "Save State";
+"LOAD_SAVE?" = "Load State?";
 "LOAD" = "Load";
-"SAVE_SAVE?" = "Save state?";
-"SAVE_CONSEQUENCES" = "This will overwrite your previous state.";
+"SAVE_SAVE?" = "Save State?";
+"SAVE_CONSEQUENCES" = "This will overwrite your previous state";
 "SAVE" = "Save";
-"EXIT_CONSEQUENCES" = "Any unsaved progress will be lost.";
+"EXIT_CONSEQUENCES" = "Any unsaved progress will be lost";
 "CANCEL" = "Cancel";
-"RESET_GAME?" = "Reset game?";
-"RESET_CONSEQUENCES" = "Any unsaved progress will be lost.";
+"RESET_GAME?" = "Reset Game?";
+"RESET_CONSEQUENCES" = "Any unsaved progress will be lost";
 "MENU" = "Menu";

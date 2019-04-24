@@ -60,9 +60,11 @@ typedef enum _LMSettingsSections
 
 - (void)LM_toggleDarkMode:(UISwitch*)sender
 {
+    NSString *Title = NSLocalizedString(@"NOTICE", nil);
+    NSString *Message = NSLocalizedString(@"DARK_MODE_NOTICE", nil);
     UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:@"Notice"
-                                 message:@"MeSNEmu will now close for Dark Mode to turn on/off"
+                                 alertControllerWithTitle:Title
+                                 message:Message
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     UIView *firstSubview = alert.view.subviews.firstObject;
@@ -127,9 +129,11 @@ typedef enum _LMSettingsSections
         [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsLRThree];
     }
     else {
+        NSString *Title = NSLocalizedString(@"NOTICE", nil);
+        NSString *Message = NSLocalizedString(@"LRTHREE_NOTICE", nil);
         UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Notice"
-                                     message:@"L3 & R3 Is Only Available For iOS 12.1+"
+                                     alertControllerWithTitle:Title
+                                     message:Message
                                      preferredStyle:UIAlertControllerStyleAlert];
     
         UIView *firstSubview = alert.view.subviews.firstObject;
