@@ -537,8 +537,8 @@
             _rButton.alpha = controlsAlpha;
             _rButton.frame = (CGRect){size.width-buttonSize*1.1-screenBorderX, size.height-buttonSize*4.3-screenBorderY-buttonSpacing, _xButton.frame.size};
             
-            _startButton.frame = (CGRect){size.width-buttonSize*2.9-screenBorderX, size.height-45, _startButton.frame.size};
-            _selectButton.frame = (CGRect){size.width-buttonSize*3.6-screenBorderX, size.height-45, _selectButton.frame.size};
+            _startButton.frame = (CGRect){size.width-buttonSize*2.4-screenBorderY, size.height-47, _startButton.frame.size};
+            _selectButton.frame = (CGRect){size.width-buttonSize*3.5-screenBorderX, size.height-47, _selectButton.frame.size};
             _optionsButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _selectButton.frame.size};
         }
         else
@@ -558,8 +558,8 @@
             _rButton.alpha = controlsAlpha;
             _rButton.frame = (CGRect){size.width-buttonSize*1.1-screenBorderX, size.height-buttonSize*4.3-screenBorderY-buttonSpacing, _xButton.frame.size};
             
-            _startButton.frame = (CGRect){size.width-buttonSize*2.9-screenBorderX, size.height-45, _startButton.frame.size};
-            _selectButton.frame = (CGRect){size.width-buttonSize*3.6-screenBorderX, size.height-45, _selectButton.frame.size};
+            _startButton.frame = (CGRect){size.width-buttonSize*2.4-screenBorderY, size.height-47, _startButton.frame.size};
+            _selectButton.frame = (CGRect){size.width-buttonSize*3.5-screenBorderX, size.height-47, _selectButton.frame.size};
             _optionsButton.frame = (CGRect){smallButtonsOriginX,smallButtonsOriginY, _selectButton.frame.size};
         }
     }
