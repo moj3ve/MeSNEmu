@@ -304,7 +304,6 @@ typedef enum _LMEmulatorAlert
 
 - (void)settingsDidDismiss:(LMSettingsController*)settingsController
 {
-    // [self LM_options:nil];
     if(_actionSheet == nil)
     {
         [self LM_options:nil];

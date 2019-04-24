@@ -21,117 +21,116 @@
 
 - (LMButtonView*)LM_smallButtonWithButton:(int)buttonMap
 {
-  int width = 44;
-  int height = 24;
-  
-  LMButtonView* button = [[LMButtonView alloc] initWithFrame:(CGRect){0,0, width,height}];
-  button.image = [UIImage imageNamed:@"ButtonWide.png"];
-  button.label.textColor = [UIColor colorWithWhite:1 alpha:0.75];
-  button.label.shadowColor = [UIColor colorWithWhite:0 alpha:0.35];
-  button.label.shadowOffset = CGSizeMake(0, -1);
-  button.label.font = [UIFont systemFontOfSize:10];
-  button.button = buttonMap;
-  if(buttonMap == SI_BUTTON_START)
-    button.label.text = @"Start";
-  else if(buttonMap == SI_BUTTON_SELECT)
-    button.label.text = @"Select";
-  return [button autorelease];
+    int width = 44;
+    int height = 24;
+    LMButtonView* button = [[LMButtonView alloc] initWithFrame:(CGRect){0,0, width,height}];
+    button.image = [UIImage imageNamed:@"ButtonWide.png"];
+    button.label.textColor = [UIColor colorWithWhite:1 alpha:0.75];
+    button.label.shadowColor = [UIColor colorWithWhite:0 alpha:0.35];
+    button.label.shadowOffset = CGSizeMake(0, -1);
+    button.label.font = [UIFont systemFontOfSize:10];
+    button.button = buttonMap;
+    if(buttonMap == SI_BUTTON_START) {
+        button.label.text = @"Start";
+    }
+    else if(buttonMap == SI_BUTTON_SELECT) {
+        button.label.text = @"Select";
+    }
+    return [button autorelease];
 }
 
 - (LMButtonView*)LM_buttonWithButton:(int)buttonMap
 {
-  BOOL rygbButtons = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsRYGBButtons];
-  int side = 60;
-  side = 70;
-  if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    BOOL rygbButtons = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsRYGBButtons];
+    int side = 60;
     side = 70;
-  LMButtonView* button = [[LMButtonView alloc] initWithFrame:(CGRect){0,0, side,side}];
-  button.button = buttonMap;
-  button.label.font = [UIFont boldSystemFontOfSize:27.0];
-  if(buttonMap == SI_BUTTON_A)
-  {
-    if (rygbButtons == YES) {
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        side = 70;
+    }
+    LMButtonView* button = [[LMButtonView alloc] initWithFrame:(CGRect){0,0, side,side}];
+    button.button = buttonMap;
+    button.label.font = [UIFont boldSystemFontOfSize:27.0];
+    if(buttonMap == SI_BUTTON_A) {
+        if (rygbButtons == YES) {
+            button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+        }
+        else {
+            button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+        }
+        button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
+        button.label.shadowOffset = CGSizeMake(0, 1);
+        button.label.text = @"A";
+        if (rygbButtons == YES) {
+            button.image = [UIImage imageNamed:@"RedButton.png"];
+        }
+        else {
+            button.image = [UIImage imageNamed:@"PurpleButton.png"];
+        }
+    }
+    else if(buttonMap == SI_BUTTON_B) {
+        if (rygbButtons == YES) {
+            button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+        }
+        else {
+            button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
+        }
+        button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
+        button.label.shadowOffset = CGSizeMake(0, 1);
+        button.label.text = @"B";
+        if (rygbButtons == YES) {
+            button.image = [UIImage imageNamed:@"YellowButton.png"];
+        }
+        else {
+            button.image = [UIImage imageNamed:@"PurpleButton.png"];
+        }
+    }
+    else if(buttonMap == SI_BUTTON_X) {
+        if (rygbButtons == YES) {
+            button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+        }
+        else {
+            button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
+        }
+        button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
+        button.label.shadowOffset = CGSizeMake(0, 1);
+        button.label.text = @"X";
+        if (rygbButtons == YES) {
+            button.image = [UIImage imageNamed:@"BlueButton.png"];
+        }
+        else {
+            button.image = [UIImage imageNamed:@"LightPurpleButton.png"];
+        }
+    }
+    else if(buttonMap == SI_BUTTON_Y) {
+        if (rygbButtons == YES) {
+            button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+        }
+        else {
+            button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
+        }
+        button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
+        button.label.shadowOffset = CGSizeMake(0, 1);
+        button.label.text = @"Y";
+        if (rygbButtons == YES) {
+            button.image = [UIImage imageNamed:@"GreenButton.png"];
+        }
+        else {
+            button.image = [UIImage imageNamed:@"LightPurpleButton.png"];
+        }
+    }
+    else if(buttonMap == SI_BUTTON_L || buttonMap == SI_BUTTON_R) {
+        button.image = [UIImage imageNamed:@"LRButton.png"];
         button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
+        button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
+        button.label.shadowOffset = CGSizeMake(0, 1);
+        if(buttonMap == SI_BUTTON_L) {
+            button.label.text = @"L";
+        }
+        else if(buttonMap == SI_BUTTON_R) {
+            button.label.text = @"R";
+        }
     }
-    else {
-        button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
-    }
-    button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
-    button.label.shadowOffset = CGSizeMake(0, 1);
-    button.label.text = @"A";
-    if (rygbButtons == YES) {
-        button.image = [UIImage imageNamed:@"RedButton.png"];
-    }
-    else {
-        button.image = [UIImage imageNamed:@"PurpleButton.png"];
-    }
-  }
-  else if(buttonMap == SI_BUTTON_B)
-  {
-      if (rygbButtons == YES) {
-          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
-      }
-      else {
-          button.label.textColor = [UIColor colorWithRed:63/255.0 green:32/255.0 blue:127/255.0 alpha:0.75];
-      }
-      button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
-      button.label.shadowOffset = CGSizeMake(0, 1);
-      button.label.text = @"B";
-      if (rygbButtons == YES) {
-          button.image = [UIImage imageNamed:@"YellowButton.png"];
-      }
-      else {
-          button.image = [UIImage imageNamed:@"PurpleButton.png"];
-      }
-  }
-  else if(buttonMap == SI_BUTTON_X)
-  {
-      if (rygbButtons == YES) {
-          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
-      }
-      else {
-          button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
-      }
-      button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
-      button.label.shadowOffset = CGSizeMake(0, 1);
-      button.label.text = @"X";
-      if (rygbButtons == YES) {
-          button.image = [UIImage imageNamed:@"BlueButton.png"];
-      }
-      else {
-          button.image = [UIImage imageNamed:@"LightPurpleButton.png"];
-      }
-  }
-  else if(buttonMap == SI_BUTTON_Y)
-  {
-      if (rygbButtons == YES) {
-          button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
-      }
-      else {
-          button.label.textColor = [UIColor colorWithRed:122/255.0 green:101/255.0 blue:208/255.0 alpha:0.75];
-      }
-      button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
-      button.label.shadowOffset = CGSizeMake(0, 1);
-      button.label.text = @"Y";
-      if (rygbButtons == YES) {
-          button.image = [UIImage imageNamed:@"GreenButton.png"];
-      }
-      else {
-          button.image = [UIImage imageNamed:@"LightPurpleButton.png"];
-      }
-  }
-  else if(buttonMap == SI_BUTTON_L || buttonMap == SI_BUTTON_R)
-  {
-    button.image = [UIImage imageNamed:@"LRButton.png"];
-    button.label.textColor = [UIColor colorWithRed:136/255.0 green:140/255.0 blue:148/255.0 alpha:0.75];
-    button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
-    button.label.shadowOffset = CGSizeMake(0, 1);
-    if(buttonMap == SI_BUTTON_L)
-      button.label.text = @"L";
-    else if(buttonMap == SI_BUTTON_R)
-      button.label.text = @"R";
-  }
-  return [button autorelease];
+    return [button autorelease];
 }
 
 @end
@@ -183,10 +182,8 @@
   if(_imageBuffer == nil || _565ImageBuffer == nil)
     return;
   
-  // make sure we're showing the proper amount of image
   [_screenView updateBufferCropResWidth:width height:height];
   
-  // we use two framebuffers to avoid copy-on-write due to us using UIImage. Little memory overhead, no speed overhead at all compared to that nasty IOSurface and SDK-safe, to boot
   if(((LMPixelLayer*)_screenView.layer).displayMainBuffer == YES)
   {
     SISetScreen(_imageBufferAlt);

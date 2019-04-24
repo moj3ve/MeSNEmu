@@ -15,7 +15,6 @@ typedef enum _LMEmulatorControllerViewMode
 
 @interface LMEmulatorControllerView : UIView
 {
-  // buffers
   unsigned int _bufferWidth;
   unsigned int _bufferHeight;
   unsigned int _bufferHeightExtended;
@@ -23,23 +22,20 @@ typedef enum _LMEmulatorControllerViewMode
   unsigned char* _imageBufferAlt;
   unsigned char* _565ImageBuffer;
   
-  // screen
   LMPixelView* _screenView;
   
-  // start / select
   LMButtonView* _startButton;
   LMButtonView* _selectButton;
-  // buttons
+    
   LMButtonView* _aButton;
   LMButtonView* _bButton;
   LMButtonView* _xButton;
   LMButtonView* _yButton;
   LMButtonView* _lButton;
   LMButtonView* _rButton;
-  // directions
+    
   LMDPadView* _dPadView;
   
-  // external controller
   LMBTControllerView* _iCadeControlView;
   
   UIButton* _optionsButton;

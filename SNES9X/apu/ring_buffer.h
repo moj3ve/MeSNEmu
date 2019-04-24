@@ -1,5 +1,3 @@
-/* Simple byte-based ring buffer. Licensed under public domain (C) BearOso. */
-
 #ifndef __RING_BUFFER_H
 #define __RING_BUFFER_H
 
