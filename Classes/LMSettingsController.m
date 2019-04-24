@@ -329,9 +329,9 @@ typedef enum _LMSettingsSections
 - (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
 {
     if(section == LMSettingsSectionScreen)
-        return NSLocalizedString(@"Dark Mode requires you to restart the app for it to fully work", nil);
+        return NSLocalizedString(@"DARK_MODE_MESSAGE", nil);
     else if(section == LMSettingsSectionEmulation)
-        return NSLocalizedString(@"Auto Frameskip may appear slower due to a more inconsistent skip rate", nil);
+        return NSLocalizedString(@"AUTO_FRAMESKIP_MESSAGE", nil);
     return nil;
 }
 
@@ -362,7 +362,7 @@ typedef enum _LMSettingsSections
             
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsFullScreen];
             [c.switchView addTarget:self action:@selector(LM_toggleFullScreen:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"Full Screen", nil);
+            c.textLabel.text = NSLocalizedString(@"FULL_SCREEN", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -373,7 +373,7 @@ typedef enum _LMSettingsSections
             
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
             [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"Dark Mode", nil);
+            c.textLabel.text = NSLocalizedString(@"DARK_MODE_TITLE", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -449,7 +449,7 @@ typedef enum _LMSettingsSections
         int row = (int)indexPath.row;
         if(row == 0)
         {
-            cell.textLabel.text = NSLocalizedString(@"VERSION", nil);
+            cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
@@ -467,7 +467,7 @@ typedef enum _LMSettingsSections
         }
         else if(row == 1)
         {
-            cell.textLabel.text = NSLocalizedString(@"Core", nil);
+            cell.textLabel.text = NSLocalizedString(@"CORE", nil);
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
@@ -477,7 +477,7 @@ typedef enum _LMSettingsSections
         }
         else if(row == 2)
         {
-            cell.textLabel.text = NSLocalizedString(@"BY", nil);
+            cell.textLabel.text = NSLocalizedString(@"DEVELOPER", nil);
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
