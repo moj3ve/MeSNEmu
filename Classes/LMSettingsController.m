@@ -384,7 +384,7 @@ typedef enum _LMSettingsSections
             
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsRYGBButtons];
             [c.switchView addTarget:self action:@selector(LM_toggleRYGBButtons:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"RYGB Buttons", nil);
+            c.textLabel.text = NSLocalizedString(@"RYGB_BUTTONS", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -405,7 +405,7 @@ typedef enum _LMSettingsSections
         else if([indexPath compare:_lrThreeIndexPath] == NSOrderedSame)
         {
             LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
-            c.textLabel.text = NSLocalizedString(@"Enable L3/R3", nil);
+            c.textLabel.text = NSLocalizedString(@"LRTHREE", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -415,7 +415,7 @@ typedef enum _LMSettingsSections
         else if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
         {
             LMTableViewSwitchCell* c = (LMTableViewSwitchCell*)(cell = [self LM_switchCell]);
-            c.textLabel.text = NSLocalizedString(@"Auto Frameskip", nil);
+            c.textLabel.text = NSLocalizedString(@"AUTO_FRAMESKIP_TITLE", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -425,14 +425,14 @@ typedef enum _LMSettingsSections
         else if([indexPath compare:_frameskipValueIndexPath] == NSOrderedSame)
         {
             LMTableViewNumberCell* c = (LMTableViewNumberCell*)(cell = [self LM_numberCell]);
-            c.textLabel.text = NSLocalizedString(@"Skip Every", nil);
+            c.textLabel.text = NSLocalizedString(@"SKIP_EVERY", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
                 c.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
             }
             c.minimumValue = 0;
             c.maximumValue = 9;
-            c.suffix = NSLocalizedString(@"Frames", nil);
+            c.suffix = NSLocalizedString(@"FRAMES", nil);
             c.allowsDefault = NO;
             c.value = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsFrameskipValue];
             c.delegate = self;
