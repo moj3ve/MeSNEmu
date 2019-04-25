@@ -1,6 +1,6 @@
 #import "ButtonView.h"
 
-#import "../SNES9XBridge/Snes9xMain.h"
+#import "../Snes9xBridge/Snes9xMain.h"
 
 @implementation ButtonView(Privates)
 

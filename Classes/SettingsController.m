@@ -477,7 +477,7 @@ typedef enum _LMSettingsSections
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
             }
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"Snes9X %@", [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
+            cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"CORE_NAME", nil), [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
         }
         else if(row == 2)
         {
@@ -487,7 +487,7 @@ typedef enum _LMSettingsSections
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
             }
-            cell.detailTextLabel.text = @"SarahH12099";
+            cell.detailTextLabel.text = NSLocalizedString(@"DEVELOPER_NAME", nil);
         }
     }
     

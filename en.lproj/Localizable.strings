@@ -3,7 +3,7 @@
 "DARK_MODE_NOTICE" = "MeSNEmu will now close for Dark Mode to turn on/off";
 "LRTHREE_NOTICE" = "L3 & R3 Is Only Available For iOS 12.1+";
 
-// LMROMBrowserController
+// ROMBrowserController
 "ROMS" = "Games";
 "CARTRIDGE_FILES" = "Cartridge";
 "GAME_FILE" = "Game";
@@ -12,7 +12,7 @@
 "LAST_PLAYED_SPOT" = "Last Stop";
 "SAVE_FILE_SLOT_%i" = "Save %i";
 
-// LMSettingsController
+// SettingsController
 "SMOOTH_SCALING" = "Smooth Scaling";
 "FULL_SCREEN" = "Full Screen";
 "DARK_MODE_TITLE" = "Dark Mode";
@@ -27,9 +27,11 @@
 "SETTINGS" = "Settings";
 "ABOUT" = "About";
 "CORE" = "Core";
+"CORE_NAME" = "Snes9x";
 "DEVELOPER" = "Developer";
+"DEVELOPER_NAME" = "SarahH12099";
 
-// LMEmulatorController
+// EmulatorController
 "BACK_TO_GAME" = "Back To Game";
 "EXIT_GAME" = "Exit Game";
 "RESET" = "Reset";
