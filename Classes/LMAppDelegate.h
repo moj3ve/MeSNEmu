@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@class LMEmulatorController;
+@class EmulatorController;
 
 @interface LMAppDelegate : UIResponder <UIApplicationDelegate>
 

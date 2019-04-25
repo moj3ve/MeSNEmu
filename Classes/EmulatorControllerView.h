@@ -1,0 +1,58 @@
+#import <UIKit/UIKit.h>
+
+@class LMBTControllerView;
+
+@class ButtonView;
+@class DPadView;
+@class PixelView;
+
+typedef enum _LMEmulatorControllerViewMode
+{
+  LMEmulatorControllerViewModeNormal,
+  LMEmulatorControllerViewModeScreenOnly,
+  LMEmulatorControllerViewModeControllerOnly
+} LMEmulatorControllerViewMode;
+
+@interface EmulatorControllerView : UIView
+{
+  unsigned int _bufferWidth;
+  unsigned int _bufferHeight;
+  unsigned int _bufferHeightExtended;
+  unsigned char* _imageBuffer;
+  unsigned char* _imageBufferAlt;
+  unsigned char* _565ImageBuffer;
+  
+  PixelView* _screenView;
+  
+  ButtonView* _startButton;
+  ButtonView* _selectButton;
+    
+  ButtonView* _aButton;
+  ButtonView* _bButton;
+  ButtonView* _xButton;
+  ButtonView* _yButton;
+  ButtonView* _lButton;
+  ButtonView* _rButton;
+    
+  DPadView* _dPadView;
+  
+  LMBTControllerView* _iCadeControlView;
+  
+  UIButton* _optionsButton;
+  
+  BOOL _hideUI;
+  
+  LMEmulatorControllerViewMode _viewMode;
+}
+
+@property (readonly) UIButton* optionsButton;
+@property (readonly) LMBTControllerView* iCadeControlView;
+@property (nonatomic) LMEmulatorControllerViewMode viewMode;
+
+- (void)setControlsHidden:(BOOL)value animated:(BOOL)animated;
+- (void)setMinMagFilter:(NSString*)filter;
+
+- (void)setPrimaryBuffer;
+- (void)flipFrontBufferWidth:(int)width height:(int)height;
+
+@end
