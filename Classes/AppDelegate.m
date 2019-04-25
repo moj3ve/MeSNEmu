@@ -1,8 +1,8 @@
-#import "LMAppDelegate.h"
+#import "AppDelegate.h"
 
 #import "ROMBrowserController.h"
 
-@implementation LMAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize viewController = _viewController;
