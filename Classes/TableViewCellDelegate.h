@@ -2,6 +2,6 @@
 
 @protocol TableViewCellDelegate <NSObject>
 
-- (void)LM_cellValueChanged:(UITableViewCell*)cell;
+- (void)cellValueChanged:(UITableViewCell*)cell;
 
 @end

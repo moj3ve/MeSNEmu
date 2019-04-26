@@ -124,7 +124,7 @@
             else {
                 SISetControllerReleaseButton(SI_BUTTON_R);
             }
-            BOOL lrThree = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsLRThree];
+            BOOL lrThree = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLRThree];
             if (lrThree == YES) {
                 if (@available(iOS 12.1, *)) {
                     if (extendedGamepad.leftTrigger.pressed) {

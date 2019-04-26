@@ -27,7 +27,7 @@
     _switch = [[UISwitch alloc] initWithFrame:(CGRect){0,0, 0,0}];
     self.accessoryView = _switch;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     if (darkMode == YES) {
         self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
     }
@@ -49,7 +49,7 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier
 {
-  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
   if (darkMode == YES) {
     self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
   }

@@ -25,7 +25,7 @@ typedef enum _LMEmulatorAlert
 
 #pragma mark -
 
-@interface EmulatorController(Privates) <UIActionSheetDelegate, UIAlertViewDelegate, LMSettingsControllerDelegate, SISaveDelegate, iCadeEventDelegate, SIScreenDelegate, GameControllerManagerDelegate>
+@interface EmulatorController(Privates) <UIActionSheetDelegate, UIAlertViewDelegate, SettingsControllerDelegate, SISaveDelegate, iCadeEventDelegate, SIScreenDelegate, GameControllerManagerDelegate>
 @end
 
 #pragma mark -
@@ -123,7 +123,7 @@ typedef enum _LMEmulatorAlert
     
     UIView *alertContentView = firstSubview.subviews.firstObject;
     for (UIView *subSubView in alertContentView.subviews) {
-        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
         if (darkMode == YES) {
             subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.1];
         }
@@ -150,7 +150,7 @@ typedef enum _LMEmulatorAlert
         
         UIView *alertContentView = firstSubview.subviews.firstObject;
         for (UIView *subSubView in alertContentView.subviews) {
-            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
             if (darkMode == YES) {
                 subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
@@ -186,7 +186,7 @@ typedef enum _LMEmulatorAlert
         
         UIView *alertContentView = firstSubview.subviews.firstObject;
         for (UIView *subSubView in alertContentView.subviews) {
-            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
             if (darkMode == YES) {
                 subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
@@ -225,7 +225,7 @@ typedef enum _LMEmulatorAlert
         
         UIView *alertContentView = firstSubview.subviews.firstObject;
         for (UIView *subSubView in alertContentView.subviews) {
-            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
             if (darkMode == YES) {
                 subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
@@ -481,15 +481,15 @@ typedef enum _LMEmulatorAlert
 - (void)LM_settingsChanged
 {
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-  SISetSoundOn([defaults boolForKey:kLMSettingsSound]);
-  if([defaults boolForKey:kLMSettingsSmoothScaling] == YES)
+  SISetSoundOn([defaults boolForKey:kSettingsSound]);
+  if([defaults boolForKey:kSettingsSmoothScaling] == YES)
     [_customView setMinMagFilter:kCAFilterLinear];
   else
     [_customView setMinMagFilter:kCAFilterNearest];
-  SISetAutoFrameskip([defaults boolForKey:kLMSettingsAutoFrameskip]);
-  SISetFrameskip([defaults integerForKey:kLMSettingsFrameskipValue]);
+  SISetAutoFrameskip([defaults boolForKey:kSettingsAutoFrameskip]);
+  SISetFrameskip([defaults integerForKey:kSettingsFrameskipValue]);
   
-  _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsBluetoothController];
+  _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
   
   SIUpdateSettings();
   
@@ -648,7 +648,7 @@ typedef enum _LMEmulatorAlert
   self = [super init];
   if(self)
   {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_settingsChanged) name:kLMSettingsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_settingsChanged) name:kSettingsChangedNotification object:nil];
   }
   return self;
 }

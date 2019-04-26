@@ -7,58 +7,58 @@
 #import "TableViewNumberCell.h"
 #import "TableViewSwitchCell.h"
 
-NSString* const kLMSettingsChangedNotification = @"SettingsChanged";
+NSString* const kSettingsChangedNotification = @"SettingsChanged";
 
-NSString* const kLMSettingsBluetoothController = @"BluetoothController";
+NSString* const kSettingsBluetoothController = @"BluetoothController";
 
-NSString* const kLMSettingsSmoothScaling = @"SmoothScaling";
-NSString* const kLMSettingsFullScreen = @"FullScreen";
-NSString* const kLMSettingsDarkMode = @"DarkMode";
-NSString* const kLMSettingsRYGBButtons = @"RYGBButtons";
+NSString* const kSettingsSmoothScaling = @"SmoothScaling";
+NSString* const kSettingsFullScreen = @"FullScreen";
+NSString* const kSettingsDarkMode = @"DarkMode";
+NSString* const kSettingsRYGBButtons = @"RYGBButtons";
 
-NSString* const kLMSettingsSound = @"Sound";
-NSString* const kLMSettingsLRThree = @"LRThree";
-NSString* const kLMSettingsAutoFrameskip = @"AutoFrameskip";
-NSString* const kLMSettingsFrameskipValue = @"FrameskipValue";
+NSString* const kSettingsSound = @"Sound";
+NSString* const kSettingsLRThree = @"LRThree";
+NSString* const kSettingsAutoFrameskip = @"AutoFrameskip";
+NSString* const kSettingsFrameskipValue = @"FrameskipValue";
 
-NSString* const kLMEmulatorPortName = @"MeSNEmu";
+NSString* const kEmulatorPortName = @"MeSNEmu";
 
-typedef enum _LMSettingsSections
+typedef enum _SettingsSections
 {
-    LMSettingsSectionScreen,
-    LMSettingsSectionEmulation,
-    LMSettingsSectionAbout
-} LMSettingsSections;
+    SettingsSectionScreen,
+    SettingsSectionEmulation,
+    SettingsSectionAbout
+} SettingsSections;
 
 @interface SettingsController(Privates) <TableViewCellDelegate, MultipleChoicePickerDelegate>
 @end
 
 @implementation SettingsController(Privates)
 
-- (void)LM_done
+- (void)done
 {
     if(_changed == YES)
-        [[NSNotificationCenter defaultCenter] postNotificationName:kLMSettingsChangedNotification object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSettingsChangedNotification object:nil userInfo:nil];
     [self.presentingViewController dismissViewControllerAnimated:YES completion:^{
         [_delegate settingsDidDismiss:self];
     }];
 }
 
-- (void)LM_toggleSmoothScaling:(UISwitch*)sender
+- (void)toggleSmoothScaling:(UISwitch*)sender
 {
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsSmoothScaling];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSmoothScaling];
 }
 
-- (void)LM_toggleFullScreen:(UISwitch*)sender
+- (void)toggleFullScreen:(UISwitch*)sender
 {
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsFullScreen];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsFullScreen];
 }
 
 // Dark Mode Switch Start
 
-- (void)LM_toggleDarkMode:(UISwitch*)sender
+- (void)toggleDarkMode:(UISwitch*)sender
 {
     NSString *Title = NSLocalizedString(@"NOTICE", nil);
     NSString *Message = NSLocalizedString(@"DARK_MODE_NOTICE", nil);
@@ -71,7 +71,7 @@ typedef enum _LMSettingsSections
     
     UIView *alertContentView = firstSubview.subviews.firstObject;
     for (UIView *subSubView in alertContentView.subviews) {
-        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
         if (darkMode == YES) {
             subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
         }
@@ -96,7 +96,7 @@ typedef enum _LMSettingsSections
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
                                    _changed = YES;
-                                   [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsDarkMode];
+                                   [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsDarkMode];
                                    [[NSThread mainThread] exit];
                                }];
     
@@ -108,25 +108,25 @@ typedef enum _LMSettingsSections
 
 // Dark Mode Switch End
 
-- (void)LM_toggleRYGBButtons:(UISwitch*)sender
+- (void)toggleRYGBButtons:(UISwitch*)sender
 {
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsRYGBButtons];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsRYGBButtons];
 }
 
-- (void)LM_toggleSound:(UISwitch*)sender
+- (void)toggleSound:(UISwitch*)sender
 {
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsSound];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSound];
 }
 
 // L3/R3 Switch Start
 
-- (void)LM_toggleLRThree:(UISwitch*)sender
+- (void)toggleLRThree:(UISwitch*)sender
 {
     if (@available(iOS 12.1, *)) {
         _changed = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsLRThree];
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsLRThree];
     }
     else {
         NSString *Title = NSLocalizedString(@"NOTICE", nil);
@@ -140,7 +140,7 @@ typedef enum _LMSettingsSections
     
         UIView *alertContentView = firstSubview.subviews.firstObject;
         for (UIView *subSubView in alertContentView.subviews) {
-            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
             if (darkMode == YES) {
                 subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
             }
@@ -168,20 +168,20 @@ typedef enum _LMSettingsSections
 
 // L3/R3 Switch End
 
-- (void)LM_toggleAutoFrameskip:(UISwitch*)sender
+- (void)toggleAutoFrameskip:(UISwitch*)sender
 {
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kLMSettingsAutoFrameskip];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsAutoFrameskip];
 }
 
-- (void)LM_cellValueChanged:(UITableViewCell*)cell
+- (void)cellValueChanged:(UITableViewCell*)cell
 {
     _changed = YES;
     if([[self.tableView indexPathForCell:cell] compare:_frameskipValueIndexPath] == NSOrderedSame)
-        [[NSUserDefaults standardUserDefaults] setInteger:((TableViewNumberCell*)cell).value forKey:kLMSettingsFrameskipValue];
+        [[NSUserDefaults standardUserDefaults] setInteger:((TableViewNumberCell*)cell).value forKey:kSettingsFrameskipValue];
 }
 
-- (TableViewNumberCell*)LM_numberCell
+- (TableViewNumberCell*)numberCell
 {
     static NSString* identifier = @"NumberCell";
     TableViewNumberCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -190,7 +190,7 @@ typedef enum _LMSettingsSections
     return cell;
 }
 
-- (TableViewSwitchCell*)LM_switchCell
+- (TableViewSwitchCell*)switchCell
 {
     static NSString* identifier = @"SwitchCell";
     TableViewSwitchCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -199,7 +199,7 @@ typedef enum _LMSettingsSections
     return cell;
 }
 
-- (UITableViewCell*)LM_multipleChoiceCell
+- (UITableViewCell*)multipleChoiceCell
 {
     static NSString* identifier = @"MultipleChoiceCell";
     UITableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -209,13 +209,13 @@ typedef enum _LMSettingsSections
     return cell;
 }
 
-#pragma mark LMMultipleChoicePickerDelegate
+#pragma mark MultipleChoicePickerDelegate
 
 - (void)multipleChoice:(MultipleChoicePicker*)picker changedIndex:(int)index
 {
     _changed = YES;
     int value = [[picker.optionValues objectAtIndex:index] intValue];
-    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kLMSettingsBluetoothController];
+    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:kSettingsBluetoothController];
 }
 
 @end
@@ -257,32 +257,32 @@ typedef enum _LMSettingsSections
 
 + (void)setDefaultsIfNotDefined
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsBluetoothController] == nil)
-        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_iCade8Bitty forKey:kLMSettingsBluetoothController];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsBluetoothController] == nil)
+        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_iCade8Bitty forKey:kSettingsBluetoothController];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsSmoothScaling] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsSmoothScaling];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSmoothScaling] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsSmoothScaling];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsFullScreen] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLMSettingsFullScreen];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsFullScreen] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsFullScreen];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsDarkMode] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsDarkMode];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsDarkMode] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsDarkMode];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsRYGBButtons] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsRYGBButtons];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsRYGBButtons] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsRYGBButtons];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsSound] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kLMSettingsSound];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSound] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSound];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsLRThree] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsLRThree];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsLRThree] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsLRThree];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsAutoFrameskip] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsAutoFrameskip];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsAutoFrameskip] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsAutoFrameskip];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsFrameskipValue] == nil)
-        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kLMSettingsFrameskipValue];
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsFrameskipValue] == nil)
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsFrameskipValue];
 }
 
 @end
@@ -308,22 +308,22 @@ typedef enum _LMSettingsSections
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if(section == LMSettingsSectionScreen)
+    if(section == SettingsSectionScreen)
         if(_darkModeIndexPath == nil && _rygbButtonsIndexPath == nil)
             return 2;
         else
             return 4;
-    else if(section == LMSettingsSectionEmulation)
+    else if(section == SettingsSectionEmulation)
     {
         if(_soundIndexPath == nil && _lrThreeIndexPath == nil)
             return 2;
         else
             return 4;
     }
-    else if(section == LMSettingsSectionAbout)
+    else if(section == SettingsSectionAbout)
     {
         NSString* bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
-        if([bundleName isEqualToString:kLMEmulatorPortName] == YES)
+        if([bundleName isEqualToString:kEmulatorPortName] == YES)
             return 3;
         return 2;
     }
@@ -332,9 +332,9 @@ typedef enum _LMSettingsSections
 
 - (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
 {
-    if(section == LMSettingsSectionScreen)
+    if(section == SettingsSectionScreen)
         return NSLocalizedString(@"DARK_MODE_MESSAGE", nil);
-    else if(section == LMSettingsSectionEmulation)
+    else if(section == SettingsSectionEmulation)
         return NSLocalizedString(@"AUTO_FRAMESKIP_MESSAGE", nil);
     return nil;
 }
@@ -342,19 +342,19 @@ typedef enum _LMSettingsSections
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     UITableViewCell* cell = nil;
-    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     NSInteger section = indexPath.section;
     if (darkMode == YES) {
         self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
     }
-    if(section == LMSettingsSectionScreen)
+    if(section == SettingsSectionScreen)
     {
         if([indexPath compare:_smoothScalingIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsSmoothScaling];
-            [c.switchView addTarget:self action:@selector(LM_toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSmoothScaling];
+            [c.switchView addTarget:self action:@selector(toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"SMOOTH_SCALING", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
@@ -362,10 +362,10 @@ typedef enum _LMSettingsSections
         }
         else if([indexPath compare:_fullScreenIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsFullScreen];
-            [c.switchView addTarget:self action:@selector(LM_toggleFullScreen:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsFullScreen];
+            [c.switchView addTarget:self action:@selector(toggleFullScreen:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"FULL_SCREEN", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
@@ -373,10 +373,10 @@ typedef enum _LMSettingsSections
         }
         else if([indexPath compare:_darkModeIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
-            [c.switchView addTarget:self action:@selector(LM_toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+            [c.switchView addTarget:self action:@selector(toggleDarkMode:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"DARK_MODE_TITLE", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
@@ -384,51 +384,51 @@ typedef enum _LMSettingsSections
         }
         else if([indexPath compare:_rygbButtonsIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsRYGBButtons];
-            [c.switchView addTarget:self action:@selector(LM_toggleRYGBButtons:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRYGBButtons];
+            [c.switchView addTarget:self action:@selector(toggleRYGBButtons:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"RYGB_BUTTONS", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
         }
     }
-    else if(section == LMSettingsSectionEmulation)
+    else if(section == SettingsSectionEmulation)
     {
         if([indexPath compare:_soundIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             c.textLabel.text = NSLocalizedString(@"SOUND", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsSound];
-            [c.switchView addTarget:self action:@selector(LM_toggleSound:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSound];
+            [c.switchView addTarget:self action:@selector(toggleSound:) forControlEvents:UIControlEventValueChanged];
         }
         else if([indexPath compare:_lrThreeIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             c.textLabel.text = NSLocalizedString(@"LRTHREE", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsLRThree];
-            [c.switchView addTarget:self action:@selector(LM_toggleLRThree:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLRThree];
+            [c.switchView addTarget:self action:@selector(toggleLRThree:) forControlEvents:UIControlEventValueChanged];
         }
         else if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
         {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self LM_switchCell]);
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             c.textLabel.text = NSLocalizedString(@"AUTO_FRAMESKIP_TITLE", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsAutoFrameskip];
-            [c.switchView addTarget:self action:@selector(LM_toggleAutoFrameskip:) forControlEvents:UIControlEventValueChanged];
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsAutoFrameskip];
+            [c.switchView addTarget:self action:@selector(toggleAutoFrameskip:) forControlEvents:UIControlEventValueChanged];
         }
         else if([indexPath compare:_frameskipValueIndexPath] == NSOrderedSame)
         {
-            TableViewNumberCell* c = (TableViewNumberCell*)(cell = [self LM_numberCell]);
+            TableViewNumberCell* c = (TableViewNumberCell*)(cell = [self numberCell]);
             c.textLabel.text = NSLocalizedString(@"SKIP_EVERY", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
@@ -438,11 +438,11 @@ typedef enum _LMSettingsSections
             c.maximumValue = 9;
             c.suffix = NSLocalizedString(@"FRAMES", nil);
             c.allowsDefault = NO;
-            c.value = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kLMSettingsFrameskipValue];
+            c.value = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kSettingsFrameskipValue];
             c.delegate = self;
         }
     }
-    else if(section == LMSettingsSectionAbout)
+    else if(section == SettingsSectionAbout)
     {
         static NSString* identifier = @"AboutCell";
         cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -461,12 +461,12 @@ typedef enum _LMSettingsSections
             }
             NSString* versionString = [NSString stringWithFormat:@"(%s)", __DATE__];
             NSString* bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
-            if([bundleName isEqualToString:kLMEmulatorPortName] == YES)
+            if([bundleName isEqualToString:kEmulatorPortName] == YES)
             {
                 versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleVersionKey];
             }
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@",
-                                         kLMEmulatorPortName,
+                                         kEmulatorPortName,
                                          versionString];
         }
         else if(row == 1)
@@ -510,8 +510,8 @@ typedef enum _LMSettingsSections
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"SETTINGS", nil);
-    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
-    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(LM_done)];
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+    UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     if (darkMode == YES) {
         [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
@@ -523,23 +523,23 @@ typedef enum _LMSettingsSections
     
     if(_hideSettingsThatRequireReset == NO)
     {
-        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionScreen] retain];
-        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionScreen] retain];
-        _darkModeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionScreen] retain];
-        _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionScreen] retain];
+        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionScreen] retain];
+        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionScreen] retain];
+        _darkModeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionScreen] retain];
+        _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionScreen] retain];
         
-        _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionEmulation] retain];
-        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionEmulation] retain];
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:LMSettingsSectionEmulation] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:LMSettingsSectionEmulation] retain];
+        _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulation] retain];
+        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulation] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionEmulation] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionEmulation] retain];
     }
     else
     {
-        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionScreen] retain];
-        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionScreen] retain];
+        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionScreen] retain];
+        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionScreen] retain];
         
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:LMSettingsSectionEmulation] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:LMSettingsSectionEmulation] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulation] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulation] retain];
     }
 }
 

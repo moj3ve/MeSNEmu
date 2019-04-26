@@ -465,7 +465,7 @@ static int const LMFileOrganizationVersionNumber = 1;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
   static NSString* CellIdentifier = @"Cell";
-  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
   UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if(cell == nil)
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
@@ -563,7 +563,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(self)
   {
     // Custom initialization
-    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     if (darkMode == YES) {
         [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
@@ -594,7 +594,7 @@ static int const LMFileOrganizationVersionNumber = 1;
   if(_detailsItem == nil)
   {
     self.title = NSLocalizedString(@"ROMS", nil);
-    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     UISearchBar* searchbar = [[UISearchBar alloc] init];
     if (darkMode == YES) {
         searchbar.barTintColor = [UIColor blackColor];

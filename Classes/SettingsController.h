@@ -2,23 +2,23 @@
 
 #import "../iCade/BTControllerView.h"
 
-extern NSString* const kLMSettingsChangedNotification;
+extern NSString* const kSettingsChangedNotification;
 
-extern NSString* const kLMSettingsBluetoothController;
+extern NSString* const kSettingsBluetoothController;
 
-extern NSString* const kLMSettingsSmoothScaling;
-extern NSString* const kLMSettingsFullScreen;
-extern NSString* const kLMSettingsDarkMode;
-extern NSString* const kLMSettingsRYGBButtons;
+extern NSString* const kSettingsSmoothScaling;
+extern NSString* const kSettingsFullScreen;
+extern NSString* const kSettingsDarkMode;
+extern NSString* const kSettingsRYGBButtons;
 
-extern NSString* const kLMSettingsSound;
-extern NSString* const kLMSettingsLRThree;
-extern NSString* const kLMSettingsAutoFrameskip;
-extern NSString* const kLMSettingsFrameskipValue;
+extern NSString* const kSettingsSound;
+extern NSString* const kSettingsLRThree;
+extern NSString* const kSettingsAutoFrameskip;
+extern NSString* const kSettingsFrameskipValue;
 
 @class SettingsController;
 
-@protocol LMSettingsControllerDelegate <NSObject>
+@protocol SettingsControllerDelegate <NSObject>
 
 - (void)settingsDidDismiss:(SettingsController*)settingsController;
 
@@ -41,10 +41,10 @@ extern NSString* const kLMSettingsFrameskipValue;
   NSIndexPath* _autoFrameskipIndexPath;
   NSIndexPath* _frameskipValueIndexPath;
   
-  id<LMSettingsControllerDelegate> _delegate;
+  id<SettingsControllerDelegate> _delegate;
 }
 
-@property (assign) id<LMSettingsControllerDelegate> delegate;
+@property (assign) id<SettingsControllerDelegate> delegate;
 
 - (void)hideSettingsThatRequireReset;
 

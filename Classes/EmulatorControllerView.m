@@ -41,7 +41,7 @@
 
 - (ButtonView*)LM_buttonWithButton:(int)buttonMap
 {
-    BOOL rygbButtons = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsRYGBButtons];
+    BOOL rygbButtons = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRYGBButtons];
     int side = 60;
     side = 70;
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -315,8 +315,8 @@
 - (void)layoutSubviews
 {
   [super layoutSubviews];
-  BOOL fullScreen = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsFullScreen];
-  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kLMSettingsDarkMode];
+  BOOL fullScreen = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsFullScreen];
+  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
   UIColor* plasticColor = [UIColor colorWithRed:195/255.0 green:198/255.0 blue:205/255.0 alpha:1];
   UIColor* blackColor = [UIColor blackColor];
   if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
