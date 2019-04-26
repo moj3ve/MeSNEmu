@@ -97,17 +97,17 @@ typedef enum _LMEmulatorAlert
 
 - (void)LM_options:(UIButton*)sender
 {
-    int resetIndex = 1;
+    /* int resetIndex = 1;
     
     #ifdef SI_ENABLE_SAVES
         int loadIndex = 2;
         int saveIndex = 3;
         int settingsIndex = 4;
     #else
-        int loadIndex = -1
+        int loadIndex = -1;
         int saveIndex = -1;
         int settingsIndex = 2;
-    #endif
+    #endif */
     
     SISetEmulationPaused(1);
   
