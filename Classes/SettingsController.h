@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-#import "../iCade/LMBTControllerView.h"
+#import "../iCade/BTControllerView.h"
 
 extern NSString* const kLMSettingsChangedNotification;
 

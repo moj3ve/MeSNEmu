@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@class LMBTControllerView;
+@class BTControllerView;
 
 @class ButtonView;
 @class DPadView;
@@ -36,7 +36,7 @@ typedef enum _LMEmulatorControllerViewMode
     
   DPadView* _dPadView;
   
-  LMBTControllerView* _iCadeControlView;
+  BTControllerView* _iCadeControlView;
   
   UIButton* _optionsButton;
   
@@ -46,7 +46,7 @@ typedef enum _LMEmulatorControllerViewMode
 }
 
 @property (readonly) UIButton* optionsButton;
-@property (readonly) LMBTControllerView* iCadeControlView;
+@property (readonly) BTControllerView* iCadeControlView;
 @property (nonatomic) LMEmulatorControllerViewMode viewMode;
 
 - (void)setControlsHidden:(BOOL)value animated:(BOOL)animated;

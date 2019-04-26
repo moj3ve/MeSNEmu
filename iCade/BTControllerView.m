@@ -1,16 +1,8 @@
-//
-//  LMBTControllerView.m
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 7/25/13.
-//  Copyright (c) 2013 Lucas Menge. All rights reserved.
-//
+#import "BTControllerView.h"
 
-#import "LMBTControllerView.h"
+NSArray* BTSupportedControllers = nil;
 
-NSArray* LMBTSupportedControllers = nil;
-
-@implementation LMBTControllerView(Privates)
+@implementation BTControllerView(Privates)
 
 - (void)LMBT_setOnStateString:(const char*)onState offStateString:(const char*)offState
 {
@@ -23,7 +15,7 @@ NSArray* LMBTSupportedControllers = nil;
 
 #pragma mark -
 
-@implementation LMBTControllerView
+@implementation BTControllerView
 
 - (void)setOnStateString:(const char*)onState offStateString:(const char*)offState
 {
@@ -41,7 +33,7 @@ NSArray* LMBTSupportedControllers = nil;
   {
     _controllerType = controllerType;
     
-    for(NSArray* controller in [LMBTControllerView supportedControllers])
+    for(NSArray* controller in [BTControllerView supportedControllers])
     {
       if([[controller objectAtIndex:1] intValue] == _controllerType)
       {
@@ -91,7 +83,7 @@ NSArray* LMBTSupportedControllers = nil;
 {
   @synchronized(self)
   {
-    if(LMBTSupportedControllers == nil)
+    if(BTSupportedControllers == nil)
     {
       // original SNES layout
       // L             R
@@ -101,7 +93,7 @@ NSArray* LMBTSupportedControllers = nil;
       
       // map order: UP RT DN LT SE ST  Y  B  X  A  L  R
       
-      LMBTSupportedControllers = [[@[
+      BTSupportedControllers = [[@[
                                     /*@[@"Custom",
                                       [NSNumber numberWithInt:LMBTControllerType_Custom],
                                       @""],*/
@@ -117,22 +109,21 @@ NSArray* LMBTSupportedControllers = nil;
                                       @"wedcxzaqytufimkpoglvhrjn"],
                                     
                                     // EX Hybrid
-                                    // TODO: Properly support the EX Hybrid
                                     @[@"EX Hybrid",
                                       [NSNumber numberWithInt:LMBTControllerType_EXHybrid],
                                       @"wedcxzaqythrufjnimkpoglv"],
                                     
-                                    // SteelSeries Free (thanks to Infernoten)
+                                    // SteelSeries Free
                                     @[@"SteelSeries Free",
                                       [NSNumber numberWithInt:LMBTControllerType_SteelSeriesFree],
                                       @"wedcxzaqoglvythrufjnimkp"],
                                     
-                                    // 8Bitdo FC30 (thanks to guidoscheffler)
+                                    // 8Bitdo FC30
                                     @[@"8Bitdo FC30",
                                       [NSNumber numberWithInt:LMBTControllerType_8BitdoFC30],
                                       @"wedcxzaqytufimkpoglvhrjn"],
                                     
-                                    // 8Bitdo NES30 (thanks to DerekT07)
+                                    // 8Bitdo NES30
                                     @[@"8Bitdo NES30",
                                       [NSNumber numberWithInt:LMBTControllerType_8BitdoNES30],
                                       @"wedcxzaqlvogythrjnufkpim"],
@@ -142,12 +133,12 @@ NSArray* LMBTSupportedControllers = nil;
                                       [NSNumber numberWithInt:LMBTControllerType_iMpulse],
                                       @"wedcxzaq....lvkpogythrjn"],
                                     
-                                    // IPEGA PG-9025 (thanks to naldin)
+                                    // IPEGA PG-9025
                                     @[@"IPEGA PG-9025",
                                       [NSNumber numberWithInt:LMBTControllerType_IPEGAPG9025],
                                       @"wedcxzaqoglvjnufythrimkp"],
                                     
-                                    // Snakebyte idroid:con (thanks to Gohlan)
+                                    // Snakebyte idroid:con
                                     @[@"Snakebyte idroid:con",
                                       [NSNumber numberWithInt:LMBTControllerType_Snakebyteidroidcon],
                                       @"wedcxzaqlvogythrjnufimkp"]
@@ -157,14 +148,14 @@ NSArray* LMBTSupportedControllers = nil;
                                    }] copy];
     }
   }
-  return LMBTSupportedControllers;
+  return BTSupportedControllers;
 }
 
 @end
 
 #pragma mark -
 
-@implementation LMBTControllerView(UIView)
+@implementation BTControllerView(UIView)
 
 - (id)initWithFrame:(CGRect)frame
 {

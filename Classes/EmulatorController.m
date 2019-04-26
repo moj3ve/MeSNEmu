@@ -14,7 +14,7 @@
 #import "../Snes9xBridge/Snes9xMain.h"
 #import "../Snes9xBridge/SISaveDelegate.h"
 
-#import "../iCade/LMBTControllerView.h"
+#import "../iCade/BTControllerView.h"
 
 typedef enum _LMEmulatorAlert
 {

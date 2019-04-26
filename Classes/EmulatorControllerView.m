@@ -1,6 +1,6 @@
 #import "EmulatorControllerView.h"
 
-#import "../iCade/LMBTControllerView.h"
+#import "../iCade/BTControllerView.h"
 #import "../Snes9xBridge/Snes9xMain.h"
 
 #import "ButtonView.h"
@@ -265,7 +265,7 @@
     [self addSubview:_dPadView];
     
     // iCade support
-    _iCadeControlView = [[LMBTControllerView alloc] initWithFrame:CGRectZero];
+    _iCadeControlView = [[BTControllerView alloc] initWithFrame:CGRectZero];
     [self addSubview:_iCadeControlView];
     _iCadeControlView.active = YES;
     

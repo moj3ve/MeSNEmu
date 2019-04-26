@@ -1,11 +1,3 @@
-//
-//  LMBTControllerView.h
-//  MeSNEmu
-//
-//  Created by Lucas Menge on 7/25/13.
-//  Copyright (c) 2013 Lucas Menge. All rights reserved.
-//
-
 #import "iCadeReaderView.h"
 
 typedef enum _LMBTControllerType
@@ -22,7 +14,7 @@ typedef enum _LMBTControllerType
   LMBTControllerType_Snakebyteidroidcon = 9
 } LMBTControllerType;
 
-@interface LMBTControllerView : iCadeReaderView {
+@interface BTControllerView : iCadeReaderView {
   LMBTControllerType _controllerType;
 }
 
