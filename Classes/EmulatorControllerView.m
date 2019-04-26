@@ -444,7 +444,12 @@
             else
             {
                 // landscape - 1:1
-                self.backgroundColor = plasticColor;
+                if (darkMode == YES) {
+                    self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:1.0];
+                }
+                else {
+                    self.backgroundColor = plasticColor;
+                }
                 
                 if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
                 {
