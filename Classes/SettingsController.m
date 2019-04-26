@@ -258,7 +258,7 @@ typedef enum _LMSettingsSections
 + (void)setDefaultsIfNotDefined
 {
     if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsBluetoothController] == nil)
-        [[NSUserDefaults standardUserDefaults] setInteger:LMBTControllerType_iCade8Bitty forKey:kLMSettingsBluetoothController];
+        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_iCade8Bitty forKey:kLMSettingsBluetoothController];
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kLMSettingsSmoothScaling] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kLMSettingsSmoothScaling];

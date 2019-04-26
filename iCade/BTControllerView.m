@@ -21,13 +21,13 @@ NSArray* BTSupportedControllers = nil;
 {
   @synchronized(self)
   {
-    self.controllerType = LMBTControllerType_Custom;
+    self.controllerType = BTControllerType_Custom;
     [self LMBT_setOnStateString:onState offStateString:offState];
   }
 }
 
 @synthesize controllerType = _controllerType;
-- (void)setControllerType:(LMBTControllerType)controllerType
+- (void)setControllerType:(BTControllerType)controllerType
 {
   if(_controllerType != controllerType)
   {
@@ -100,47 +100,47 @@ NSArray* BTSupportedControllers = nil;
                                      
                                     // iCade
                                     @[@"iCade",
-                                      [NSNumber numberWithInt:LMBTControllerType_iCade],
+                                      [NSNumber numberWithInt:BTControllerType_iCade],
                                       @"wedcxzaqythrufjnimkpoglv"],
                                     
                                     // iCade 8-Bitty
                                     @[@"iCade 8-Bitty",
-                                      [NSNumber numberWithInt:LMBTControllerType_iCade8Bitty],
+                                      [NSNumber numberWithInt:BTControllerType_iCade8Bitty],
                                       @"wedcxzaqytufimkpoglvhrjn"],
                                     
                                     // EX Hybrid
                                     @[@"EX Hybrid",
-                                      [NSNumber numberWithInt:LMBTControllerType_EXHybrid],
+                                      [NSNumber numberWithInt:BTControllerType_EXHybrid],
                                       @"wedcxzaqythrufjnimkpoglv"],
                                     
                                     // SteelSeries Free
                                     @[@"SteelSeries Free",
-                                      [NSNumber numberWithInt:LMBTControllerType_SteelSeriesFree],
+                                      [NSNumber numberWithInt:BTControllerType_SteelSeriesFree],
                                       @"wedcxzaqoglvythrufjnimkp"],
                                     
                                     // 8Bitdo FC30
                                     @[@"8Bitdo FC30",
-                                      [NSNumber numberWithInt:LMBTControllerType_8BitdoFC30],
+                                      [NSNumber numberWithInt:BTControllerType_8BitdoFC30],
                                       @"wedcxzaqytufimkpoglvhrjn"],
                                     
                                     // 8Bitdo NES30
                                     @[@"8Bitdo NES30",
-                                      [NSNumber numberWithInt:LMBTControllerType_8BitdoNES30],
+                                      [NSNumber numberWithInt:BTControllerType_8BitdoNES30],
                                       @"wedcxzaqlvogythrjnufkpim"],
                                     
                                     // iMpulse
                                     @[@"iMpulse",
-                                      [NSNumber numberWithInt:LMBTControllerType_iMpulse],
+                                      [NSNumber numberWithInt:BTControllerType_iMpulse],
                                       @"wedcxzaq....lvkpogythrjn"],
                                     
                                     // IPEGA PG-9025
                                     @[@"IPEGA PG-9025",
-                                      [NSNumber numberWithInt:LMBTControllerType_IPEGAPG9025],
+                                      [NSNumber numberWithInt:BTControllerType_IPEGAPG9025],
                                       @"wedcxzaqoglvjnufythrimkp"],
                                     
                                     // Snakebyte idroid:con
                                     @[@"Snakebyte idroid:con",
-                                      [NSNumber numberWithInt:LMBTControllerType_Snakebyteidroidcon],
+                                      [NSNumber numberWithInt:BTControllerType_Snakebyteidroidcon],
                                       @"wedcxzaqlvogythrjnufimkp"]
                                     
                                    ] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
