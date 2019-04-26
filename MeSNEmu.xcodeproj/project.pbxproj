@@ -379,8 +379,8 @@
 		A0F1F113184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7@2x.png"; sourceTree = "<group>"; };
 		A0F1F116184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7.png"; sourceTree = "<group>"; };
 		A0F1F117184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7@2x.png"; sourceTree = "<group>"; };
-		A0FE5CB117A1EC5D0001EA30 /* LMBTControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LMBTControllerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		A0FE5CB217A1EC5D0001EA30 /* LMBTControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LMBTControllerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A0FE5CB117A1EC5D0001EA30 /* LMBTControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LMBTControllerView.h; sourceTree = "<group>"; };
+		A0FE5CB217A1EC5D0001EA30 /* LMBTControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LMBTControllerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
