@@ -2,7 +2,11 @@
 
 #include <assert.h>
 #include <ctype.h>
+#ifdef SYSTEM_ZIP
+#include <minizip/unzip.h>
+#else
 #include "unzip/unzip.h"
+#endif
 #include "snes9x.h"
 #include "memmap.h"
 
@@ -47,14 +51,24 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 			filesize = info.uncompressed_size;
 			break;
 		}
+        
+        if (strncasecmp(name, "program.rom", 11) == 0)
+        {
+            strcpy(filename, name);
+            filesize = info.uncompressed_size;
+            break;
+        }
 
 		port = unzGoToNextFile(file);
 	}
 
-	if (!(port == UNZ_END_OF_LIST_OF_FILE || port == UNZ_OK) || filesize == 0)
+    int len = strlen(zipname);
+    if (!(port == UNZ_END_OF_LIST_OF_FILE || port == UNZ_OK) || filesize == 0 ||
+        (len > 5 && strcasecmp(zipname + len - 5, ".msu1") == 0 && strcasecmp(filename, "program.rom") != 0))
 	{
-		assert(unzClose(file) == UNZ_OK);
-		return (FALSE);
+        if (unzClose(file) != UNZ_OK)
+            assert(FALSE);
+        return (FALSE);
 	}
 
 	// find extension
@@ -80,9 +94,9 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 	do
 	{
 		assert(info.uncompressed_size <= CMemory::MAX_ROM_SIZE + 512);
-
-		int	FileSize = info.uncompressed_size;
-		int	l = unzReadCurrentFile(file, ptr, FileSize);
+        
+        uint32 FileSize = info.uncompressed_size;
+        int l = unzReadCurrentFile(file, ptr, FileSize);
 
 		if (unzCloseCurrentFile(file) == UNZ_CRCERROR)
 		{
@@ -96,7 +110,8 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 			return (FALSE);
 		}
 
-		FileSize = (int) Memory.HeaderRemove((uint32) FileSize, *headers, ptr);
+		// FileSize = (int) Memory.HeaderRemove((uint32) FileSize, *headers, ptr);
+        FileSize = Memory.HeaderRemove(FileSize, *headers, ptr);
 		ptr += FileSize;
 		*TotalFileSize += FileSize;
 
