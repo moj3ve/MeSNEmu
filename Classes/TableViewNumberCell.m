@@ -181,14 +181,14 @@
 {
   self.usesDefaultValue = NO;
   self.value++;
-  [_delegate LM_cellValueChanged:self];
+  [_delegate cellValueChanged:self];
 }
 
 - (void)minus:(id)sender
 {
   self.usesDefaultValue = NO;
   self.value--;
-  [_delegate LM_cellValueChanged:self];
+  [_delegate cellValueChanged:self];
 }
 
 - (void)toggleDefault:(id)sender
@@ -199,7 +199,7 @@
       self.usesDefaultValue = NO;
     else
       self.usesDefaultValue = YES;
-    [_delegate LM_cellValueChanged:self];
+    [_delegate cellValueChanged:self];
   }
 }
 
