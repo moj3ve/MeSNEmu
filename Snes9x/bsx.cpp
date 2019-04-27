@@ -1,14 +1,3 @@
-/*****************************************************************************\
- Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
- This file is licensed under the Snes9x License.
- For further information, consult the LICENSE file in the root directory.
- \*****************************************************************************/
-
-// Dreamer Nom wrote:
-// Large thanks to John Weidman for all his initial research
-// Thanks to Seph3 for his modem notes
-
-
 #include "snes9x.h"
 #include "memmap.h"
 #include "display.h"
