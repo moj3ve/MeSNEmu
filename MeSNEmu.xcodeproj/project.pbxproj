@@ -732,8 +732,8 @@
 				A0B8687614BE3B6700663EBE /* ROMBrowserController.h */,
 				A0B8687514BE3B6700663EBE /* ROMBrowserController.m */,
 				A03C087214BF7AB2003FAEB9 /* SettingsController.h */,
-				A03C087314BF7AB2003FAEB9 /* SettingsController.m */,
 				A093242617CE590200A93B6B /* MultipleChoicePicker.h */,
+				A03C087314BF7AB2003FAEB9 /* SettingsController.m */,
 				A093242717CE590200A93B6B /* MultipleChoicePicker.m */,
 				A093242817CE590200A93B6B /* MultipleChoicePickerDelegate.h */,
 				66C1BD5E1866ACA800E5A833 /* GameControllerManager.h */,
@@ -813,6 +813,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = A05065FC14B21C7E003E0C5E;

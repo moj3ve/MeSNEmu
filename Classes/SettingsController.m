@@ -320,7 +320,7 @@ typedef enum _SettingsSections
     {
         NSString* bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
         if([bundleName isEqualToString:kEmulatorPortName] == YES)
-            return 3;
+            return 2;
         return 2;
     }
     return 0;
@@ -332,6 +332,8 @@ typedef enum _SettingsSections
         return NSLocalizedString(@"DARK_MODE_MESSAGE", nil);
     else if(section == SettingsSectionEmulation)
         return NSLocalizedString(@"AUTO_FRAMESKIP_MESSAGE", nil);
+    else if(section == SettingsSectionAbout)
+        return NSLocalizedString(@"ABOUT_MESSAGE", nil);
     return nil;
 }
 

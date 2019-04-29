@@ -30,8 +30,7 @@
 "ABOUT" = "About";
 "CORE" = "Core";
 "CORE_NAME" = "Snes9x";
-"DEVELOPER" = "Developer";
-"DEVELOPER_NAME" = "SarahH12099";
+"ABOUT_MESSAGE" = "Original Developer: Lucas Menge (2012-2015) \nNew Developer: SarahH12099 (2019+) \nEnglish Translation By: SarahH12099 \nSpanish Translation By: KoukoCarlos";
 
 // EmulatorController
 "BACK_TO_GAME" = "Back To Game";
