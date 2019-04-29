@@ -594,14 +594,18 @@ void fx_flushCache (void)
  static void fx_setCache (void)
  {
  uint32    c;
+ 
  GSU.bCacheActive = TRUE;
  GSU.pvRegisters[0x3e] &= 0xf0;
+ 
  c  =  (uint32) GSU.pvRegisters[0x3e];
  c |= ((uint32) GSU.pvRegisters[0x3f]) << 8;
  if (c == GSU.vCacheBaseReg)
  return;
+ 
  GSU.vCacheBaseReg = c;
  GSU.vCacheFlags = 0;
+ 
  if (c < (0x10000 - 512))
  {
  const uint8    *t = &ROM(c);
@@ -611,6 +615,7 @@ void fx_flushCache (void)
  {
  const uint8    *t1, *t2;
  uint32        i = 0x10000 - c;
+ 
  t1 = &ROM(c);
  t2 = &ROM(0);
  memcpy(GSU.pvCache, t1, i);
@@ -624,6 +629,7 @@ void fx_flushCache (void)
  {
  uint32    v = GSU.vCacheFlags;
  uint32    c = USEX16(GSU.vCacheBaseReg);
+ 
  if (v)
  {
  for (int i = 0; i < 32; i++)
@@ -640,6 +646,7 @@ void fx_flushCache (void)
  {
  uint8    *t1, *t2;
  uint32    a = 0x10000 - c;
+ 
  t1 = &GSU.pvPrgBank[c];
  t2 = &GSU.pvPrgBank[0];
  memcpy(&GSU.avCacheBackup[i << 4], t1, a);
@@ -648,6 +655,7 @@ void fx_flushCache (void)
  memcpy(t2, &GSU.pvCache[(i << 4) + a], 16 - a);
  }
  }
+ 
  c = USEX16(c + 16);
  v >>= 1;
  }
@@ -660,6 +668,7 @@ void fx_flushCache (void)
  {
  uint32    v = GSU.vCacheFlags;
  uint32    c = USEX16(GSU.vCacheBaseReg);
+ 
  if (v)
  {
  for (int i = 0; i < 32; i++)
@@ -676,6 +685,7 @@ void fx_flushCache (void)
  {
  uint8    *t1, *t2;
  uint32    a = 0x10000 - c;
+ 
  t1 = &GSU.pvPrgBank[c];
  t2 = &GSU.pvPrgBank[0];
  memcpy(t1, &GSU.avCacheBackup[i << 4], a);
@@ -684,6 +694,7 @@ void fx_flushCache (void)
  memcpy(&GSU.pvCache[(i << 4) + a], t2, 16 - a);
  }
  }
+ 
  c = USEX16(c + 16);
  v >>= 1;
  }
@@ -712,7 +723,9 @@ void fx_flushCache (void)
  static uint32 FxStepOver (uint32 nInstructions)
  {
  uint32    vCount;
+ 
  fx_readRegisterSpace();
+ 
  if (!fx_checkStartAddress())
  {
  CF(G);
@@ -723,6 +736,7 @@ void fx_flushCache (void)
  return (0);
  #endif
  }
+ 
  if (PIPE >= 0xf0)
  GSU.vStepPoint = USEX16(R15 + 3);
  else
@@ -730,8 +744,11 @@ void fx_flushCache (void)
  GSU.vStepPoint = USEX16(R15 + 2);
  else
  GSU.vStepPoint = USEX16(R15 + 1);
+ 
  vCount = fx_step_over(nInstructions);
+ 
  fx_writeRegisterSpace();
+ 
  if (GSU.vErrorCode)
  return (GSU.vErrorCode);
  else
