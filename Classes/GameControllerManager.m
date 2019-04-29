@@ -7,7 +7,7 @@
 
 #pragma mark Game Controller Handling
 
-- (void)LM_setupController
+- (void)setupController
 {
    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f)
    {
@@ -24,27 +24,27 @@
       __weak id weakSelf = self;
     
       _gameController.gamepad.valueChangedHandler = ^(GCGamepad* gamepad, GCControllerElement* element) {
-          [weakSelf LM_getCurrentControllerInput];
+          [weakSelf getCurrentControllerInput];
       };
       _gameController.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad* gamepad, GCControllerElement* element) {
-          [weakSelf LM_getCurrentControllerInput];
+          [weakSelf getCurrentControllerInput];
       };
    }
 }
 
-- (void)LM_controllerConnected:(NSNotification*)notification
+- (void)controllerConnected:(NSNotification*)notification
 {
-  [self LM_setupController];
+  [self setupController];
   [self.delegate gameControllerManagerGamepadDidConnect:self];
 }
 
-- (void)LM_controllerDisconnected:(NSNotification*)notification
+- (void)controllerDisconnected:(NSNotification*)notification
 {
-  [self LM_setupController];
+  [self setupController];
   [self.delegate gameControllerManagerGamepadDidDisconnect:self];
 }
 
-- (void)LM_getCurrentControllerInput
+- (void)getCurrentControllerInput
 {
     if(_gameController)
     {
@@ -311,21 +311,21 @@
     self = [super init];
     if (self) {
         [GCController startWirelessControllerDiscoveryWithCompletionHandler:^{
-            [self LM_setupController];
+            [self setupController];
         }];
         
-        [self LM_setupController];
+        [self setupController];
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
         [defaultCenter addObserver:self
-                          selector:@selector(LM_setupController)
+                          selector:@selector(setupController)
                               name:GCControllerDidConnectNotification
                             object:nil];
         [defaultCenter addObserver:self
-                          selector:@selector(LM_setupController)
+                          selector:@selector(setupController)
                               name:GCControllerDidDisconnectNotification
                             object:nil];
         [defaultCenter addObserver:self
-                          selector:@selector(LM_setupController)
+                          selector:@selector(setupController)
                               name:UIApplicationDidBecomeActiveNotification
                             object:nil];
         
