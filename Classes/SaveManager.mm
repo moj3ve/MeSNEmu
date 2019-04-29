@@ -9,7 +9,7 @@
 
 @implementation SaveManager(Privates)
 
-+ (NSString*)LM_pathForRunningStates
++ (NSString*)pathForRunningStates
 {
   static NSString* path = nil;
   @synchronized(self)
@@ -23,7 +23,7 @@
   return path;
 }
 
-+ (NSString*)LM_pathForSaveStates
++ (NSString*)pathForSaveStates
 {
   static NSString* path = nil;
   @synchronized(self)
@@ -40,7 +40,7 @@
 extern "C" volatile int SI_EmulationDidPause;
 extern "C" volatile int SI_AudioIsOnHold;
 
-+ (void)LM_saveStateForROMName:(NSString*)romFileName inSlot:(int)slot
++ (void)saveStateForROMName:(NSString*)romFileName inSlot:(int)slot
 {
   NSLog(@"EmulationDidPause %i", SI_EmulationDidPause);
   NSLog(@"AudioIsOnHold %i", SI_AudioIsOnHold);
@@ -53,7 +53,7 @@ extern "C" volatile int SI_AudioIsOnHold;
     NSLog(@"Failed to save to %@", savePath);
 }
 
-+ (void)LM_loadStateForROMName:(NSString*)romFileName inSlot:(int)slot
++ (void)loadStateForROMName:(NSString*)romFileName inSlot:(int)slot
 {
   NSLog(@"EmulationDidPause %i", SI_EmulationDidPause);
   NSLog(@"AudioIsOnHold %i", SI_AudioIsOnHold);
@@ -92,9 +92,9 @@ extern "C" volatile int SI_AudioIsOnHold;
 {  
   NSString* saveFolderPath = nil;
   if(slot <= 0)
-    saveFolderPath = [SaveManager LM_pathForRunningStates];
+    saveFolderPath = [SaveManager pathForRunningStates];
   else
-    saveFolderPath = [SaveManager LM_pathForSaveStates];
+    saveFolderPath = [SaveManager pathForSaveStates];
   
   if([[NSFileManager defaultManager] fileExistsAtPath:saveFolderPath isDirectory:nil] == NO)
     [[NSFileManager defaultManager] createDirectoryAtPath:saveFolderPath withIntermediateDirectories:YES attributes:nil error:nil];
@@ -112,11 +112,11 @@ extern "C" volatile int SI_AudioIsOnHold;
 
 + (void)saveRunningStateForROMNamed:(NSString*)romFileName
 {
-  [SaveManager LM_saveStateForROMName:romFileName inSlot:0];
+  [SaveManager saveStateForROMName:romFileName inSlot:0];
 }
 + (void)loadRunningStateForROMNamed:(NSString*)romFileName
 {
-  [SaveManager LM_loadStateForROMName:romFileName inSlot:0];
+  [SaveManager loadStateForROMName:romFileName inSlot:0];
 }
 
 + (void)saveStateForROMNamed:(NSString*)romFileName slot:(int)slot
@@ -124,14 +124,14 @@ extern "C" volatile int SI_AudioIsOnHold;
   if(slot <= 0)
     return;
   
-  [SaveManager LM_saveStateForROMName:romFileName inSlot:slot];
+  [SaveManager saveStateForROMName:romFileName inSlot:slot];
 }
 + (void)loadStateForROMNamed:(NSString*)romFileName slot:(int)slot
 {
   if(slot <= 0)
     return;
   
-  [SaveManager LM_loadStateForROMName:romFileName inSlot:slot];
+  [SaveManager loadStateForROMName:romFileName inSlot:slot];
 }
 
 @end
