@@ -1,5 +1,7 @@
 // UIAlertController
 "NOTICE" = "Notice";
+"CANCEL" = "Cancel";
+"OKAY" = "Okay";
 "DARK_MODE_NOTICE" = "MeSNEmu will now close for Dark Mode to turn on/off";
 "LRTHREE_NOTICE" = "L3 & R3 Is Only Available For iOS 12.1+";
 
@@ -43,7 +45,6 @@
 "SAVE_CONSEQUENCES" = "This will overwrite your previous state";
 "SAVE" = "Save";
 "EXIT_CONSEQUENCES" = "Any unsaved progress will be lost";
-"CANCEL" = "Cancel";
 "RESET_GAME?" = "Reset Game?";
 "RESET_CONSEQUENCES" = "Any unsaved progress will be lost";
 "MENU" = "Menu";

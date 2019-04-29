@@ -60,11 +60,9 @@ typedef enum _SettingsSections
 
 - (void)toggleDarkMode:(UISwitch*)sender
 {
-    NSString *Title = NSLocalizedString(@"NOTICE", nil);
-    NSString *Message = NSLocalizedString(@"DARK_MODE_NOTICE", nil);
     UIAlertController * alert = [UIAlertController
-                                 alertControllerWithTitle:Title
-                                 message:Message
+                                 alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
+                                 message:NSLocalizedString(@"DARK_MODE_NOTICE", nil)
                                  preferredStyle:UIAlertControllerStyleAlert];
     
     UIView *firstSubview = alert.view.subviews.firstObject;
@@ -78,7 +76,7 @@ typedef enum _SettingsSections
     }
     
     UIAlertAction* noButton = [UIAlertAction
-                                actionWithTitle:@"Cancel"
+                                actionWithTitle:NSLocalizedString(@"CANCEL", nil)
                                 style:UIAlertActionStyleDefault
                                 handler:^(UIAlertAction * action) {
                                     if (sender.isOn == 0) {
@@ -92,7 +90,7 @@ typedef enum _SettingsSections
                                 }];
     
     UIAlertAction* yesButton = [UIAlertAction
-                               actionWithTitle:@"Okay"
+                               actionWithTitle:NSLocalizedString(@"OKAY", nil)
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
                                    _changed = YES;
@@ -129,11 +127,9 @@ typedef enum _SettingsSections
         [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsLRThree];
     }
     else {
-        NSString *Title = NSLocalizedString(@"NOTICE", nil);
-        NSString *Message = NSLocalizedString(@"LRTHREE_NOTICE", nil);
         UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:Title
-                                     message:Message
+                                     alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
+                                     message:NSLocalizedString(@"LRTHREE_NOTICE", nil)
                                      preferredStyle:UIAlertControllerStyleAlert];
     
         UIView *firstSubview = alert.view.subviews.firstObject;
@@ -147,7 +143,7 @@ typedef enum _SettingsSections
         }
     
         UIAlertAction* okayButton = [UIAlertAction
-                                   actionWithTitle:@"Okay"
+                                   actionWithTitle:NSLocalizedString(@"OKAY", nil)
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * action) {
                                        if (sender.isOn == 1) {
