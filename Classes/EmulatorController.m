@@ -16,12 +16,12 @@
 
 #import "../iCade/BTControllerView.h"
 
-typedef enum _LMEmulatorAlert
+typedef enum _EmulatorAlert
 {
-  LMEmulatorAlertReset,
-  LMEmulatorAlertSave,
-  LMEmulatorAlertLoad
-} LMEmulatorAlert;
+  EmulatorAlertReset,
+  EmulatorAlertSave,
+  EmulatorAlertLoad
+} EmulatorAlert;
 
 #pragma mark -
 
@@ -32,7 +32,7 @@ typedef enum _LMEmulatorAlert
 
 @implementation EmulatorController(Privates)
 
-- (void)LM_emulationThreadMethod:(NSString*)romFileName;
+- (void)emulationThreadMethod:(NSString*)romFileName;
 {
   NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
   
@@ -57,11 +57,11 @@ typedef enum _LMEmulatorAlert
   [pool release];
 }
 
-- (void)LM_dismantleExternalScreen
+- (void)dismantleExternalScreen
 {
   if(_externalEmulator != nil)
   {
-    _customView.viewMode = LMEmulatorControllerViewModeNormal;
+    _customView.viewMode = EmulatorControllerViewModeNormal;
     
     SISetScreenDelegate(self);
     [_customView setPrimaryBuffer];
@@ -81,7 +81,7 @@ typedef enum _LMEmulatorAlert
   }
 }
 
-- (void)LM_showSettings
+- (void)showSettings
 {
   SettingsController* c = [[SettingsController alloc] init];
   [c hideSettingsThatRequireReset];
@@ -95,7 +95,7 @@ typedef enum _LMEmulatorAlert
 
 #pragma mark UI Interaction Handling
 
-- (void)LM_options:(UIButton*)sender
+- (void)options:(UIButton*)sender
 {
     /* int resetIndex = 1;
     
@@ -134,7 +134,7 @@ typedef enum _LMEmulatorAlert
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"EXIT_GAME", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        [self LM_dismantleExternalScreen];
+        [self dismantleExternalScreen];
         SISetEmulationRunning(0);
         SIWaitForEmulationEnd();
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -255,7 +255,7 @@ typedef enum _LMEmulatorAlert
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SETTINGS", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self LM_showSettings];
+        [self showSettings];
     }]];
     
     [self presentViewController:actionSheet animated:YES completion:nil];
@@ -300,13 +300,13 @@ typedef enum _LMEmulatorAlert
 #endif
 }
 
-#pragma mark LMSettingsControllerDelegate
+#pragma mark SettingsControllerDelegate
 
 - (void)settingsDidDismiss:(SettingsController*)settingsController
 {
     if(_actionSheet == nil)
     {
-        [self LM_options:nil];
+        [self options:nil];
     }
 }
 
@@ -404,7 +404,7 @@ typedef enum _LMEmulatorAlert
   } 
 }
 
-#pragma mark LMGameControllerManagerDelegate
+#pragma mark GameControllerManagerDelegate
 
 - (void)gameControllerManagerGamepadDidConnect:(GameControllerManager*)controllerManager
 {
@@ -418,7 +418,7 @@ typedef enum _LMEmulatorAlert
 
 #pragma mark Notifications
 
-- (void)LM_didBecomeInactive
+- (void)didBecomeInactive
 {
   UIBackgroundTaskIdentifier identifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
     [[UIApplication sharedApplication] endBackgroundTask:identifier];
@@ -428,18 +428,18 @@ typedef enum _LMEmulatorAlert
   [[UIApplication sharedApplication] endBackgroundTask:identifier];
 }
 
-- (void)LM_didBecomeActive
+- (void)didBecomeActive
 {
     if(_actionSheet == nil)
     {
-        [self LM_options:nil];
+        [self options:nil];
     }
-    [self LM_screensChanged];
+    [self screensChanged];
 }
 
-- (void)LM_screensChanged
+- (void)screensChanged
 {
-#ifdef LM_LOG_SCREENS
+#ifdef LOG_SCREENS
   NSLog(@"Screens changed");
   for(UIScreen* screen in [UIScreen screens])
   {
@@ -466,7 +466,7 @@ typedef enum _LMEmulatorAlert
       window.hidden = NO;
       _externalWindow = window;
       
-      _customView.viewMode = LMEmulatorControllerViewModeControllerOnly;
+      _customView.viewMode = EmulatorControllerViewModeControllerOnly;
       [UIView animateWithDuration:0.3 animations:^{
         [_customView layoutIfNeeded];
       }];
@@ -474,11 +474,11 @@ typedef enum _LMEmulatorAlert
   }
   else
   {
-    [self LM_dismantleExternalScreen];
+    [self dismantleExternalScreen];
   }
 }
 
-- (void)LM_settingsChanged
+- (void)settingsChanged
 {
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
   SISetSoundOn([defaults boolForKey:kSettingsSound]);
@@ -515,10 +515,10 @@ typedef enum _LMEmulatorAlert
   
   [SettingsController setDefaultsIfNotDefined];
   
-  [self LM_settingsChanged];
+  [self settingsChanged];
   
   _emulationThread = [NSThread mainThread];
-  [NSThread detachNewThreadSelector:@selector(LM_emulationThreadMethod:) toTarget:self withObject:romFileName];
+  [NSThread detachNewThreadSelector:@selector(emulationThreadMethod:) toTarget:self withObject:romFileName];
 }
 
 - (id)initMirrorOf:(EmulatorController*)mainController
@@ -528,7 +528,7 @@ typedef enum _LMEmulatorAlert
   {
     _isMirror = YES;
     [self view];
-    _customView.viewMode = LMEmulatorControllerViewModeScreenOnly;
+    _customView.viewMode = EmulatorControllerViewModeScreenOnly;
     _customView.iCadeControlView.active = NO;
   }
   return self;
@@ -544,7 +544,7 @@ typedef enum _LMEmulatorAlert
 {
   _customView = [[EmulatorControllerView alloc] initWithFrame:CGRectZero];
   _customView.iCadeControlView.delegate = self;
-  [_customView.optionsButton addTarget:self action:@selector(LM_options:) forControlEvents:UIControlEventTouchUpInside];
+  [_customView.optionsButton addTarget:self action:@selector(options:) forControlEvents:UIControlEventTouchUpInside];
   self.view = _customView;
 }
 
@@ -564,7 +564,7 @@ typedef enum _LMEmulatorAlert
   
   if(_isMirror == NO)
   {
-    [self LM_screensChanged];
+    [self screensChanged];
     
     if([GameControllerManager gameControllersMightBeAvailable] == YES)
     {
@@ -581,10 +581,10 @@ typedef enum _LMEmulatorAlert
   
   if(_isMirror == NO)
   {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_didBecomeInactive) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_screensChanged) name:UIScreenDidConnectNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_screensChanged) name:UIScreenDidDisconnectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeInactive) name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged) name:UIScreenDidConnectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged) name:UIScreenDidDisconnectNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveROMRunningState:) name:SISaveRunningStateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadROMRunningState:) name:SILoadRunningStateNotification object:nil];
   }
@@ -648,7 +648,7 @@ typedef enum _LMEmulatorAlert
   self = [super init];
   if(self)
   {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LM_settingsChanged) name:kSettingsChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged) name:kSettingsChangedNotification object:nil];
   }
   return self;
 }
@@ -667,7 +667,7 @@ typedef enum _LMEmulatorAlert
     
   _actionSheet = nil;
   
-  [self LM_dismantleExternalScreen];
+  [self dismantleExternalScreen];
   
   [_customView release];
   _customView = nil;

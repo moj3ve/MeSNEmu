@@ -19,7 +19,7 @@
 
 #pragma mark UI Creation Shortcuts
 
-- (ButtonView*)LM_smallButtonWithButton:(int)buttonMap
+- (ButtonView*)smallButtonWithButton:(int)buttonMap
 {
     int width = 44;
     int height = 24;
@@ -39,7 +39,7 @@
     return [button autorelease];
 }
 
-- (ButtonView*)LM_buttonWithButton:(int)buttonMap
+- (ButtonView*)buttonWithButton:(int)buttonMap
 {
     BOOL rygbButtons = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsRYGBButtons];
     int side = 60;
@@ -142,7 +142,7 @@
 @synthesize optionsButton = _optionsButton;
 @synthesize iCadeControlView = _iCadeControlView;
 @synthesize viewMode = _viewMode;
-- (void)setViewMode:(LMEmulatorControllerViewMode)viewMode
+- (void)setViewMode:(EmulatorControllerViewMode)viewMode
 {
   if(_viewMode != viewMode)
   {
@@ -214,9 +214,7 @@
   if(self)
   {
     self.multipleTouchEnabled = YES;
-    _viewMode = LMEmulatorControllerViewModeNormal;
-    //_viewMode = LMEmulatorControllerViewModeScreenOnly;
-    //_viewMode = LMEmulatorControllerViewModeControllerOnly;
+    _viewMode = EmulatorControllerViewModeNormal;
     
     // screen
     _screenView = [[PixelView alloc] initWithFrame:(CGRect){0,0,10,10}];
@@ -224,10 +222,10 @@
     [self addSubview:_screenView];
     
     // start / select buttons
-    _startButton = [[self LM_smallButtonWithButton:SI_BUTTON_START] retain];
+    _startButton = [[self smallButtonWithButton:SI_BUTTON_START] retain];
     [self addSubview:_startButton];
     
-    _selectButton = [[self LM_smallButtonWithButton:SI_BUTTON_SELECT] retain];
+    _selectButton = [[self smallButtonWithButton:SI_BUTTON_SELECT] retain];
     [self addSubview:_selectButton];
     
     // menu button
@@ -241,23 +239,23 @@
     [self addSubview:_optionsButton];
     
     // ABXY buttons
-    _aButton = [[self LM_buttonWithButton:SI_BUTTON_A] retain];
+    _aButton = [[self buttonWithButton:SI_BUTTON_A] retain];
     [self addSubview:_aButton];
     
-    _bButton = [[self LM_buttonWithButton:SI_BUTTON_B] retain];
+    _bButton = [[self buttonWithButton:SI_BUTTON_B] retain];
     [self addSubview:_bButton];
     
-    _xButton = [[self LM_buttonWithButton:SI_BUTTON_X] retain];
+    _xButton = [[self buttonWithButton:SI_BUTTON_X] retain];
     [self addSubview:_xButton];
     
-    _yButton = [[self LM_buttonWithButton:SI_BUTTON_Y] retain];
+    _yButton = [[self buttonWithButton:SI_BUTTON_Y] retain];
     [self addSubview:_yButton];
     
     // L/R buttons
-    _lButton = [[self LM_buttonWithButton:SI_BUTTON_L] retain];
+    _lButton = [[self buttonWithButton:SI_BUTTON_L] retain];
     [self addSubview:_lButton];
     
-    _rButton = [[self LM_buttonWithButton:SI_BUTTON_R] retain];
+    _rButton = [[self buttonWithButton:SI_BUTTON_R] retain];
     [self addSubview:_rButton];
     
     // d-pad
@@ -319,9 +317,9 @@
   BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
   UIColor* plasticColor = [UIColor colorWithRed:195/255.0 green:198/255.0 blue:205/255.0 alpha:1];
   UIColor* blackColor = [UIColor blackColor];
-  if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
+  if(_viewMode == EmulatorControllerViewModeScreenOnly)
     plasticColor = [UIColor blackColor];
-  else if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+  else if(_viewMode == EmulatorControllerViewModeControllerOnly)
     blackColor = plasticColor;
   int originalWidth = 256;
   int originalHeight = 224;
@@ -353,7 +351,7 @@
             self.backgroundColor = plasticColor;
         }
         
-        if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+        if(_viewMode == EmulatorControllerViewModeControllerOnly)
         {
             // portrait - controller mode
             width = height = 0;
@@ -408,7 +406,7 @@
     else
     {
         // landscape
-        if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+        if(_viewMode == EmulatorControllerViewModeControllerOnly)
         {
             // landscape - controller mode
             self.backgroundColor = plasticColor;
@@ -468,9 +466,9 @@
         }
     }
   
-  if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
+  if(_viewMode == EmulatorControllerViewModeScreenOnly)
     controlsAlpha = 0;
-  else if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+  else if(_viewMode == EmulatorControllerViewModeControllerOnly)
   {
     controlsAlpha = 1;
     
@@ -483,14 +481,14 @@
     screenOffsetY = screenOffsetX;
   else if(screenOffsetY == -2)
     screenOffsetY = (size.height-screenBorderY-_dPadView.image.size.height-height)/2;
-  if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
+  if(_viewMode == EmulatorControllerViewModeScreenOnly)
     // we're showing only the screen. center it
     _screenView.frame = (CGRect){(int)((size.width-width)*0.5), (int)((size.height-height)*0.5), width,height};
   else
     // we're showing the controls + screen
     _screenView.frame = (CGRect){screenOffsetX,screenOffsetY, width,height};
   
-  if(_viewMode == LMEmulatorControllerViewModeControllerOnly)
+  if(_viewMode == EmulatorControllerViewModeControllerOnly)
     _screenView.alpha = 0;
   else
     _screenView.alpha = 1;
@@ -503,7 +501,7 @@
   else
     xOffset = _startButton.frame.size.width+smallButtonsSpacing;
   
-  if(_viewMode == LMEmulatorControllerViewModeScreenOnly)
+  if(_viewMode == EmulatorControllerViewModeScreenOnly)
   {
     _startButton.alpha = 0;
     _selectButton.alpha = 0;

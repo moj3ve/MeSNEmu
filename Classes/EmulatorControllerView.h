@@ -6,12 +6,12 @@
 @class DPadView;
 @class PixelView;
 
-typedef enum _LMEmulatorControllerViewMode
+typedef enum _EmulatorControllerViewMode
 {
-  LMEmulatorControllerViewModeNormal,
-  LMEmulatorControllerViewModeScreenOnly,
-  LMEmulatorControllerViewModeControllerOnly
-} LMEmulatorControllerViewMode;
+  EmulatorControllerViewModeNormal,
+  EmulatorControllerViewModeScreenOnly,
+  EmulatorControllerViewModeControllerOnly
+} EmulatorControllerViewMode;
 
 @interface EmulatorControllerView : UIView
 {
@@ -42,12 +42,12 @@ typedef enum _LMEmulatorControllerViewMode
   
   BOOL _hideUI;
   
-  LMEmulatorControllerViewMode _viewMode;
+  EmulatorControllerViewMode _viewMode;
 }
 
 @property (readonly) UIButton* optionsButton;
 @property (readonly) BTControllerView* iCadeControlView;
-@property (nonatomic) LMEmulatorControllerViewMode viewMode;
+@property (nonatomic) EmulatorControllerViewMode viewMode;
 
 - (void)setControlsHidden:(BOOL)value animated:(BOOL)animated;
 - (void)setMinMagFilter:(NSString*)filter;
