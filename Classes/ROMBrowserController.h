@@ -1,10 +1,10 @@
 #import <UIKit/UIKit.h>
 
-@class LMFileListItem;
+@class FileListItem;
 
 @interface ROMBrowserController : UITableViewController
 {
-  LMFileListItem* _detailsItem;
+  FileListItem* _detailsItem;
   NSString* _romPath;
   NSString* _sramPath;
   
@@ -19,6 +19,6 @@
   NSTimer* _fsTimer;
 }
 
-@property (retain) LMFileListItem* detailsItem;
+@property (retain) FileListItem* detailsItem;
 
 @end
