@@ -31,10 +31,10 @@
     button.label.font = [UIFont systemFontOfSize:10];
     button.button = buttonMap;
     if(buttonMap == SI_BUTTON_START) {
-        button.label.text = @"Start";
+        button.label.text = NSLocalizedString(@"START", nil);
     }
     else if(buttonMap == SI_BUTTON_SELECT) {
-        button.label.text = @"Select";
+        button.label.text = NSLocalizedString(@"SELECT", nil);
     }
     return [button autorelease];
 }
@@ -59,7 +59,7 @@
         }
         button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
         button.label.shadowOffset = CGSizeMake(0, 1);
-        button.label.text = @"A";
+        button.label.text = NSLocalizedString(@"A", nil);
         if (rygbButtons == YES) {
             button.image = [UIImage imageNamed:@"RedButton.png"];
         }
@@ -76,7 +76,7 @@
         }
         button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
         button.label.shadowOffset = CGSizeMake(0, 1);
-        button.label.text = @"B";
+        button.label.text = NSLocalizedString(@"B", nil);
         if (rygbButtons == YES) {
             button.image = [UIImage imageNamed:@"YellowButton.png"];
         }
@@ -93,7 +93,7 @@
         }
         button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
         button.label.shadowOffset = CGSizeMake(0, 1);
-        button.label.text = @"X";
+        button.label.text = NSLocalizedString(@"X", nil);
         if (rygbButtons == YES) {
             button.image = [UIImage imageNamed:@"BlueButton.png"];
         }
@@ -110,7 +110,7 @@
         }
         button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
         button.label.shadowOffset = CGSizeMake(0, 1);
-        button.label.text = @"Y";
+        button.label.text = NSLocalizedString(@"Y", nil);
         if (rygbButtons == YES) {
             button.image = [UIImage imageNamed:@"GreenButton.png"];
         }
@@ -124,10 +124,10 @@
         button.label.shadowColor = [UIColor colorWithWhite:1 alpha:0.25];
         button.label.shadowOffset = CGSizeMake(0, 1);
         if(buttonMap == SI_BUTTON_L) {
-            button.label.text = @"L";
+            button.label.text = NSLocalizedString(@"L", nil);
         }
         else if(buttonMap == SI_BUTTON_R) {
-            button.label.text = @"R";
+            button.label.text = NSLocalizedString(@"R", nil);
         }
     }
     return [button autorelease];

@@ -47,3 +47,11 @@
 "RESET_GAME?" = "Reset Game?";
 "RESET_CONSEQUENCES" = "Any unsaved progress will be lost";
 "MENU" = "Menu";
+"A" = "A";
+"B" = "B";
+"Y" = "Y";
+"X" = "X";
+"L" = "L";
+"R" = "R";
+"START" = "Start";
+"SELECT" = "Select";
