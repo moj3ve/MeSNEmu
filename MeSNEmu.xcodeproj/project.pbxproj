@@ -145,6 +145,7 @@
 		267312232272283B00687228 /* TableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewSwitchCell.m; path = Classes/TableViewSwitchCell.m; sourceTree = SOURCE_ROOT; };
 		26AAB78821F77DBC00E05B50 /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
 		26AAB78921F77DBC00E05B50 /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
+		26AB9AA12279189E0037C01E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
 		26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
 		66C1BD5E1866ACA800E5A833 /* GameControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GameControllerManager.h; path = Classes/GameControllerManager.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -815,6 +816,7 @@
 			knownRegions = (
 				English,
 				en,
+				es,
 			);
 			mainGroup = A05065FC14B21C7E003E0C5E;
 			productRefGroup = A050660814B21C7F003E0C5E /* Products */;
@@ -972,6 +974,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A0BB592714E84BC000D12F97 /* en */,
+				26AB9AA12279189E0037C01E /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;
