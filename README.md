@@ -17,6 +17,7 @@ Support Filetypes:<br>
 - Zip <br>
 - Smc <br>
 - Sfc <br>
+- Fig <br>
 
 <br>
 
