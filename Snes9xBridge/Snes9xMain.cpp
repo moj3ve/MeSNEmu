@@ -261,6 +261,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	Settings.SoundPlaybackRate = 32000;
   //Settings.SoundPlaybackRate = 22050;
 	//Settings.SoundInputRate = 32000;
+    Settings.OpenGLEnable = TRUE; // Experimental
   Settings.SoundInputRate = 32000;
   Settings.SoundSync = FALSE;
 	Settings.SupportHiRes = TRUE;
