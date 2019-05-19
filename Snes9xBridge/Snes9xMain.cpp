@@ -235,19 +235,19 @@ extern "C" void SIUpdateSettings()
 
 extern "C" int SIStartWithROM(char* rom_filename)
 {
-  // notify that we're running
-  SI_EmulationIsRunning = 1;
+    // notify that we're running
+    SI_EmulationIsRunning = 1;
   
-  // frameskip settings reset
-  SI_NextFrameTime = (timeval){0, 0};
-  SI_FrameTimeDebt = 0;
-  SI_SleptLastFrame = 0;
+    // frameskip settings reset
+    SI_NextFrameTime = (timeval){0, 0};
+    SI_FrameTimeDebt = 0;
+    SI_SleptLastFrame = 0;
   
-  // ensure dirs exist
-  mode_t dir_mode = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
+    // ensure dirs exist
+    mode_t dir_mode = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
 	mkdir(SI_SRAMPath, dir_mode);
   
-  // unix init
+    // unix init
 	ZeroMemory(&Settings, sizeof(Settings));
 	Settings.MouseMaster = TRUE;
 	Settings.SuperScopeMaster = TRUE;
@@ -257,13 +257,13 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	Settings.FrameTimeNTSC = 16667;
 	Settings.SixteenBitSound = TRUE;
 	Settings.Stereo = TRUE;
-  //Settings.Stereo = FALSE;
+    // Settings.Stereo = FALSE;
 	Settings.SoundPlaybackRate = 32000;
-  //Settings.SoundPlaybackRate = 22050;
-	//Settings.SoundInputRate = 32000;
+    // Settings.SoundPlaybackRate = 22050;
+	// Settings.SoundInputRate = 32000;
     Settings.OpenGLEnable = TRUE; // Experimental
-  Settings.SoundInputRate = 32000;
-  Settings.SoundSync = FALSE;
+    Settings.SoundInputRate = 32000;
+    Settings.SoundSync = FALSE;
 	Settings.SupportHiRes = TRUE;
 	Settings.Transparency = TRUE;
 	Settings.AutoDisplayMessages = TRUE;
@@ -275,17 +275,17 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	Settings.DumpStreamsMaxFrames = -1;
 	Settings.StretchScreenshots = 1;
 	Settings.SnapshotScreenshots = TRUE;
-  if(SI_AutoFrameskip)
-    Settings.SkipFrames = AUTO_FRAMERATE;
-  else
-    Settings.SkipFrames = SI_Frameskip;
-  //Settings.SkipFrames = 1;
-	Settings.TurboSkipFrames = 15;
-	Settings.CartAName[0] = 0;
-	Settings.CartBName[0] = 0;
-#ifdef NETPLAY_SUPPORT
-	Settings.ServerName[0] = 0;
-#endif
+    if(SI_AutoFrameskip)
+        Settings.SkipFrames = AUTO_FRAMERATE;
+    else
+        Settings.SkipFrames = SI_Frameskip;
+        // Settings.SkipFrames = 1;
+        Settings.TurboSkipFrames = 15;
+        Settings.CartAName[0] = 0;
+        Settings.CartBName[0] = 0;
+    #ifdef NETPLAY_SUPPORT
+        Settings.ServerName[0] = 0;
+    #endif
   
 	CPU.Flags = 0;
   
