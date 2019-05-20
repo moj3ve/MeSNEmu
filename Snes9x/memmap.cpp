@@ -3,12 +3,19 @@
 #include <assert.h>
 
 #ifdef UNZIP_SUPPORT
-#include "unzip/unzip.h"
+#  ifdef SYSTEM_ZIP
+#    include <minizip/unzip.h>
+#  else
+#    include "unzip/unzip.h"
+#  endif
 #endif
 
 #ifdef JMA_SUPPORT
 #include "jma/s9x-jma.h"
 #endif
+
+#include <ctype.h>
+#include <sys/stat.h>
 
 #include "snes9x.h"
 #include "memmap.h"
@@ -759,10 +766,13 @@ static void S9xDeinterleaveType1 (int, uint8 *);
 static void S9xDeinterleaveType2 (int, uint8 *);
 static void S9xDeinterleaveGD24 (int, uint8 *);
 static bool8 allASCII (uint8 *, int);
-static bool8 is_SufamiTurbo_BIOS (uint8 *, uint32);
-static bool8 is_SufamiTurbo_Cart (uint8 *, uint32);
-static bool8 is_SameGame_BIOS (uint8 *, uint32);
-static bool8 is_SameGame_Add_On (uint8 *, uint32);
+static bool8 is_SufamiTurbo_BIOS (const uint8 *, uint32);
+static bool8 is_SufamiTurbo_Cart (const uint8 *, uint32);
+static bool8 is_SameGame_BIOS (const uint8 *, uint32);
+static bool8 is_SameGame_Add_On (const uint8 *, uint32);
+static bool8 is_BSCart_BIOS (const uint8 *, uint32);
+static bool8 is_BSCartSA1_BIOS(const uint8 *, uint32);
+static bool8 is_GNEXT_Add_On (const uint8 *, uint32);
 static uint32 caCRC32 (uint8 *, uint32, uint32 crc32 = 0xffffffff);
 static uint32 ReadUPSPointer (const uint8 *, unsigned &, unsigned);
 static bool8 ReadUPSPatch (Reader *, long, int32 &);
@@ -1027,7 +1037,7 @@ static bool8 allASCII (uint8 *b, int size)
 	return (TRUE);
 }
 
-static bool8 is_SufamiTurbo_BIOS (uint8 *data, uint32 size)
+static bool8 is_SufamiTurbo_BIOS (const uint8 *data, uint32 size)
 {
 	if (size == 0x40000 &&
 		strncmp((char *) data, "BANDAI SFC-ADX", 14) == 0 && strncmp((char * ) (data + 0x10), "SFC-ADX BACKUP", 14) == 0)
@@ -1036,7 +1046,7 @@ static bool8 is_SufamiTurbo_BIOS (uint8 *data, uint32 size)
 		return (FALSE);
 }
 
-static bool8 is_SufamiTurbo_Cart (uint8 *data, uint32 size)
+static bool8 is_SufamiTurbo_Cart (const uint8 *data, uint32 size)
 {
 	if (size >= 0x80000 && size <= 0x100000 &&
 		strncmp((char *) data, "BANDAI SFC-ADX", 14) == 0 && strncmp((char * ) (data + 0x10), "SFC-ADX BACKUP", 14) != 0)
@@ -1045,7 +1055,7 @@ static bool8 is_SufamiTurbo_Cart (uint8 *data, uint32 size)
 		return (FALSE);
 }
 
-static bool8 is_SameGame_BIOS (uint8 *data, uint32 size)
+static bool8 is_SameGame_BIOS (const uint8 *data, uint32 size)
 {
 	if (size == 0x100000 && strncmp((char *) (data + 0xffc0), "Same Game Tsume Game", 20) == 0)
 		return (TRUE);
@@ -1053,12 +1063,53 @@ static bool8 is_SameGame_BIOS (uint8 *data, uint32 size)
 		return (FALSE);
 }
 
-static bool8 is_SameGame_Add_On (uint8 *data, uint32 size)
+static bool8 is_SameGame_Add_On (const uint8 *data, uint32 size)
 {
 	if (size == 0x80000)
 		return (TRUE);
 	else
 		return (FALSE);
+}
+
+static bool8 is_BSCart_BIOS(const uint8 *data, uint32 size)
+{
+    if ((data[0x7FB2] == 0x5A) && (data[0x7FB5] != 0x20) && (data[0x7FDA] == 0x33))
+    {
+        Memory.LoROM = TRUE;
+        Memory.HiROM = FALSE;
+        
+        return (TRUE);
+    }
+    else if ((data[0xFFB2] == 0x5A) && (data[0xFFB5] != 0x20) && (data[0xFFDA] == 0x33))
+    {
+        Memory.LoROM = FALSE;
+        Memory.HiROM = TRUE;
+        
+        return (TRUE);
+    }
+    else
+        return (FALSE);
+}
+
+static bool8 is_BSCartSA1_BIOS (const uint8 *data, uint32 size)
+{
+    //Same basic check as BSCart
+    if (!is_BSCart_BIOS(data, size))
+        return (FALSE);
+    
+    //Checks if the game is Itoi's Bass Fishing No. 1 (ZBPJ) or SD Gundam G-NEXT (ZX3J)
+    if (strncmp((char *)(data + 0x7fb2), "ZBPJ", 4) == 0 || strncmp((char *)(data + 0x7fb2), "ZX3J", 4) == 0)
+        return (TRUE);
+    else
+        return (FALSE);
+}
+
+static bool8 is_GNEXT_Add_On (const uint8 *data, uint32 size)
+{
+    if (size == 0x80000)
+        return (TRUE);
+    else
+        return (FALSE);
 }
 
 int CMemory::ScoreHiROM (bool8 skip_header, int32 romoff)
@@ -1177,7 +1228,7 @@ uint32 CMemory::HeaderRemove (uint32 size, int32 &headerCount, uint8 *buf)
 		}
 
 		memmove(buf, buf + 512, calc_size);
-		headerCount++;
+		HeaderCount++;
 		size -= 512;
 	}
 
@@ -1208,7 +1259,7 @@ uint32 CMemory::FileLoader (uint8 *buffer, const char *filename, int32 maxsize)
 	_makepath(fname, drive, dir, name, exts);
 
 	int	nFormat = FILE_DEFAULT;
-	if (strcasecmp(ext, "zip") == 0)
+	if (strcasecmp(ext, "zip") == 0 || strcasecmp(ext, "msu1") == 0)
 		nFormat = FILE_ZIP;
 	else
 	if (strcasecmp(ext, "jma") == 0)
@@ -1360,12 +1411,14 @@ again:
 
 	CalculatedSize = ((totalFileSize + 0x1fff) / 0x2000) * 0x2000;
 
-	if (CalculatedSize > 0x400000 &&
-		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x4332 && // exclude S-DD1
-		(ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x4532 &&
-		(ROM[0xffd5] + (ROM[0xffd6] << 8)) != 0xF93a && // exclude SPC7110
-		(ROM[0xffd5] + (ROM[0xffd6] << 8)) != 0xF53a)
-		ExtendedFormat = YEAH;
+    if (CalculatedSize > 0x400000 &&
+        (ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x3423 && // exclude SA-1
+        (ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x3523 &&
+        (ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x4332 && // exclude S-DD1
+        (ROM[0x7fd5] + (ROM[0x7fd6] << 8)) != 0x4532 &&
+        (ROM[0xffd5] + (ROM[0xffd6] << 8)) != 0xF93a && // exclude SPC7110
+        (ROM[0xffd5] + (ROM[0xffd6] << 8)) != 0xF53a)
+        ExtendedFormat = YEAH;
 
 	// if both vectors are invalid, it's type 1 interleaved LoROM
 	if (ExtendedFormat == NOPE &&
@@ -1587,6 +1640,35 @@ bool8 CMemory::LoadMultiCart (const char *cartA, const char *cartB)
 	}
 	else
 		Multi.cartType = 4; // assuming BIOS only
+    
+    if(Multi.cartType == 4 && Multi.cartOffsetA == 0) { // try to load bios from file
+        Multi.cartOffsetA = 0x40000;
+        if(Multi.cartSizeA)
+            memmove(ROM + Multi.cartOffsetA, ROM, Multi.cartSizeA + Multi.cartSizeB);
+        else if(Multi.cartOffsetB) // clear cart A so the bios can detect that it's not present
+            memset(ROM, 0, Multi.cartOffsetB);
+        
+        FILE    *fp;
+        size_t    size;
+        char    path[PATH_MAX + 1];
+        
+        strcpy(path, S9xGetDirectory(BIOS_DIR));
+        strcat(path, SLASH_STR);
+        strcat(path, "STBIOS.bin");
+        
+        fp = fopen(path, "rb");
+        if (fp)
+        {
+            size = fread((void *) ROM, 1, 0x40000, fp);
+            fclose(fp);
+            if (!is_SufamiTurbo_BIOS(ROM, size))
+                return (FALSE);
+        }
+        else
+            return (FALSE);
+        
+        strcpy(ROMFilename, path);
+    }
 
 	switch (Multi.cartType)
 	{
