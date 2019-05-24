@@ -555,8 +555,8 @@ void S9xSelectTileConverter (int depth, bool8 hires, bool8 sub, bool8 mosaic)
 
 #define DRAW_TILE() \
 	uint8			*pCache; \
-	register int32	l; \
-	register uint8	*bp, Pix; \
+	int32	l; \
+	uint8	*bp, Pix; \
 	\
 	GET_CACHED_TILE(); \
 	if (IS_BLANK_TILE()) \
@@ -626,8 +626,8 @@ void S9xSelectTileConverter (int depth, bool8 hires, bool8 sub, bool8 mosaic)
 
 #define DRAW_TILE() \
 	uint8			*pCache; \
-	register int32	l; \
-	register uint8	*bp, Pix, w; \
+	int32	l; \
+	uint8	*bp, Pix, w; \
 	\
 	GET_CACHED_TILE(); \
 	if (IS_BLANK_TILE()) \
@@ -734,8 +734,8 @@ void S9xSelectTileConverter (int depth, bool8 hires, bool8 sub, bool8 mosaic)
 
 #define DRAW_TILE() \
 	uint8			*pCache; \
-	register int32	l, w; \
-	register uint8	Pix; \
+	int32	l, w; \
+	uint8	Pix; \
 	\
 	GET_CACHED_TILE(); \
 	if (IS_BLANK_TILE()) \
@@ -783,7 +783,7 @@ void S9xSelectTileConverter (int depth, bool8 hires, bool8 sub, bool8 mosaic)
 #define Pix				0
 
 #define DRAW_TILE() \
-	register uint32	l, x; \
+	uint32	l, x; \
 	\
 	GFX.RealScreenColors = IPPU.ScreenColors; \
 	GFX.ScreenColors = GFX.ClipColors ? BlackColourMap : GFX.RealScreenColors; \
