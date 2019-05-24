@@ -972,6 +972,8 @@ static int UnfreezeStructCopy (STREAM, const char *, uint8 **, FreezeData *, int
 static void UnfreezeStructFromCopy (void *, FreezeData *, int, uint8 *, int);
 static void FreezeBlock (STREAM, const char *, uint8 *, int);
 static void FreezeStruct (STREAM, const char *, void *, FreezeData *, int);
+static bool CheckBlockName(STREAM stream, const char *name, int &len);
+static void SkipBlockWithName(STREAM stream, const char *name);
 
 
 void S9xResetSaveTimer (bool8 dontsave)
@@ -1091,7 +1093,7 @@ bool8 S9xUnfreezeGame (const char *filename)
 
 void S9xFreezeToStream (STREAM stream)
 {
-	char	buffer[1024];
+	char	buffer[8192];
 	uint8	*soundsnapshot = new uint8[SPC_SAVE_STATE_BLOCK_SIZE];
 
 	S9xSetSoundMute(TRUE);
@@ -1243,7 +1245,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 	char	buffer[PATH_MAX + 1];
 
 	len = strlen(SNAPSHOT_MAGIC) + 1 + 4 + 1;
-	if (READ_STREAM(buffer, len, stream) != len)
+	if (READ_STREAM(buffer, len, stream) != (unsigned int ) len)
 		return (WRONG_FORMAT);
 
 	if (strncmp(buffer, SNAPSHOT_MAGIC, strlen(SNAPSHOT_MAGIC)) != 0)
@@ -1552,6 +1554,9 @@ int S9xUnfreezeFromStream (STREAM stream)
 		IPPU.ColorsChanged = TRUE;
 		IPPU.OBJChanged = TRUE;
 		IPPU.RenderThisFrame = TRUE;
+        
+        GFX.InterlaceFrame = Timings.InterlaceField;
+        GFX.DoInterlace = 0;
 
 		uint8 hdma_byte = Memory.FillRAM[0x420c];
 		S9xSetCPU(hdma_byte, 0x420c);
@@ -1848,6 +1853,50 @@ static void FreezeBlock (STREAM stream, const char *name, uint8 *block, int size
 	WRITE_STREAM(block, size, stream);
 }
 
+static bool CheckBlockName(STREAM stream, const char *name, int &len)
+{
+    char    buffer[16];
+    len = 0;
+    
+    size_t    l = READ_STREAM(buffer, 11, stream);
+    buffer[l] = 0;
+    REVERT_STREAM(stream, FIND_STREAM(stream) - l, 0);
+    
+    if (buffer[4] == '-')
+    {
+        len = (((unsigned char)buffer[6]) << 24)
+        | (((unsigned char)buffer[7]) << 16)
+        | (((unsigned char)buffer[8]) << 8)
+        | (((unsigned char)buffer[9]) << 0);
+    }
+    else
+        len = atoi(buffer + 4);
+    
+    if (l != 11 || strncmp(buffer, name, 3) != 0 || buffer[3] != ':')
+    {
+        return false;
+    }
+    
+    if (len <= 0)
+    {
+        return false;
+    }
+    
+    return true;
+}
+
+static void SkipBlockWithName(STREAM stream, const char *name)
+{
+    int len;
+    bool matchesName = CheckBlockName(stream, name, len);
+    if (matchesName)
+    {
+        long rewind = FIND_STREAM(stream);
+        rewind += len + 11;
+        REVERT_STREAM(stream, rewind, 0);
+    }
+}
+
 static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int size)
 {
 	char	buffer[20];
@@ -1886,7 +1935,7 @@ static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int siz
 
 	ZeroMemory(block, size);
 
-	if (READ_STREAM(block, len, stream) != len)
+	if (READ_STREAM(block, len, stream) != (unsigned int) len)
 	{
 		REVERT_STREAM(stream, rewind, 0);
 		return (WRONG_FORMAT);
@@ -1910,6 +1959,12 @@ static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int siz
 static int UnfreezeBlockCopy (STREAM stream, const char *name, uint8 **block, int size)
 {
 	int	result;
+    int blockLength;
+    
+    if (!CheckBlockName(stream, name, blockLength))
+    {
+        return 0;
+    }
 
 	*block = new uint8[size];
 
