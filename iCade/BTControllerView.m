@@ -108,6 +108,11 @@ NSArray* BTSupportedControllers = nil;
                                       [NSNumber numberWithInt:BTControllerType_iCade8Bitty],
                                       @"wedcxzaqytufimkpoglvhrjn"],
                                     
+                                    // iCade NControl
+                                    @[@"NControl",
+                                      [NSNumber numberWithInt:BTControllerType_NControl],
+                                      @""],
+                                    
                                     // EX Hybrid
                                     @[@"EX Hybrid",
                                       [NSNumber numberWithInt:BTControllerType_EXHybrid],

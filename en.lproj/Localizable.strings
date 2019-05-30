@@ -15,6 +15,10 @@
 "SAVE_FILE_SLOT_%i" = "Save %i";
 
 // SettingsController
+"APP_SETTINGS" = "App Settings";
+"CORE_SETTINGS" = "Core Settings";
+"CONTROLLER_SETTINGS" = "Controller Settings";
+"CREDITS" = "Credits";
 "SMOOTH_SCALING" = "Smooth Scaling";
 "FULL_SCREEN" = "Full Screen";
 "DARK_MODE_TITLE" = "Dark Mode";
@@ -26,6 +30,7 @@
 "AUTO_FRAMESKIP_MESSAGE" = "Auto Frameskip may appear slower due to a more inconsistent skip rate";
 "SKIP_EVERY" = "Skip Every";
 "FRAMES" = "Frames";
+"BLUETOOTH_CONTROLLER" = "Controller";
 "SETTINGS" = "Settings";
 "ABOUT" = "About";
 "CORE" = "Core";

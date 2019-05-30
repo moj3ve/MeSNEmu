@@ -27,6 +27,7 @@ typedef enum _SettingsSections
 {
     SettingsSectionScreen,
     SettingsSectionEmulation,
+    SettingsSectionBluetoothController,
     SettingsSectionAbout
 } SettingsSections;
 
@@ -254,7 +255,7 @@ typedef enum _SettingsSections
 + (void)setDefaultsIfNotDefined
 {
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsBluetoothController] == nil)
-        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_iCade8Bitty forKey:kSettingsBluetoothController];
+        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_NControl forKey:kSettingsBluetoothController];
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSmoothScaling] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsSmoothScaling];
@@ -298,12 +299,14 @@ typedef enum _SettingsSections
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
+    if(section == SettingsSectionBluetoothController)
+        return 1;
     if(section == SettingsSectionScreen)
         if(_darkModeIndexPath == nil && _rygbButtonsIndexPath == nil)
             return 2;
@@ -318,12 +321,22 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionAbout)
     {
-        NSString* bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
-        if([bundleName isEqualToString:kEmulatorPortName] == YES)
-            return 2;
         return 2;
     }
     return 0;
+}
+
+- (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if(section == SettingsSectionScreen)
+        return NSLocalizedString(@"APP_SETTINGS", nil);
+    else if(section == SettingsSectionEmulation)
+        return NSLocalizedString(@"CORE_SETTINGS", nil);
+    else if(section == SettingsSectionBluetoothController)
+        return NSLocalizedString(@"CONTROLLER_SETTINGS", nil);
+    else if(section == SettingsSectionAbout)
+        return NSLocalizedString(@"CREDITS", nil);
+    return nil;
 }
 
 - (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
@@ -345,7 +358,33 @@ typedef enum _SettingsSections
     if (darkMode == YES) {
         self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
     }
-    if(section == SettingsSectionScreen)
+    if(section == SettingsSectionBluetoothController)
+    {
+        if(indexPath.row == 0)
+        {
+            cell = [self multipleChoiceCell];
+            cell.textLabel.text = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
+            if (darkMode == YES) {
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+            }
+            NSString* controllerName = nil;
+            BTControllerType bluetoothControllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
+            
+            for(NSArray* controller in [BTControllerView supportedControllers])
+            {
+                if([[controller objectAtIndex:1] intValue] == bluetoothControllerType)
+                {
+                    controllerName = [controller objectAtIndex:0];
+                    break;
+                }
+            }
+            
+            cell.detailTextLabel.text = controllerName;
+        }
+    }
+    else if(section == SettingsSectionScreen)
     {
         if([indexPath compare:_smoothScalingIndexPath] == NSOrderedSame)
         {
@@ -490,6 +529,43 @@ typedef enum _SettingsSections
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSInteger section = indexPath.section;
+    if(section == SettingsSectionBluetoothController)
+    {
+        if(indexPath.row == 0)
+        {
+            MultipleChoicePicker* c = [[MultipleChoicePicker alloc] initWithStyle:UITableViewStyleGrouped];
+            c.title = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
+            
+            // building the option names and values for the controllers
+            NSMutableArray* optionNames = [NSMutableArray array];
+            NSMutableArray* optionValues = [NSMutableArray array];
+            for(NSArray* controller in [BTControllerView supportedControllers])
+            {
+                [optionNames addObject:[controller firstObject]];
+                [optionValues addObject:[controller objectAtIndex:1]];
+            }
+            c.optionNames = optionNames;
+            c.optionValues = optionValues;
+            
+            BTControllerType controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
+            for(int i=0; i<[c.optionValues count]; i++)
+            {
+                if([[c.optionValues objectAtIndex:i] intValue] == controllerType)
+                {
+                    c.pickedIndex = i;
+                    break;
+                }
+            }
+            c.delegate = self;
+            [self.navigationController pushViewController:c animated:YES];
+            [c release];
+        }
+    }
 }
 
 @end
