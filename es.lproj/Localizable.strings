@@ -15,6 +15,10 @@
 "SAVE_FILE_SLOT_%i" = "Salvar %i";
 
 // SettingsController
+"APP_SETTINGS" = "App Settings";
+"CORE_SETTINGS" = "Core Settings";
+"CONTROLLER_SETTINGS" = "Controller Settings";
+"CREDITS" = "Credits";
 "SMOOTH_SCALING" = "Escalado Suave";
 "FULL_SCREEN" = "Pantalla Completa";
 "DARK_MODE_TITLE" = "Modo Oscuro";
@@ -26,6 +30,7 @@
 "AUTO_FRAMESKIP_MESSAGE" = "Auto Omitir Fotogramas uede aparecer más lento debido a mas inconsistente fotogramas saltos.";
 "SKIP_EVERY" = "Omitir Cada";
 "FRAMES" = "Fotogramas";
+"BLUETOOTH_CONTROLLER" = "Controller";
 "SETTINGS" = "Configuración";
 "ABOUT" = "Sobre";
 "CORE" = "Núcleo";
