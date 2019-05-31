@@ -1,3 +1,15 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
+/*****
+ * S-RTC emulation code
+ * Copyright (c) byuu
+ *****/
+
+
 #include <limits>
 
 #include "snes9x.h"
