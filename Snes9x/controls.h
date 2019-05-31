@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _CONTROLS_H_
 #define _CONTROLS_H_
 
@@ -8,8 +14,9 @@
 #define S9xButtonJustifier		4
 #define S9xButtonCommand		5
 #define S9xButtonMulti			6
-#define S9xAxisJoypad			7
-#define S9xPointer				8
+#define S9xButtonMacsRifle		7
+#define S9xAxisJoypad			8
+#define S9xPointer				9
 
 #define S9xButtonPseudopointer	254
 #define S9xAxisPseudopointer	253
@@ -82,6 +89,11 @@ typedef struct
 				uint8	aim_offscreen:1;	// Pretend we're pointing the gun offscreen (ignore the pointer)
 			}	justifier;
 
+			struct
+			{
+				uint8	trigger:1;
+			}	macsrifle;
+
 			int32	multi_idx;
 			uint16	command;
 		}	button;
@@ -119,6 +131,7 @@ typedef struct
 			uint16	aim_scope:1;
 			uint16	aim_justifier0:1;
 			uint16	aim_justifier1:1;
+			uint16	aim_macsrifle:1;
 		}	pointer;
 
 		uint8	port[4];
@@ -138,14 +151,15 @@ enum controllers
 	CTL_MOUSE,		// use id1 to specify 0-1
 	CTL_SUPERSCOPE,
 	CTL_JUSTIFIER,	// use id1: 0=one justifier, 1=two justifiers
-	CTL_MP5			// use id1-id4 to specify pad 0-7 (or -1)
+	CTL_MP5,			// use id1-id4 to specify pad 0-7 (or -1)
+	CTL_MACSRIFLE
 };
 
 void S9xSetController (int port, enum controllers controller, int8 id1, int8 id2, int8 id3, int8 id4); // port=0-1
 void S9xGetController (int port, enum controllers *controller, int8 *id1, int8 *id2, int8 *id3, int8 *id4);
 void S9xReportControllers (void);
 
-// Call this when you're done with S9xSetController, or if you change any of the controller Settings.*Master flags. 
+// Call this when you're done with S9xSetController, or if you change any of the controller Settings.*Master flags.
 // Returns true if something was disabled.
 
 bool S9xVerifyControllers (void);
@@ -268,6 +282,7 @@ struct SControlSnapshot
 	uint8	dummy3[8];
 	bool8	pad_read, pad_read_last;
 	uint8	internal[60];				// yes, we need to save this!
+	uint8   internal_macs[5];
 };
 
 void S9xControlPreSaveState (struct SControlSnapshot *s);
