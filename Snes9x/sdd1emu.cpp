@@ -1,3 +1,24 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
+/* S-DD1 decompressor
+ *
+ * Based on code and documentation by Andreas Naive, who deserves a great deal
+ * of thanks and credit for figuring this out.
+ *
+ * Andreas says:
+ * The author is greatly indebted with The Dumper, without whose help and
+ * patience providing him with real S-DD1 data the research had never been
+ * possible. He also wish to note that in the very beggining of his research,
+ * Neviksti had done some steps in the right direction. By last, the author is
+ * indirectly indebted to all the people that worked and contributed in the
+ * S-DD1 issue in the past.
+ */
+
+
 #include "port.h"
 #include "sdd1emu.h"
 
