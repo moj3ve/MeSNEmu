@@ -1,9 +1,15 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _CROSSHAIRS_H_
 #define _CROSSHAIRS_H_
 
 // Read in the specified crosshair file, replacing whatever data might be in that slot.
 // Available slots are 1-31.
-// The input file must be a PNG or a text file. 
+// The input file must be a PNG or a text file.
 // PNG:  15x15 pixels, palettized, with 3 colors (white, black, and transparent).
 // text: 15 lines of 16 characters (counting the \n), consisting of ' ', '#', or '.'.
 
@@ -22,6 +28,7 @@ const char * S9xGetCrosshair (int idx);
 //   Superscope:    2     White      Black
 //   Justifier 1:   4     Blue       Black
 //   Justifier 2:   4     MagicPink  Black
+//   Macs Rifle:    2     White      Black
 //
 // Available colors are: Trans, Black, 25Grey, 50Grey, 75Grey, White, Red, Orange,
 // Yellow, Green, Cyan, Sky, Blue, Violet, MagicPink, and Purple.
@@ -34,7 +41,8 @@ enum crosscontrols
 	X_MOUSE2,
 	X_SUPERSCOPE,
 	X_JUSTIFIER1,
-	X_JUSTIFIER2
+	X_JUSTIFIER2,
+	X_MACSRIFLE
 };
 
 void S9xSetControllerCrosshair (enum crosscontrols ctl, int8 idx, const char *fg, const char *bg);
