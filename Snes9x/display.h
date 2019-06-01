@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _DISPLAY_H_
 #define _DISPLAY_H_
 
@@ -5,21 +11,21 @@
 
 enum s9x_getdirtype
 {
-    DEFAULT_DIR = 0,
-    HOME_DIR,
-    ROMFILENAME_DIR,
-    ROM_DIR,
-    SRAM_DIR,
-    SNAPSHOT_DIR,
-    SCREENSHOT_DIR,
-    SPC_DIR,
-    CHEAT_DIR,
+	DEFAULT_DIR = 0,
+	HOME_DIR,
+	ROMFILENAME_DIR,
+	ROM_DIR,
+	SRAM_DIR,
+	SNAPSHOT_DIR,
+	SCREENSHOT_DIR,
+	SPC_DIR,
+	CHEAT_DIR,
+	PATCH_DIR,
+	BIOS_DIR,
     IPS_DIR,
-    PATCH_DIR,
-    BIOS_DIR,
-    LOG_DIR,
-    SAT_DIR,
-    LAST_DIR
+	LOG_DIR,
+	SAT_DIR,
+	LAST_DIR
 };
 
 void S9xUsage (void);

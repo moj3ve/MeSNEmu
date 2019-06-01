@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifdef DEBUGGER
 
 #ifndef _DEBUG_H_
@@ -28,6 +34,7 @@ void S9xSA1Trace (void);
 void S9xTraceMessage (const char *);
 void S9xTraceFormattedMessage (const char *, ...);
 void S9xPrintHVPosition (char *);
+void S9xDebugProcessCommand(char *);
 
 #endif
 
