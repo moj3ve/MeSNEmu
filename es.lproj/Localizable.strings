@@ -15,10 +15,10 @@
 "SAVE_FILE_SLOT_%i" = "Salvar %i";
 
 // SettingsController
-"APP_SETTINGS" = "App Settings";
-"CORE_SETTINGS" = "Core Settings";
-"CONTROLLER_SETTINGS" = "Controller Settings";
-"CREDITS" = "Credits";
+"APP_SETTINGS" = "Configuración de la Aplicación";
+"CORE_SETTINGS" = "Configuración de Núcleo";
+"CONTROLLER_SETTINGS" = "Configuración del Controlador";
+"CREDITS" = "Creditos";
 "SMOOTH_SCALING" = "Escalado Suave";
 "FULL_SCREEN" = "Pantalla Completa";
 "DARK_MODE_TITLE" = "Modo Oscuro";
@@ -27,10 +27,10 @@
 "SOUND" = "Sonido";
 "LRTHREE" = "Habilitar L3/R3";
 "AUTO_FRAMESKIP_TITLE" = "Auto Omitir Fotogramas";
-"AUTO_FRAMESKIP_MESSAGE" = "Auto Omitir Fotogramas uede aparecer más lento debido a mas inconsistente fotogramas saltos.";
+"AUTO_FRAMESKIP_MESSAGE" = "Auto Omitir Fotogramas puede aparecer más lento debido a mas inconsistente fotogramas saltos.";
 "SKIP_EVERY" = "Omitir Cada";
 "FRAMES" = "Fotogramas";
-"BLUETOOTH_CONTROLLER" = "Controller";
+"BLUETOOTH_CONTROLLER" = "Controlador";
 "SETTINGS" = "Configuración";
 "ABOUT" = "Sobre";
 "CORE" = "Núcleo";
