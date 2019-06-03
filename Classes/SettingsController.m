@@ -255,7 +255,7 @@ typedef enum _SettingsSections
 + (void)setDefaultsIfNotDefined
 {
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsBluetoothController] == nil)
-        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_NControl forKey:kSettingsBluetoothController];
+        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_nControl forKey:kSettingsBluetoothController];
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSmoothScaling] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsSmoothScaling];

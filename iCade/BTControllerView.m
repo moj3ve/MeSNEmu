@@ -93,11 +93,7 @@ NSArray* BTSupportedControllers = nil;
       
       // map order: UP RT DN LT SE ST  Y  B  X  A  L  R
       
-      BTSupportedControllers = [[@[
-                                    /*@[@"Custom",
-                                      [NSNumber numberWithInt:LMBTControllerType_Custom],
-                                      @""],*/
-                                     
+      BTSupportedControllers = [[@[                                     
                                     // iCade
                                     @[@"iCade",
                                       [NSNumber numberWithInt:BTControllerType_iCade],
@@ -108,20 +104,10 @@ NSArray* BTSupportedControllers = nil;
                                       [NSNumber numberWithInt:BTControllerType_iCade8Bitty],
                                       @"wedcxzaqytufimkpoglvhrjn"],
                                     
-                                    // iCade NControl
-                                    @[@"NControl",
-                                      [NSNumber numberWithInt:BTControllerType_NControl],
+                                    // nControl
+                                    @[@"nControl",
+                                      [NSNumber numberWithInt:BTControllerType_nControl],
                                       @""],
-                                    
-                                    // EX Hybrid
-                                    @[@"EX Hybrid",
-                                      [NSNumber numberWithInt:BTControllerType_EXHybrid],
-                                      @"wedcxzaqythrufjnimkpoglv"],
-                                    
-                                    // SteelSeries Free
-                                    @[@"SteelSeries Free",
-                                      [NSNumber numberWithInt:BTControllerType_SteelSeriesFree],
-                                      @"wedcxzaqoglvythrufjnimkp"],
                                     
                                     // 8Bitdo FC30
                                     @[@"8Bitdo FC30",
@@ -133,20 +119,10 @@ NSArray* BTSupportedControllers = nil;
                                       [NSNumber numberWithInt:BTControllerType_8BitdoNES30],
                                       @"wedcxzaqlvogythrjnufkpim"],
                                     
-                                    // iMpulse
-                                    @[@"iMpulse",
-                                      [NSNumber numberWithInt:BTControllerType_iMpulse],
-                                      @"wedcxzaq....lvkpogythrjn"],
-                                    
                                     // IPEGA PG-9025
                                     @[@"IPEGA PG-9025",
                                       [NSNumber numberWithInt:BTControllerType_IPEGAPG9025],
-                                      @"wedcxzaqoglvjnufythrimkp"],
-                                    
-                                    // Snakebyte idroid:con
-                                    @[@"Snakebyte idroid:con",
-                                      [NSNumber numberWithInt:BTControllerType_Snakebyteidroidcon],
-                                      @"wedcxzaqlvogythrjnufimkp"]
+                                      @"wedcxzaqoglvjnufythrimkp"]
                                     
                                    ] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
                                      return [[obj1 firstObject] compare:[obj2 firstObject]];
