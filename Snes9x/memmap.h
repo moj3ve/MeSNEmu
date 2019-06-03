@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _MEMMAP_H_
 #define _MEMMAP_H_
 
@@ -76,6 +82,7 @@ struct CMemory
 	uint32	ROMChecksum;
 	uint32	ROMComplementChecksum;
 	uint32	ROMCRC32;
+	unsigned char ROMSHA256[32];
 	int32	ROMFramesPerSecond;
 
 	bool8	HiROM;
@@ -93,17 +100,25 @@ struct CMemory
 
 	int		ScoreHiROM (bool8, int32 romoff = 0);
 	int		ScoreLoROM (bool8, int32 romoff = 0);
-	uint32	HeaderRemove (uint32, int32 &, uint8 *);
-	uint32	FileLoader (uint8 *, const char *, int32);
+	int		First512BytesCountZeroes() const;
+	uint32	HeaderRemove (uint32, uint8 *);
+	uint32	FileLoader (uint8 *, const char *, uint32);
+    uint32  MemLoader (uint8 *, const char*, uint32);
+    bool8   LoadROMMem (const uint8 *, uint32);
 	bool8	LoadROM (const char *);
+    bool8	LoadROMInt (int32);
+    bool8   LoadMultiCartMem (const uint8 *, uint32, const uint8 *, uint32, const uint8 *, uint32);
 	bool8	LoadMultiCart (const char *, const char *);
-	bool8	LoadSufamiTurbo (const char *, const char *);
-	bool8	LoadSameGame (const char *, const char *);
+    bool8	LoadMultiCartInt ();
+	bool8	LoadSufamiTurbo ();
+	bool8	LoadBSCart ();
+	bool8	LoadGNEXT ();
 	bool8	LoadSRAM (const char *);
 	bool8	SaveSRAM (const char *);
 	void	ClearSRAM (bool8 onlyNonSavedSRAM = 0);
 	bool8	LoadSRTC (void);
 	bool8	SaveSRTC (void);
+	bool8	SaveMPAK (const char *);
 
 	char *	Safe (const char *);
 	char *	SafeANK (const char *);
@@ -139,10 +154,12 @@ struct CMemory
 	void	Map_SetaDSPLoROMMap (void);
 	void	Map_SDD1LoROMMap (void);
 	void	Map_SA1LoROMMap (void);
+	void	Map_BSSA1LoROMMap (void);
 	void	Map_HiROMMap (void);
 	void	Map_ExtendedHiROMMap (void);
-	void	Map_SameGameHiROMMap (void);
 	void	Map_SPC7110HiROMMap (void);
+	void	Map_BSCartLoROMMap(uint8);
+	void	Map_BSCartHiROMMap(void);
 
 	uint16	checksum_calc_sum (uint8 *, uint32);
 	uint16	checksum_mirror_sum (uint8 *, uint32 &, uint32 mask = 0x800000);
@@ -181,7 +198,7 @@ extern CMemory	Memory;
 extern SMulti	Multi;
 
 void S9xAutoSaveSRAM (void);
-bool8 LoadZip(const char *, int32 *, int32 *, uint8 *);
+bool8 LoadZip(const char *, uint32 *, uint8 *);
 
 enum s9xwrap_t
 {

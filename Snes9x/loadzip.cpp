@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifdef UNZIP_SUPPORT
 
 #include <assert.h>
@@ -11,18 +17,17 @@
 #include "memmap.h"
 
 
-bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 *buffer)
+bool8 LoadZip (const char *zipname, uint32 *TotalFileSize, uint8 *buffer)
 {
 	*TotalFileSize = 0;
-	*headers = 0;
 
 	unzFile	file = unzOpen(zipname);
 	if (file == NULL)
 		return (FALSE);
 
-	// find largest file in zip file (under MAX_ROM_SIZE) or a file with extension .1
+	// find largest file in zip file (under MAX_ROM_SIZE) or a file with extension .1, or a file named program.rom
 	char	filename[132];
-	int		filesize = 0;
+	uint32	filesize = 0;
 	int		port = unzGoToFirstFile(file);
 
 	unz_file_info	info;
@@ -38,7 +43,7 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 			continue;
 		}
 
-		if ((int) info.uncompressed_size > filesize)
+		if (info.uncompressed_size > filesize)
 		{
 			strcpy(filename, name);
 			filesize = info.uncompressed_size;
@@ -51,24 +56,24 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 			filesize = info.uncompressed_size;
 			break;
 		}
-        
-        if (strncasecmp(name, "program.rom", 11) == 0)
-        {
-            strcpy(filename, name);
-            filesize = info.uncompressed_size;
-            break;
-        }
+
+		if (strncasecmp(name, "program.rom", 11) == 0)
+		{
+			strcpy(filename, name);
+			filesize = info.uncompressed_size;
+			break;
+		}
 
 		port = unzGoToNextFile(file);
 	}
 
-    int len = strlen(zipname);
-    if (!(port == UNZ_END_OF_LIST_OF_FILE || port == UNZ_OK) || filesize == 0 ||
-        (len > 5 && strcasecmp(zipname + len - 5, ".msu1") == 0 && strcasecmp(filename, "program.rom") != 0))
+	int len = strlen(zipname);
+	if (!(port == UNZ_END_OF_LIST_OF_FILE || port == UNZ_OK) || filesize == 0 ||
+		(len > 5 && strcasecmp(zipname + len - 5, ".msu1") == 0 && strcasecmp(filename, "program.rom") != 0))
 	{
-        if (unzClose(file) != UNZ_OK)
-            assert(FALSE);
-        return (FALSE);
+		if (unzClose(file) != UNZ_OK)
+			assert(FALSE);
+		return (FALSE);
 	}
 
 	// find extension
@@ -82,7 +87,7 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 	uint8	*ptr = buffer;
 	bool8	more = FALSE;
 
-	unzLocateFile(file, filename, 1);
+	unzLocateFile(file, filename, 0);
 	unzGetCurrentFileInfo(file, &info, filename, 128, NULL, 0, NULL, 0);
 
 	if (unzOpenCurrentFile(file) != UNZ_OK)
@@ -94,9 +99,9 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 	do
 	{
 		assert(info.uncompressed_size <= CMemory::MAX_ROM_SIZE + 512);
-        
-        uint32 FileSize = info.uncompressed_size;
-        int l = unzReadCurrentFile(file, ptr, FileSize);
+
+		uint32 FileSize = info.uncompressed_size;
+		int	l = unzReadCurrentFile(file, ptr, FileSize);
 
 		if (unzCloseCurrentFile(file) == UNZ_CRCERROR)
 		{
@@ -104,14 +109,13 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 			return (FALSE);
 		}
 
-		if (l <= 0 || l != FileSize)
+		if (l <= 0 || l != (int) FileSize)
 		{
 			unzClose(file);
 			return (FALSE);
 		}
 
-		// FileSize = (int) Memory.HeaderRemove((uint32) FileSize, *headers, ptr);
-        FileSize = Memory.HeaderRemove(FileSize, *headers, ptr);
+		FileSize = Memory.HeaderRemove(FileSize, ptr);
 		ptr += FileSize;
 		*TotalFileSize += FileSize;
 
@@ -143,7 +147,7 @@ bool8 LoadZip (const char *zipname, int32 *TotalFileSize, int32 *headers, uint8 
 
 		if (more)
 		{
-			if (unzLocateFile(file, filename, 1) != UNZ_OK ||
+			if (unzLocateFile(file, filename, 0) != UNZ_OK ||
 				unzGetCurrentFileInfo(file, &info, filename, 128, NULL, 0, NULL, 0) != UNZ_OK ||
 				unzOpenCurrentFile(file) != UNZ_OK)
 				break;

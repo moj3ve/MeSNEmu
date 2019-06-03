@@ -263,11 +263,21 @@ struct SSettings
 
 	bool8	ApplyCheats;
 	bool8	NoPatch;
+    bool8	IgnorePatchChecksum;
+	bool8	IsPatched;
 	int32	AutoSaveDelay;
 	bool8	DontSaveOopsSnapshot;
 	bool8	UpAndDown;
 
 	bool8	OpenGLEnable;
+    
+    bool8   SeparateEchoBuffer;
+	uint32	SuperFXClockMultiplier;
+    int OverclockMode;
+	int	OneClockCycle;
+	int	OneSlowClockCycle;
+	int	TwoClockCycles;
+	int	MaxSpriteTilesPerLine;
 };
 
 struct SSNESGameFixes

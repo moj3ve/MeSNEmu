@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #include "snes9x.h"
 #include "memmap.h"
 
@@ -120,20 +126,25 @@ void S9xSA1MainLoop (void)
 		}
 	}
 
-	for (int i = 0; i < 3 && !(Memory.FillRAM[0x2200] & 0x60); i++)
+	#undef CPU
+	int cycles = CPU.Cycles * 3;
+	#define CPU SA1
+
+	for (; SA1.Cycles < cycles && !(Memory.FillRAM[0x2200] & 0x60);)
 	{
 	#ifdef DEBUGGER
 		if (SA1.Flags & TRACE_FLAG)
 			S9xSA1Trace();
 	#endif
 
-		register uint8				Op;
-		register struct SOpcodes	*Opcodes;
+		uint8				Op;
+		struct SOpcodes	*Opcodes;
 
 		if (SA1.PCBase)
 		{
 			SA1OpenBus = Op = SA1.PCBase[Registers.PCw];
 			Opcodes = SA1.S9xOpcodes;
+			SA1.Cycles += SA1.MemSpeed;
 		}
 		else
 		{
@@ -182,9 +193,6 @@ static void S9xSA1UpdateTimer (void) // FIXME
 				SA1.VCounter = 0;
 		}
 	}
-
-	if (SA1.Cycles >= Timings.H_Max_Master)
-		SA1.Cycles -= Timings.H_Max_Master;
 
 	SA1.PrevCycles = SA1.Cycles;
 

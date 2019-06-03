@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _MESSAGES_H_
 #define _MESSAGES_H_
 
@@ -15,6 +21,7 @@ enum
 // Individual message numbers
 enum
 {
+	S9X_NO_INFO,
 	S9X_ROM_INFO,
 	S9X_HEADERS_INFO,
 	S9X_CONFIG_INFO,
@@ -45,7 +52,8 @@ enum
 	S9X_WRONG_MOVIE_SNAPSHOT,
 	S9X_NOT_A_MOVIE_SNAPSHOT,
 	S9X_SNAPSHOT_INCONSISTENT,
-	S9X_AVI_INFO
+	S9X_AVI_INFO,
+	S9X_PRESSED_KEYS_INFO
 };
 
 #endif
