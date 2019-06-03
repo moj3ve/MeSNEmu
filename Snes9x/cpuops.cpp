@@ -1,9 +1,15 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #include "snes9x.h"
 #include "memmap.h"
 #include "apu/apu.h"
 
 // for "Magic WDM" features
-#ifdef DEBUGGER	
+#ifdef DEBUGGER
 #include "snapshot.h"
 #include "display.h"
 #include "debug.h"
@@ -13,7 +19,7 @@
 #ifdef SA1_OPCODES
 #define AddCycles(n)	{ SA1.Cycles += (n); }
 #else
-#define AddCycles(n)	{ CPU.PrevCycles = CPU.Cycles; CPU.Cycles += (n); S9xCheckInterrupts(); while (CPU.Cycles >= CPU.NextEvent) S9xDoHEventProcessing(); }
+#define AddCycles(n)	{ CPU.Cycles += (n); while (CPU.Cycles >= CPU.NextEvent) S9xDoHEventProcessing(); }
 #endif
 
 #include "cpuaddr.h"
@@ -1443,16 +1449,25 @@ static void OpF8 (void)
 // CLI
 static void Op58 (void)
 {
-	ClearIRQ();
 	AddCycles(ONE_CYCLE);
-	CHECK_FOR_IRQ();
+
+#ifndef SA1_OPCODES
+	Timings.IRQFlagChanging |= IRQ_CLEAR_FLAG;
+#else
+	ClearIRQ();
+#endif
 }
 
 // SEI
 static void Op78 (void)
 {
-	SetIRQ();
 	AddCycles(ONE_CYCLE);
+
+#ifndef SA1_OPCODES
+	Timings.IRQFlagChanging |= IRQ_SET_FLAG;
+#else
+	SetIRQ();
+#endif
 }
 
 // CLV
@@ -2596,13 +2611,13 @@ void S9xOpcode_IRQ (void)
 
 	#ifdef SA1_OPCODES
 		OpenBus = Memory.FillRAM[0x2208];
-		AddCycles(2 * SLOW_ONE_CYCLE);
+		AddCycles(2 * ONE_CYCLE);
 		S9xSA1SetPCBase(Memory.FillRAM[0x2207] | (Memory.FillRAM[0x2208] << 8));
 	#else
 		if (Settings.SA1 && (Memory.FillRAM[0x2209] & 0x40))
 		{
 			OpenBus = Memory.FillRAM[0x220f];
-			AddCycles(2 * SLOW_ONE_CYCLE);
+			AddCycles(2 * ONE_CYCLE);
 			S9xSetPCBase(Memory.FillRAM[0x220e] | (Memory.FillRAM[0x220f] << 8));
 		}
 		else
@@ -2624,13 +2639,13 @@ void S9xOpcode_IRQ (void)
 
 	#ifdef SA1_OPCODES
 		OpenBus = Memory.FillRAM[0x2208];
-		AddCycles(2 * SLOW_ONE_CYCLE);
+		AddCycles(2 * ONE_CYCLE);
 		S9xSA1SetPCBase(Memory.FillRAM[0x2207] | (Memory.FillRAM[0x2208] << 8));
 	#else
 		if (Settings.SA1 && (Memory.FillRAM[0x2209] & 0x40))
 		{
 			OpenBus = Memory.FillRAM[0x220f];
-			AddCycles(2 * SLOW_ONE_CYCLE);
+			AddCycles(2 * ONE_CYCLE);
 			S9xSetPCBase(Memory.FillRAM[0x220e] | (Memory.FillRAM[0x220f] << 8));
 		}
 		else
@@ -2671,13 +2686,13 @@ void S9xOpcode_NMI (void)
 
 	#ifdef SA1_OPCODES
 		OpenBus = Memory.FillRAM[0x2206];
-		AddCycles(2 * SLOW_ONE_CYCLE);
+		AddCycles(2 * ONE_CYCLE);
 		S9xSA1SetPCBase(Memory.FillRAM[0x2205] | (Memory.FillRAM[0x2206] << 8));
 	#else
 		if (Settings.SA1 && (Memory.FillRAM[0x2209] & 0x10))
 		{
 			OpenBus = Memory.FillRAM[0x220d];
-			AddCycles(2 * SLOW_ONE_CYCLE);
+			AddCycles(2 * ONE_CYCLE);
 			S9xSetPCBase(Memory.FillRAM[0x220c] | (Memory.FillRAM[0x220d] << 8));
 		}
 		else
@@ -2699,13 +2714,13 @@ void S9xOpcode_NMI (void)
 
 	#ifdef SA1_OPCODES
 		OpenBus = Memory.FillRAM[0x2206];
-		AddCycles(2 * SLOW_ONE_CYCLE);
+		AddCycles(2 * ONE_CYCLE);
 		S9xSA1SetPCBase(Memory.FillRAM[0x2205] | (Memory.FillRAM[0x2206] << 8));
 	#else
 		if (Settings.SA1 && (Memory.FillRAM[0x2209] & 0x10))
 		{
 			OpenBus = Memory.FillRAM[0x220d];
-			AddCycles(2 * SLOW_ONE_CYCLE);
+			AddCycles(2 * ONE_CYCLE);
 			S9xSetPCBase(Memory.FillRAM[0x220c] | (Memory.FillRAM[0x220d] << 8));
 		}
 		else
@@ -2764,21 +2779,33 @@ static void Op02 (void)
 static void OpDC (void)
 {
 	S9xSetPCBase(AbsoluteIndirectLong(JUMP));
+#ifdef SA1_OPCODES
+	AddCycles(ONE_CYCLE);
+#endif
 }
 
 static void OpDCSlow (void)
 {
 	S9xSetPCBase(AbsoluteIndirectLongSlow(JUMP));
+#ifdef SA1_OPCODES
+	AddCycles(ONE_CYCLE);
+#endif
 }
 
 static void Op5C (void)
 {
 	S9xSetPCBase(AbsoluteLong(JUMP));
+#ifdef SA1_OPCODES
+	AddCycles(ONE_CYCLE);
+#endif
 }
 
 static void Op5CSlow (void)
 {
 	S9xSetPCBase(AbsoluteLongSlow(JUMP));
+#ifdef SA1_OPCODES
+	AddCycles(ONE_CYCLE);
+#endif
 }
 
 /* JMP ********************************************************************* */
@@ -3287,8 +3314,9 @@ static void OpCB (void)
 	AddCycles(TWO_CYCLES);
 #else
 	CPU.WaitingForInterrupt = TRUE;
+
 	Registers.PCw--;
-	AddCycles(TWO_CYCLES);
+	AddCycles(ONE_CYCLE);
 #endif
 }
 

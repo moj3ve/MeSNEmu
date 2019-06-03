@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _CPUEXEC_H_
 #define _CPUEXEC_H_
 
@@ -91,45 +97,6 @@ static inline void S9xFixCycles (void)
 			ICPU.S9xOpLengths = S9xOpLengthsM0X0;
 		}
 	}
-}
-
-static inline void S9xCheckInterrupts (void)
-{
-	bool8	thisIRQ = PPU.HTimerEnabled || PPU.VTimerEnabled;
-
-	if (CPU.IRQLine && thisIRQ)
-		CPU.IRQTransition = TRUE;
-
-	if (PPU.HTimerEnabled)
-	{
-		int32	htimepos = PPU.HTimerPosition;
-		if (CPU.Cycles >= Timings.H_Max)
-			htimepos += Timings.H_Max;
-
-		if (CPU.PrevCycles >= htimepos || CPU.Cycles < htimepos)
-			thisIRQ = FALSE;
-	}
-
-	if (PPU.VTimerEnabled)
-	{
-		int32	vcounter = CPU.V_Counter;
-		if (CPU.Cycles >= Timings.H_Max)
-			vcounter++;
-
-		if (vcounter != PPU.VTimerPosition)
-			thisIRQ = FALSE;
-	}
-
-	if (!CPU.IRQLastState && thisIRQ)
-	{
-#ifdef DEBUGGER
-		S9xTraceFormattedMessage("--- /IRQ High->Low  prev HC:%04d  curr HC:%04d  HTimer:%d Pos:%04d  VTimer:%d Pos:%03d",
-			CPU.PrevCycles, CPU.Cycles, PPU.HTimerEnabled, PPU.HTimerPosition, PPU.VTimerEnabled, PPU.VTimerPosition);
-#endif
-		CPU.IRQLine = TRUE;
-	}
-
-	CPU.IRQLastState = thisIRQ;
 }
 
 #endif

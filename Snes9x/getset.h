@@ -19,9 +19,7 @@
 #define addCyclesInMemoryAccess \
 	if (!CPU.InDMAorHDMA) \
 	{ \
-        CPU.PrevCycles = CPU.Cycles; \
 		CPU.Cycles += speed; \
-        S9xCheckInterrupts(); \
 		while (CPU.Cycles >= CPU.NextEvent) \
 			S9xDoHEventProcessing(); \
 	}
@@ -29,9 +27,7 @@
 #define addCyclesInMemoryAccess_x2 \
 	if (!CPU.InDMAorHDMA) \
 	{ \
-        CPU.PrevCycles = CPU.Cycles; \
 		CPU.Cycles += speed << 1; \
-        S9xCheckInterrupts(); \
 		while (CPU.Cycles >= CPU.NextEvent) \
 			S9xDoHEventProcessing(); \
 	}

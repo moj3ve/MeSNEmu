@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #include "snes9x.h"
 #include "memmap.h"
 #include "cpuops.h"
@@ -5,6 +11,7 @@
 #include "apu/apu.h"
 #include "fxemu.h"
 #include "snapshot.h"
+#include "movie.h"
 #ifdef DEBUGGER
 #include "debug.h"
 #include "missing.h"
@@ -12,13 +19,37 @@
 
 static inline void S9xReschedule (void);
 
-
 void S9xMainLoop (void)
 {
+	#define CHECK_FOR_IRQ_CHANGE() \
+	if (Timings.IRQFlagChanging) \
+	{ \
+		if (Timings.IRQFlagChanging & IRQ_TRIGGER_NMI) \
+		{ \
+			CPU.NMILine = TRUE; \
+			Timings.NMITriggerPos = CPU.Cycles + 6; \
+		} \
+		if (Timings.IRQFlagChanging & IRQ_CLEAR_FLAG) \
+			ClearIRQ(); \
+		else if (Timings.IRQFlagChanging & IRQ_SET_FLAG) \
+			SetIRQ(); \
+		Timings.IRQFlagChanging = IRQ_NONE; \
+	}
+
+	if (CPU.Flags & SCAN_KEYS_FLAG)
+	{
+		CPU.Flags &= ~SCAN_KEYS_FLAG;
+		S9xMovieUpdate();
+	}
+
 	for (;;)
 	{
 		if (CPU.NMILine)
 		{
+			#ifdef DEBUGGER
+			if (Settings.TraceHCEvent)
+			    S9xTraceFormattedMessage ("Comparing %d to %d\n", Timings.NMITriggerPos, CPU.Cycles);
+			#endif
 			if (Timings.NMITriggerPos <= CPU.Cycles)
 			{
 				CPU.NMILine = FALSE;
@@ -27,31 +58,47 @@ void S9xMainLoop (void)
 				{
 					CPU.WaitingForInterrupt = FALSE;
 					Registers.PCw++;
+					CPU.Cycles += TWO_CYCLES + ONE_DOT_CYCLE / 2;
+					while (CPU.Cycles >= CPU.NextEvent)
+						S9xDoHEventProcessing();
 				}
 
+				CHECK_FOR_IRQ_CHANGE();
 				S9xOpcode_NMI();
 			}
 		}
 
-		if (CPU.IRQTransition || CPU.IRQExternal)
+		if (CPU.Cycles >= Timings.NextIRQTimer)
 		{
-			if (CPU.IRQPending)
-				CPU.IRQPending--;
-			else
+			#ifdef DEBUGGER
+			S9xTraceMessage ("Timer triggered\n");
+			#endif
+
+			S9xUpdateIRQPositions(false);
+			CPU.IRQLine = TRUE;
+		}
+
+		if (CPU.IRQLine || CPU.IRQExternal)
+		{
+			if (CPU.WaitingForInterrupt)
 			{
-				if (CPU.WaitingForInterrupt)
-				{
-					CPU.WaitingForInterrupt = FALSE;
-					Registers.PCw++;
-				}
+				CPU.WaitingForInterrupt = FALSE;
+				Registers.PCw++;
+				CPU.Cycles += TWO_CYCLES + ONE_DOT_CYCLE / 2;
+				while (CPU.Cycles >= CPU.NextEvent)
+					S9xDoHEventProcessing();
+			}
 
-				CPU.IRQTransition = FALSE;
-				CPU.IRQPending = Timings.IRQPendCount;
-
-				if (!CheckFlag(IRQ))
-					S9xOpcode_IRQ();
+			if (!CheckFlag(IRQ))
+			{
+				/* The flag pushed onto the stack is the new value */
+				CHECK_FOR_IRQ_CHANGE();
+				S9xOpcode_IRQ();
 			}
 		}
+
+		/* Change IRQ flag for instructions that set it only on last cycle */
+		CHECK_FOR_IRQ_CHANGE();
 
 	#ifdef DEBUGGER
 		if ((CPU.Flags & BREAK_FLAG) && !(CPU.Flags & SINGLE_STEP_FLAG))
@@ -84,17 +131,24 @@ void S9xMainLoop (void)
 	#endif
 
 		if (CPU.Flags & SCAN_KEYS_FLAG)
-			break;
+		{
+			#ifdef DEBUGGER
+			if (!(CPU.Flags & FRAME_ADVANCE_FLAG))
+			#endif
+			{
+				S9xSyncSpeed();
+			}
 
-		register uint8				Op;
-		register struct	SOpcodes	*Opcodes;
+			break;
+		}
+
+		uint8				Op;
+		struct	SOpcodes	*Opcodes;
 
 		if (CPU.PCBase)
 		{
 			Op = CPU.PCBase[Registers.PCw];
-			CPU.PrevCycles = CPU.Cycles;
 			CPU.Cycles += CPU.MemSpeed;
-			S9xCheckInterrupts();
 			Opcodes = ICPU.S9xOpcodes;
 		}
 		else
@@ -121,15 +175,6 @@ void S9xMainLoop (void)
 	}
 
 	S9xPackStatus();
-
-	if (CPU.Flags & SCAN_KEYS_FLAG)
-	{
-	#ifdef DEBUGGER
-		if (!(CPU.Flags & FRAME_ADVANCE_FLAG))
-	#endif
-		S9xSyncSpeed();
-		CPU.Flags &= ~SCAN_KEYS_FLAG;
-	}
 }
 
 static inline void S9xReschedule (void)
@@ -185,8 +230,8 @@ void S9xDoHEventProcessing (void)
 
 #ifdef DEBUGGER
 	if (Settings.TraceHCEvent)
-		S9xTraceFormattedMessage("--- HC event processing  (%s)  expected HC:%04d  executed HC:%04d",
-			eventname[CPU.WhichEvent], CPU.NextEvent, CPU.Cycles);
+		S9xTraceFormattedMessage("--- HC event processing  (%s)  expected HC:%04d  executed HC:%04d VC:%04d",
+			eventname[CPU.WhichEvent], CPU.NextEvent, CPU.Cycles, CPU.V_Counter);
 #endif
 
 	switch (CPU.WhichEvent)
@@ -218,11 +263,14 @@ void S9xDoHEventProcessing (void)
 
 			S9xAPUEndScanline();
 			CPU.Cycles -= Timings.H_Max;
-			CPU.PrevCycles -= Timings.H_Max;
+			if (Timings.NMITriggerPos != 0xffff)
+				Timings.NMITriggerPos -= Timings.H_Max;
+			if (Timings.NextIRQTimer != 0x0fffffff)
+				Timings.NextIRQTimer -= Timings.H_Max;
 			S9xAPUSetReferenceTime(CPU.Cycles);
 
-			if ((Timings.NMITriggerPos != 0xffff) && (Timings.NMITriggerPos >= Timings.H_Max))
-				Timings.NMITriggerPos -= Timings.H_Max;
+			if (Settings.SA1)
+				SA1.Cycles -= Timings.H_Max * 3;
 
 			CPU.V_Counter++;
 			if (CPU.V_Counter >= Timings.V_Max)	// V ranges from 0 to Timings.V_Max - 1
@@ -247,12 +295,9 @@ void S9xDoHEventProcessing (void)
 
 				// FIXME: reading $4210 will wait 2 cycles, then perform reading, then wait 4 more cycles.
 				Memory.FillRAM[0x4210] = Model->_5A22;
-				CPU.NMILine = FALSE;
-				Timings.NMITriggerPos = 0xffff;
 
 				ICPU.Frame++;
 				PPU.HVBeamCounterLatched = 0;
-				CPU.Flags |= SCAN_KEYS_FLAG;
 			}
 
 			// From byuu:
@@ -282,6 +327,9 @@ void S9xDoHEventProcessing (void)
 			if (CPU.V_Counter == PPU.ScreenHeight + FIRST_VISIBLE_LINE)	// VBlank starts from V=225(240).
 			{
 				S9xEndScreenRefresh();
+
+				CPU.Flags |= SCAN_KEYS_FLAG;
+
 				PPU.HDMA = 0;
 				// Bits 7 and 6 of $4212 are computed when read in S9xGetPPU.
 			#ifdef DEBUGGER
@@ -311,6 +359,10 @@ void S9xDoHEventProcessing (void)
 				Memory.FillRAM[0x4210] = 0x80 | Model->_5A22;
 				if (Memory.FillRAM[0x4200] & 0x80)
 				{
+#ifdef DEBUGGER
+					if (Settings.TraceHCEvent)
+					    S9xTraceFormattedMessage ("NMI Scheduled for next scanline.");
+#endif
 					// FIXME: triggered at HC=6, checked just before the final CPU cycle,
 					// then, when to call S9xOpcode_NMI()?
 					CPU.NMILine = TRUE;
@@ -358,9 +410,7 @@ void S9xDoHEventProcessing (void)
 			S9xTraceFormattedMessage("*** WRAM Refresh  HC:%04d", CPU.Cycles);
 		#endif
 
-			CPU.PrevCycles = CPU.Cycles;
 			CPU.Cycles += SNES_WRAM_REFRESH_CYCLES;
-			S9xCheckInterrupts();
 
 			S9xReschedule();
 

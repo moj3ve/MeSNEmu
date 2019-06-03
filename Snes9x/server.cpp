@@ -1,7 +1,10 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifdef NETPLAY_SUPPORT
-#ifdef _DEBUG
-	#define NP_DEBUG 1
-#endif
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,6 +14,8 @@
 #ifdef HAVE_STRINGS_H
 	#include <strings.h>
 #endif
+
+#include "snes9x.h"
 
 #ifdef __WIN32__
 
@@ -41,7 +46,6 @@
 
 #endif // !__WIN32__
 
-#include "snes9x.h"
 #include "memmap.h"
 #include "snapshot.h"
 #include "netplay.h"
@@ -167,7 +171,6 @@ static bool8 S9xNPSGetData (int socket, uint8 *data, int length)
 
 static bool8 S9xNPSSendData (int fd, const uint8 *data, int length)
 {
-    int Percent = 0;
     int len = length;
     int chunk = length / 50;
 
@@ -211,8 +214,8 @@ static bool8 S9xNPSSendData (int fd, const uint8 *data, int length)
 	data += sent;
         if (length > 1024)
         {
-            Percent = (uint8) (((length - len) * 100) / length);
 #ifdef __WIN32__
+            int Percent = (uint8) (((length - len) * 100) / length);
             PostMessage (GUI.hWnd, WM_USER, Percent, Percent);
             Sleep (0);
 #endif
@@ -356,7 +359,7 @@ void S9xNPProcessClient (int c)
 
             len = 7 + 1 + 1 + 4 + strlen (NPServer.ROMName) + 1;
 
-            delete data;
+            delete[] data;
             ptr = data = new uint8 [len];
             *ptr++ = NP_SERV_MAGIC;
             *ptr++ = NPServer.Clients [c].SendSequenceNum++;
@@ -384,7 +387,7 @@ void S9xNPProcessClient (int c)
                 S9xNPShutdownClient (c, TRUE);
                 return;
             }
-            delete data;
+            delete[] data;
 #ifdef NP_DEBUG
             printf ("SERVER: Waiting for a response from the client @%ld...\n", S9xGetMilliTime () - START);
 #endif
@@ -403,11 +406,11 @@ void S9xNPProcessClient (int c)
 
             if (NPServer.SyncByReset)
             {
-                S9xNPServerAddTask (NP_SERVER_SEND_SRAM, (void *) c);
+                S9xNPServerAddTask (NP_SERVER_SEND_SRAM, (void *) (pint) c);
                 S9xNPServerAddTask (NP_SERVER_RESET_ALL, 0);
             }
             else
-                S9xNPServerAddTask (NP_SERVER_SYNC_CLIENT, (void *) c);
+                S9xNPServerAddTask (NP_SERVER_SYNC_CLIENT, (void *) (pint) c);
             break;
 
         case NP_CLNT_RECEIVED_ROM_IMAGE:
@@ -422,11 +425,11 @@ void S9xNPProcessClient (int c)
 
             if (NPServer.SyncByReset)
             {
-                S9xNPServerAddTask (NP_SERVER_SEND_SRAM, (void *) c);
+                S9xNPServerAddTask (NP_SERVER_SEND_SRAM, (void *) (pint) c);
                 S9xNPServerAddTask (NP_SERVER_RESET_ALL, 0);
             }
             else
-                S9xNPServerAddTask (NP_SERVER_SYNC_CLIENT, (void *) c);
+                S9xNPServerAddTask (NP_SERVER_SYNC_CLIENT, (void *) (pint) c);
 
             break;
 
@@ -467,15 +470,15 @@ void S9xNPProcessClient (int c)
 
                     if (NPServer.SyncByReset)
                     {
-                        S9xNPServerAddTask (NP_SERVER_SEND_SRAM, (void *) c);
+                        S9xNPServerAddTask (NP_SERVER_SEND_SRAM, (void *) (pint) c);
                         S9xNPServerAddTask (NP_SERVER_RESET_ALL, 0);
                     }
                     else
 #ifdef __WIN32__
-                        S9xNPServerAddTask (NP_SERVER_SYNC_CLIENT, (void *) c);
+                        S9xNPServerAddTask (NP_SERVER_SYNC_CLIENT, (void *)(UINT_PTR) c);
 #else
                         /* We need to resync all clients on new player connect as we don't have a 'reference game' */
-                        S9xNPServerAddTask (NP_SERVER_SYNC_ALL, (void *) c);
+                        S9xNPServerAddTask (NP_SERVER_SYNC_ALL, (void *) (pint) c);
 #endif
                 }
             }
@@ -677,6 +680,20 @@ void S9xNPSendServerPause (bool8 paused)
     S9xNPSendToAllClients (pause, 7);
 }
 
+void S9xNPSendJoypadSwap()
+{
+#ifdef NP_DEBUG
+	printf("SERVER: Swap Joypads - @%ld\n", S9xGetMilliTime() - START);
+#endif
+	uint8 swap[7];
+	uint8 *ptr = swap;
+	*ptr++ = NP_SERV_MAGIC;
+	*ptr++ = 0;
+	*ptr++ = NP_SERV_JOYPAD_SWAP;
+	WRITE_LONG(ptr, 7);
+	S9xNPSendToAllClients(swap, 7);
+}
+
 void S9xNPServerLoop (void *)
 {
 #ifdef __WIN32__
@@ -864,19 +881,22 @@ void S9xNPServerLoop (void *)
 
 bool8 S9xNPStartServer (int port)
 {
+#ifdef __WIN32__
     static int p;
+    p = port;
+#endif
 
 #ifdef NP_DEBUG
     printf ("SERVER: Starting server on port %d @%ld\n", port, S9xGetMilliTime () - START);
 #endif
-    p = port;
+
     server_continue = TRUE;
     if (S9xNPServerInit (port))
 #ifdef __WIN32__
         return (_beginthread (S9xNPServerLoop, 0, &p) != (uintptr_t)(~0));
 #else
-    	S9xNPServerLoop(NULL);
-	return (TRUE);
+    S9xNPServerLoop(NULL);
+    return (TRUE);
 #endif
 
     return (FALSE);
@@ -1127,7 +1147,7 @@ void S9xNPSendROMLoadRequest (const char *filename)
             }
         }
     }
-    delete data;
+    delete[] data;
 }
 
 void S9xNPSendSRAMToAllClients ()
