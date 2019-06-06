@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #include <ctype.h>
 #include "snes9x.h"
 #include "memmap.h"
@@ -68,6 +74,9 @@ const char * S9xGoldFingerToRaw (const char *code, uint32 &address, bool8 &sram,
 	tmp[5] = 0;
 	if (sscanf(tmp, "%x", &address) != 1)
 		return ("Invalid Gold Finger code.");
+
+	// Correct GoldFinger Address
+	address = (address & 0x7FFF) | ((address & 0x7F8000) << 1) | 0x8000;
 
 	for (i = 0; i < 3; i++)
 	{
