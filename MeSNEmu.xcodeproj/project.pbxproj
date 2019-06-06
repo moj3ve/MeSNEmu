@@ -11,6 +11,8 @@
 		26210DA5223F26F0009708E9 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA1223F26F0009708E9 /* RedButton.png */; };
 		26210DA6223F26F0009708E9 /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA2223F26F0009708E9 /* GreenButton.png */; };
 		26210DA7223F26F0009708E9 /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA3223F26F0009708E9 /* BlueButton.png */; };
+		262B5B8D22A9694F00BB3D52 /* bml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262B5B8822A9694E00BB3D52 /* bml.cpp */; };
+		262B5B8E22A9694F00BB3D52 /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262B5B8B22A9694F00BB3D52 /* sha256.cpp */; };
 		267312242272283C00687228 /* TableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267312232272283B00687228 /* TableViewSwitchCell.m */; };
 		26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78821F77DBC00E05B50 /* DPadButton.png */; };
 		26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78921F77DBC00E05B50 /* LRButton.png */; };
@@ -142,6 +144,10 @@
 		26210DA1223F26F0009708E9 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
 		26210DA2223F26F0009708E9 /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButton.png; sourceTree = "<group>"; };
 		26210DA3223F26F0009708E9 /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
+		262B5B8722A9694E00BB3D52 /* sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
+		262B5B8822A9694E00BB3D52 /* bml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bml.cpp; sourceTree = "<group>"; };
+		262B5B8922A9694E00BB3D52 /* bml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bml.h; sourceTree = "<group>"; };
+		262B5B8B22A9694F00BB3D52 /* sha256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha256.cpp; sourceTree = "<group>"; };
 		267312232272283B00687228 /* TableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewSwitchCell.m; path = Classes/TableViewSwitchCell.m; sourceTree = SOURCE_ROOT; };
 		26AAB78821F77DBC00E05B50 /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
 		26AAB78921F77DBC00E05B50 /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
@@ -405,6 +411,10 @@
 		A00401E214BE3E4D00FE28CE /* Snes9x */ = {
 			isa = PBXGroup;
 			children = (
+				262B5B8822A9694E00BB3D52 /* bml.cpp */,
+				262B5B8922A9694E00BB3D52 /* bml.h */,
+				262B5B8B22A9694F00BB3D52 /* sha256.cpp */,
+				262B5B8722A9694E00BB3D52 /* sha256.h */,
 				A00401E314BE3E4D00FE28CE /* 65c816.h */,
 				A00401E414BE3E4D00FE28CE /* apu */,
 				A00401F914BE3E4D00FE28CE /* bsx.cpp */,
@@ -917,6 +927,7 @@
 				A00403EC14BE3E4D00FE28CE /* fxemu.cpp in Sources */,
 				A00403ED14BE3E4D00FE28CE /* fxinst.cpp in Sources */,
 				A00403EE14BE3E4D00FE28CE /* gfx.cpp in Sources */,
+				262B5B8D22A9694F00BB3D52 /* bml.cpp in Sources */,
 				A00403EF14BE3E4D00FE28CE /* globals.cpp in Sources */,
 				A004042914BE3E4E00FE28CE /* 7zlzma.cpp in Sources */,
 				A004042A14BE3E4E00FE28CE /* crc32.cpp in Sources */,
@@ -937,6 +948,7 @@
 				A004048114BE3E4E00FE28CE /* obc1.cpp in Sources */,
 				A004048214BE3E4E00FE28CE /* ppu.cpp in Sources */,
 				A004048314BE3E4E00FE28CE /* reader.cpp in Sources */,
+				262B5B8E22A9694F00BB3D52 /* sha256.cpp in Sources */,
 				A004048414BE3E4E00FE28CE /* sa1.cpp in Sources */,
 				A004048514BE3E4E00FE28CE /* sa1cpu.cpp in Sources */,
 				A004048714BE3E4E00FE28CE /* sdd1.cpp in Sources */,

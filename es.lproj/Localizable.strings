@@ -34,7 +34,7 @@
 "SETTINGS" = "Configuración";
 "ABOUT" = "Sobre";
 "CORE" = "Núcleo";
-"CORE_NAME" = "Snes9x";
+"CORE_NAME" = "Snes9x %@";
 "ABOUT_MESSAGE" = "Desarrollador Original: Lucas Menge (2012-2015) \nDesarrollador actual: SarahH12099 (2019+) \nTraducción de inglés: SarahH12099 \nTraduccion de español: KoukoCarlos";
 
 // EmulatorController

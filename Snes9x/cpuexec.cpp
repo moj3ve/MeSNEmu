@@ -26,7 +26,7 @@ void S9xMainLoop (void)
 	{ \
 		if (Timings.IRQFlagChanging & IRQ_TRIGGER_NMI) \
 		{ \
-			CPU.NMILine = TRUE; \
+			CPU.NMIPending = TRUE; \
 			Timings.NMITriggerPos = CPU.Cycles + 6; \
 		} \
 		if (Timings.IRQFlagChanging & IRQ_CLEAR_FLAG) \
@@ -44,7 +44,7 @@ void S9xMainLoop (void)
 
 	for (;;)
 	{
-		if (CPU.NMILine)
+		if (CPU.NMIPending)
 		{
 			#ifdef DEBUGGER
 			if (Settings.TraceHCEvent)
@@ -52,7 +52,7 @@ void S9xMainLoop (void)
 			#endif
 			if (Timings.NMITriggerPos <= CPU.Cycles)
 			{
-				CPU.NMILine = FALSE;
+				CPU.NMIPending = FALSE;
 				Timings.NMITriggerPos = 0xffff;
 				if (CPU.WaitingForInterrupt)
 				{
@@ -365,7 +365,7 @@ void S9xDoHEventProcessing (void)
 #endif
 					// FIXME: triggered at HC=6, checked just before the final CPU cycle,
 					// then, when to call S9xOpcode_NMI()?
-					CPU.NMILine = TRUE;
+					CPU.NMIPending = TRUE;
 					Timings.NMITriggerPos = 6 + 6;
 				}
 
