@@ -14,6 +14,7 @@
 		262B5B8D22A9694F00BB3D52 /* bml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262B5B8822A9694E00BB3D52 /* bml.cpp */; };
 		262B5B8E22A9694F00BB3D52 /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262B5B8B22A9694F00BB3D52 /* sha256.cpp */; };
 		267312242272283C00687228 /* TableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267312232272283B00687228 /* TableViewSwitchCell.m */; };
+		26A6C59522AAD25400E06CB5 /* statemanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26A6C59322AAD25300E06CB5 /* statemanager.cpp */; };
 		26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78821F77DBC00E05B50 /* DPadButton.png */; };
 		26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78921F77DBC00E05B50 /* LRButton.png */; };
 		26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B321F7622A00DD9D5E /* PurpleButton.png */; };
@@ -149,6 +150,8 @@
 		262B5B8922A9694E00BB3D52 /* bml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bml.h; sourceTree = "<group>"; };
 		262B5B8B22A9694F00BB3D52 /* sha256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha256.cpp; sourceTree = "<group>"; };
 		267312232272283B00687228 /* TableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewSwitchCell.m; path = Classes/TableViewSwitchCell.m; sourceTree = SOURCE_ROOT; };
+		26A6C59322AAD25300E06CB5 /* statemanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = statemanager.cpp; sourceTree = "<group>"; };
+		26A6C59422AAD25300E06CB5 /* statemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statemanager.h; sourceTree = "<group>"; };
 		26AAB78821F77DBC00E05B50 /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
 		26AAB78921F77DBC00E05B50 /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
 		26AB9AA12279189E0037C01E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -411,6 +414,8 @@
 		A00401E214BE3E4D00FE28CE /* Snes9x */ = {
 			isa = PBXGroup;
 			children = (
+				26A6C59322AAD25300E06CB5 /* statemanager.cpp */,
+				26A6C59422AAD25300E06CB5 /* statemanager.h */,
 				262B5B8822A9694E00BB3D52 /* bml.cpp */,
 				262B5B8922A9694E00BB3D52 /* bml.h */,
 				262B5B8B22A9694F00BB3D52 /* sha256.cpp */,
@@ -895,6 +900,7 @@
 				A0B8688514BE3B6800663EBE /* AppDelegate.m in Sources */,
 				A00403C114BE3E4D00FE28CE /* apu.cpp in Sources */,
 				A00403C314BE3E4D00FE28CE /* SNES_SPC.cpp in Sources */,
+				26A6C59522AAD25400E06CB5 /* statemanager.cpp in Sources */,
 				A00403C414BE3E4D00FE28CE /* SNES_SPC_misc.cpp in Sources */,
 				A00403C514BE3E4D00FE28CE /* SNES_SPC_state.cpp in Sources */,
 				A00403C614BE3E4D00FE28CE /* SPC_DSP.cpp in Sources */,
