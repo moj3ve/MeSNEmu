@@ -542,6 +542,16 @@ void S9xSetController (int port, enum controllers controller, int8 id1, int8 id2
 			newcontrollers[port] = ONE_JUSTIFIER + id1;
 			return;
 
+		case CTL_MACSRIFLE:
+			if (!Settings.MacsRifleMaster)
+			{
+				S9xMessage(S9X_CONFIG_INFO, S9X_ERROR, "Cannot select SNES M.A.C.S. Rifle: MacsRifleMaster disabled");
+				break;
+			}
+
+			newcontrollers[port] = MACSRIFLE;
+			return;
+
 		case CTL_MP5:
 			if (id1 < -1 || id1 > 7)
 				break;
@@ -637,6 +647,26 @@ bool S9xVerifyControllers (void)
 				if (used[ONE_JUSTIFIER]++ > 0)
 				{
 					snprintf(buf, sizeof(buf), "Justifier used more than once! Disabling extra instances");
+					S9xMessage(S9X_CONFIG_INFO, S9X_ERROR, buf);
+					newcontrollers[port] = NONE;
+					ret = true;
+					break;
+				}
+
+				break;
+
+			case MACSRIFLE:
+				if (!Settings.MacsRifleMaster)
+				{
+					S9xMessage(S9X_CONFIG_INFO, S9X_ERROR, "Cannot select SNES M.A.C.S. Rifle: MacsRifleMaster disabled");
+					newcontrollers[port] = NONE;
+					ret = true;
+					break;
+				}
+
+				if (used[i]++ > 0)
+				{
+					snprintf(buf, sizeof(buf), "M.A.C.S. Rifle used more than once! Disabling extra instances");
 					S9xMessage(S9X_CONFIG_INFO, S9X_ERROR, buf);
 					newcontrollers[port] = NONE;
 					ret = true;
@@ -3325,6 +3355,7 @@ void S9xSetControllerCrosshair (enum crosscontrols ctl, int8 idx, const char *fg
 		case X_SUPERSCOPE:	c = &superscope.crosshair;		break;
 		case X_JUSTIFIER1:	c = &justifier.crosshair[0];	break;
 		case X_JUSTIFIER2:	c = &justifier.crosshair[1];	break;
+		case X_MACSRIFLE:	c = &macsrifle.crosshair;		break;
 		default:
 			fprintf(stderr, "S9xSetControllerCrosshair() called with an invalid controller ID %d\n", ctl);
 			return;
@@ -3416,6 +3447,7 @@ void S9xGetControllerCrosshair (enum crosscontrols ctl, int8 *idx, const char **
 		case X_SUPERSCOPE:	c = &superscope.crosshair;		break;
 		case X_JUSTIFIER1:	c = &justifier.crosshair[0];	break;
 		case X_JUSTIFIER2:	c = &justifier.crosshair[1];	break;
+		case X_MACSRIFLE:	c = &macsrifle.crosshair;		break;
 		default:
 			fprintf(stderr, "S9xGetControllerCrosshair() called with an invalid controller ID %d\n", ctl);
 			return;
