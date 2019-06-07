@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #include <assert.h>
 #include "snes9x.h"
 #include "memmap.h"
@@ -13,6 +19,7 @@
 #include "display.h"
 #include "language.h"
 #include "gfx.h"
+#include "reader.h"
 
 #ifndef min
 #define min(a,b)	(((a) < (b)) ? (a) : (b))
@@ -242,7 +249,7 @@ static FreezeData	SnapPPU[] =
 	INT_ENTRY(6, CGFLIP),
 	INT_ENTRY(6, CGFLIPRead),
 	INT_ENTRY(6, CGADD),
-    INT_ENTRY(11, CGSavedByte),
+	INT_ENTRY(11, CGSavedByte),
 	ARRAY_ENTRY(6, CGDATA, 256, uint16_ARRAY_V),
 #define O(N) \
 	INT_ENTRY(6, OBJ[N].HPos), \
@@ -998,6 +1005,18 @@ void S9xResetSaveTimer (bool8 dontsave)
 	t = time(NULL);
 }
 
+uint32 S9xFreezeSize()
+{
+    nulStream stream;
+    return stream.size();
+}
+
+bool8 S9xFreezeGameMem (uint8 *buf, uint32 bufSize)
+{
+    memStream S9xFreezeToStream(buf, bufSize);
+    return (TRUE);
+}
+
 bool8 S9xFreezeGame (const char *filename)
 {
 	STREAM	stream = NULL;
@@ -1021,6 +1040,12 @@ bool8 S9xFreezeGame (const char *filename)
 	}
 
 	return (FALSE);
+}
+
+int S9xUnfreezeGameMem (const uint8 *buf, uint32 bufSize)
+{
+    memStream S9xUnfreezeFromStream(buf, bufSize);
+    return (TRUE);
 }
 
 bool8 S9xUnfreezeGame (const char *filename)
@@ -1240,8 +1265,8 @@ void S9xFreezeToStream (STREAM stream)
 
 int S9xUnfreezeFromStream (STREAM stream)
 {
-    const bool8 fast = Settings.FastSavestates;
-    
+	const bool8 fast = Settings.FastSavestates;
+
 	int		result = SUCCESS;
 	int		version, len;
 	char	buffer[PATH_MAX + 1];
@@ -2007,12 +2032,13 @@ static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int siz
 static int UnfreezeBlockCopy (STREAM stream, const char *name, uint8 **block, int size)
 {
 	int	result;
-    int blockLength;
-    
-    if (!CheckBlockName(stream, name, blockLength))
-    {
-        return 0;
-    }
+
+	//check name first to avoid memory allocation
+	int blockLength;
+	if (!CheckBlockName(stream, name, blockLength))
+	{
+		return 0;
+	}
 
 	*block = new uint8[size];
 

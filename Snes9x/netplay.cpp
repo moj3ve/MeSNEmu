@@ -1,15 +1,19 @@
-#ifdef NETPLAY_SUPPORT
-#ifdef _DEBUG
-	#define NP_DEBUG 1
-#endif
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
 
-#define NP_DEBUG 3 // FF-FIXME
+#ifdef NETPLAY_SUPPORT
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <memory.h>
 #include <sys/types.h>
+
+#include "snes9x.h"
+#include "controls.h"
 
 #ifdef __WIN32__
 	#include <winsock.h>
@@ -44,7 +48,6 @@
 #include <semaphore.h>
 #endif
 
-#include "snes9x.h"
 #include "memmap.h"
 #include "netplay.h"
 #include "snapshot.h"
@@ -147,7 +150,7 @@ up correctly?");
 #ifdef NP_DEBUG
     printf ("CLIENT: Trying to connect to server @%ld...\n", S9xGetMilliTime () - START);
 #endif
-    S9xNPSetAction ("Trying to connect to Snes9X server...");
+    S9xNPSetAction ("Trying to connect to Snes9x server...");
 
     if (connect (NetPlay.Socket, (struct sockaddr *) &address, sizeof (address)) < 0)
     {
@@ -160,7 +163,7 @@ up correctly?");
         {
             S9xNPSetError ("\
 Connection to remote server socket refused:\n\n\
-Is there actually a Snes9X NetPlay server running\n\
+Is there actually a Snes9x NetPlay server running\n\
 on the remote machine on this port?");
         }
         else
@@ -172,6 +175,7 @@ on the remote machine on this port?");
 		     errno
 #endif
 		     );
+            S9xNPSetError(buf);
             S9xNPDisconnect ();
         }
 	return (FALSE);
@@ -206,10 +210,10 @@ on the remote machine on this port?");
     {
         S9xNPSetError ("Sending 'HELLO' message failed.");
 	S9xNPDisconnect ();
-	delete tmp;
+	delete[] tmp;
 	return (FALSE);
     }
-    delete tmp;
+    delete[] tmp;
 
 #ifdef NP_DEBUG
     printf ("CLIENT: Waiting for 'WELCOME' reply from server @%ld...\n", S9xGetMilliTime () - START);
@@ -240,7 +244,7 @@ on the remote machine on this port?");
     if (!S9xNPGetData (NetPlay.Socket, data, len - 7))
     {
         S9xNPSetError ("Error in 'HELLO' reply packet received from server.");
-        delete data;
+        delete[] data;
 	S9xNPDisconnect ();
 	return (FALSE);
     }
@@ -248,9 +252,9 @@ on the remote machine on this port?");
     if (data [0] != NP_VERSION)
     {
         S9xNPSetError ("\
-The Snes9X NetPlay server implements a different\n\
+The Snes9x NetPlay server implements a different\n\
 version of the protocol. Disconnecting.");
-        delete data;
+        delete[] data;
 	S9xNPDisconnect ();
         return (FALSE);
     }
@@ -262,13 +266,13 @@ version of the protocol. Disconnecting.");
     {
         if (!S9xNPLoadROMDialog ((char *) data + 4 + 2))
         {
-            delete data;
+            delete[] data;
             S9xNPDisconnect ();
             return (FALSE);
         }
     }
     NetPlay.Player = data [1];
-    delete data;
+    delete[] data;
 
     NetPlay.PendingWait4Sync = TRUE;
     Settings.NetPlay = TRUE;
@@ -490,7 +494,13 @@ bool8 S9xNPWaitForHeartBeat ()
 				else
 					S9xNPSetWarning("CLIENT: Server has resumed.");
                 break;
-            case NP_SERV_LOAD_ROM:
+		case NP_SERV_JOYPAD_SWAP:
+#ifdef NP_DEBUG
+			printf("CLIENT: Joypad Swap received @%ld\n", S9xGetMilliTime() - START);
+#endif
+			S9xApplyCommand(S9xGetCommandT("SwapJoypads"), 1, 1);
+			break;
+        case NP_SERV_LOAD_ROM:
 #ifdef NP_DEBUG
                 printf ("CLIENT: LOAD_ROM received @%ld\n", S9xGetMilliTime () - START);
 #endif
@@ -547,7 +557,7 @@ bool8 S9xNPLoadROMDialog (const char *rom_name)
     printf ("CLIENT: Asking GUI thread to open ROM load dialog...\n");
 #endif
 
-    PostMessage (GUI.hWnd, WM_USER + 3, (uint32) rom_name, (uint32) rom_name);
+    PostMessage (GUI.hWnd, WM_USER + 3, (WPARAM) rom_name, (LPARAM) rom_name);
 
 #ifdef NP_DEBUG
     printf ("CLIENT: Waiting for reply from GUI thread...\n");
@@ -574,7 +584,7 @@ bool8 S9xNPLoadROM (uint32 len)
     if (!S9xNPGetData (NetPlay.Socket, data, len))
     {
         S9xNPSetError ("Error while receiving ROM name.");
-        delete data;
+        delete[] data;
         S9xNPDisconnect ();
         return (FALSE);
     }
@@ -583,11 +593,11 @@ bool8 S9xNPLoadROM (uint32 len)
     if (!S9xNPLoadROMDialog ((char *) data))
     {
         S9xNPSetError ("Disconnected from NetPlay server because you are playing a different game!");
-        delete data;
+        delete[] data;
         S9xNPDisconnect ();
         return (FALSE);
     }
-    delete data;
+    delete[] data;
     return (TRUE);
 }
 
@@ -698,7 +708,7 @@ void S9xNPGetFreezeFile (uint32 len)
     {
         S9xNPSetError ("Error while receiving freeze file from server.");
         S9xNPDisconnect ();
-        delete data;
+        delete[] data;
         return;
     }
 	S9xNPSetAction ("", TRUE);
@@ -744,7 +754,7 @@ void S9xNPGetFreezeFile (uint32 len)
         remove (fname);
     } else
         S9xNPSetError ("Unable to get name for temporary freeze file.");
-    delete data;
+    delete[] data;
 }
 
 uint32 S9xNPGetJoypad (int which1)
@@ -772,7 +782,7 @@ void S9xNPStepJoypadHistory ()
         NetPlay.JoypadReadInd = (NetPlay.JoypadReadInd + 1) % NP_JOYPAD_HIST_SIZE;
         if (NetPlay.FrameCount != NetPlay.Frame [NetPlay.JoypadReadInd])
         {
-            S9xNPSetWarning ("This Snes9X session may be out of sync with the server.");
+            S9xNPSetWarning ("This Snes9x session may be out of sync with the server.");
 #ifdef NP_DEBUG
             printf ("*** CLIENT: client out of sync with server (%d, %d) @%ld\n", NetPlay.FrameCount, NetPlay.Frame [NetPlay.JoypadReadInd], S9xGetMilliTime () - START);
 #endif

@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _NETPLAY_H_
 #define _NETPLAY_H_
 
@@ -16,7 +22,9 @@
  * joypad data  4 * n
  */
 
-//#define NP_DEBUG 1
+#ifdef _DEBUG
+#define NP_DEBUG 1
+#endif
 
 #define NP_VERSION 10
 #define NP_JOYPAD_HIST_SIZE 120
@@ -49,6 +57,8 @@
 #define NP_SERV_FREEZE_FILE 6
 #define NP_SERV_SRAM_DATA 7
 #define NP_SERV_READY 8
+// ...
+#define NP_SERV_JOYPAD_SWAP 12
 
 struct SNPClient
 {
@@ -190,6 +200,7 @@ void S9xNPServerAddTask (uint32 task, void *data);
 
 bool8 S9xNPStartServer (int port);
 void S9xNPStopServer ();
+void S9xNPSendJoypadSwap ();
 #ifdef __WIN32__
 #define S9xGetMilliTime timeGetTime
 #else
