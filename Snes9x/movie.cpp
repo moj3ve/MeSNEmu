@@ -1,3 +1,12 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
+//  Input recording/playback code
+//  (c) Copyright 2004 blip
+
 #ifndef __WIN32__
 #include <unistd.h>
 #endif
@@ -232,14 +241,14 @@ static void reset_controllers (void)
 		MovieSetJoypad(i, 0);
 
 	uint8 clearedMouse[MOUSE_DATA_SIZE];
-	ZeroMemory(clearedMouse, MOUSE_DATA_SIZE);
+	memset(clearedMouse, 0, MOUSE_DATA_SIZE);
 	clearedMouse[4] = 1;
 
 	uint8 clearedScope[SCOPE_DATA_SIZE];
-	ZeroMemory(clearedScope, SCOPE_DATA_SIZE);
+	memset(clearedScope, 0, SCOPE_DATA_SIZE);
 
 	uint8 clearedJustifier[JUSTIFIER_DATA_SIZE];
-	ZeroMemory(clearedJustifier, JUSTIFIER_DATA_SIZE);
+	memset(clearedJustifier, 0, JUSTIFIER_DATA_SIZE);
 
 	for (int p = 0; p < 2; p++)
 	{
@@ -357,8 +366,8 @@ static void flush_movie (void)
 	write_movie_header(Movie.File, &Movie);
 	fseek(Movie.File, Movie.ControllerDataOffset, SEEK_SET);
 
-	size_t	ignore;
-	ignore = fwrite(Movie.InputBuffer, 1, Movie.BytesPerSample * (Movie.MaxSample + 1), Movie.File);
+	if (!fwrite(Movie.InputBuffer, 1, Movie.BytesPerSample * (Movie.MaxSample + 1), Movie.File))
+		printf ("Movie flush failed.\n");
 }
 
 static void truncate_movie (void)
@@ -369,8 +378,8 @@ static void truncate_movie (void)
 	if (Movie.SaveStateOffset > Movie.ControllerDataOffset)
 		return;
 
-	int	ignore;
-	ignore = ftruncate(fileno(Movie.File), Movie.ControllerDataOffset + Movie.BytesPerSample * (Movie.MaxSample + 1));
+	if (ftruncate(fileno(Movie.File), Movie.ControllerDataOffset + Movie.BytesPerSample * (Movie.MaxSample + 1)))
+		printf ("Couldn't truncate file.\n");
 }
 
 static int read_movie_header (FILE *fd, SMovie *movie)
@@ -425,7 +434,7 @@ static int read_movie_extrarominfo (FILE *fd, SMovie *movie)
 
 	ptr += 3; // zero bytes
 	movie->ROMCRC32 = Read32(ptr);
-	strncpy(movie->ROMName, (char *) ptr, 23);
+	sstrncpy(movie->ROMName, (char *) ptr, 23);
 
 	return (SUCCESS);
 }
@@ -434,7 +443,7 @@ static void write_movie_header (FILE *fd, SMovie *movie)
 {
 	uint8	buf[SMV_HEADER_SIZE], *ptr = buf;
 
-	ZeroMemory(buf, sizeof(buf));
+	memset(buf, 0, sizeof(buf));
 
 	Write32(SMV_MAGIC, ptr);
 	Write32(SMV_VERSION, ptr);
@@ -456,8 +465,8 @@ static void write_movie_header (FILE *fd, SMovie *movie)
 			Write8(movie->PortIDs[p][i], ptr);
 	}
 
-	size_t	ignore;
-	ignore = fwrite(buf, 1, SMV_HEADER_SIZE, fd);
+	if (!fwrite(buf, 1, SMV_HEADER_SIZE, fd))
+		printf ("Couldn't write movie header.\n");
 }
 
 static void write_movie_extrarominfo (FILE *fd, SMovie *movie)
@@ -470,8 +479,7 @@ static void write_movie_extrarominfo (FILE *fd, SMovie *movie)
 	Write32(movie->ROMCRC32, ptr);
 	strncpy((char *) ptr, movie->ROMName, 23);
 
-	size_t	ignore;
-	ignore = fwrite(buf, 1, SMV_EXTRAROMINFO_SIZE, fd);
+	fwrite(buf, 1, SMV_EXTRAROMINFO_SIZE, fd);
 }
 
 static void change_state (MovieState new_state)
@@ -615,7 +623,9 @@ int S9xMovieOpen (const char *filename, bool8 read_only)
 	restore_movie_settings();
 
 	lseek(fn, Movie.SaveStateOffset, SEEK_SET);
-	stream = REOPEN_STREAM(fn, "rb");
+
+    // reopen stream to access as gzipped data
+    stream = REOPEN_STREAM(fn, "rb");
 	if (!stream)
 		return (FILE_NOT_FOUND);
 
@@ -628,7 +638,11 @@ int S9xMovieOpen (const char *filename, bool8 read_only)
 	else
 		result = S9xUnfreezeFromStream(stream);
 
-	CLOSE_STREAM(stream);
+    // do not close stream but close FILE *
+    // (msvcrt will try to close all open FILE *handles on exit - if we do CLOSE_STREAM here
+    //  the underlying file will be closed by zlib, causing problems when msvcrt tries to do it)
+    delete stream;
+    fclose(fd);
 
 	if (result != SUCCESS)
 		return (result);
@@ -642,15 +656,22 @@ int S9xMovieOpen (const char *filename, bool8 read_only)
 	}
 
 	if (fseek(fd, Movie.ControllerDataOffset, SEEK_SET))
+	{
+		fclose(fd);
 		return (WRONG_FORMAT);
+	}
 
 	Movie.File           = fd;
 	Movie.BytesPerSample = bytes_per_sample();
 	Movie.InputBufferPtr = Movie.InputBuffer;
 	reserve_buffer_space(Movie.BytesPerSample * (Movie.MaxSample + 1));
 
-	size_t	ignore;
-	ignore = fread(Movie.InputBufferPtr, 1, Movie.BytesPerSample * (Movie.MaxSample + 1), fd);
+	if (!fread(Movie.InputBufferPtr, 1, Movie.BytesPerSample * (Movie.MaxSample + 1), fd))
+	{
+		printf ("Failed to read from movie file.\n");
+		fclose(fd);
+		return (WRONG_FORMAT);
+	}
 
 	// read "baseline" controller data
 	if (Movie.MaxSample && Movie.MaxFrame)
@@ -714,8 +735,8 @@ int S9xMovieCreate (const char *filename, uint8 controllers_mask, uint8 opts, co
 			meta_buf[i * 2 + 1] = (uint8) ((c >> 8) & 0xff);
 		}
 
-		size_t	ignore;
-		ignore = fwrite(meta_buf, sizeof(uint16), metadata_length, fd);
+		if (!fwrite(meta_buf, sizeof(uint16), metadata_length, fd))
+			printf ("Failed writing movie metadata.\n");
 	}
 
 	Movie.ROMCRC32 = Memory.ROMCRC32;
@@ -783,14 +804,17 @@ int S9xMovieGetInfo (const char *filename, struct MovieInfo *info)
 
 	flush_movie();
 
-	ZeroMemory(info, sizeof(*info));
+	memset(info, 0, sizeof(*info));
 
 	if (!(fd = fopen(filename, "rb")))
 		return (FILE_NOT_FOUND);
 
 	result = read_movie_header(fd, &local_movie);
 	if (result != SUCCESS)
+	{
+		fclose(fd);
 		return (result);
+	}
 
 	info->TimeCreated     = (time_t) local_movie.MovieId;
 	info->Version         = local_movie.Version;
@@ -879,8 +903,8 @@ void S9xMovieUpdate (bool addFrame)
 			if (addFrame)
 				Movie.MaxFrame = ++Movie.CurrentFrame;
 
-			size_t	ignore;
-			ignore = fwrite((Movie.InputBufferPtr - Movie.BytesPerSample), 1, Movie.BytesPerSample, Movie.File);
+			if (!fwrite((Movie.InputBufferPtr - Movie.BytesPerSample), 1, Movie.BytesPerSample, Movie.File))
+				printf ("Error writing control data.\n");
 
 			break;
 		}
@@ -905,14 +929,14 @@ void S9xMovieUpdateOnReset (void)
 		Movie.MaxSample = ++Movie.CurrentSample;
 		Movie.MaxFrame = ++Movie.CurrentFrame;
 
-		size_t	ignore;
-		ignore = fwrite((Movie.InputBufferPtr - Movie.BytesPerSample), 1, Movie.BytesPerSample, Movie.File);
+		if (!fwrite((Movie.InputBufferPtr - Movie.BytesPerSample), 1, Movie.BytesPerSample, Movie.File))
+			printf ("Failed writing reset data.\n");
 	}
 }
 
 void S9xMovieInit (void)
 {
-	ZeroMemory(&Movie, sizeof(Movie));
+	memset(&Movie, 0, sizeof(Movie));
 	Movie.State = MOVIE_STATE_NONE;
 }
 

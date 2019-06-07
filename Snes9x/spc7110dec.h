@@ -15,6 +15,7 @@
  * or in connection with the use or performance of this software.
  *****/
 
+
 #ifndef _SPC7110DEC_H_
 #define _SPC7110DEC_H_
 
@@ -55,7 +56,7 @@ public:
   uint8 probability(unsigned n);
   uint8 next_lps(unsigned n);
   uint8 next_mps(unsigned n);
-  bool toggle_invert(unsigned n);
+  uint8 toggle_invert(unsigned n);
 
   unsigned morton16[2][256];
   unsigned morton32[4][256];

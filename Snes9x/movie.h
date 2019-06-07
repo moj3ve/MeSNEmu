@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 #ifndef _MOVIE_H_
 #define _MOVIE_H_
 
@@ -7,10 +13,8 @@
 #define MOVIE_OPT_NOSAVEDATA		(1 << 2)
 #define MOVIE_SYNC_DATA_EXISTS		0x01
 #define MOVIE_SYNC_OBSOLETE			0x02
-#define MOVIE_SYNC_LEFTRIGHT		0x04
 #define MOVIE_SYNC_VOLUMEENVX		0x08
 #define MOVIE_SYNC_FAKEMUTE			0x10
-#define MOVIE_SYNC_SYNCSOUND		0x20
 #define MOVIE_SYNC_HASROMINFO		0x40
 #define MOVIE_SYNC_NOCPUSHUTDOWN	0x80
 #define MOVIE_MAX_METADATA			512

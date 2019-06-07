@@ -1,3 +1,9 @@
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
+
 /*****
  * SPC7110 emulator - version 0.03 (2008-08-10)
  * Copyright (c) 2008, byuu and neviksti
@@ -14,6 +20,7 @@
  * action of contract, negligence or other tortious action, arising out of
  * or in connection with the use or performance of this software.
  *****/
+
 
 #include <limits>
 

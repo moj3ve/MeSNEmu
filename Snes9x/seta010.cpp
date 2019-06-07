@@ -159,9 +159,9 @@ static int16 ST010_Cos (int16 Theta)
 }
 
 void ST010_Compass(int16 x0, int16 y0, int16 &x1, int16 &y1, int16 &Quadrant, int16 &Theta)
-{
+{	
  	if ((x0 <= 0) && (y0 < 0))
-	{
+	{	
 		x1 = -x0;
 		y1 = -y0;
 		Quadrant = -0x8000;
@@ -256,20 +256,20 @@ static void ST010_Raster(int16 Theta)
 	{
 		data = ST010_M7Scale[i] * ST010_Cos(Theta) >> 15;
 
-		Memory.SRAM[0x00f0 + offset] = data;
+		Memory.SRAM[0x00f0 + offset] = data; 
 		Memory.SRAM[0x00f1 + offset] = data >> 8;
 
-		Memory.SRAM[0x0510 + offset] = data;
-		Memory.SRAM[0x0511 + offset] = data >> 8;
+		Memory.SRAM[0x0510 + offset] = data; 
+		Memory.SRAM[0x0511 + offset] = data >> 8; 
 		
-		data = ST010_M7Scale[i] * ST010_Sin(Theta) >> 15;
+		data = ST010_M7Scale[i] * ST010_Sin(Theta) >> 15;  
 		
-		Memory.SRAM[0x0250 + offset] = data;
+		Memory.SRAM[0x0250 + offset] = data;		
 		Memory.SRAM[0x0251 + offset] = data >> 8;
 		
 		if (data) data = ~data;
 				 
-		Memory.SRAM[0x03b0 + offset] = data;
+		Memory.SRAM[0x03b0 + offset] = data;		
 		Memory.SRAM[0x03b1 + offset] = data >> 8;
 		
 		offset += 2;

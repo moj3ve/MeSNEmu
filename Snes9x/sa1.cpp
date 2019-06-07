@@ -168,7 +168,7 @@ static void S9xSetSA1MemMap (uint32 which1, uint8 map)
 			{
 				offset = (((map & 0x80) ? (map - 4) : which1) & 7) * 0x100000 + (c << 11) - 0x8000;
 				block = Memory.ROM + Multi.cartOffsetB + offset;
-			}
+			}			
 		}
 		for (int i = c + 8; i < c + 16; i++)
 			Memory.Map[start2 + i] = SA1.Map[start2 + i] = block;
