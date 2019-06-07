@@ -216,7 +216,7 @@ static void BSX_Map_FlashIO (void)
 				BlockIsROM[i + 0x400] = BlockIsROM[i + 0xC00] = FALSE;
 			}
 		}
-	}
+	}	
 }
 
 static void BSX_Map_SRAM (void)
