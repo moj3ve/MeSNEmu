@@ -1617,17 +1617,18 @@ int S9xUnfreezeFromStream (STREAM stream)
 
 		for (int d = 0; d < 8; d++)
 			DMA[d] = dma_snap.dma[d];
+		// TODO: these should already be correct since they are stored in the snapshot
 		CPU.InDMA = CPU.InHDMA = FALSE;
 		CPU.InDMAorHDMA = CPU.InWRAMDMAorHDMA = FALSE;
 		CPU.HDMARanInDMA = 0;
 
 		S9xFixColourBrightness();
-        S9xBuildDirectColourMaps();
+		S9xBuildDirectColourMaps();
 		IPPU.ColorsChanged = TRUE;
 		IPPU.OBJChanged = TRUE;
 		IPPU.RenderThisFrame = TRUE;
-        
-        GFX.InterlaceFrame = Timings.InterlaceField;
+		
+		GFX.InterlaceFrame = Timings.InterlaceField;
 		GFX.DoInterlace = 0;
 		
 		if (Settings.FastSavestates == 0)
