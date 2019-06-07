@@ -22,7 +22,6 @@ enum s9x_getdirtype
 	CHEAT_DIR,
 	PATCH_DIR,
 	BIOS_DIR,
-    IPS_DIR,
 	LOG_DIR,
 	SAT_DIR,
 	LAST_DIR
