@@ -1370,8 +1370,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 		result = UnfreezeStructCopy(stream, "DP4", &local_dsp4, SnapDSP4, COUNT(SnapDSP4), version);
 		if (result != SUCCESS && Settings.DSP == 4)
 			break;
-
-		result = UnfreezeBlockCopy (stream, "CX4", &local_cx4_data, 8192);
+        
 		if (Settings.C4)
 		{
 			if (fast)
@@ -1407,10 +1406,6 @@ int S9xUnfreezeFromStream (STREAM stream)
 		{
 			SkipBlockWithName(stream, "OBM");
 		}
-
-		result = UnfreezeBlockCopy (stream, "OBM", &local_obc1_data, 8192);
-		if (result != SUCCESS && Settings.OBC1)
-			break;
 
 		result = UnfreezeStructCopy(stream, "S71", &local_spc7110, SnapSPC7110Snap, COUNT(SnapSPC7110Snap), version);
 		if (result != SUCCESS && Settings.SPC7110)
@@ -1903,46 +1898,46 @@ static void FreezeBlock (STREAM stream, const char *name, uint8 *block, int size
 
 static bool CheckBlockName(STREAM stream, const char *name, int &len)
 {
-    char    buffer[16];
-    len = 0;
-    
-    size_t    l = READ_STREAM(buffer, 11, stream);
-    buffer[l] = 0;
-    REVERT_STREAM(stream, FIND_STREAM(stream) - l, 0);
-    
-    if (buffer[4] == '-')
-    {
-        len = (((unsigned char)buffer[6]) << 24)
-        | (((unsigned char)buffer[7]) << 16)
-        | (((unsigned char)buffer[8]) << 8)
-        | (((unsigned char)buffer[9]) << 0);
-    }
-    else
-        len = atoi(buffer + 4);
-    
-    if (l != 11 || strncmp(buffer, name, 3) != 0 || buffer[3] != ':')
-    {
-        return false;
-    }
-    
-    if (len <= 0)
-    {
-        return false;
-    }
-    
-    return true;
+	char	buffer[16];
+	len = 0;
+
+	size_t	l = READ_STREAM(buffer, 11, stream);
+	buffer[l] = 0;
+	REVERT_STREAM(stream, FIND_STREAM(stream) - l, 0);
+
+	if (buffer[4] == '-')
+	{
+		len = (((unsigned char)buffer[6]) << 24)
+			| (((unsigned char)buffer[7]) << 16)
+			| (((unsigned char)buffer[8]) << 8)
+			| (((unsigned char)buffer[9]) << 0);
+	}
+	else
+		len = atoi(buffer + 4);
+
+	if (l != 11 || strncmp(buffer, name, 3) != 0 || buffer[3] != ':')
+	{
+		return false;
+	}
+
+	if (len <= 0)
+	{
+		return false;
+	}
+
+	return true;
 }
 
 static void SkipBlockWithName(STREAM stream, const char *name)
 {
-    int len;
-    bool matchesName = CheckBlockName(stream, name, len);
-    if (matchesName)
-    {
-        long rewind = FIND_STREAM(stream);
-        rewind += len + 11;
-        REVERT_STREAM(stream, rewind, 0);
-    }
+	int len;
+	bool matchesName = CheckBlockName(stream, name, len);
+	if (matchesName)
+	{
+		long rewind = FIND_STREAM(stream);
+		rewind += len + 11;
+		REVERT_STREAM(stream, rewind, 0);
+	}
 }
 
 static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int size)
@@ -1957,7 +1952,9 @@ static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int siz
 	if (l != 11 || strncmp(buffer, name, 3) != 0 || buffer[3] != ':')
 	{
 	err:
+#ifdef DEBUGGER
 		fprintf(stdout, "absent: %s(%d); next: '%.11s'\n", name, size, buffer);
+#endif
 		REVERT_STREAM(stream, FIND_STREAM(stream) - l, 0);
 		return (WRONG_FORMAT);
 	}
@@ -1981,7 +1978,10 @@ static int UnfreezeBlock (STREAM stream, const char *name, uint8 *block, int siz
 		len = size;
 	}
 
-	ZeroMemory(block, size);
+	if (!Settings.FastSavestates)
+	{
+		memset(block, 0, size);
+	}
 
 	if (READ_STREAM(block, len, stream) != (unsigned int) len)
 	{
