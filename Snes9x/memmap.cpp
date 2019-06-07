@@ -2503,7 +2503,7 @@ void CMemory::InitROM (void)
 	if (!Settings.BS || Settings.BSXItself) // Not BS Dump
 	{
 		ROMCRC32 = caCRC32(ROM, CalculatedSize);
-        sha256sum(ROM, CalculatedSize, ROMSHA256);
+		sha256sum(ROM, CalculatedSize, ROMSHA256);
 	}
 	else // Convert to correct format before scan
 	{
@@ -2516,7 +2516,7 @@ void CMemory::InitROM (void)
 		ROM[offset + 23] = 0x00;
 		// Calc
 		ROMCRC32 = caCRC32(ROM, CalculatedSize);
-        sha256sum(ROM, CalculatedSize, ROMSHA256);
+		sha256sum(ROM, CalculatedSize, ROMSHA256);
 		// Convert back
 		ROM[offset + 22] = BSMagic0;
 		ROM[offset + 23] = BSMagic1;

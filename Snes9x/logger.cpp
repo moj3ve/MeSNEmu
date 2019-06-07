@@ -57,7 +57,7 @@ void S9xCloseLogger (void)
 		fclose(audio);
 		audio = NULL;
 	}
-}
+}	
 
 void S9xVideoLogger (void *pixels, int width, int height, int depth, int bytes_per_line)
 {
