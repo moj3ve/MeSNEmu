@@ -9,17 +9,23 @@
 
 NSString* const kSettingsChangedNotification = @"SettingsChanged";
 
-NSString* const kSettingsBluetoothController = @"BluetoothController";
-
-NSString* const kSettingsSmoothScaling = @"SmoothScaling";
+// UI Settings
 NSString* const kSettingsFullScreen = @"FullScreen";
 NSString* const kSettingsDarkMode = @"DarkMode";
 NSString* const kSettingsRYGBButtons = @"RYGBButtons";
 
+// Emulator Settings
+NSString* const kSettingsSmoothScaling = @"SmoothScaling";
+NSString* const kSettingsShowFPS = @"ShowFPS";
+
+// Core Settings
 NSString* const kSettingsSound = @"Sound";
 NSString* const kSettingsLRThree = @"LRThree";
 NSString* const kSettingsAutoFrameskip = @"AutoFrameskip";
 NSString* const kSettingsFrameskipValue = @"FrameskipValue";
+
+// Controller Settings
+NSString* const kSettingsBluetoothController = @"BluetoothController";
 
 NSString* const kEmulatorPortName = @"MeSNEmu";
 
@@ -114,6 +120,12 @@ typedef enum _SettingsSections
 {
     _changed = YES;
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSmoothScaling];
+}
+
+- (void)toggleShowFPS:(UISwitch*)sender
+{
+    _changed = YES;
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsShowFPS];
 }
 
 // Emulator Settings End
@@ -259,12 +271,7 @@ typedef enum _SettingsSections
 
 + (void)setDefaultsIfNotDefined
 {
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsBluetoothController] == nil)
-        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_nControl forKey:kSettingsBluetoothController];
-    
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSmoothScaling] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsSmoothScaling];
-    
+    // UI Settings
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsFullScreen] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsFullScreen];
     
@@ -274,6 +281,14 @@ typedef enum _SettingsSections
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsRYGBButtons] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsRYGBButtons];
     
+    // Emulator Settings
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSmoothScaling] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsSmoothScaling];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsShowFPS] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsShowFPS];
+    
+    // Core Settings
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSound] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSound];
     
@@ -285,6 +300,10 @@ typedef enum _SettingsSections
     
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsFrameskipValue] == nil)
         [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kSettingsFrameskipValue];
+    
+    // Controller Settings
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsBluetoothController] == nil)
+        [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_nControl forKey:kSettingsBluetoothController];
 }
 
 @end
@@ -318,7 +337,7 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionEmulator)
     {
-        return 1;
+        return 2;
     }
     else if(section == SettingsSectionCore)
     {
@@ -417,6 +436,17 @@ typedef enum _SettingsSections
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSmoothScaling];
             [c.switchView addTarget:self action:@selector(toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
             c.textLabel.text = NSLocalizedString(@"SMOOTH_SCALING", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor whiteColor];
+            }
+        }
+        else if([indexPath compare:_showFPSIndexPath] == NSOrderedSame)
+        {
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
+            
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsShowFPS];
+            [c.switchView addTarget:self action:@selector(toggleShowFPS:) forControlEvents:UIControlEventValueChanged];
+            c.textLabel.text = NSLocalizedString(@"SHOW_FPS", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
             }
@@ -619,6 +649,7 @@ typedef enum _SettingsSections
         _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionUI] retain];
         
         _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
+        _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
         _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
         _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
@@ -630,6 +661,7 @@ typedef enum _SettingsSections
         _fullScreenIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionUI] retain];
         
         _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
+        _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
         _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
         _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];

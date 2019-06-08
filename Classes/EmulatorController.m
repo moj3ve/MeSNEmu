@@ -482,6 +482,7 @@ typedef enum _EmulatorAlert
 {
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
   SISetSoundOn([defaults boolForKey:kSettingsSound]);
+  SISetShowFPS([defaults boolForKey:kSettingsShowFPS]);
   if([defaults boolForKey:kSettingsSmoothScaling] == YES)
     [_customView setMinMagFilter:kCAFilterLinear];
   else

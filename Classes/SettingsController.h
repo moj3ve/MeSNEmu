@@ -6,10 +6,12 @@ extern NSString* const kSettingsChangedNotification;
 
 extern NSString* const kSettingsBluetoothController;
 
-extern NSString* const kSettingsSmoothScaling;
 extern NSString* const kSettingsFullScreen;
 extern NSString* const kSettingsDarkMode;
 extern NSString* const kSettingsRYGBButtons;
+
+extern NSString* const kSettingsSmoothScaling;
+extern NSString* const kSettingsShowFPS;
 
 extern NSString* const kSettingsSound;
 extern NSString* const kSettingsLRThree;
@@ -31,10 +33,12 @@ extern NSString* const kSettingsFrameskipValue;
   BOOL _hideSettingsThatRequireReset;
   BOOL _changed;
   
-  NSIndexPath* _smoothScalingIndexPath;
   NSIndexPath* _fullScreenIndexPath;
   NSIndexPath* _darkModeIndexPath;
   NSIndexPath* _rygbButtonsIndexPath;
+    
+  NSIndexPath* _smoothScalingIndexPath;
+  NSIndexPath* _showFPSIndexPath;
 
   NSIndexPath* _soundIndexPath;
   NSIndexPath* _lrThreeIndexPath;

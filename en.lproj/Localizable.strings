@@ -20,10 +20,11 @@
 "CORE_SETTINGS" = "Core Settings";
 "CONTROLLER_SETTINGS" = "Controller Settings";
 "CREDITS_SETTINGS" = "Credits";
-"SMOOTH_SCALING" = "Smooth Scaling";
 "FULL_SCREEN" = "Full Screen";
 "DARK_MODE_TITLE" = "Dark Mode";
 "DARK_MODE_MESSAGE" = "Dark Mode requires you to restart the app for it to fully work";
+"SMOOTH_SCALING" = "Smooth Scaling";
+"SHOW_FPS" = "Show FPS";
 "RYGB_BUTTONS" = "RYGB Buttons";
 "SOUND" = "Sound";
 "LRTHREE" = "Enable L3/R3";

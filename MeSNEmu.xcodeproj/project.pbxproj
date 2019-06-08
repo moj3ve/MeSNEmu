@@ -158,6 +158,7 @@
 		26AB9AA12279189E0037C01E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
 		26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
+		26B6C59422AC3DC500ADC916 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsController.h; path = Classes/SettingsController.h; sourceTree = SOURCE_ROOT; };
 		26B779FA22AC1D960027F221 /* msu1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msu1.h; sourceTree = "<group>"; };
 		26B779FB22AC1D960027F221 /* msu1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msu1.cpp; sourceTree = "<group>"; };
 		66C1BD5E1866ACA800E5A833 /* GameControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GameControllerManager.h; path = Classes/GameControllerManager.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -325,7 +326,6 @@
 		A027AC1814C78F3C00F177F7 /* SaveManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; name = SaveManager.mm; path = Classes/SaveManager.mm; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A027AC2D14C8456D00F177F7 /* SISaveDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SISaveDelegate.h; path = SNES9XBridge/SISaveDelegate.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A027AC2E14C8456D00F177F7 /* SISaveDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SISaveDelegate.m; path = SNES9XBridge/SISaveDelegate.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		A03C087214BF7AB2003FAEB9 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SettingsController.h; path = Classes/SettingsController.h; sourceTree = SOURCE_ROOT; };
 		A03C087314BF7AB2003FAEB9 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SettingsController.m; path = Classes/SettingsController.m; sourceTree = SOURCE_ROOT; };
 		A03C087614BF7E43003FAEB9 /* TableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TableViewSwitchCell.h; path = Classes/TableViewSwitchCell.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A03C087914BF89CC003FAEB9 /* TableViewNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TableViewNumberCell.m; path = Classes/TableViewNumberCell.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -752,7 +752,7 @@
 				A093242A17CE6A4A00A93B6B /* EmulatorController */,
 				A0B8687614BE3B6700663EBE /* ROMBrowserController.h */,
 				A0B8687514BE3B6700663EBE /* ROMBrowserController.m */,
-				A03C087214BF7AB2003FAEB9 /* SettingsController.h */,
+				26B6C59422AC3DC500ADC916 /* SettingsController.h */,
 				A03C087314BF7AB2003FAEB9 /* SettingsController.m */,
 				A093242617CE590200A93B6B /* MultipleChoicePicker.h */,
 				A093242717CE590200A93B6B /* MultipleChoicePicker.m */,

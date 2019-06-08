@@ -39,6 +39,7 @@ extern volatile int SI_AudioIsOnHold;
 int SI_SoundOn = 1;
 int SI_AutoFrameskip = 1;
 int SI_Frameskip = 0;
+int SI_ShowFPS = 0;
 
 // run management flags which are set by the UI
 volatile int SI_EmulationRun = 0;
@@ -125,6 +126,15 @@ extern "C" void SISetFrameskip(int value)
   SI_Frameskip = value;
 }
 
+extern "C" void SISetShowFPS(int value)
+{
+    if(value < 0)
+        value = 0;
+    else if(value > 1)
+        value = 1;
+    SI_ShowFPS = value;
+}
+
 #pragma mark - Run-state management
 
 extern "C" void SISetEmulationRunning(int value)
@@ -146,7 +156,6 @@ extern "C" void SISetEmulationPaused(int value)
   {
     if(value == 0)
     {
-      // we're unpausing. Reset the frameskip metrics
       SI_NextFrameTime = (timeval){0,0};
       SI_FrameTimeDebt = 0;
       SI_SleptLastFrame = 0;
@@ -229,6 +238,10 @@ extern "C" void SIUpdateSettings()
     Settings.SkipFrames = AUTO_FRAMERATE;
   else
     Settings.SkipFrames = SI_Frameskip;
+    if(SI_ShowFPS)
+        Settings.DisplayFrameRate = TRUE;
+    else
+        Settings.DisplayFrameRate = FALSE;
 }
 
 #pragma mark - Main starting point
@@ -253,7 +266,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	Settings.FrameTimePAL = 20000;
 	Settings.FrameTimeNTSC = 16667;
     Settings.FrameTime = 20000;
-    Settings.DisplayFrameRate = TRUE;
+    Settings.DisplayFrameRate = SI_ShowFPS;
 	Settings.SixteenBitSound = TRUE;
 	Settings.Stereo = TRUE;
 	Settings.SoundPlaybackRate = 32000;

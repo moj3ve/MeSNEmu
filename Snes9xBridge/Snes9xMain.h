@@ -43,6 +43,7 @@ void SISetScreen(unsigned char* screen);
 void SISetSoundOn(int value);
 void SISetAutoFrameskip(int value);
 void SISetFrameskip(int value);
+void SISetShowFPS(int value);
 
 // Run-state management
 // ====================
