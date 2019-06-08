@@ -248,7 +248,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	mkdir(SI_SRAMPath, dir_mode);
   
     // unix init
-	ZeroMemory(&Settings, sizeof(Settings));
+	memset(&Settings, 0, sizeof(Settings));
 	Settings.MouseMaster = TRUE;
 	Settings.SuperScopeMaster = TRUE;
 	Settings.JustifierMaster = TRUE;
