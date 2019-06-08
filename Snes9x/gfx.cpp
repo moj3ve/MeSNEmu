@@ -1921,7 +1921,7 @@ static void DisplayPressedKeys (void)
 				{
 					if (ids[n] != -1)
 					{
-						sprintf(string, "#%d %d:                  ", port + 1, ids[n] + 1);
+						sprintf(string, "#%d %d:                  ", port, ids[n]);
 						uint16 pad = MovieGetJoypad(ids[n]);
 						for (int i = 0; i < 15; i++)
 						{
