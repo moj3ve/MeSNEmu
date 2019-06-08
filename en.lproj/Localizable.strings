@@ -15,10 +15,11 @@
 "SAVE_FILE_SLOT_%i" = "Save %i";
 
 // SettingsController
-"APP_SETTINGS" = "App Settings";
+"UI_SETTINGS" = "UI Settings";
+"EMULATOR_SETTINGS" = "Emulator Settings";
 "CORE_SETTINGS" = "Core Settings";
 "CONTROLLER_SETTINGS" = "Controller Settings";
-"CREDITS" = "Credits";
+"CREDITS_SETTINGS" = "Credits";
 "SMOOTH_SCALING" = "Smooth Scaling";
 "FULL_SCREEN" = "Full Screen";
 "DARK_MODE_TITLE" = "Dark Mode";

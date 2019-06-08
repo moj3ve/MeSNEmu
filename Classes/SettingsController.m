@@ -25,10 +25,11 @@ NSString* const kEmulatorPortName = @"MeSNEmu";
 
 typedef enum _SettingsSections
 {
-    SettingsSectionScreen,
-    SettingsSectionEmulation,
-    SettingsSectionBluetoothController,
-    SettingsSectionAbout
+    SettingsSectionUI,
+    SettingsSectionEmulator,
+    SettingsSectionCore,
+    SettingsSectionController,
+    SettingsSectionCredits
 } SettingsSections;
 
 @interface SettingsController(Privates) <TableViewCellDelegate, MultipleChoicePickerDelegate>
@@ -45,19 +46,13 @@ typedef enum _SettingsSections
     }];
 }
 
-- (void)toggleSmoothScaling:(UISwitch*)sender
-{
-    _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSmoothScaling];
-}
+// UI Settings Start
 
 - (void)toggleFullScreen:(UISwitch*)sender
 {
     _changed = YES;
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsFullScreen];
 }
-
-// Dark Mode Switch Start
 
 - (void)toggleDarkMode:(UISwitch*)sender
 {
@@ -77,27 +72,27 @@ typedef enum _SettingsSections
     }
     
     UIAlertAction* noButton = [UIAlertAction
-                                actionWithTitle:NSLocalizedString(@"CANCEL", nil)
-                                style:UIAlertActionStyleDefault
-                                handler:^(UIAlertAction * action) {
-                                    if (sender.isOn == 0) {
-                                        _changed = YES;
-                                        [sender setOn:TRUE animated:YES];
-                                    }
-                                    else {
-                                        _changed = YES;
-                                        [sender setOn:FALSE animated:YES];
-                                    }
-                                }];
-    
-    UIAlertAction* yesButton = [UIAlertAction
-                               actionWithTitle:NSLocalizedString(@"OKAY", nil)
+                               actionWithTitle:NSLocalizedString(@"CANCEL", nil)
                                style:UIAlertActionStyleDefault
                                handler:^(UIAlertAction * action) {
-                                   _changed = YES;
-                                   [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsDarkMode];
-                                   [[NSThread mainThread] exit];
+                                   if (sender.isOn == 0) {
+                                       _changed = YES;
+                                       [sender setOn:TRUE animated:YES];
+                                   }
+                                   else {
+                                       _changed = YES;
+                                       [sender setOn:FALSE animated:YES];
+                                   }
                                }];
+    
+    UIAlertAction* yesButton = [UIAlertAction
+                                actionWithTitle:NSLocalizedString(@"OKAY", nil)
+                                style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction * action) {
+                                    _changed = YES;
+                                    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsDarkMode];
+                                    [[NSThread mainThread] exit];
+                                }];
     
     [alert addAction:noButton];
     [alert addAction:yesButton];
@@ -105,21 +100,31 @@ typedef enum _SettingsSections
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-// Dark Mode Switch End
-
 - (void)toggleRYGBButtons:(UISwitch*)sender
 {
     _changed = YES;
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsRYGBButtons];
 }
 
+// UI Settings End
+
+// Emulator Settings Start
+
+- (void)toggleSmoothScaling:(UISwitch*)sender
+{
+    _changed = YES;
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSmoothScaling];
+}
+
+// Emulator Settings End
+
+// Core Settings Start
+
 - (void)toggleSound:(UISwitch*)sender
 {
     _changed = YES;
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSound];
 }
-
-// L3/R3 Switch Start
 
 - (void)toggleLRThree:(UISwitch*)sender
 {
@@ -163,8 +168,6 @@ typedef enum _SettingsSections
     }
 }
 
-// L3/R3 Switch End
-
 - (void)toggleAutoFrameskip:(UISwitch*)sender
 {
     _changed = YES;
@@ -195,6 +198,8 @@ typedef enum _SettingsSections
         cell = [[[TableViewSwitchCell alloc] initWithReuseIdentifier:identifier] autorelease];
     return cell;
 }
+
+// Core Settings End
 
 - (UITableViewCell*)multipleChoiceCell
 {
@@ -299,27 +304,34 @@ typedef enum _SettingsSections
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    if(section == SettingsSectionBluetoothController)
-        return 1;
-    if(section == SettingsSectionScreen)
+    if(section == SettingsSectionUI)
+    {
         if(_darkModeIndexPath == nil && _rygbButtonsIndexPath == nil)
-            return 2;
+            return 1;
         else
-            return 4;
-    else if(section == SettingsSectionEmulation)
+            return 3;
+    }
+    else if(section == SettingsSectionEmulator)
+    {
+        return 1;
+    }
+    else if(section == SettingsSectionCore)
     {
         if(_soundIndexPath == nil && _lrThreeIndexPath == nil)
             return 2;
         else
             return 4;
     }
-    else if(section == SettingsSectionAbout)
+    else if(section == SettingsSectionController)
+    {
+        return 1;
+    }
+    else if(section == SettingsSectionCredits)
     {
         return 2;
     }
@@ -328,24 +340,26 @@ typedef enum _SettingsSections
 
 - (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if(section == SettingsSectionScreen)
-        return NSLocalizedString(@"APP_SETTINGS", nil);
-    else if(section == SettingsSectionEmulation)
+    if(section == SettingsSectionUI)
+        return NSLocalizedString(@"UI_SETTINGS", nil);
+    else if(section == SettingsSectionEmulator)
+        return NSLocalizedString(@"EMULATOR_SETTINGS", nil);
+    else if(section == SettingsSectionCore)
         return NSLocalizedString(@"CORE_SETTINGS", nil);
-    else if(section == SettingsSectionBluetoothController)
+    else if(section == SettingsSectionController)
         return NSLocalizedString(@"CONTROLLER_SETTINGS", nil);
-    else if(section == SettingsSectionAbout)
-        return NSLocalizedString(@"CREDITS", nil);
+    else if(section == SettingsSectionCredits)
+        return NSLocalizedString(@"CREDITS_SETTINGS", nil);
     return nil;
 }
 
 - (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
 {
-    if(section == SettingsSectionScreen)
+    if(section == SettingsSectionUI)
         return NSLocalizedString(@"DARK_MODE_MESSAGE", nil);
-    else if(section == SettingsSectionEmulation)
+    else if(section == SettingsSectionCore)
         return NSLocalizedString(@"AUTO_FRAMESKIP_MESSAGE", nil);
-    else if(section == SettingsSectionAbout)
+    else if(section == SettingsSectionCredits)
         return NSLocalizedString(@"ABOUT_MESSAGE", nil);
     return nil;
 }
@@ -358,46 +372,9 @@ typedef enum _SettingsSections
     if (darkMode == YES) {
         self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
     }
-    if(section == SettingsSectionBluetoothController)
+    if(section == SettingsSectionUI)
     {
-        if(indexPath.row == 0)
-        {
-            cell = [self multipleChoiceCell];
-            cell.textLabel.text = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
-            if (darkMode == YES) {
-                cell.textLabel.textColor = [UIColor whiteColor];
-                cell.detailTextLabel.textColor = [UIColor whiteColor];
-                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
-            }
-            NSString* controllerName = nil;
-            BTControllerType bluetoothControllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
-            
-            for(NSArray* controller in [BTControllerView supportedControllers])
-            {
-                if([[controller objectAtIndex:1] intValue] == bluetoothControllerType)
-                {
-                    controllerName = [controller objectAtIndex:0];
-                    break;
-                }
-            }
-            
-            cell.detailTextLabel.text = controllerName;
-        }
-    }
-    else if(section == SettingsSectionScreen)
-    {
-        if([indexPath compare:_smoothScalingIndexPath] == NSOrderedSame)
-        {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
-            
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSmoothScaling];
-            [c.switchView addTarget:self action:@selector(toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
-            c.textLabel.text = NSLocalizedString(@"SMOOTH_SCALING", nil);
-            if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor whiteColor];
-            }
-        }
-        else if([indexPath compare:_fullScreenIndexPath] == NSOrderedSame)
+        if([indexPath compare:_fullScreenIndexPath] == NSOrderedSame)
         {
             TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             
@@ -431,7 +408,21 @@ typedef enum _SettingsSections
             }
         }
     }
-    else if(section == SettingsSectionEmulation)
+    else if(section == SettingsSectionEmulator)
+    {
+        if([indexPath compare:_smoothScalingIndexPath] == NSOrderedSame)
+        {
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
+            
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSmoothScaling];
+            [c.switchView addTarget:self action:@selector(toggleSmoothScaling:) forControlEvents:UIControlEventValueChanged];
+            c.textLabel.text = NSLocalizedString(@"SMOOTH_SCALING", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor whiteColor];
+            }
+        }
+    }
+    else if(section == SettingsSectionCore)
     {
         if([indexPath compare:_soundIndexPath] == NSOrderedSame)
         {
@@ -479,7 +470,33 @@ typedef enum _SettingsSections
             c.delegate = self;
         }
     }
-    else if(section == SettingsSectionAbout)
+    else if(section == SettingsSectionController)
+    {
+        if(indexPath.row == 0)
+        {
+            cell = [self multipleChoiceCell];
+            cell.textLabel.text = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
+            if (darkMode == YES) {
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+            }
+            NSString* controllerName = nil;
+            BTControllerType bluetoothControllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
+            
+            for(NSArray* controller in [BTControllerView supportedControllers])
+            {
+                if([[controller objectAtIndex:1] intValue] == bluetoothControllerType)
+                {
+                    controllerName = [controller objectAtIndex:0];
+                    break;
+                }
+            }
+            
+            cell.detailTextLabel.text = controllerName;
+        }
+    }
+    else if(section == SettingsSectionCredits)
     {
         static NSString* identifier = @"AboutCell";
         cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -534,7 +551,7 @@ typedef enum _SettingsSections
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
     NSInteger section = indexPath.section;
-    if(section == SettingsSectionBluetoothController)
+    if(section == SettingsSectionController)
     {
         if(indexPath.row == 0)
         {
@@ -597,23 +614,25 @@ typedef enum _SettingsSections
     
     if(_hideSettingsThatRequireReset == NO)
     {
-        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionScreen] retain];
-        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionScreen] retain];
-        _darkModeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionScreen] retain];
-        _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionScreen] retain];
+        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionUI] retain];
+        _darkModeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionUI] retain];
+        _rygbButtonsIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionUI] retain];
         
-        _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulation] retain];
-        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulation] retain];
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionEmulation] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionEmulation] retain];
+        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
+        
+        _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
+        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionCore] retain];
     }
     else
     {
-        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionScreen] retain];
-        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionScreen] retain];
+        _fullScreenIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionUI] retain];
         
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulation] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulation] retain];
+        _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
+        
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
     }
 }
 
@@ -678,14 +697,15 @@ typedef enum _SettingsSections
 
 - (void)dealloc
 {
-    [_smoothScalingIndexPath release];
-    _smoothScalingIndexPath = nil;
     [_fullScreenIndexPath release];
     _fullScreenIndexPath = nil;
     [_darkModeIndexPath release];
     _darkModeIndexPath = nil;
     [_rygbButtonsIndexPath release];
     _rygbButtonsIndexPath = nil;
+    
+    [_smoothScalingIndexPath release];
+    _smoothScalingIndexPath = nil;
     
     [_soundIndexPath release];
     _soundIndexPath = nil;
