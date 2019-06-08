@@ -12,6 +12,7 @@
 #include "apu/blargg_endian.h"
 #include <fstream>
 #include <sys/stat.h>
+#include "reader.h"
 
 STREAM dataStream = NULL;
 STREAM audioStream = NULL;
@@ -86,7 +87,7 @@ STREAM S9xMSU1OpenFile(const char *msu_ext, bool skip_unpacked)
             if (port == UNZ_OK)
             {
                 printf(" in %s.\n", zip_filename);
-                file = new unzStream(unzFile);
+                new unzReader(unzFile);
             }
             else
                 unzClose(unzFile);

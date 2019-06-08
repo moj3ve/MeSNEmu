@@ -958,6 +958,23 @@ static FreezeData	SnapBSX[] =
 };
 
 #undef STRUCT
+#define STRUCT	struct SMSU1
+
+static FreezeData	SnapMSU1[] =
+{
+	INT_ENTRY(9, MSU1_STATUS),
+	INT_ENTRY(9, MSU1_DATA_SEEK),
+	INT_ENTRY(9, MSU1_DATA_POS),
+	INT_ENTRY(9, MSU1_TRACK_SEEK),
+	INT_ENTRY(9, MSU1_CURRENT_TRACK),
+	INT_ENTRY(9, MSU1_RESUME_TRACK),
+	INT_ENTRY(9, MSU1_VOLUME),
+	INT_ENTRY(9, MSU1_CONTROL),
+	INT_ENTRY(9, MSU1_AUDIO_POS),
+	INT_ENTRY(9, MSU1_RESUME_POS)
+};
+
+#undef STRUCT
 #define STRUCT	struct SnapshotScreenshotInfo
 
 static FreezeData	SnapScreenshot[] =
@@ -1014,7 +1031,8 @@ uint32 S9xFreezeSize()
 bool8 S9xFreezeGameMem (uint8 *buf, uint32 bufSize)
 {
     memStream S9xFreezeToStream(buf, bufSize);
-    return (TRUE);
+
+	return (TRUE);
 }
 
 bool8 S9xFreezeGame (const char *filename)
@@ -1045,7 +1063,8 @@ bool8 S9xFreezeGame (const char *filename)
 int S9xUnfreezeGameMem (const uint8 *buf, uint32 bufSize)
 {
     memStream S9xUnfreezeFromStream(buf, bufSize);
-    return (TRUE);
+
+	return (TRUE);
 }
 
 bool8 S9xUnfreezeGame (const char *filename)
@@ -1211,6 +1230,9 @@ void S9xFreezeToStream (STREAM stream)
 	if (Settings.BS)
 		FreezeStruct(stream, "BSX", &BSX, SnapBSX, COUNT(SnapBSX));
 
+	if (Settings.MSU1)
+		FreezeStruct(stream, "MSU", &MSU1, SnapMSU1, COUNT(SnapMSU1));
+
 	if (Settings.SnapshotScreenshots)
 	{
 		SnapshotScreenshotInfo	*ssi = new SnapshotScreenshotInfo;
@@ -1311,6 +1333,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 	uint8	*local_srtc          = NULL;
 	uint8	*local_rtc_data      = NULL;
 	uint8	*local_bsx_data      = NULL;
+	uint8	*local_msu1_data     = NULL;
 	uint8	*local_screenshot    = NULL;
 	uint8	*local_movie_data    = NULL;
 
@@ -1395,7 +1418,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 		result = UnfreezeStructCopy(stream, "DP4", &local_dsp4, SnapDSP4, COUNT(SnapDSP4), version);
 		if (result != SUCCESS && Settings.DSP == 4)
 			break;
-        
+
 		if (Settings.C4)
 		{
 			if (fast)
@@ -1417,8 +1440,8 @@ int S9xUnfreezeFromStream (STREAM stream)
 		result = UnfreezeStructCopy(stream, "OBC", &local_obc1, SnapOBC1, COUNT(SnapOBC1), version);
 		if (result != SUCCESS && Settings.OBC1)
 			break;
-        
-        if (Settings.OBC1)
+
+		if (Settings.OBC1)
 		{
 			if (fast)
 				result = UnfreezeBlock(stream, "OBM", Memory.OBC1RAM, 8192);
@@ -1446,6 +1469,10 @@ int S9xUnfreezeFromStream (STREAM stream)
 
 		result = UnfreezeStructCopy(stream, "BSX", &local_bsx_data, SnapBSX, COUNT(SnapBSX), version);
 		if (result != SUCCESS && Settings.BS)
+			break;
+
+		result = UnfreezeStructCopy(stream, "MSU", &local_msu1_data, SnapMSU1, COUNT(SnapMSU1), version);
+		if (result != SUCCESS && Settings.MSU1)
 			break;
 
 		result = UnfreezeStructCopy(stream, "SHO", &local_screenshot, SnapScreenshot, COUNT(SnapScreenshot), version);
@@ -1521,7 +1548,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 			memcpy(Memory.FillRAM, local_fillram, 0x8000);
 
         S9xAPULoadState(local_apu_sound);
-        
+
 		struct SControlSnapshot	ctl_snap;
 		UnfreezeStructFromCopy(&ctl_snap, SnapControls, COUNT(SnapControls), local_control_data, version);
 
@@ -1572,6 +1599,9 @@ int S9xUnfreezeFromStream (STREAM stream)
 		if (local_bsx_data)
 			UnfreezeStructFromCopy(&BSX, SnapBSX, COUNT(SnapBSX), local_bsx_data, version);
 
+		if (local_msu1_data)
+			UnfreezeStructFromCopy(&MSU1, SnapMSU1, COUNT(SnapMSU1), local_msu1_data, version);
+
 		if (version < SNAPSHOT_VERSION_IRQ)
 		{
 			printf("Converting old snapshot version %d to %d\n...", version, SNAPSHOT_VERSION);
@@ -1611,7 +1641,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 		ICPU.ShiftedDB = Registers.DB << 16;
 		S9xSetPCBase(Registers.PBPC);
 		S9xUnpackStatus();
-        if(version < SNAPSHOT_VERSION_IRQ_2018)
+		if(version < SNAPSHOT_VERSION_IRQ_2018)
 			S9xUpdateIRQPositions(false); // calculate the new trigger pos from saved PPU data
 		S9xFixCycles();
 
@@ -1630,6 +1660,8 @@ int S9xUnfreezeFromStream (STREAM stream)
 		
 		GFX.InterlaceFrame = Timings.InterlaceField;
 		GFX.DoInterlace = 0;
+
+		// S9xGraphicsScreenResize();
 		
 		if (Settings.FastSavestates == 0)
 			memset(GFX.Screen,0,GFX.Pitch * MAX_SNES_HEIGHT);
@@ -1663,6 +1695,9 @@ int S9xUnfreezeFromStream (STREAM stream)
 
 		if (local_bsx_data)
 			S9xBSXPostLoadState();
+
+		if (local_msu1_data)
+			S9xMSU1PostLoadState();
 
 		if (local_movie_data)
 		{
@@ -2224,7 +2259,7 @@ static void UnfreezeStructFromCopy (void *sbase, FreezeData *fields, int num_fie
 		{
 			relativeAddr = (int) *((pint *) ((uint8 *) base + fields[i].offset));
 			uint8	*relativeTo = (uint8 *) *((pint *) ((uint8 *) base + fields[i].offset2));
-			*((pint *) (addr)) = (long) (relativeTo + relativeAddr);
+			*((pint *) (addr)) = (pint) (relativeTo + relativeAddr);
 		}
 	}
 }

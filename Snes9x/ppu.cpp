@@ -243,7 +243,7 @@ void S9xSetPPU (uint8 Byte, uint16 Address)
 #endif
 
 	if (Settings.MSU1 && (Address & 0xfff8) == 0x2000) // MSU-1
-		S9xAPUWritePort(Address & 7, Byte);
+		S9xMSU1WritePort(Address & 7, Byte);
 	else
 	if ((Address & 0xffc0) == 0x2140) // APUIO0, APUIO1, APUIO2, APUIO3
 		// write_port will run the APU until given clock before writing value
@@ -991,7 +991,7 @@ uint8 S9xGetPPU (uint16 Address)
 {
 	// MAP_PPU: $2000-$3FFF
 	if (Settings.MSU1 && (Address & 0xfff8) == 0x2000)
-		return (S9xAPUReadPort(Address & 7));
+		return (S9xMSU1ReadPort(Address & 7));
 	else
 	if (Address < 0x2100)
 		return (OpenBus);

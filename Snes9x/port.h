@@ -90,7 +90,7 @@ typedef unsigned short		uint16;
 typedef signed int			int32;
 typedef unsigned int		uint32;
 #ifdef __GNUC__
-// long long is not part of ISO C++
+// long long is not part of ISO C++ 
 __extension__
 #endif
 typedef long long			int64;

@@ -2411,6 +2411,9 @@ void CMemory::InitROM (void)
 			break;
 	}
 
+	// MSU1
+	Settings.MSU1 = S9xMSU1ROMExists();
+
 	//// Map memory and calculate checksum
 
 	Map_Initialize();
