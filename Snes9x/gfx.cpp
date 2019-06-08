@@ -52,7 +52,6 @@ bool8 S9xGraphicsInit (void)
 	Settings.BG_Forced = 0;
 	S9xFixColourBrightness();
 
-	GFX.X2   = (uint16 *) malloc(sizeof(uint16) * 0x10000);
 	GFX.ZERO = (uint16 *) malloc(sizeof(uint16) * 0x10000);
 
 	GFX.ScreenSize = GFX.Pitch / 2 * SNES_HEIGHT_EXTENDED * (Settings.SupportHiRes ? 2 : 1);
@@ -60,36 +59,10 @@ bool8 S9xGraphicsInit (void)
 	GFX.ZBuffer    = (uint8 *)  malloc(GFX.ScreenSize);
 	GFX.SubZBuffer = (uint8 *)  malloc(GFX.ScreenSize);
 
-	if (!GFX.X2 || !GFX.ZERO || !GFX.SubScreen || !GFX.ZBuffer || !GFX.SubZBuffer)
+	if (!GFX.ZERO || !GFX.SubScreen || !GFX.ZBuffer || !GFX.SubZBuffer)
 	{
 		S9xGraphicsDeinit();
 		return (FALSE);
-	}
-
-    // Lookup table for color addition
-	memset(GFX.X2, 0, 0x10000 * sizeof(uint16));
-	for (uint32 r = 0; r <= MAX_RED; r++)
-	{
-		uint32	r2 = r << 1;
-		if (r2 > MAX_RED)
-			r2 = MAX_RED;
-
-		for (uint32 g = 0; g <= MAX_GREEN; g++)
-		{
-			uint32	g2 = g << 1;
-			if (g2 > MAX_GREEN)
-				g2 = MAX_GREEN;
-
-			for (uint32 b = 0; b <= MAX_BLUE; b++)
-			{
-				uint32	b2 = b << 1;
-				if (b2 > MAX_BLUE)
-					b2 = MAX_BLUE;
-
-				GFX.X2[BUILD_PIXEL2(r, g, b)] = BUILD_PIXEL2(r2, g2, b2);
-				GFX.X2[BUILD_PIXEL2(r, g, b) & ~ALPHA_BITS_MASK] = BUILD_PIXEL2(r2, g2, b2);
-			}
-		}
 	}
 
 	// Lookup table for 1/2 color subtraction
@@ -129,7 +102,6 @@ bool8 S9xGraphicsInit (void)
 
 void S9xGraphicsDeinit (void)
 {
-	if (GFX.X2)         { free(GFX.X2);         GFX.X2         = NULL; }
 	if (GFX.ZERO)       { free(GFX.ZERO);       GFX.ZERO       = NULL; }
 	if (GFX.SubScreen)  { free(GFX.SubScreen);  GFX.SubScreen  = NULL; }
 	if (GFX.ZBuffer)    { free(GFX.ZBuffer);    GFX.ZBuffer    = NULL; }

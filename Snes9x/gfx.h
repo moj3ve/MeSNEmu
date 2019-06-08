@@ -19,7 +19,6 @@ struct SGFX
 	uint32	ScreenSize;
 	uint16	*S;
 	uint8	*DB;
-    uint16	*X2;
 	uint16	*ZERO;
 	uint32	RealPPL;			// true PPL of Screen buffer
 	uint32	PPL;				// number of pixels on each of Screen buffer
