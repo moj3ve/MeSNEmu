@@ -16,6 +16,7 @@ extern struct SLineMatrixData	LineMatrixData[240];
 void S9xComputeClipWindows (void);
 
 static int	font_width = 8, font_height = 9;
+void (*S9xCustomDisplayString) (const char *, int, int, bool, int) = NULL;
 
 static void SetupOBJ (void);
 static void DrawOBJS (int);
@@ -1920,7 +1921,7 @@ static void DisplayPressedKeys (void)
 				{
 					if (ids[n] != -1)
 					{
-						sprintf(string, "#%d %d:                  ", port, ids[n]);
+						sprintf(string, "#%d %d:                  ", port + 1, ids[n] + 1);
 						uint16 pad = MovieGetJoypad(ids[n]);
 						for (int i = 0; i < 15; i++)
 						{
@@ -1933,6 +1934,22 @@ static void DisplayPressedKeys (void)
 					}
 				}
 
+				break;
+			}
+
+			case CTL_MACSRIFLE:
+			{
+				/*
+				uint8 buf[6], *p = buf;
+				MovieGetScope(port, buf);
+				int16 x = READ_WORD(p);
+				int16 y = READ_WORD(p + 2);
+				uint8 buttons = buf[4];
+				sprintf(string, "#%d %d: (%03d,%03d) %c%c%c%c", port, ids[0], x, y,
+						(buttons & 0x80) ? 'F' : ' ', (buttons & 0x40) ? 'C' : ' ',
+						(buttons & 0x20) ? 'T' : ' ', (buttons & 0x10) ? 'P' : ' ');
+				S9xDisplayString(string, line++, 1, false);
+				*/
 				break;
 			}
 
