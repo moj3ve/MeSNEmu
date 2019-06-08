@@ -4594,5 +4594,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 	}
 
 #ifdef UNZIP_SUPPORT
+	// Mercurial Magic (MSU-1 distribution pack)
+	if (strcasecmp(ext, "msu1") && strcasecmp(ext, ".msu1"))	// ROM was *NOT* loaded from a .msu1 pack
+	{
+		S9xMSU1OpenFile("patch.bps", TRUE);
+		printf("Using BPS patch %s.msu1", name);
+	}
 #endif
 }
