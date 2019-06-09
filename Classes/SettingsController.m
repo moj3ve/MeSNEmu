@@ -491,7 +491,7 @@ typedef enum _SettingsSections
         if([indexPath compare:_controllerIndexPath] == NSOrderedSame)
         {
             cell = [self multipleChoiceCell];
-            cell.textLabel.text = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
+            cell.textLabel.text = NSLocalizedString(@"CONTROLLER", nil);
             if (darkMode == YES) {
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
@@ -582,7 +582,7 @@ typedef enum _SettingsSections
         if(indexPath.row == 0)
         {
             MultipleChoicePicker* c = [[MultipleChoicePicker alloc] initWithStyle:UITableViewStyleGrouped];
-            c.title = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
+            c.title = NSLocalizedString(@"CONTROLLER", nil);
             
             // building the option names and values for the controllers
             NSMutableArray* optionNames = [NSMutableArray array];

@@ -1,3 +1,5 @@
+// Spanish Translation By KoukoCarlos
+
 // UIAlertController
 "NOTICE" = "Aviso";
 "CANCEL" = "Cancelar";
@@ -5,9 +7,7 @@
 "DARK_MODE_NOTICE" = "MeSNEmu ahora se cerrará para que el Modo Oscuro se encienda/apague";
 "LRTHREE_NOTICE" = "L3 y R3 solo están disponibles para iOS 12.1+";
 
-// Spanish Translation By KoukoCarlos
-
-// ROMBrowserController
+// RomBrowserController
 "ROMS" = "Juegos";
 "CARTRIDGE_FILES" = "Cartucho";
 "GAME_FILE" = "Juego";
@@ -17,27 +17,28 @@
 "SAVE_FILE_SLOT_%i" = "Salvar %i";
 
 // SettingsController
-"APP_SETTINGS" = "Configuración de la Aplicación";
-"CORE_SETTINGS" = "Configuración de Núcleo";
+"UI_SETTINGS" = "UI Settings";
+"EMULATOR_SETTINGS" = "Emulator Settings";
+"CORE_SETTINGS" = "Core Settings";
 "CONTROLLER_SETTINGS" = "Configuración del Controlador";
-"CREDITS" = "Creditos";
+"ABOUT_SETTINGS" = "About";
 "SMOOTH_SCALING" = "Escalado Suave";
 "FULL_SCREEN" = "Pantalla Completa";
 "DARK_MODE_TITLE" = "Modo Oscuro";
-"DARK_MODE_MESSAGE" = "Modo Oscuro requiere que reiniciar la aplicación para que funcione completamente";
+"SHOW_FPS" = "Show FPS";
 "RYGB_BUTTONS" = "Botones de RYBG";
 "SOUND" = "Sonido";
-"LRTHREE" = "Habilitar L3/R3";
 "AUTO_FRAMESKIP_TITLE" = "Auto Omitir Fotogramas";
-"AUTO_FRAMESKIP_MESSAGE" = "Auto Omitir Fotogramas puede aparecer más lento debido a mas inconsistente fotogramas saltos.";
 "SKIP_EVERY" = "Omitir Cada";
 "FRAMES" = "Fotogramas";
-"BLUETOOTH_CONTROLLER" = "Controlador";
+"CONTROLLER" = "Controlador";
+"LRTHREE" = "Habilitar L3/R3";
 "SETTINGS" = "Configuración";
 "ABOUT" = "Sobre";
 "CORE" = "Núcleo";
 "CORE_NAME" = "Snes9x %@";
-"ABOUT_MESSAGE" = "Desarrollador Original: Lucas Menge (2012-2015) \nDesarrollador actual: SarahH12099 (2019+) \nTraducción de inglés: SarahH12099 \nTraduccion de español: KoukoCarlos";
+"DEVELOPER" = "Developer";
+"DEVELOPER_NAME" = "Lucas M, Sarah H";
 
 // EmulatorController
 "BACK_TO_GAME" = "Volver A Juego";

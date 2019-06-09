@@ -7,7 +7,7 @@
 "DARK_MODE_NOTICE" = "MeSNEmu will now close for Dark Mode to turn on/off";
 "LRTHREE_NOTICE" = "L3 & R3 Is Only Available For iOS 12.1+";
 
-// ROMBrowserController
+// RomBrowserController
 "ROMS" = "Games";
 "CARTRIDGE_FILES" = "Cartridge";
 "GAME_FILE" = "Game";
@@ -28,11 +28,11 @@
 "SHOW_FPS" = "Show FPS";
 "RYGB_BUTTONS" = "RYGB Buttons";
 "SOUND" = "Sound";
-"LRTHREE" = "Enable L3/R3";
 "AUTO_FRAMESKIP_TITLE" = "Auto Frameskip";
 "SKIP_EVERY" = "Skip Every";
 "FRAMES" = "Frames";
-"BLUETOOTH_CONTROLLER" = "Controller";
+"CONTROLLER" = "Controller";
+"LRTHREE" = "Enable L3/R3";
 "SETTINGS" = "Settings";
 "ABOUT" = "About";
 "CORE" = "Core";
