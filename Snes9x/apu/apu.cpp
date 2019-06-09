@@ -1,20 +1,25 @@
-#include <math.h>
-#include "snes9x.h"
-#include "apu.h"
-#include "snapshot.h"
-#include "display.h"
-#include "linear_resampler.h"
-#include "hermite_resampler.h"
+/*****************************************************************************\
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator.
+                This file is licensed under the Snes9x License.
+   For further information, consult the LICENSE file in the root directory.
+\*****************************************************************************/
 
-#define APU_DEFAULT_INPUT_RATE		31920
-#define APU_SAMPLE_BLOCK            48
-#define APU_MINIMUM_SAMPLE_COUNT	512
-#define APU_MINIMUM_SAMPLE_BLOCK	128
-#define APU_NUMERATOR_NTSC			5632
-#define APU_DENOMINATOR_NTSC		118125
-#define APU_NUMERATOR_PAL			35527
-#define APU_DENOMINATOR_PAL			738343
-#define APU_DEFAULT_RESAMPLER		HermiteResampler
+#include <cmath>
+#include "../snes9x.h"
+#include "apu.h"
+#include "../msu1.h"
+#include "../snapshot.h"
+#include "../display.h"
+#include "resampler.h"
+
+static const int APU_DEFAULT_INPUT_RATE        = 31950; // ~59.94Hz
+static const int APU_SAMPLE_BLOCK              = 48;
+static const int APU_MINIMUM_SAMPLE_COUNT      = 512;
+static const int APU_MINIMUM_SAMPLE_BLOCK      = 128;
+static const int APU_NUMERATOR_NTSC            = 15664;
+static const int APU_DENOMINATOR_NTSC          = 328125;
+static const int APU_NUMERATOR_PAL             = 34176;
+static const int APU_DENOMINATOR_PAL           = 709379;
 
 SNES_SPC	*spc_core = NULL;
 
