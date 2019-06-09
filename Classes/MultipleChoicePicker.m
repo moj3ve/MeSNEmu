@@ -1,4 +1,5 @@
 #import "MultipleChoicePicker.h"
+#import "SettingsController.h"
 
 @implementation MultipleChoicePicker
 
@@ -28,18 +29,26 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  static NSString* CellIdentifier = @"Cell";
+    static NSString* CellIdentifier = @"Cell";
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
   
-  UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if(cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-  
-  cell.textLabel.text = [_optionNames objectAtIndex:indexPath.row];
-  if(indexPath.row == _pickedIndex)
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  else
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil)
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    if (darkMode == YES) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+        cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    else {
+    
+    }
+    cell.textLabel.text = [_optionNames objectAtIndex:indexPath.row];
+    if(indexPath.row == _pickedIndex)
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    else
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
   return cell;
 }
 
