@@ -19,17 +19,15 @@
 "EMULATOR_SETTINGS" = "Emulator Settings";
 "CORE_SETTINGS" = "Core Settings";
 "CONTROLLER_SETTINGS" = "Controller Settings";
-"CREDITS_SETTINGS" = "Credits";
+"ABOUT_SETTINGS" = "About";
 "FULL_SCREEN" = "Full Screen";
 "DARK_MODE_TITLE" = "Dark Mode";
-"DARK_MODE_MESSAGE" = "Dark Mode requires you to restart the app for it to fully work";
 "SMOOTH_SCALING" = "Smooth Scaling";
 "SHOW_FPS" = "Show FPS";
 "RYGB_BUTTONS" = "RYGB Buttons";
 "SOUND" = "Sound";
 "LRTHREE" = "Enable L3/R3";
 "AUTO_FRAMESKIP_TITLE" = "Auto Frameskip";
-"AUTO_FRAMESKIP_MESSAGE" = "Auto Frameskip may appear slower due to a more inconsistent skip rate";
 "SKIP_EVERY" = "Skip Every";
 "FRAMES" = "Frames";
 "BLUETOOTH_CONTROLLER" = "Controller";
@@ -37,7 +35,8 @@
 "ABOUT" = "About";
 "CORE" = "Core";
 "CORE_NAME" = "Snes9x %@";
-"ABOUT_MESSAGE" = "Original Developer: Lucas Menge (2012-2015) \nCurrent Developer: SarahH12099 (2019+) \nEnglish Translation By: SarahH12099 \nSpanish Translation By: KoukoCarlos";
+"DEVELOPER" = "Developer";
+"DEVELOPER_NAME" = "Lucas M, Sarah H";
 
 // EmulatorController
 "BACK_TO_GAME" = "Back To Game";

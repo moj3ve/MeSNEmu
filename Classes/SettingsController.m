@@ -20,12 +20,12 @@ NSString* const kSettingsShowFPS = @"ShowFPS";
 
 // Core Settings
 NSString* const kSettingsSound = @"Sound";
-NSString* const kSettingsLRThree = @"LRThree";
 NSString* const kSettingsAutoFrameskip = @"AutoFrameskip";
 NSString* const kSettingsFrameskipValue = @"FrameskipValue";
 
 // Controller Settings
 NSString* const kSettingsBluetoothController = @"BluetoothController";
+NSString* const kSettingsLRThree = @"LRThree";
 
 NSString* const kEmulatorPortName = @"MeSNEmu";
 
@@ -35,7 +35,7 @@ typedef enum _SettingsSections
     SettingsSectionEmulator,
     SettingsSectionCore,
     SettingsSectionController,
-    SettingsSectionCredits
+    SettingsSectionAbout
 } SettingsSections;
 
 @interface SettingsController(Privates) <TableViewCellDelegate, MultipleChoicePickerDelegate>
@@ -138,48 +138,6 @@ typedef enum _SettingsSections
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSound];
 }
 
-- (void)toggleLRThree:(UISwitch*)sender
-{
-    if (@available(iOS 12.1, *)) {
-        _changed = YES;
-        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsLRThree];
-    }
-    else {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
-                                     message:NSLocalizedString(@"LRTHREE_NOTICE", nil)
-                                     preferredStyle:UIAlertControllerStyleAlert];
-    
-        UIView *firstSubview = alert.view.subviews.firstObject;
-    
-        UIView *alertContentView = firstSubview.subviews.firstObject;
-        for (UIView *subSubView in alertContentView.subviews) {
-            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
-            if (darkMode == YES) {
-                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
-            }
-        }
-    
-        UIAlertAction* okayButton = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"OKAY", nil)
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action) {
-                                       if (sender.isOn == 1) {
-                                           _changed = YES;
-                                           [sender setOn:FALSE animated:YES];
-                                       }
-                                       else {
-                                           _changed = YES;
-                                           [sender setOn:FALSE animated:YES];
-                                       }
-                                   }];
-    
-        [alert addAction:okayButton];
-    
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
-
 - (void)toggleAutoFrameskip:(UISwitch*)sender
 {
     _changed = YES;
@@ -213,6 +171,8 @@ typedef enum _SettingsSections
 
 // Core Settings End
 
+// Controller Settings Start
+
 - (UITableViewCell*)multipleChoiceCell
 {
     static NSString* identifier = @"MultipleChoiceCell";
@@ -222,6 +182,50 @@ typedef enum _SettingsSections
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
+
+- (void)toggleLRThree:(UISwitch*)sender
+{
+    if (@available(iOS 12.1, *)) {
+        _changed = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsLRThree];
+    }
+    else {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
+                                     message:NSLocalizedString(@"LRTHREE_NOTICE", nil)
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIView *firstSubview = alert.view.subviews.firstObject;
+        
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
+            }
+        }
+        
+        UIAlertAction* okayButton = [UIAlertAction
+                                     actionWithTitle:NSLocalizedString(@"OKAY", nil)
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         if (sender.isOn == 1) {
+                                             _changed = YES;
+                                             [sender setOn:FALSE animated:YES];
+                                         }
+                                         else {
+                                             _changed = YES;
+                                             [sender setOn:FALSE animated:YES];
+                                         }
+                                     }];
+        
+        [alert addAction:okayButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+// Controller Settings End
 
 #pragma mark MultipleChoicePickerDelegate
 
@@ -292,9 +296,6 @@ typedef enum _SettingsSections
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSound] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSound];
     
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsLRThree] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsLRThree];
-    
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsAutoFrameskip] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsAutoFrameskip];
     
@@ -304,6 +305,9 @@ typedef enum _SettingsSections
     // Controller Settings
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsBluetoothController] == nil)
         [[NSUserDefaults standardUserDefaults] setInteger:BTControllerType_nControl forKey:kSettingsBluetoothController];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsLRThree] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsLRThree];
 }
 
 @end
@@ -341,18 +345,21 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionCore)
     {
-        if(_soundIndexPath == nil && _lrThreeIndexPath == nil)
+        if(_soundIndexPath == nil)
             return 2;
         else
-            return 4;
+            return 3;
     }
     else if(section == SettingsSectionController)
     {
-        return 1;
+         if(_lrThreeIndexPath == nil)
+             return 1;
+         else
+            return 2;
     }
-    else if(section == SettingsSectionCredits)
+    else if(section == SettingsSectionAbout)
     {
-        return 2;
+        return 3;
     }
     return 0;
 }
@@ -367,19 +374,8 @@ typedef enum _SettingsSections
         return NSLocalizedString(@"CORE_SETTINGS", nil);
     else if(section == SettingsSectionController)
         return NSLocalizedString(@"CONTROLLER_SETTINGS", nil);
-    else if(section == SettingsSectionCredits)
-        return NSLocalizedString(@"CREDITS_SETTINGS", nil);
-    return nil;
-}
-
-- (NSString*)tableView:(UITableView*)tableView titleForFooterInSection:(NSInteger)section
-{
-    if(section == SettingsSectionUI)
-        return NSLocalizedString(@"DARK_MODE_MESSAGE", nil);
-    else if(section == SettingsSectionCore)
-        return NSLocalizedString(@"AUTO_FRAMESKIP_MESSAGE", nil);
-    else if(section == SettingsSectionCredits)
-        return NSLocalizedString(@"ABOUT_MESSAGE", nil);
+    else if(section == SettingsSectionAbout)
+        return NSLocalizedString(@"ABOUT_SETTINGS", nil);
     return nil;
 }
 
@@ -464,16 +460,6 @@ typedef enum _SettingsSections
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSound];
             [c.switchView addTarget:self action:@selector(toggleSound:) forControlEvents:UIControlEventValueChanged];
         }
-        else if([indexPath compare:_lrThreeIndexPath] == NSOrderedSame)
-        {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
-            c.textLabel.text = NSLocalizedString(@"LRTHREE", nil);
-            if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor whiteColor];
-            }
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLRThree];
-            [c.switchView addTarget:self action:@selector(toggleLRThree:) forControlEvents:UIControlEventValueChanged];
-        }
         else if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
         {
             TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
@@ -502,7 +488,7 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionController)
     {
-        if(indexPath.row == 0)
+        if([indexPath compare:_controllerIndexPath] == NSOrderedSame)
         {
             cell = [self multipleChoiceCell];
             cell.textLabel.text = NSLocalizedString(@"BLUETOOTH_CONTROLLER", nil);
@@ -525,8 +511,18 @@ typedef enum _SettingsSections
             
             cell.detailTextLabel.text = controllerName;
         }
+        else if([indexPath compare:_lrThreeIndexPath] == NSOrderedSame)
+        {
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
+            c.textLabel.text = NSLocalizedString(@"LRTHREE", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor whiteColor];
+            }
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsLRThree];
+            [c.switchView addTarget:self action:@selector(toggleLRThree:) forControlEvents:UIControlEventValueChanged];
+        }
     }
-    else if(section == SettingsSectionCredits)
+    else if(section == SettingsSectionAbout)
     {
         static NSString* identifier = @"AboutCell";
         cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
@@ -652,9 +648,11 @@ typedef enum _SettingsSections
         _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
         _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
-        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionCore] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
+        
+        _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
+        _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionController] retain];
     }
     else
     {
@@ -665,6 +663,8 @@ typedef enum _SettingsSections
         
         _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
         _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        
+        _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
     }
 }
 

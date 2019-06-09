@@ -41,9 +41,11 @@ extern NSString* const kSettingsFrameskipValue;
   NSIndexPath* _showFPSIndexPath;
 
   NSIndexPath* _soundIndexPath;
-  NSIndexPath* _lrThreeIndexPath;
   NSIndexPath* _autoFrameskipIndexPath;
   NSIndexPath* _frameskipValueIndexPath;
+    
+  NSIndexPath* _controllerIndexPath;
+  NSIndexPath* _lrThreeIndexPath;
   
   id<SettingsControllerDelegate> _delegate;
 }
