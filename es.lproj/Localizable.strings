@@ -5,6 +5,8 @@
 "DARK_MODE_NOTICE" = "MeSNEmu ahora se cerrará para que el Modo Oscuro se encienda/apague";
 "LRTHREE_NOTICE" = "L3 y R3 solo están disponibles para iOS 12.1+";
 
+// Spanish Translation By KoukoCarlos
+
 // ROMBrowserController
 "ROMS" = "Juegos";
 "CARTRIDGE_FILES" = "Cartucho";

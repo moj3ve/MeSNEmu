@@ -1,4 +1,4 @@
-#import "ROMBrowserController.h"
+#import "RomBrowserController.h"
 
 #import "../Snes9xBridge/Snes9xMain.h"
 
@@ -59,13 +59,13 @@ static int const FileOrganizationVersionNumber = 1;
 
 #pragma mark -
 
-@interface ROMBrowserController(Privates) <UISearchDisplayDelegate>
+@interface RomBrowserController(Privates) <UISearchDisplayDelegate>
 
 @end
 
 #pragma mark -
 
-@implementation ROMBrowserController(Privates)
+@implementation RomBrowserController(Privates)
 
 - (void)moveLegacyFilesToDocumentsFolder
 {
@@ -401,7 +401,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 #pragma mark -
 
-@implementation ROMBrowserController
+@implementation RomBrowserController
 
 @synthesize detailsItem = _detailsItem;
 
@@ -409,7 +409,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 #pragma mark -
 
-@implementation ROMBrowserController(UITableViewController)
+@implementation RomBrowserController(UITableViewController)
 
 - (NSArray*)sectionIndexTitlesForTableView:(UITableView*)tableView
 {
@@ -520,7 +520,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 - (void)tableView:(UITableView*)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath*)indexPath
 {
-  ROMBrowserController* detailsBrowser = [[ROMBrowserController alloc] initWithStyle:UITableViewStyleGrouped];
+  RomBrowserController* detailsBrowser = [[RomBrowserController alloc] initWithStyle:UITableViewStyleGrouped];
   FileListItem* item = [self romItemForTableView:tableView indexPath:indexPath];
   detailsBrowser.detailsItem = item;
   [self.navigationController pushViewController:detailsBrowser animated:YES];
@@ -558,7 +558,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 #pragma mark -
 
-@implementation ROMBrowserController(UIViewController)
+@implementation RomBrowserController(UIViewController)
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -688,7 +688,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 #pragma mark -
 
-@implementation ROMBrowserController(NSObject)
+@implementation RomBrowserController(NSObject)
 
 - (void)dealloc
 {

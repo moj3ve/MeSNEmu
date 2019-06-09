@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 
-#import "ROMBrowserController.h"
+#import "RomBrowserController.h"
 
 @implementation AppDelegate
 
@@ -22,7 +22,7 @@
   
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.frame = [[UIScreen mainScreen] bounds];
-    ROMBrowserController* romBrowser = [[ROMBrowserController alloc] init];
+    RomBrowserController* romBrowser = [[RomBrowserController alloc] init];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:romBrowser];
     self.viewController = nav;
     [nav release];

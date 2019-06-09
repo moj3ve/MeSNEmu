@@ -113,7 +113,7 @@
 		A0B8687E14BE3B6800663EBE /* DPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686E14BE3B6600663EBE /* DPadView.m */; };
 		A0B8687F14BE3B6800663EBE /* EmulatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686F14BE3B6600663EBE /* EmulatorController.m */; };
 		A0B8688014BE3B6800663EBE /* ButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687014BE3B6600663EBE /* ButtonView.m */; };
-		A0B8688214BE3B6800663EBE /* ROMBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687514BE3B6700663EBE /* ROMBrowserController.m */; };
+		A0B8688214BE3B6800663EBE /* RomBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687514BE3B6700663EBE /* RomBrowserController.m */; };
 		A0B8688314BE3B6800663EBE /* PixelView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687714BE3B6700663EBE /* PixelView.m */; };
 		A0B8688414BE3B6800663EBE /* PixelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687914BE3B6700663EBE /* PixelLayer.m */; };
 		A0B8688514BE3B6800663EBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687C14BE3B6800663EBE /* AppDelegate.m */; };
@@ -359,8 +359,8 @@
 		A0B8687014BE3B6600663EBE /* ButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ButtonView.m; path = Classes/ButtonView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8687114BE3B6600663EBE /* ButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ButtonView.h; path = Classes/ButtonView.h; sourceTree = SOURCE_ROOT; };
 		A0B8687214BE3B6600663EBE /* EmulatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = EmulatorController.h; path = Classes/EmulatorController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		A0B8687514BE3B6700663EBE /* ROMBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ROMBrowserController.m; path = Classes/ROMBrowserController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		A0B8687614BE3B6700663EBE /* ROMBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ROMBrowserController.h; path = Classes/ROMBrowserController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A0B8687514BE3B6700663EBE /* RomBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = RomBrowserController.m; path = Classes/RomBrowserController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A0B8687614BE3B6700663EBE /* RomBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = RomBrowserController.h; path = Classes/RomBrowserController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A0B8687714BE3B6700663EBE /* PixelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = PixelView.m; path = Classes/PixelView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8687814BE3B6700663EBE /* PixelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = PixelView.h; path = Classes/PixelView.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A0B8687914BE3B6700663EBE /* PixelLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = PixelLayer.m; path = Classes/PixelLayer.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -750,8 +750,8 @@
 			isa = PBXGroup;
 			children = (
 				A093242A17CE6A4A00A93B6B /* EmulatorController */,
-				A0B8687614BE3B6700663EBE /* ROMBrowserController.h */,
-				A0B8687514BE3B6700663EBE /* ROMBrowserController.m */,
+				A0B8687614BE3B6700663EBE /* RomBrowserController.h */,
+				A0B8687514BE3B6700663EBE /* RomBrowserController.m */,
 				26B6C59422AC3DC500ADC916 /* SettingsController.h */,
 				A03C087314BF7AB2003FAEB9 /* SettingsController.m */,
 				A093242617CE590200A93B6B /* MultipleChoicePicker.h */,
@@ -899,7 +899,7 @@
 				A0B8687E14BE3B6800663EBE /* DPadView.m in Sources */,
 				A0B8687F14BE3B6800663EBE /* EmulatorController.m in Sources */,
 				A0B8688014BE3B6800663EBE /* ButtonView.m in Sources */,
-				A0B8688214BE3B6800663EBE /* ROMBrowserController.m in Sources */,
+				A0B8688214BE3B6800663EBE /* RomBrowserController.m in Sources */,
 				A0B8688314BE3B6800663EBE /* PixelView.m in Sources */,
 				A0B8688414BE3B6800663EBE /* PixelLayer.m in Sources */,
 				A0B8688514BE3B6800663EBE /* AppDelegate.m in Sources */,

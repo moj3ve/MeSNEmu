@@ -2,7 +2,7 @@
 
 @class FileListItem;
 
-@interface ROMBrowserController : UITableViewController
+@interface RomBrowserController : UITableViewController
 {
   FileListItem* _detailsItem;
   NSString* _romPath;
