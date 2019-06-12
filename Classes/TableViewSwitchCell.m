@@ -29,7 +29,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     if (darkMode == YES) {
-        self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+        self.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
     }
   }
   return _switch;
@@ -51,7 +51,7 @@
 {
   BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
   if (darkMode == YES) {
-    self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+    self.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
   }
   self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
   if (self)

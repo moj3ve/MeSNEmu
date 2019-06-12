@@ -385,7 +385,7 @@ typedef enum _SettingsSections
     BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     NSInteger section = indexPath.section;
     if (darkMode == YES) {
-        self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+        self.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
     }
     if(section == SettingsSectionUI)
     {
@@ -476,7 +476,7 @@ typedef enum _SettingsSections
             c.textLabel.text = NSLocalizedString(@"SKIP_EVERY", nil);
             if (darkMode == YES) {
                 c.textLabel.textColor = [UIColor whiteColor];
-                c.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+                c.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }
             c.minimumValue = 0;
             c.maximumValue = 9;
@@ -495,7 +495,7 @@ typedef enum _SettingsSections
             if (darkMode == YES) {
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
-                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }
             NSString* controllerName = nil;
             BTControllerType bluetoothControllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
