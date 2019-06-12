@@ -40,8 +40,6 @@ static int const FileOrganizationVersionNumber = 1;
      && ([lowerCaseExtension compare:@"smc"] == NSOrderedSame
          || [lowerCaseExtension compare:@"sfc"] == NSOrderedSame
          || [lowerCaseExtension compare:@"fig"] == NSOrderedSame
-         // || [lowerCaseExtension compare:@"swc"] == NSOrderedSame  // Testing (Unstable/Beta)
-         // || [lowerCaseExtension compare:@"bs"] == NSOrderedSame  // Testing (Unstable/Beta)
          || [lowerCaseExtension compare:@"zip"] == NSOrderedSame))
     return YES;
   return NO;

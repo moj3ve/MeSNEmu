@@ -386,6 +386,7 @@ typedef enum _SettingsSections
     NSInteger section = indexPath.section;
     if (darkMode == YES) {
         self.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+        tableView.separatorColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
     }
     if(section == SettingsSectionUI)
     {
@@ -537,7 +538,7 @@ typedef enum _SettingsSections
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
-                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }
             NSString* versionString = [NSString stringWithFormat:@"(%s)", __DATE__];
             NSString* bundleName = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString*)kCFBundleNameKey];
@@ -555,7 +556,7 @@ typedef enum _SettingsSections
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
-                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"CORE_NAME", nil), [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
         }
@@ -565,7 +566,7 @@ typedef enum _SettingsSections
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
-                cell.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }
             cell.detailTextLabel.text = NSLocalizedString(@"DEVELOPER_NAME", nil);
         }
