@@ -633,7 +633,7 @@ typedef enum _SettingsSections
     if (darkMode == YES) {
         [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0]];
         [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
     }
     self.navigationItem.rightBarButtonItem = doneButton;

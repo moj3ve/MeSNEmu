@@ -265,7 +265,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.MacsRifleMaster = TRUE;
 	Settings.FrameTimePAL = 20000;
 	Settings.FrameTimeNTSC = 16667;
-    Settings.FrameTime = 20000;
     Settings.DisplayFrameRate = SI_ShowFPS;
 	Settings.SixteenBitSound = TRUE;
 	Settings.Stereo = TRUE;

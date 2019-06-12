@@ -345,7 +345,7 @@
     {
         // portrait
         if (darkMode == YES) {
-            self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:1.0];
+            self.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
         }
         else {
             self.backgroundColor = plasticColor;
@@ -443,7 +443,7 @@
             {
                 // landscape - 1:1
                 if (darkMode == YES) {
-                    self.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:1.0];
+                    self.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
                 }
                 else {
                     self.backgroundColor = plasticColor;
