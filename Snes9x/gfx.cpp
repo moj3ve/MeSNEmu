@@ -149,7 +149,7 @@ void S9xGraphicsScreenResize (void)
 		GFX.PPL = GFX.RealPPL;
 		IPPU.DoubleHeightPixels = FALSE;
 		IPPU.RenderedScreenHeight = PPU.ScreenHeight;
-	}
+	}	
 }
 
 void S9xBuildDirectColourMaps (void)
@@ -683,8 +683,14 @@ static void SetupOBJ (void)
 	else // evil FirstSprite+Y case
 	{
 		// First, find out which sprites are on which lines
-		uint8	OBJOnLine[SNES_HEIGHT_EXTENDED][128];
-		memset(OBJOnLine, 0, sizeof(OBJOnLine));
+		uint8 OBJOnLine[SNES_HEIGHT_EXTENDED][128];
+		// memset(OBJOnLine, 0, sizeof(OBJOnLine));
+		/* Hold on here, that's a lot of bytes to initialise at once!
+		 * So we only initialise them per line, as needed. [Neb]
+		 * Bonus: We can quickly avoid looping if a line has no OBJs.
+		 */
+        bool8 AnyOBJOnLine[SNES_HEIGHT_EXTENDED];
+        memset(AnyOBJOnLine, FALSE, sizeof(AnyOBJOnLine)); // better
 
 		for (S = 0; S < 128; S++)
 		{
@@ -718,6 +724,11 @@ static void SetupOBJ (void)
 					if (Y >= SNES_HEIGHT_EXTENDED)
 						continue;
 
+					if (!AnyOBJOnLine[Y]) {
+						memset(OBJOnLine[Y], 0, sizeof(OBJOnLine[Y]));
+						AnyOBJOnLine[Y] = TRUE;
+					}
+
 					if (PPU.OBJ[S].VFlip)
 						// Yes, Width not Height. It so happens that the
 						// sprites with H=2*W flip as two WxW sprites.
@@ -733,31 +744,34 @@ static void SetupOBJ (void)
 		for (int Y = 0; Y < SNES_HEIGHT_EXTENDED; Y++)
 		{
 			GFX.OBJLines[Y].RTOFlags = Y ? GFX.OBJLines[Y - 1].RTOFlags : 0;
-			GFX.OBJLines[Y].Tiles = 34;
+			GFX.OBJLines[Y].Tiles = Settings.MaxSpriteTilesPerLine;
 
 			uint8	FirstSprite = (PPU.FirstSprite + Y) & 0x7f;
 			S = FirstSprite;
 			j = 0;
 
-			do
+			if (AnyOBJOnLine[Y])
 			{
-				if (OBJOnLine[Y][S])
+				do
 				{
-					if (j >= 32)
+					if (OBJOnLine[Y][S])
 					{
-						GFX.OBJLines[Y].RTOFlags |= 0x40;
-						break;
+						if (j >= 32)
+						{
+							GFX.OBJLines[Y].RTOFlags |= 0x40;
+							break;
+						}
+
+						GFX.OBJLines[Y].Tiles -= GFX.OBJVisibleTiles[S];
+						if (GFX.OBJLines[Y].Tiles < 0)
+							GFX.OBJLines[Y].RTOFlags |= 0x80;
+						GFX.OBJLines[Y].OBJ[j].Sprite = S;
+						GFX.OBJLines[Y].OBJ[j++].Line = OBJOnLine[Y][S] & ~0x80;
 					}
 
-					GFX.OBJLines[Y].Tiles -= GFX.OBJVisibleTiles[S];
-					if (GFX.OBJLines[Y].Tiles < 0)
-						GFX.OBJLines[Y].RTOFlags |= 0x80;
-					GFX.OBJLines[Y].OBJ[j].Sprite = S;
-					GFX.OBJLines[Y].OBJ[j++].Line = OBJOnLine[Y][S] & ~0x80;
-				}
-
-				S = (S + 1) & 0x7f;
-			} while (S != FirstSprite);
+					S = (S + 1) & 0x7f;
+				} while (S != FirstSprite);
+			}
 
 			if (j < 32)
 				GFX.OBJLines[Y].OBJ[j].Sprite = -1;
@@ -767,6 +781,10 @@ static void SetupOBJ (void)
 	IPPU.OBJChanged = FALSE;
 }
 
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC push_options
+#pragma GCC optimize ("no-tree-vrp")
+#endif
 static void DrawOBJS (int D)
 {
 	void (*DrawTile) (uint32, uint32, uint32, uint32) = NULL;
@@ -859,6 +877,9 @@ static void DrawOBJS (int D)
 		}
 	}
 }
+#if defined(__GNUC__) && !defined(__clang__)
+#pragma GCC pop_options
+#endif
 
 static void DrawBackground (int bg, uint8 Zh, uint8 Zl)
 {
@@ -1117,8 +1138,8 @@ static void DrawBackgroundMosaic (int bg, uint8 Zh, uint8 Zl)
 		for (uint32 Y = GFX.StartY - MosaicStart; Y <= GFX.EndY; Y += PPU.Mosaic)
 		{
 			uint32	Y2 = HiresInterlace ? Y * 2 : Y;
-			uint32	VOffset = LineData[Y].BG[bg].VOffset + (HiresInterlace ? 1 : 0);
-			uint32	HOffset = LineData[Y].BG[bg].HOffset;
+			uint32	VOffset = LineData[Y + MosaicStart].BG[bg].VOffset + (HiresInterlace ? 1 : 0);
+			uint32	HOffset = LineData[Y + MosaicStart].BG[bg].HOffset;
 
 			Lines = PPU.Mosaic - MosaicStart;
 			if (Y + MosaicStart + Lines > GFX.EndY)
@@ -1281,7 +1302,6 @@ static void DrawBackgroundOffset (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 	int	PixWidth = IPPU.DoubleWidthPixels ? 2 : 1;
 	bool8	HiresInterlace = IPPU.Interlace && IPPU.DoubleWidthPixels;
 
-	void (*DrawTile) (uint32, uint32, uint32, uint32);
 	void (*DrawClippedTile) (uint32, uint32, uint32, uint32, uint32, uint32);
 
 	for (int clip = 0; clip < GFX.Clip[bg].Count; clip++)
@@ -1290,12 +1310,10 @@ static void DrawBackgroundOffset (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 
 		if (BG.EnableMath && (GFX.Clip[bg].DrawMode[clip] & 2))
 		{
-			DrawTile = GFX.DrawTileMath;
 			DrawClippedTile = GFX.DrawClippedTileMath;
 		}
 		else
 		{
-			DrawTile = GFX.DrawTileNomath;
 			DrawClippedTile = GFX.DrawClippedTileNomath;
 		}
 
@@ -1327,8 +1345,8 @@ static void DrawBackgroundOffset (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 			uint32	Left  = GFX.Clip[bg].Left[clip];
 			uint32	Right = GFX.Clip[bg].Right[clip];
 			uint32	Offset = Left * PixWidth + Y * GFX.PPL;
-			uint32	LineHOffset = LineData[Y].BG[bg].HOffset;
-			bool8	left_edge = (Left < (8 - (LineHOffset & 7)));
+			uint32	HScroll = LineData[Y].BG[bg].HOffset;
+			bool8	left_edge = (Left < (8 - (HScroll & 7)));
 			uint32	Width = Right - Left;
 
 			while (Left < Right)
@@ -1339,12 +1357,12 @@ static void DrawBackgroundOffset (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 				{
 					// SNES cannot do OPT for leftmost tile column
 					VOffset = LineData[Y].BG[bg].VOffset;
-					HOffset = LineHOffset;
+					HOffset = HScroll;
 					left_edge = FALSE;
 				}
 				else
 				{
-					int	HOffTile = ((HOff + Left - 1) & Offset2Mask) >> 3;
+					int HOffTile = ((HOff + Left - 1) & Offset2Mask) >> 3;
 
 					if (BG.OffsetSizeH == 8)
 					{
@@ -1383,9 +1401,9 @@ static void DrawBackgroundOffset (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 						VOffset = LineData[Y].BG[bg].VOffset;
 
 					if (HCellOffset & OffsetEnableMask)
-						HOffset = (HCellOffset & ~7) | (LineHOffset & 7);
+						HOffset = (HCellOffset & ~7) | (HScroll & 7);
 					else
-						HOffset = LineHOffset;
+						HOffset = HScroll;
 				}
 
 				if (HiresInterlace)
@@ -1507,7 +1525,6 @@ static void DrawBackgroundOffsetMosaic (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 	int	Lines;
 	int	OffsetMask   = (BG.TileSizeH   == 16) ? 0x3ff : 0x1ff;
 	int	OffsetShift  = (BG.TileSizeV   == 16) ? 4 : 3;
-	int	Offset2Mask  = (BG.OffsetSizeH == 16) ? 0x3ff : 0x1ff;
 	int	Offset2Shift = (BG.OffsetSizeV == 16) ? 4 : 3;
 	int	OffsetEnableMask = 0x2000 << bg;
 	int	PixWidth = IPPU.DoubleWidthPixels ? 2 : 1;
@@ -1529,8 +1546,8 @@ static void DrawBackgroundOffsetMosaic (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 		for (uint32 Y = GFX.StartY - MosaicStart; Y <= GFX.EndY; Y += PPU.Mosaic)
 		{
 			uint32	Y2 = HiresInterlace ? Y * 2 : Y;
-			uint32	VOff = LineData[Y].BG[2].VOffset - 1;
-			uint32	HOff = LineData[Y].BG[2].HOffset;
+			uint32	VOff = LineData[Y + MosaicStart].BG[2].VOffset - 1;
+			uint32	HOff = LineData[Y + MosaicStart].BG[2].HOffset;
 
 			Lines = PPU.Mosaic - MosaicStart;
 			if (Y + MosaicStart + Lines > GFX.EndY)
@@ -1559,24 +1576,22 @@ static void DrawBackgroundOffsetMosaic (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 			uint32	Left =  GFX.Clip[bg].Left[clip];
 			uint32	Right = GFX.Clip[bg].Right[clip];
 			uint32	Offset = Left * PixWidth + (Y + MosaicStart) * GFX.PPL;
-			uint32	LineHOffset = LineData[Y].BG[bg].HOffset;
-			bool8	left_edge = (Left < (8 - (LineHOffset & 7)));
+			uint32	HScroll = LineData[Y + MosaicStart].BG[bg].HOffset;
 			uint32	Width = Right - Left;
 
 			while (Left < Right)
 			{
 				uint32	VOffset, HOffset;
 
-				if (left_edge)
+				if (Left < (8 - (HScroll & 7)))
 				{
 					// SNES cannot do OPT for leftmost tile column
-					VOffset = LineData[Y].BG[bg].VOffset;
-					HOffset = LineHOffset;
-					left_edge = FALSE;
+					VOffset = LineData[Y + MosaicStart].BG[bg].VOffset;
+					HOffset = HScroll;
 				}
 				else
 				{
-					int	HOffTile = ((HOff + Left - 1) & Offset2Mask) >> 3;
+					int HOffTile = (((Left + (HScroll & 7)) - 8) + (HOff & ~7)) >> 3;
 
 					if (BG.OffsetSizeH == 8)
 					{
@@ -1612,12 +1627,12 @@ static void DrawBackgroundOffsetMosaic (int bg, uint8 Zh, uint8 Zl, int VOffOff)
 					if (VCellOffset & OffsetEnableMask)
 						VOffset = VCellOffset + 1;
 					else
-						VOffset = LineData[Y].BG[bg].VOffset;
+						VOffset = LineData[Y + MosaicStart].BG[bg].VOffset;
 
 					if (HCellOffset & OffsetEnableMask)
-						HOffset = (HCellOffset & ~7) | (LineHOffset & 7);
+						HOffset = (HCellOffset & ~7) | (HScroll & 7);
 					else
-						HOffset = LineHOffset;
+						HOffset = HScroll;
 				}
 
 				if (HiresInterlace)
@@ -1775,6 +1790,12 @@ void S9xDisplayChar (uint16 *s, uint8 c)
 
 static void DisplayStringFromBottom (const char *string, int linesFromBottom, int pixelsFromLeft, bool allowWrap)
 {
+	if (S9xCustomDisplayString)
+	{
+		S9xCustomDisplayString (string, linesFromBottom, pixelsFromLeft, allowWrap, S9X_NO_INFO);
+		return;
+	}
+
 	if (linesFromBottom <= 0)
 		linesFromBottom = 1;
 
@@ -1804,6 +1825,17 @@ static void DisplayStringFromBottom (const char *string, int linesFromBottom, in
 		S9xDisplayChar(dst, string[i]);
 		dst += font_width - 1;
 	}
+}
+
+static void S9xDisplayStringType (const char *string, int linesFromBottom, int pixelsFromLeft, bool allowWrap, int type)
+{
+    if (S9xCustomDisplayString)
+    {
+            S9xCustomDisplayString (string, linesFromBottom, pixelsFromLeft, allowWrap, type);
+            return;
+    }
+
+    S9xDisplayString (string, linesFromBottom, pixelsFromLeft, allowWrap);
 }
 
 static void DisplayFrameRate (void)
@@ -1836,11 +1868,11 @@ static void DisplayFrameRate (void)
 
 static void DisplayPressedKeys (void)
 {
-	static char	KeyMap[]   = { '0', '1', '2', 'R', 'L', 'X', 'A', '>', '<', 'v', '^', 'S', 's', 'Y', 'B' };
-	static int	KeyOrder[] = { 8, 10, 7, 9, 0, 6, 14, 13, 5, 1, 4, 3, 2, 11, 12 }; // < ^ > v   A B Y X  L R  S s
+	static unsigned char	KeyMap[]   = { '0', '1', '2', 'R', 'L', 'X', 'A', 225, 224, 227, 226, 'S', 's', 'Y', 'B' };
+	static int		KeyOrder[] = { 8, 10, 7, 9, 0, 6, 14, 13, 5, 1, 4, 3, 2, 11, 12 }; // < ^ > v   A B Y X  L R  S s
 
 	enum controllers	controller;
-	int					line = 1;
+    int					line = Settings.DisplayMovieFrame && S9xMovieActive() ? 2 : 1;
 	int8				ids[4];
 	char				string[255];
 
@@ -1852,52 +1884,55 @@ static void DisplayPressedKeys (void)
 		{
 			case CTL_MOUSE:
 			{
-				uint8 buf[5], *p = buf;
-				MovieGetMouse(port, buf);
-				int16 x = READ_WORD(p);
-				int16 y = READ_WORD(p + 2);
+				uint8 buf[5];
+				if (!MovieGetMouse(port, buf))
+					break;
+				int16 x = READ_WORD(buf);
+				int16 y = READ_WORD(buf + 2);
 				uint8 buttons = buf[4];
-				sprintf(string, "#%d %d: (%03d,%03d) %c%c", port, ids[0], x, y,
+				sprintf(string, "#%d %d: (%03d,%03d) %c%c", port + 1, ids[0] + 1, x, y,
 						(buttons & 0x40) ? 'L' : ' ', (buttons & 0x80) ? 'R' : ' ');
-				S9xDisplayString(string, line++, 1, false);
+				S9xDisplayStringType(string, line++, 1, false, S9X_PRESSED_KEYS_INFO);
 				break;
 			}
 
 			case CTL_SUPERSCOPE:
 			{
-				uint8 buf[6], *p = buf;
-				MovieGetScope(port, buf);
-				int16 x = READ_WORD(p);
-				int16 y = READ_WORD(p + 2);
+				uint8 buf[6];
+				if (!MovieGetScope(port, buf))
+					break;
+				int16 x = READ_WORD(buf);
+				int16 y = READ_WORD(buf + 2);
 				uint8 buttons = buf[4];
-				sprintf(string, "#%d %d: (%03d,%03d) %c%c%c%c", port, ids[0], x, y,
+				sprintf(string, "#%d %d: (%03d,%03d) %c%c%c%c", port + 1, ids[0] + 1, x, y,
 						(buttons & 0x80) ? 'F' : ' ', (buttons & 0x40) ? 'C' : ' ',
 						(buttons & 0x20) ? 'T' : ' ', (buttons & 0x10) ? 'P' : ' ');
-				S9xDisplayString(string, line++, 1, false);
+				S9xDisplayStringType(string, line++, 1, false, S9X_PRESSED_KEYS_INFO);
 				break;
 			}
 
 			case CTL_JUSTIFIER:
 			{
-				uint8 buf[11], *p = buf;
-				MovieGetJustifier(port, buf);
-				int16 x1 = READ_WORD(p);
-				int16 x2 = READ_WORD(p + 2);
-				int16 y1 = READ_WORD(p + 4);
-				int16 y2 = READ_WORD(p + 6);
+				uint8 buf[11];
+				if (!MovieGetJustifier(port, buf))
+					break;
+				int16 x1 = READ_WORD(buf);
+				int16 x2 = READ_WORD(buf + 2);
+				int16 y1 = READ_WORD(buf + 4);
+				int16 y2 = READ_WORD(buf + 6);
 				uint8 buttons = buf[8];
 				bool8 offscreen1 = buf[9];
 				bool8 offscreen2 = buf[10];
-				sprintf(string, "#%d %d: (%03d,%03d) %c%c%c / (%03d,%03d) %c%c%c", port, ids[0],
+				sprintf(string, "#%d %d: (%03d,%03d) %c%c%c / (%03d,%03d) %c%c%c", port + 1, ids[0] + 1,
 						x1, y1, (buttons & 0x80) ? 'T' : ' ', (buttons & 0x20) ? 'S' : ' ', offscreen1 ? 'O' : ' ',
 						x2, y2, (buttons & 0x40) ? 'T' : ' ', (buttons & 0x10) ? 'S' : ' ', offscreen2 ? 'O' : ' ');
-				S9xDisplayString(string, line++, 1, false);
+				S9xDisplayStringType(string, line++, 1, false, S9X_PRESSED_KEYS_INFO);
 				break;
 			}
 
 			case CTL_JOYPAD:
 			{
-				sprintf(string, "#%d %d:                  ", port, ids[0]);
+				sprintf(string, "#%d %d:                  ", port + 1, ids[0] + 1);
 				uint16 pad = MovieGetJoypad(ids[0]);
 				for (int i = 0; i < 15; i++)
 				{
@@ -1906,7 +1941,7 @@ static void DisplayPressedKeys (void)
 					string[6 + i]= (pad & mask) ? KeyMap[j] : ' ';
 				}
 
-				S9xDisplayString(string, line++, 1, false);
+				S9xDisplayStringType(string, line++, 1, false, S9X_PRESSED_KEYS_INFO);
 				break;
 			}
 
@@ -1916,7 +1951,7 @@ static void DisplayPressedKeys (void)
 				{
 					if (ids[n] != -1)
 					{
-						sprintf(string, "#%d %d:                  ", port, ids[n]);
+						sprintf(string, "#%d %d:                  ", port + 1, ids[n] + 1);
 						uint16 pad = MovieGetJoypad(ids[n]);
 						for (int i = 0; i < 15; i++)
 						{
@@ -1925,7 +1960,7 @@ static void DisplayPressedKeys (void)
 							string[6 + i]= (pad & mask) ? KeyMap[j] : ' ';
 						}
 
-						S9xDisplayString(string, line++, 1, false);
+						S9xDisplayStringType(string, line++, 1, false, S9X_PRESSED_KEYS_INFO);
 					}
 				}
 
@@ -1950,8 +1985,7 @@ static void DisplayPressedKeys (void)
 
 			case CTL_NONE:
 			{
-				sprintf(string, "#%d -", port);
-				S9xDisplayString(string, line++, 1, false);
+				// Display Nothing
 				break;
 			}
 		}
@@ -2055,163 +2089,38 @@ void S9xDrawCrosshair (const char *crosshair, uint8 fgcolor, uint8 bgcolor, int1
 	fg = get_crosshair_color(fgcolor);
 	bg = get_crosshair_color(bgcolor);
 
-	// XXX: FIXME: why does it crash without this on Linux port? There are no out-of-bound writes without it...
-#if (defined(__unix) || defined(__linux) || defined(__sun) || defined(__DJGPP))
-	if (x >= 0 && y >= 0)
-#endif
+	uint16	*s = GFX.Screen + y * (int32)GFX.RealPPL + x;
+
+	for (r = 0; r < 15 * rx; r++, s += GFX.RealPPL - 15 * cx)
 	{
-		uint16	*s = GFX.Screen + y * GFX.RealPPL + x;
-
-		for (r = 0; r < 15 * rx; r++, s += GFX.RealPPL - 15 * cx)
+		if (y + r < 0)
 		{
-			if (y + r < 0)
-			{
-				s += 15 * cx;
+			s += 15 * cx;
+			continue;
+		}
+
+		if (y + r >= H)
+			break;
+
+		for (c = 0; c < 15 * cx; c++, s++)
+		{
+			if (x + c < 0 || s < GFX.Screen)
 				continue;
-			}
 
-			if (y + r >= H)
-				break;
-
-			for (c = 0; c < 15 * cx; c++, s++)
+			if (x + c >= W)
 			{
-				if (x + c < 0 || s < GFX.Screen)
-					continue;
-
-				if (x + c >= W)
-				{
-					s += 15 * cx - c;
-					break;
-				}
-
-				uint8	p = crosshair[(r / rx) * 15 + (c / cx)];
-
-				if (p == '#' && fgcolor)
-					*s = (fgcolor & 0x10) ? COLOR_ADD1_2(fg, *s) : fg;
-				else
-				if (p == '.' && bgcolor)
-					*s = (bgcolor & 0x10) ? COLOR_ADD1_2(*s, bg) : bg;
+				s += 15 * cx - c;
+				break;
 			}
+
+			uint8	p = crosshair[(r / rx) * 15 + (c / cx)];
+
+			if (p == '#' && fgcolor)
+				*s = (fgcolor & 0x10) ? COLOR_ADD1_2(fg, *s) : fg;
+			else
+			if (p == '.' && bgcolor)
+				*s = (bgcolor & 0x10) ? COLOR_ADD1_2(*s, bg) : bg;
 		}
 	}
 }
 
-#ifdef GFX_MULTI_FORMAT
-
-static uint32 BuildPixelRGB565  (uint32, uint32, uint32);
-static uint32 BuildPixelRGB555  (uint32, uint32, uint32);
-static uint32 BuildPixelBGR565  (uint32, uint32, uint32);
-static uint32 BuildPixelBGR555  (uint32, uint32, uint32);
-static uint32 BuildPixelGBR565  (uint32, uint32, uint32);
-static uint32 BuildPixelGBR555  (uint32, uint32, uint32);
-static uint32 BuildPixelRGB5551 (uint32, uint32, uint32);
-
-static uint32 BuildPixel2RGB565  (uint32, uint32, uint32);
-static uint32 BuildPixel2RGB555  (uint32, uint32, uint32);
-static uint32 BuildPixel2BGR565  (uint32, uint32, uint32);
-static uint32 BuildPixel2BGR555  (uint32, uint32, uint32);
-static uint32 BuildPixel2GBR565  (uint32, uint32, uint32);
-static uint32 BuildPixel2GBR555  (uint32, uint32, uint32);
-static uint32 BuildPixel2RGB5551 (uint32, uint32, uint32);
-
-static void DecomposePixelRGB565  (uint32, uint32 &, uint32 &, uint32 &);
-static void DecomposePixelRGB555  (uint32, uint32 &, uint32 &, uint32 &);
-static void DecomposePixelBGR565  (uint32, uint32 &, uint32 &, uint32 &);
-static void DecomposePixelBGR555  (uint32, uint32 &, uint32 &, uint32 &);
-static void DecomposePixelGBR565  (uint32, uint32 &, uint32 &, uint32 &);
-static void DecomposePixelGBR555  (uint32, uint32 &, uint32 &, uint32 &);
-static void DecomposePixelRGB5551 (uint32, uint32 &, uint32 &, uint32 &);
-
-#define _BUILD_PIXEL(F) \
-static uint32 BuildPixel##F (uint32 R, uint32 G, uint32 B) \
-{ \
-	return (BUILD_PIXEL_##F(R, G, B)); \
-} \
-\
-static uint32 BuildPixel2##F (uint32 R, uint32 G, uint32 B) \
-{ \
-	return (BUILD_PIXEL2_##F(R, G, B)); \
-} \
-\
-static void DecomposePixel##F (uint32 pixel, uint32 &R, uint32 &G, uint32 &B) \
-{ \
-	DECOMPOSE_PIXEL_##F(pixel, R, G, B); \
-}
-
-_BUILD_PIXEL(RGB565)
-_BUILD_PIXEL(RGB555)
-_BUILD_PIXEL(BGR565)
-_BUILD_PIXEL(BGR555)
-_BUILD_PIXEL(GBR565)
-_BUILD_PIXEL(GBR555)
-_BUILD_PIXEL(RGB5551)
-
-#define _BUILD_SETUP(F) \
-GFX.BuildPixel             = BuildPixel##F; \
-GFX.BuildPixel2            = BuildPixel2##F; \
-GFX.DecomposePixel         = DecomposePixel##F; \
-RED_LOW_BIT_MASK           = RED_LOW_BIT_MASK_##F; \
-GREEN_LOW_BIT_MASK         = GREEN_LOW_BIT_MASK_##F; \
-BLUE_LOW_BIT_MASK          = BLUE_LOW_BIT_MASK_##F; \
-RED_HI_BIT_MASK            = RED_HI_BIT_MASK_##F; \
-GREEN_HI_BIT_MASK          = GREEN_HI_BIT_MASK_##F; \
-BLUE_HI_BIT_MASK           = BLUE_HI_BIT_MASK_##F; \
-MAX_RED                    = MAX_RED_##F; \
-MAX_GREEN                  = MAX_GREEN_##F; \
-MAX_BLUE                   = MAX_BLUE_##F; \
-SPARE_RGB_BIT_MASK         = SPARE_RGB_BIT_MASK_##F; \
-GREEN_HI_BIT               = ((MAX_GREEN_##F + 1) >> 1); \
-RGB_LOW_BITS_MASK          = (RED_LOW_BIT_MASK_##F | GREEN_LOW_BIT_MASK_##F | BLUE_LOW_BIT_MASK_##F); \
-RGB_HI_BITS_MASK           = (RED_HI_BIT_MASK_##F  | GREEN_HI_BIT_MASK_##F  | BLUE_HI_BIT_MASK_##F); \
-RGB_HI_BITS_MASKx2         = (RED_HI_BIT_MASK_##F  | GREEN_HI_BIT_MASK_##F  | BLUE_HI_BIT_MASK_##F) << 1; \
-RGB_REMOVE_LOW_BITS_MASK   = ~RGB_LOW_BITS_MASK; \
-FIRST_COLOR_MASK           = FIRST_COLOR_MASK_##F; \
-SECOND_COLOR_MASK          = SECOND_COLOR_MASK_##F; \
-THIRD_COLOR_MASK           = THIRD_COLOR_MASK_##F; \
-ALPHA_BITS_MASK            = ALPHA_BITS_MASK_##F; \
-FIRST_THIRD_COLOR_MASK     = FIRST_COLOR_MASK | THIRD_COLOR_MASK; \
-TWO_LOW_BITS_MASK          = RGB_LOW_BITS_MASK | (RGB_LOW_BITS_MASK << 1); \
-HIGH_BITS_SHIFTED_TWO_MASK = ((FIRST_COLOR_MASK | SECOND_COLOR_MASK | THIRD_COLOR_MASK) & ~TWO_LOW_BITS_MASK) >> 2;
-
-bool8 S9xSetRenderPixelFormat (int format)
-{
-	GFX.PixelFormat = format;
-
-	switch (format)
-	{
-		case RGB565:
-			_BUILD_SETUP(RGB565)
-			return (TRUE);
-
-		case RGB555:
-			_BUILD_SETUP(RGB555)
-			return (TRUE);
-
-		case BGR565:
-			_BUILD_SETUP(BGR565)
-			return (TRUE);
-
-		case BGR555:
-			_BUILD_SETUP(BGR555)
-			return (TRUE);
-
-		case GBR565:
-			_BUILD_SETUP(GBR565)
-			return (TRUE);
-
-		case GBR555:
-			_BUILD_SETUP(GBR555)
-			return (TRUE);
-
-		case RGB5551:
-			_BUILD_SETUP(RGB5551)
-			return (TRUE);
-
-		default:
-			break;
-	}
-
-	return (FALSE);
-}
-
-#endif
