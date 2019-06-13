@@ -17,11 +17,11 @@
 "SAVE_FILE_SLOT_%i" = "Salvar %i";
 
 // SettingsController
-"UI_SETTINGS" = "UI Settings";
-"EMULATOR_SETTINGS" = "Emulator Settings";
-"CORE_SETTINGS" = "Core Settings";
+"UI_SETTINGS" = "Configuraciones de la UI";
+"EMULATOR_SETTINGS" = "Configuraciones de emulador";
+"CORE_SETTINGS" = "Configuraciones del Núcleo";
 "CONTROLLER_SETTINGS" = "Configuración del Controlador";
-"ABOUT_SETTINGS" = "About";
+"ABOUT_SETTINGS" = "Sobre";
 "SMOOTH_SCALING" = "Escalado Suave";
 "FULL_SCREEN" = "Pantalla Completa";
 "DARK_MODE_TITLE" = "Modo Oscuro";

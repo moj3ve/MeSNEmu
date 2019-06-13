@@ -568,7 +568,7 @@ static int const FileOrganizationVersionNumber = 1;
     if (darkMode == YES) {
         [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0]];
         [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
         self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
     }
@@ -595,7 +595,7 @@ static int const FileOrganizationVersionNumber = 1;
   if(_detailsItem == nil)
   {
     self.title = NSLocalizedString(@"ROMS", nil);
-    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+    /* BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     UISearchBar* searchbar = [[UISearchBar alloc] init];
     if (darkMode == YES) {
         searchbar.barTintColor = [UIColor blackColor];
@@ -607,7 +607,7 @@ static int const FileOrganizationVersionNumber = 1;
     UISearchDisplayController* searchController = [[UISearchDisplayController alloc] initWithSearchBar:searchbar contentsController:self];
     searchController.delegate = self;
     searchController.searchResultsDataSource = self;
-    searchController.searchResultsDelegate = self;
+    searchController.searchResultsDelegate = self; */
   }
   else
     self.title = _detailsItem.displayName;
