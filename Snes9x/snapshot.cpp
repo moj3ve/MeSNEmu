@@ -1661,7 +1661,7 @@ int S9xUnfreezeFromStream (STREAM stream)
 		GFX.InterlaceFrame = Timings.InterlaceField;
 		GFX.DoInterlace = 0;
 
-		// S9xGraphicsScreenResize();
+		S9xGraphicsScreenResize();
 		
 		if (Settings.FastSavestates == 0)
 			memset(GFX.Screen,0,GFX.Pitch * MAX_SNES_HEIGHT);
