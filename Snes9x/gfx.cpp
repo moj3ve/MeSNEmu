@@ -52,7 +52,7 @@ bool8 S9xGraphicsInit (void)
 	IPPU.OBJChanged = TRUE;
 	Settings.BG_Forced = 0;
 	S9xFixColourBrightness();
-    S9xBuildDirectColourMaps();
+	S9xBuildDirectColourMaps();
 
 	GFX.ZERO = (uint16 *) malloc(sizeof(uint16) * 0x10000);
 
@@ -612,7 +612,7 @@ static void SetupOBJ (void)
 		for (int i = 0; i < SNES_HEIGHT_EXTENDED; i++)
 		{
 			GFX.OBJLines[i].RTOFlags = 0;
-			GFX.OBJLines[i].Tiles = 34;
+			GFX.OBJLines[i].Tiles = Settings.MaxSpriteTilesPerLine;
 			for (int j = 0; j < 32; j++)
 				GFX.OBJLines[i].OBJ[j].Sprite = -1;
 		}

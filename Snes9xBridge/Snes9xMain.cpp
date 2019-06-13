@@ -283,6 +283,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	Settings.DumpStreamsMaxFrames = -1;
 	Settings.StretchScreenshots = 1;
 	Settings.SnapshotScreenshots = TRUE;
+    Settings.MaxSpriteTilesPerLine = 34;
     if(SI_AutoFrameskip)
         Settings.SkipFrames = AUTO_FRAMERATE;
     else
