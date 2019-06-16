@@ -280,13 +280,13 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.IsPatched = 0;
     
     // Sound
-    // Settings.SoundSync = TRUE;
-    Settings.SoundSync = FALSE;
+    Settings.SoundSync = TRUE;
+    // Settings.SoundSync = FALSE;
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
     Settings.ReverseStereo = TRUE;
-    // Settings.SoundPlaybackRate = 48000;
-    Settings.SoundPlaybackRate = 32000;
+    Settings.SoundPlaybackRate = 48000;
+    // Settings.SoundPlaybackRate = 32000;
     Settings.SoundInputRate = 31920;
     Settings.DynamicRateControl = TRUE;
     Settings.SeparateEchoBuffer = FALSE;
@@ -300,8 +300,8 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.MaxSpriteTilesPerLine = 34;
     Settings.DisplayFrameRate = SI_ShowFPS;
     Settings.AutoDisplayMessages = TRUE;
-    // Settings.InitialInfoStringTimeout = 200;
-    Settings.InitialInfoStringTimeout = 120;
+    Settings.InitialInfoStringTimeout = 200;
+    // Settings.InitialInfoStringTimeout = 120;
     Settings.DumpStreamsMaxFrames = -1;
     
     // Frame timings in 50hz and 60hz cpu mode
@@ -318,8 +318,8 @@ extern "C" int SIStartWithROM(char* rom_filename)
         Settings.SkipFrames = AUTO_FRAMERATE;
     else
         Settings.SkipFrames = SI_Frameskip;
-        Settings.TurboSkipFrames = 15;
-        // Settings.TurboSkipFrames = 19;
+        // Settings.TurboSkipFrames = 15;
+        Settings.TurboSkipFrames = 19;
         Settings.CartAName[0] = 0;
         Settings.CartBName[0] = 0;
     #ifdef NETPLAY_SUPPORT
@@ -328,7 +328,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
   
 	CPU.Flags = 0;
   
-	/*S9xLoadConfigFiles(argv, argc);
+	/* S9xLoadConfigFiles(argv, argc);
 	rom_filename = S9xParseArgs(argv, argc);
   
 	make_snes9x_dirs();*/
