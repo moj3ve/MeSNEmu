@@ -256,13 +256,20 @@ extern "C" int SIStartWithROM(char* rom_filename)
   
     mode_t dir_mode = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
 	mkdir(SI_SRAMPath, dir_mode);
-  
-	memset(&Settings, 0, sizeof(Settings));
-	Settings.MouseMaster = TRUE;
-	Settings.SuperScopeMaster = TRUE;
-	Settings.JustifierMaster = TRUE;
-	Settings.MultiPlayer5Master = TRUE;
+    
+    // Default ALL to false
+    memset(&Settings, 0, sizeof(Settings));
+    
+    // General
+    Settings.MouseMaster = TRUE;
+    Settings.SuperScopeMaster = TRUE;
+    Settings.JustifierMaster = TRUE;
     Settings.MacsRifleMaster = TRUE;
+    Settings.MultiPlayer5Master = TRUE;
+    Settings.DontSaveOopsSnapshot = TRUE;
+    Settings.ApplyCheats = TRUE;
+  
+	/* 
 	Settings.FrameTimePAL = 20000;
 	Settings.FrameTimeNTSC = 16667;
     Settings.DisplayFrameRate = SI_ShowFPS;
@@ -295,7 +302,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
         Settings.ServerName[0] = 0;
     #endif
   
-	CPU.Flags = 0;
+	CPU.Flags = 0; */
   
 	/*S9xLoadConfigFiles(argv, argc);
 	rom_filename = S9xParseArgs(argv, argc);
