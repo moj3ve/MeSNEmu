@@ -267,7 +267,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.MacsRifleMaster = TRUE;
     Settings.MultiPlayer5Master = TRUE;
     Settings.DontSaveOopsSnapshot = TRUE;
-    Settings.ApplyCheats = TRUE;
     Settings.StretchScreenshots = 1;
     Settings.SnapshotScreenshots = TRUE;
     Settings.StopEmulation = TRUE;
