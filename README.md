@@ -28,7 +28,7 @@ Features:<br>
 - Frameskipping <br>
 - Smooth scaling <br>
 - MFI support <br>
-- NControl support <br>
+- nControl support <br>
 - Full screen/disable full screen <br>
 - Option to disable/enable sound <br>
 - Files app support <br>
@@ -53,3 +53,11 @@ Building IPA:
 2) Open MeSNEmu.xcodeproj <br>
 3) Change Bundle Identifier in Xcode <br>
 4) Run ./genipa.sh in Terminal <br>
+
+<br>
+
+/*****************************************************************************\ <br>
+     Snes9x - Portable Super Nintendo Entertainment System (TM) emulator. <br>
+                This file is licensed under the Snes9x License. <br>
+   For further information, consult the LICENSE file in the root directory. <br>
+\*****************************************************************************/
