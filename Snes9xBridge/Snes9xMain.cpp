@@ -268,41 +268,65 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.MultiPlayer5Master = TRUE;
     Settings.DontSaveOopsSnapshot = TRUE;
     Settings.ApplyCheats = TRUE;
-  
-	/* 
-	Settings.FrameTimePAL = 20000;
-	Settings.FrameTimeNTSC = 16667;
-    Settings.DisplayFrameRate = SI_ShowFPS;
-	Settings.SixteenBitSound = TRUE;
-	Settings.Stereo = TRUE;
-	Settings.SoundPlaybackRate = 32000;
+    Settings.StretchScreenshots = 1;
+    Settings.SnapshotScreenshots = TRUE;
+    Settings.StopEmulation = TRUE;
+    Settings.WrongMovieStateProtection = TRUE;
     Settings.OpenGLEnable = TRUE;
-    Settings.SoundInputRate = 32000;
+    
+    Settings.HDMATimingHack = 100;
+    Settings.BlockInvalidVRAMAccessMaster = TRUE;
+    
+    Settings.IsPatched = 0;
+    
+    // Sound
+    // Settings.SoundSync = TRUE;
     Settings.SoundSync = FALSE;
-	Settings.SupportHiRes = TRUE;
-	Settings.Transparency = TRUE;
-	Settings.AutoDisplayMessages = TRUE;
-	Settings.InitialInfoStringTimeout = 120;
-	Settings.HDMATimingHack = 100;
-	Settings.BlockInvalidVRAMAccessMaster = TRUE;
-	Settings.StopEmulation = TRUE;
-	Settings.WrongMovieStateProtection = TRUE;
-	Settings.DumpStreamsMaxFrames = -1;
-	Settings.StretchScreenshots = 1;
-	Settings.SnapshotScreenshots = TRUE;
+    Settings.SixteenBitSound = TRUE;
+    Settings.Stereo = TRUE;
+    Settings.ReverseStereo = TRUE;
+    // Settings.SoundPlaybackRate = 48000;
+    Settings.SoundPlaybackRate = 32000;
+    Settings.SoundInputRate = 31920;
+    Settings.DynamicRateControl = TRUE;
+    Settings.SeparateEchoBuffer = FALSE;
+    
+    // Interpolation Method
+    Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN;
+    
+    // Graphics
+    Settings.Transparency = TRUE;
+    Settings.SupportHiRes = TRUE;
     Settings.MaxSpriteTilesPerLine = 34;
+    Settings.DisplayFrameRate = SI_ShowFPS;
+    Settings.AutoDisplayMessages = TRUE;
+    // Settings.InitialInfoStringTimeout = 200;
+    Settings.InitialInfoStringTimeout = 120;
+    Settings.DumpStreamsMaxFrames = -1;
+    
+    // Frame timings in 50hz and 60hz cpu mode
+    Settings.FrameTimePAL = 20000;
+    Settings.FrameTimeNTSC = 16667;
+    
+    Settings.SuperFXClockMultiplier = 100;
+    Settings.OverclockMode = 0;
+    Settings.OneClockCycle = 6;
+    Settings.OneSlowClockCycle = 8;
+    Settings.TwoClockCycles = 12;
+  
     if(SI_AutoFrameskip)
         Settings.SkipFrames = AUTO_FRAMERATE;
     else
         Settings.SkipFrames = SI_Frameskip;
         Settings.TurboSkipFrames = 15;
+        // Settings.TurboSkipFrames = 19;
         Settings.CartAName[0] = 0;
         Settings.CartBName[0] = 0;
     #ifdef NETPLAY_SUPPORT
         Settings.ServerName[0] = 0;
     #endif
   
-	CPU.Flags = 0; */
+	CPU.Flags = 0;
   
 	/*S9xLoadConfigFiles(argv, argc);
 	rom_filename = S9xParseArgs(argv, argc);
@@ -345,9 +369,9 @@ extern "C" int SIStartWithROM(char* rom_filename)
   
 	S9xReportControllers();
   
-#ifdef GFX_MULTI_FORMAT
+/* #ifdef GFX_MULTI_FORMAT
 	S9xSetRenderPixelFormat(RGB565);
-#endif
+#endif */
   
 	uint32	saved_flags = CPU.Flags;
 	bool8	loaded = FALSE;
