@@ -14,7 +14,6 @@ extern NSString* const kSettingsSmoothScaling;
 extern NSString* const kSettingsShowFPS;
 
 extern NSString* const kSettingsSound;
-extern NSString* const kSettingsSoundSync;
 extern NSString* const kSettingsLRThree;
 extern NSString* const kSettingsAutoFrameskip;
 extern NSString* const kSettingsFrameskipValue;
@@ -42,7 +41,6 @@ extern NSString* const kSettingsFrameskipValue;
   NSIndexPath* _showFPSIndexPath;
 
   NSIndexPath* _soundIndexPath;
-  NSIndexPath* _soundSyncIndexPath;
   NSIndexPath* _autoFrameskipIndexPath;
   NSIndexPath* _frameskipValueIndexPath;
     

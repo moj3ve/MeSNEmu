@@ -28,8 +28,7 @@
 "SHOW_FPS" = "Show FPS";
 "RYGB_BUTTONS" = "RYGB Buttons";
 "SOUND" = "Sound";
-"SOUND_SYNC" = "Sound Sync";
-"AUTO_FRAMESKIP_TITLE" = "Auto Frameskip";
+"AUTO_FRAMESKIP_TITLE" = "Auto Frameskip (Broken)";
 "SKIP_EVERY" = "Skip Every";
 "FRAMES" = "Frames";
 "CONTROLLER" = "Controller";
