@@ -279,8 +279,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.IsPatched = 0;
     
     // Sound
-    Settings.SoundSync = TRUE;
-    // Settings.SoundSync = FALSE;
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
     Settings.ReverseStereo = TRUE;
@@ -313,14 +311,18 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.OneSlowClockCycle = 8;
     Settings.TwoClockCycles = 12;
   
-    if(SI_AutoFrameskip)
+    if(SI_AutoFrameskip) {
+        Settings.SoundSync = FALSE;
         Settings.SkipFrames = AUTO_FRAMERATE;
-    else
+    }
+    else {
+        Settings.SoundSync = TRUE;
         Settings.SkipFrames = SI_Frameskip;
         // Settings.TurboSkipFrames = 15;
         Settings.TurboSkipFrames = 19;
         Settings.CartAName[0] = 0;
         Settings.CartBName[0] = 0;
+    }
     #ifdef NETPLAY_SUPPORT
         Settings.ServerName[0] = 0;
     #endif

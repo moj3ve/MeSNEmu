@@ -265,6 +265,12 @@ typedef enum _SettingsSections
         _soundIndexPath = nil;
         [self.tableView reloadData];
     }
+    if(_autoFrameskipIndexPath != nil)
+    {
+        [_autoFrameskipIndexPath release];
+        _autoFrameskipIndexPath = nil;
+        [self.tableView reloadData];
+    }
     if(_lrThreeIndexPath != nil)
     {
         [_lrThreeIndexPath release];
@@ -345,8 +351,8 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionCore)
     {
-        if(_soundIndexPath == nil)
-            return 2;
+        if(_soundIndexPath == nil && _autoFrameskipIndexPath == nil)
+            return 1;
         else
             return 3;
     }
@@ -662,8 +668,7 @@ typedef enum _SettingsSections
         _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
         _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
         
         _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
     }

@@ -28,7 +28,7 @@ Features:<br>
 - Frameskipping <br>
 - Smooth scaling <br>
 - MFI support <br>
-- NControl support <br>
+- nControl support <br>
 - Full screen/disable full screen <br>
 - Option to disable/enable sound <br>
 - Files app support <br>
