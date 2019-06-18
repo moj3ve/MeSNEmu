@@ -20,6 +20,7 @@ NSString* const kSettingsShowFPS = @"ShowFPS";
 
 // Core Settings
 NSString* const kSettingsSound = @"Sound";
+NSString* const kSettingsSoundSync = @"SoundSync";
 NSString* const kSettingsAutoFrameskip = @"AutoFrameskip";
 NSString* const kSettingsFrameskipValue = @"FrameskipValue";
 
@@ -138,10 +139,52 @@ typedef enum _SettingsSections
     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSound];
 }
 
-- (void)toggleAutoFrameskip:(UISwitch*)sender
+- (void)toggleSoundSync:(UISwitch*)sender
 {
     _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsAutoFrameskip];
+    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSoundSync];
+}
+
+- (void)toggleAutoFrameskip:(UISwitch*)sender
+{
+    if (kSettingsSoundSync == TRUE) {
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
+                                     message:NSLocalizedString(@"LRTHREE_NOTICE", nil)
+                                     preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIView *firstSubview = alert.view.subviews.firstObject;
+        
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
+            }
+        }
+        
+        UIAlertAction* okayButton = [UIAlertAction
+                                     actionWithTitle:NSLocalizedString(@"OKAY", nil)
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         if (sender.isOn == 1) {
+                                             _changed = YES;
+                                             [sender setOn:FALSE animated:YES];
+                                         }
+                                         else {
+                                             _changed = YES;
+                                             [sender setOn:FALSE animated:YES];
+                                         }
+                                     }];
+        
+        [alert addAction:okayButton];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else {
+        _changed = YES;
+        [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsAutoFrameskip];
+    }
 }
 
 - (void)cellValueChanged:(UITableViewCell*)cell
@@ -296,6 +339,9 @@ typedef enum _SettingsSections
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSound] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSound];
     
+    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSoundSync] == nil)
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSoundSync];
+    
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsAutoFrameskip] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsAutoFrameskip];
     
@@ -346,9 +392,9 @@ typedef enum _SettingsSections
     else if(section == SettingsSectionCore)
     {
         if(_soundIndexPath == nil)
-            return 2;
-        else
             return 3;
+        else
+            return 4;
     }
     else if(section == SettingsSectionController)
     {
@@ -460,6 +506,16 @@ typedef enum _SettingsSections
             }
             c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSound];
             [c.switchView addTarget:self action:@selector(toggleSound:) forControlEvents:UIControlEventValueChanged];
+        }
+        else if([indexPath compare:_soundSyncIndexPath] == NSOrderedSame)
+        {
+            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
+            c.textLabel.text = NSLocalizedString(@"SOUND_SYNC", nil);
+            if (darkMode == YES) {
+                c.textLabel.textColor = [UIColor whiteColor];
+            }
+            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSoundSync];
+            [c.switchView addTarget:self action:@selector(toggleSoundSync:) forControlEvents:UIControlEventValueChanged];
         }
         else if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
         {
@@ -649,8 +705,9 @@ typedef enum _SettingsSections
         _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
         _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
+        _soundSyncIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionCore] retain];
         
         _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
         _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionController] retain];
@@ -662,8 +719,9 @@ typedef enum _SettingsSections
         _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
         _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        _soundSyncIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
         
         _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
     }
@@ -742,6 +800,8 @@ typedef enum _SettingsSections
     
     [_soundIndexPath release];
     _soundIndexPath = nil;
+    [_soundSyncIndexPath release];
+    _soundSyncIndexPath = nil;
     [_lrThreeIndexPath release];
     _lrThreeIndexPath = nil;
     [_autoFrameskipIndexPath release];
