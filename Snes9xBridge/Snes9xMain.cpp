@@ -314,7 +314,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.TwoClockCycles = 12;
   
     if(SI_AutoFrameskip)
-        Settings.SkipFrames = AUTO_FRAMERATE;
+        Settings.SkipFrames = AUTO_FRAMERATE; // Broken
     else
         Settings.SkipFrames = SI_Frameskip;
         // Settings.TurboSkipFrames = 15;
