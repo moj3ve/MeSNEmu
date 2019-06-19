@@ -38,7 +38,7 @@
         
         UIAlertController * alert = [UIAlertController
                                      alertControllerWithTitle:@"Notice"
-                                     message:@"Exit Saves & Save States from MeSNEmu v1.4.6.4 and below will not work."
+                                     message:@"Exit Saves & Save States from MeSNEmu v1.4.6.4 and below will not work on MeSNEmu v2.0.0.0 and above."
                                      preferredStyle:UIAlertControllerStyleAlert];
     
         UIView *firstSubview = alert.view.subviews.firstObject;
