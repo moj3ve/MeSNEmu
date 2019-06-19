@@ -57,7 +57,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 #pragma mark -
 
-@interface RomBrowserController(Privates) <UISearchDisplayDelegate>
+@interface RomBrowserController(Privates)
 
 @end
 
@@ -358,41 +358,24 @@ static int const FileOrganizationVersionNumber = 1;
 }
 - (void)reloadROMList
 {
-  if(self.searchDisplayController.isActive == NO)
     [self reloadROMList:YES];
 }
 
 - (void)settingsTapped
 {
-  SettingsController* c = [[SettingsController alloc] init];
-  UINavigationController* n = [[UINavigationController alloc] initWithRootViewController:c];
-  n.modalPresentationStyle = UIModalPresentationFormSheet;
-  [self presentViewController:n animated:YES completion:nil];
-  [c release];
-  [n release];
+    SettingsController* c = [[SettingsController alloc] init];
+    UINavigationController* n = [[UINavigationController alloc] initWithRootViewController:c];
+    n.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:n animated:YES completion:nil];
+    [c release];
+    [n release];
 }
 
 - (FileListItem*)romItemForTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath
 {
-  int index = indexPath.row;
-  if(tableView == self.searchDisplayController.searchResultsTableView)
-  {
-    index += [[_filteredSectionMarkers objectAtIndex:indexPath.section] intValue];
-    return [_filteredRomList objectAtIndex:index];
-  }
-  else
-  {
+    int index = indexPath.row;
     index += [[_sectionMarkers objectAtIndex:indexPath.section] intValue];
     return [_romList objectAtIndex:index];
-  }
-}
-
-#pragma mark UISearchDisplayControllerDelegate
-
-- (BOOL)searchDisplayController:(UISearchController*)controller shouldReloadTableForSearchString:(NSString*)searchString
-{
-  [self reloadROMList:NO];
-  return YES;
 }
 
 @end
@@ -411,56 +394,36 @@ static int const FileOrganizationVersionNumber = 1;
 
 - (NSArray*)sectionIndexTitlesForTableView:(UITableView*)tableView
 {
-  if(_detailsItem != nil)
-    return nil;
-  if(tableView == self.searchDisplayController.searchResultsTableView)
-    return _filteredSectionTitles;
-  else
+    if(_detailsItem != nil)
+        return nil;
     return _sectionTitles;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView sectionForSectionIndexTitle:(NSString*)title atIndex:(NSInteger)index
 {
-  return index;
+    return index;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-  // Return the number of sections.
-  if(tableView == self.searchDisplayController.searchResultsTableView)
-    return [_filteredSectionTitles count];
-  else
     return [_sectionTitles count];
 }
 
 - (NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-  if(tableView == self.searchDisplayController.searchResultsTableView)
-    return [_filteredSectionTitles objectAtIndex:section];
-  else
     return [_sectionTitles objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-  // Return the number of rows in the section.
-  int sectionStart, sectionEnd;
-  if(tableView == self.searchDisplayController.searchResultsTableView)
-  {
-    sectionStart = [[_filteredSectionMarkers objectAtIndex:section] intValue];
-    sectionEnd = [_filteredRomList count];
-    if(section < [_filteredSectionMarkers count]-1)
-      sectionEnd = [[_filteredSectionMarkers objectAtIndex:(section+1)] intValue];
-  }
-  else
-  {
+    int sectionStart, sectionEnd;
     sectionStart = [[_sectionMarkers objectAtIndex:section] intValue];
     sectionEnd = [_romList count];
+    
     if(section < [_sectionMarkers count]-1)
       sectionEnd = [[_sectionMarkers objectAtIndex:(section+1)] intValue];
-  }
   
-  return sectionEnd-sectionStart;
+    return sectionEnd-sectionStart;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -595,19 +558,6 @@ static int const FileOrganizationVersionNumber = 1;
   if(_detailsItem == nil)
   {
     self.title = NSLocalizedString(@"ROMS", nil);
-    /* BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
-    UISearchBar* searchbar = [[UISearchBar alloc] init];
-    if (darkMode == YES) {
-        searchbar.barTintColor = [UIColor blackColor];
-        searchbar.keyboardAppearance = [UIColor blackColor];
-    }
-    [searchbar sizeToFit];
-    self.tableView.tableHeaderView = searchbar;
-    [searchbar release];
-    UISearchDisplayController* searchController = [[UISearchDisplayController alloc] initWithSearchBar:searchbar contentsController:self];
-    searchController.delegate = self;
-    searchController.searchResultsDataSource = self;
-    searchController.searchResultsDelegate = self; */
   }
   else
     self.title = _detailsItem.displayName;
