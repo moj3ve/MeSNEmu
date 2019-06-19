@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 #import "RomBrowserController.h"
+#import "SettingsController.h"
 
 @implementation AppDelegate
 
@@ -29,6 +30,43 @@
     [romBrowser release];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    // if ([[NSUserDefaults standardUserDefaults] boolForKey:@"alertShownOnce"] == NO) {
+        
+        UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        alertWindow.rootViewController = [[UIViewController alloc] init];
+        alertWindow.windowLevel = UIWindowLevelAlert + 1;
+        
+        UIAlertController * alert = [UIAlertController
+                                     alertControllerWithTitle:@"Notice"
+                                     message:@"Exit Saves & Save States from MeSNEmu v1.4.6.4 and below will not work."
+                                     preferredStyle:UIAlertControllerStyleAlert];
+    
+        UIView *firstSubview = alert.view.subviews.firstObject;
+    
+        UIView *alertContentView = firstSubview.subviews.firstObject;
+        for (UIView *subSubView in alertContentView.subviews) {
+            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+            if (darkMode == YES) {
+                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
+            }
+        }
+        
+        UIAlertAction* okayButton = [UIAlertAction
+                                     actionWithTitle:@"Okay"
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         alertWindow.hidden = YES;
+                                         [alert dismissViewControllerAnimated:YES completion:nil];
+                                     }];
+        
+        [alert addAction:okayButton];
+        
+        [alertWindow makeKeyAndVisible];
+        [alertWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+        
+        // [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"alertShownOnce"];
+        // [[NSUserDefaults standardUserDefaults] synchronize];
+    // }
     return YES;
 }
 
