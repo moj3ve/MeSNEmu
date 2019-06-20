@@ -30,15 +30,15 @@
     [romBrowser release];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
-    // if ([[NSUserDefaults standardUserDefaults] boolForKey:@"alertShownOnce"] == NO) {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"alertShownOnce"] == NO) {
         
         UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         alertWindow.rootViewController = [[UIViewController alloc] init];
         alertWindow.windowLevel = UIWindowLevelAlert + 1;
         
         UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:@"Notice"
-                                     message:@"Exit Saves & Save States from MeSNEmu v1.4.6.4 and below will not work on MeSNEmu v2.0.0.0 and above."
+                                     alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
+                                     message:NSLocalizedString(@"APPLAUNCH_NOTICE", nil)
                                      preferredStyle:UIAlertControllerStyleAlert];
     
         UIView *firstSubview = alert.view.subviews.firstObject;
@@ -64,9 +64,9 @@
         [alertWindow makeKeyAndVisible];
         [alertWindow.rootViewController presentViewController:alert animated:YES completion:nil];
         
-        // [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"alertShownOnce"];
-        // [[NSUserDefaults standardUserDefaults] synchronize];
-    // }
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"alertShownOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     return YES;
 }
 

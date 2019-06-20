@@ -163,6 +163,9 @@
 		26B6C59422AC3DC500ADC916 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsController.h; path = Classes/SettingsController.h; sourceTree = SOURCE_ROOT; };
 		26B779FA22AC1D960027F221 /* msu1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msu1.h; sourceTree = "<group>"; };
 		26B779FB22AC1D960027F221 /* msu1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msu1.cpp; sourceTree = "<group>"; };
+		26FA6AA022BBF52B00E5C92F /* xbrz_tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz_tools.h; sourceTree = "<group>"; };
+		26FA6AA222BBF52C00E5C92F /* xbrz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz.h; sourceTree = "<group>"; };
+		26FA6AA322BBF52C00E5C92F /* xbrz_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz_config.h; sourceTree = "<group>"; };
 		66C1BD5E1866ACA800E5A833 /* GameControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GameControllerManager.h; path = Classes/GameControllerManager.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		66C1BD5F1866ACA800E5A833 /* GameControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GameControllerManager.m; path = Classes/GameControllerManager.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		66C1BD611866AF9E00E5A833 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
@@ -565,6 +568,9 @@
 				A004023014BE3E4D00FE28CE /* snes_ntsc.h */,
 				A004023114BE3E4D00FE28CE /* snes_ntsc_config.h */,
 				A004023214BE3E4D00FE28CE /* snes_ntsc_impl.h */,
+				26FA6AA222BBF52C00E5C92F /* xbrz.h */,
+				26FA6AA322BBF52C00E5C92F /* xbrz_config.h */,
+				26FA6AA022BBF52B00E5C92F /* xbrz_tools.h */,
 			);
 			path = filter;
 			sourceTree = "<group>";

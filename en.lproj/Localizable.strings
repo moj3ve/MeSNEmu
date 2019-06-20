@@ -6,6 +6,7 @@
 "OKAY" = "Okay";
 "DARK_MODE_NOTICE" = "MeSNEmu will now close for Dark Mode to turn on/off";
 "LRTHREE_NOTICE" = "L3 & R3 Is Only Available For iOS 12.1+";
+"APPLAUNCH_NOTICE" = "Exit Saves & Save States from MeSNEmu v1.4.6.4 and below will not work on MeSNEmu v2.0.0.0 and above";
 
 // RomBrowserController
 "ROMS" = "Games";
