@@ -32,7 +32,6 @@
 #include "controls.h"
 #include "cheats.h"
 #include "movie.h"
-#include "reader.h"
 #include "display.h"
 #include "sha256.h"
 
@@ -779,9 +778,9 @@ static bool8 is_BSCart_BIOS (const uint8 *, uint32);
 static bool8 is_BSCartSA1_BIOS(const uint8 *, uint32);
 static bool8 is_GNEXT_Add_On (const uint8 *, uint32);
 static uint32 caCRC32 (uint8 *, uint32, uint32 crc32 = 0xffffffff);
-static bool8 ReadUPSPatch (Reader *, long, int32 &);
-static long ReadInt (Reader *, unsigned);
-static bool8 ReadIPSPatch (Reader *, long, int32 &);
+static bool8 ReadUPSPatch (Stream *, long, int32 &);
+static long ReadInt (Stream *, unsigned);
+static bool8 ReadIPSPatch (Stream *, long, int32 &);
 #ifdef UNZIP_SUPPORT
 static int unzFindExtension (unzFile &, const char *, bool restart = TRUE, bool print = TRUE, bool allowExact = FALSE);
 #endif
@@ -3749,7 +3748,7 @@ static uint32 XPSdecode (const uint8 *data, unsigned &addr, unsigned size)
 //no-header patching errors that result in IPS patches having a 50/50 chance of
 //being applied correctly.
 
-static bool8 ReadUPSPatch (Reader *r, long, int32 &rom_size)
+static bool8 ReadUPSPatch (Stream *r, long, int32 &rom_size)
 {
 	//Reader lacks size() and rewind(), so we need to read in the file to get its size
 	uint8 *data = new uint8[8 * 1024 * 1024];  //allocate a lot of memory, better safe than sorry ...
@@ -3833,7 +3832,7 @@ static bool8 ReadUPSPatch (Reader *r, long, int32 &rom_size)
 //
 // logic taken from http://byuu.org/programming/bps and the accompanying source
 //
-static bool8 ReadBPSPatch (Reader *r, long, int32 &rom_size)
+static bool8 ReadBPSPatch (Stream *r, long, int32 &rom_size)
 {
 	uint8 *data = new uint8[8 * 1024 * 1024];  //allocate a lot of memory, better safe than sorry ...
 	uint32 size = 0;
@@ -3928,7 +3927,7 @@ static bool8 ReadBPSPatch (Reader *r, long, int32 &rom_size)
 	}
 }
 
-static long ReadInt (Reader *r, unsigned nbytes)
+static long ReadInt (Stream *r, unsigned nbytes)
 {
 	long	v = 0;
 
@@ -3943,7 +3942,7 @@ static long ReadInt (Reader *r, unsigned nbytes)
 	return (v);
 }
 
-static bool8 ReadIPSPatch (Reader *r, long offset, int32 &rom_size)
+static bool8 ReadIPSPatch (Stream *r, long offset, int32 &rom_size)
 {
 	const int32	IPS_EOF = 0x00454F46l;
 	int32		ofs;
@@ -4065,7 +4064,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 	if (Settings.NoPatch)
 		return;
 
-	STREAM		patch_file  = NULL;
+	FSTREAM		patch_file  = NULL;
 	uint32		i;
 	long		offset = header ? 512 : 0;
 	int			ret;
@@ -4078,11 +4077,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 	// BPS
 	_makepath(fname, drive, dir, name, "bps");
 
-	if ((patch_file = OPEN_STREAM(fname, "rb")) != NULL)
+	if ((patch_file = OPEN_FSTREAM(fname, "rb")) != NULL)
 	{
 		printf("Using BPS patch %s", fname);
 
-        Reader *s = new fReader(patch_file);
+        Stream *s = new fStream(patch_file);
 		ret = ReadBPSPatch(s, 0, rom_size);
         s->closeStream();
 
@@ -4106,7 +4105,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			{
 				printf(" in %s", rom_filename);
 
-                Reader *s = new unzReader(file);
+                Stream *s = new unzStream(file);
 				ret = ReadBPSPatch(s, offset, rom_size);
 				delete s;
 
@@ -4122,11 +4121,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 	n = S9xGetFilename(".bps", PATCH_DIR);
 
-	if ((patch_file = OPEN_STREAM(n, "rb")) != NULL)
+	if ((patch_file = OPEN_FSTREAM(n, "rb")) != NULL)
 	{
 		printf("Using BPS patch %s", n);
 
-        Reader *s = new fReader(patch_file);
+        Stream *s = new fStream(patch_file);
 		ret = ReadBPSPatch(s, 0, rom_size);
         s->closeStream();
 
@@ -4143,11 +4142,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 	_makepath(fname, drive, dir, name, "ups");
 
-	if ((patch_file = OPEN_STREAM(fname, "rb")) != NULL)
+	if ((patch_file = OPEN_FSTREAM(fname, "rb")) != NULL)
 	{
 		printf("Using UPS patch %s", fname);
 
-        Reader *s = new fReader(patch_file);
+        Stream *s = new fStream(patch_file);
 		ret = ReadUPSPatch(s, 0, rom_size);
         s->closeStream();
 
@@ -4171,7 +4170,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			{
 				printf(" in %s", rom_filename);
 
-                Reader *s = new unzReader(file);
+                Stream *s = new unzStream(file);
 				ret = ReadUPSPatch(s, offset, rom_size);
 				delete s;
 
@@ -4187,11 +4186,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 	n = S9xGetFilename(".ups", PATCH_DIR);
 
-	if ((patch_file = OPEN_STREAM(n, "rb")) != NULL)
+	if ((patch_file = OPEN_FSTREAM(n, "rb")) != NULL)
 	{
 		printf("Using UPS patch %s", n);
 
-        Reader *s = new fReader(patch_file);
+        Stream *s = new fStream(patch_file);
 		ret = ReadUPSPatch(s, 0, rom_size);
         s->closeStream();
 
@@ -4208,11 +4207,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 	_makepath(fname, drive, dir, name, "ips");
 
-	if ((patch_file = OPEN_STREAM(fname, "rb")) != NULL)
+	if ((patch_file = OPEN_FSTREAM(fname, "rb")) != NULL)
 	{
 		printf("Using IPS patch %s", fname);
 
-        Reader *s = new fReader(patch_file);
+        Stream *s = new fStream(patch_file);
 		ret = ReadIPSPatch(s, offset, rom_size);
         s->closeStream();
 
@@ -4235,12 +4234,12 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			snprintf(ips, 8, "%03d.ips", i);
 			_makepath(fname, drive, dir, name, ips);
 
-			if (!(patch_file = OPEN_STREAM(fname, "rb")))
+			if (!(patch_file = OPEN_FSTREAM(fname, "rb")))
 				break;
 
 			printf("Using IPS patch %s", fname);
 
-            Reader *s = new fReader(patch_file);
+            Stream *s = new fStream(patch_file);
 			ret = ReadIPSPatch(s, offset, rom_size);
             s->closeStream();
 
@@ -4272,12 +4271,12 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 				break;
 			_makepath(fname, drive, dir, name, ips);
 
-			if (!(patch_file = OPEN_STREAM(fname, "rb")))
+			if (!(patch_file = OPEN_FSTREAM(fname, "rb")))
 				break;
 
 			printf("Using IPS patch %s", fname);
 
-            Reader *s = new fReader(patch_file);
+            Stream *s = new fStream(patch_file);
 			ret = ReadIPSPatch(s, offset, rom_size);
             s->closeStream();
 
@@ -4307,12 +4306,12 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			snprintf(ips, 4, "ip%d", i);
 			_makepath(fname, drive, dir, name, ips);
 
-			if (!(patch_file = OPEN_STREAM(fname, "rb")))
+			if (!(patch_file = OPEN_FSTREAM(fname, "rb")))
 				break;
 
 			printf("Using IPS patch %s", fname);
 
-            Reader *s = new fReader(patch_file);
+            Stream *s = new fStream(patch_file);
 			ret = ReadIPSPatch(s, offset, rom_size);
             s->closeStream();
 
@@ -4343,7 +4342,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			{
 				printf(" in %s", rom_filename);
 
-                Reader *s = new unzReader(file);
+                Stream *s = new unzStream(file);
 				ret = ReadIPSPatch(s, offset, rom_size);
 				delete s;
 
@@ -4371,7 +4370,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 					printf(" in %s", rom_filename);
 
-                    Reader *s = new unzReader(file);
+                    Stream *s = new unzStream(file);
 					ret = ReadIPSPatch(s, offset, rom_size);
 					delete s;
 
@@ -4406,7 +4405,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 					printf(" in %s", rom_filename);
 
-                    Reader *s = new unzReader(file);
+                    Stream *s = new unzStream(file);
 					ret = ReadIPSPatch(s, offset, rom_size);
 					delete s;
 
@@ -4439,7 +4438,7 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 					printf(" in %s", rom_filename);
 
-                    Reader *s = new unzReader(file);
+                    Stream *s = new unzStream(file);
 					ret = ReadIPSPatch(s, offset, rom_size);
 					delete s;
 
@@ -4469,11 +4468,11 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 
 	n = S9xGetFilename(".ips", PATCH_DIR);
 
-	if ((patch_file = OPEN_STREAM(n, "rb")) != NULL)
+	if ((patch_file = OPEN_FSTREAM(n, "rb")) != NULL)
 	{
 		printf("Using IPS patch %s", n);
 
-        Reader *s = new fReader(patch_file);
+        Stream *s = new fStream(patch_file);
 		ret = ReadIPSPatch(s, offset, rom_size);
         s->closeStream();
 
@@ -4496,12 +4495,12 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			snprintf(ips, 9, ".%03d.ips", i);
 			n = S9xGetFilename(ips, PATCH_DIR);
 
-			if (!(patch_file = OPEN_STREAM(n, "rb")))
+			if (!(patch_file = OPEN_FSTREAM(n, "rb")))
 				break;
 
 			printf("Using IPS patch %s", n);
 
-            Reader *s = new fReader(patch_file);
+            Stream *s = new fStream(patch_file);
 			ret = ReadIPSPatch(s, offset, rom_size);
             s->closeStream();
 
@@ -4533,12 +4532,12 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 				break;
 			n = S9xGetFilename(ips, PATCH_DIR);
 
-			if (!(patch_file = OPEN_STREAM(n, "rb")))
+			if (!(patch_file = OPEN_FSTREAM(n, "rb")))
 				break;
 
 			printf("Using IPS patch %s", n);
 
-            Reader *s = new fReader(patch_file);
+            Stream *s = new fStream(patch_file);
 			ret = ReadIPSPatch(s, offset, rom_size);
             s->closeStream();
 
@@ -4568,12 +4567,12 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 			snprintf(ips, 5, ".ip%d", i);
 			n = S9xGetFilename(ips, PATCH_DIR);
 
-			if (!(patch_file = OPEN_STREAM(n, "rb")))
+			if (!(patch_file = OPEN_FSTREAM(n, "rb")))
 				break;
 
 			printf("Using IPS patch %s", n);
 
-            Reader *s = new fReader(patch_file);
+            Stream *s = new fStream(patch_file);
 			ret = ReadIPSPatch(s, offset, rom_size);
             s->closeStream();
 
@@ -4597,8 +4596,18 @@ void CMemory::CheckForAnyPatch (const char *rom_filename, bool8 header, int32 &r
 	// Mercurial Magic (MSU-1 distribution pack)
 	if (strcasecmp(ext, "msu1") && strcasecmp(ext, ".msu1"))	// ROM was *NOT* loaded from a .msu1 pack
 	{
-		S9xMSU1OpenFile("patch.bps", TRUE);
-		printf("Using BPS patch %s.msu1", name);
+		Stream *s = S9xMSU1OpenFile("patch.bps", TRUE);
+		if (s)
+		{
+			printf("Using BPS patch %s.msu1", name);
+			ret = ReadBPSPatch(s, offset, rom_size);
+			s->closeStream();
+
+			if (ret)
+				printf("!\n");
+			else
+				printf(" failed!\n");
+		}
 	}
 #endif
 }

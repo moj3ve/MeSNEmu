@@ -19,6 +19,7 @@
 		26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78921F77DBC00E05B50 /* LRButton.png */; };
 		26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B321F7622A00DD9D5E /* PurpleButton.png */; };
 		26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */; };
+		26B546B222BBEC6400A3A91D /* stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26B546B022BBEC6200A3A91D /* stream.cpp */; };
 		26B779FC22AC1D960027F221 /* msu1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26B779FB22AC1D960027F221 /* msu1.cpp */; };
 		66C1BD601866ACA800E5A833 /* GameControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C1BD5F1866ACA800E5A833 /* GameControllerManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		66C1BD621866AF9E00E5A833 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C1BD611866AF9E00E5A833 /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -73,7 +74,6 @@
 		A004048014BE3E4E00FE28CE /* netplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004033214BE3E4D00FE28CE /* netplay.cpp */; };
 		A004048114BE3E4E00FE28CE /* obc1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004033414BE3E4D00FE28CE /* obc1.cpp */; };
 		A004048214BE3E4E00FE28CE /* ppu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004033814BE3E4D00FE28CE /* ppu.cpp */; };
-		A004048314BE3E4E00FE28CE /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004033A14BE3E4D00FE28CE /* reader.cpp */; };
 		A004048414BE3E4E00FE28CE /* sa1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004033C14BE3E4D00FE28CE /* sa1.cpp */; };
 		A004048514BE3E4E00FE28CE /* sa1cpu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004033E14BE3E4D00FE28CE /* sa1cpu.cpp */; };
 		A004048714BE3E4E00FE28CE /* sdd1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A004034214BE3E4D00FE28CE /* sdd1.cpp */; };
@@ -158,6 +158,8 @@
 		26AB9AA12279189E0037C01E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
 		26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
+		26B546B022BBEC6200A3A91D /* stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stream.cpp; sourceTree = "<group>"; };
+		26B546B122BBEC6300A3A91D /* stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream.h; sourceTree = "<group>"; };
 		26B6C59422AC3DC500ADC916 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsController.h; path = Classes/SettingsController.h; sourceTree = SOURCE_ROOT; };
 		26B779FA22AC1D960027F221 /* msu1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msu1.h; sourceTree = "<group>"; };
 		26B779FB22AC1D960027F221 /* msu1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msu1.cpp; sourceTree = "<group>"; };
@@ -284,8 +286,6 @@
 		A004033714BE3E4D00FE28CE /* port.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = port.h; sourceTree = "<group>"; };
 		A004033814BE3E4D00FE28CE /* ppu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ppu.cpp; sourceTree = "<group>"; };
 		A004033914BE3E4D00FE28CE /* ppu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ppu.h; sourceTree = "<group>"; };
-		A004033A14BE3E4D00FE28CE /* reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = reader.cpp; sourceTree = "<group>"; };
-		A004033B14BE3E4D00FE28CE /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
 		A004033C14BE3E4D00FE28CE /* sa1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sa1.cpp; sourceTree = "<group>"; };
 		A004033D14BE3E4D00FE28CE /* sa1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sa1.h; sourceTree = "<group>"; };
 		A004033E14BE3E4D00FE28CE /* sa1cpu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sa1cpu.cpp; sourceTree = "<group>"; };
@@ -486,8 +486,6 @@
 				A004033714BE3E4D00FE28CE /* port.h */,
 				A004033814BE3E4D00FE28CE /* ppu.cpp */,
 				A004033914BE3E4D00FE28CE /* ppu.h */,
-				A004033A14BE3E4D00FE28CE /* reader.cpp */,
-				A004033B14BE3E4D00FE28CE /* reader.h */,
 				A004033C14BE3E4D00FE28CE /* sa1.cpp */,
 				A004033D14BE3E4D00FE28CE /* sa1.h */,
 				A004033E14BE3E4D00FE28CE /* sa1cpu.cpp */,
@@ -517,6 +515,8 @@
 				A004035914BE3E4D00FE28CE /* srtcemu.h */,
 				26A6C59322AAD25300E06CB5 /* statemanager.cpp */,
 				26A6C59422AAD25300E06CB5 /* statemanager.h */,
+				26B546B022BBEC6200A3A91D /* stream.cpp */,
+				26B546B122BBEC6300A3A91D /* stream.h */,
 				A004035A14BE3E4D00FE28CE /* tile.cpp */,
 				A004035B14BE3E4D00FE28CE /* tile.h */,
 				A004036714BE3E4D00FE28CE /* unzip */,
@@ -958,12 +958,12 @@
 				A004048014BE3E4E00FE28CE /* netplay.cpp in Sources */,
 				A004048114BE3E4E00FE28CE /* obc1.cpp in Sources */,
 				A004048214BE3E4E00FE28CE /* ppu.cpp in Sources */,
-				A004048314BE3E4E00FE28CE /* reader.cpp in Sources */,
 				262B5B8E22A9694F00BB3D52 /* sha256.cpp in Sources */,
 				A004048414BE3E4E00FE28CE /* sa1.cpp in Sources */,
 				A004048514BE3E4E00FE28CE /* sa1cpu.cpp in Sources */,
 				A004048714BE3E4E00FE28CE /* sdd1.cpp in Sources */,
 				A004048814BE3E4E00FE28CE /* sdd1emu.cpp in Sources */,
+				26B546B222BBEC6400A3A91D /* stream.cpp in Sources */,
 				A004048914BE3E4E00FE28CE /* server.cpp in Sources */,
 				A004048A14BE3E4E00FE28CE /* seta.cpp in Sources */,
 				A004048B14BE3E4E00FE28CE /* seta010.cpp in Sources */,

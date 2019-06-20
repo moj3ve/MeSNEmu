@@ -34,7 +34,7 @@ static inline uint8 S9xGetByteFree (uint32 Address)
         return (byte);
     }
 
-    switch ((long) GetAddress)
+    switch ((pint) GetAddress)
     {
     case CMemory::MAP_CPU:
         byte = S9xGetCPU(Address & 0xffff);
@@ -119,7 +119,7 @@ static inline void S9xSetByteFree (uint8 Byte, uint32 Address)
         return;
     }
 
-    switch ((long) SetAddress)
+    switch ((pint) SetAddress)
     {
     case CMemory::MAP_CPU:
         S9xSetCPU(Byte, Address & 0xffff);

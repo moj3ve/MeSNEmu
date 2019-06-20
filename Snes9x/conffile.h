@@ -20,7 +20,6 @@
 #  endif
 #endif
 #include "snes9x.h"
-#include "reader.h"
 
 #ifndef MAX
 #  define MAX(a,b)  ((a) > (b)? (a) : (b))
@@ -35,7 +34,7 @@ class ConfigFile {
 
     // return false on failure
     bool LoadFile(const char *filename);
-    void LoadFile(Reader *r, const char *name=NULL);
+    void LoadFile(Stream *r, const char *name=NULL);
 
     // return false if key does not exist or is empty
     bool Exists(const char *key);

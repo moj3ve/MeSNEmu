@@ -4,16 +4,17 @@
    For further information, consult the LICENSE file in the root directory.
 \*****************************************************************************/
 
-#ifndef _READER_H_
-#define _READER_H_
+#ifdef __cplusplus
+#ifndef _STREAM_H_
+#define _STREAM_H_
 
 #include <string>
 
-class Reader
+class Stream
 {
 	public:
-		Reader (void);
-		virtual ~Reader (void);
+		Stream (void);
+		virtual ~Stream (void);
 		virtual int get_char (void) = 0;
 		virtual char * gets (char *, size_t) = 0;
 		virtual char * getline (void);	// free() when done
@@ -29,11 +30,11 @@ class Reader
 		size_t pos_from_origin_offset(uint8 origin, int32 offset);
 };
 
-class fReader : public Reader
+class fStream : public Stream
 {
 	public:
-		fReader (STREAM);
-		virtual ~fReader (void);
+		fStream (FSTREAM);
+		virtual ~fStream (void);
 		virtual int get_char (void);
 		virtual char * gets (char *, size_t);
 		virtual size_t read (void *, size_t);
@@ -44,7 +45,7 @@ class fReader : public Reader
         virtual void closeStream();
 
 	private:
-		STREAM	fp;
+		FSTREAM	fp;
 };
 
 #ifdef UNZIP_SUPPORT
@@ -56,11 +57,11 @@ class fReader : public Reader
 
 #define unz_BUFFSIZ	1024
 
-class unzReader : public Reader
+class unzStream : public Stream
 {
 	public:
-		unzReader (unzFile &);
-		virtual ~unzReader (void);
+		unzStream (unzFile &);
+		virtual ~unzStream (void);
 		virtual int get_char (void);
 		virtual char * gets (char *, size_t);
 		virtual size_t read (void *, size_t);
@@ -84,7 +85,7 @@ class unzReader : public Reader
 
 #endif
 
-class memStream : public Reader
+class memStream : public Stream
 {
 	public:
         memStream (uint8 *,size_t);
@@ -110,7 +111,7 @@ class memStream : public Reader
 /* dummy stream that always reads 0 and writes nowhere
    but counts bytes written
 */
-class nulStream : public Reader
+class nulStream : public Stream
 {
 	public:
         nulStream (void);
@@ -128,8 +129,9 @@ class nulStream : public Reader
         size_t  bytes_written;
 };
 
-Reader *openStreamFromSTREAM(const char* filename, const char* mode);
-Reader *reopenStreamFromFd(int fd, const char* mode);
+Stream *openStreamFromFSTREAM(const char* filename, const char* mode);
+Stream *reopenStreamFromFd(int fd, const char* mode);
 
 
+#endif
 #endif

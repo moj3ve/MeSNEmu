@@ -146,15 +146,15 @@ static void parse_crosshair_spec (enum crosscontrols ctl, const char *spec)
 
 static bool try_load_config_file (const char *fname, ConfigFile &conf)
 {
-	STREAM	fp;
+	FSTREAM	fp;
 
-	fp = OPEN_STREAM(fname, "r");
+	fp = OPEN_FSTREAM(fname, "r");
 	if (fp)
 	{
 		fprintf(stdout, "Reading config file %s.\n", fname);
-		fReader fS(fp);
+		fStream fS(fp);
 		conf.LoadFile(&fS);
-        CLOSE_STREAM(fp);
+        CLOSE_FSTREAM(fp);
 		return (true);
 	}
 

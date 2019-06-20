@@ -19,7 +19,6 @@
 #include "display.h"
 #include "language.h"
 #include "gfx.h"
-#include "reader.h"
 
 #ifndef min
 #define min(a,b)	(((a) < (b)) ? (a) : (b))
@@ -1025,12 +1024,14 @@ void S9xResetSaveTimer (bool8 dontsave)
 uint32 S9xFreezeSize()
 {
     nulStream stream;
+    S9xFreezeToStream(&stream);
     return stream.size();
 }
 
 bool8 S9xFreezeGameMem (uint8 *buf, uint32 bufSize)
 {
-    memStream S9xFreezeToStream(buf, bufSize);
+    memStream mStream(buf, bufSize);
+	S9xFreezeToStream(&mStream);
 
 	return (TRUE);
 }
@@ -1062,9 +1063,10 @@ bool8 S9xFreezeGame (const char *filename)
 
 int S9xUnfreezeGameMem (const uint8 *buf, uint32 bufSize)
 {
-    memStream S9xUnfreezeFromStream(buf, bufSize);
+    memStream stream(buf, bufSize);
+	int result = S9xUnfreezeFromStream(&stream);
 
-	return (TRUE);
+	return result;
 }
 
 bool8 S9xUnfreezeGame (const char *filename)

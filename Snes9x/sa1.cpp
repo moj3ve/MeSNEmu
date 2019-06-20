@@ -765,7 +765,7 @@ uint8 S9xSA1GetByte (uint32 address)
 		return (*(GetAddress + (address & 0xffff)));
 	}
 
-	switch ((long) GetAddress)
+	switch ((pint) GetAddress)
 	{
 		case CMemory::MAP_PPU:
 			SA1.Cycles += ONE_CYCLE;
@@ -839,7 +839,7 @@ void S9xSA1SetByte (uint8 byte, uint32 address)
 		return;
 	}
 
-	switch ((long) SetAddress)
+	switch ((pint) SetAddress)
 	{
 		case CMemory::MAP_PPU:
 			S9xSetSA1(byte, address & 0xffff);
@@ -947,7 +947,7 @@ void S9xSA1SetPCBase (uint32 address)
 		return;
 	}
 
-	switch ((long) GetAddress)
+	switch ((pint) GetAddress)
 	{
 		case CMemory::MAP_LOROM_SRAM:
 			if ((Memory.SRAMMask & MEMMAP_MASK) != MEMMAP_MASK)
