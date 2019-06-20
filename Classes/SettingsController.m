@@ -482,6 +482,7 @@ typedef enum _SettingsSections
             TableViewNumberCell* c = (TableViewNumberCell*)(cell = [self numberCell]);
             c.textLabel.text = NSLocalizedString(@"SKIP_EVERY", nil);
             if (darkMode == YES) {
+                c.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
                 c.textLabel.textColor = [UIColor whiteColor];
                 c.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }

@@ -444,7 +444,9 @@ static int const FileOrganizationVersionNumber = 1;
     cell.detailTextLabel.text = item.displayDetails;
     if(item.hasDetails) {
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        cell.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
+        if (darkMode == YES) {
+            cell.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
+        }
     }
     else {
         cell.accessoryType = UITableViewCellAccessoryNone;
