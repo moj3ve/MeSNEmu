@@ -427,10 +427,6 @@
 		A00401E214BE3E4D00FE28CE /* Snes9x */ = {
 			isa = PBXGroup;
 			children = (
-				260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */,
-				260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */,
-				260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */,
-				260B587522C6E1D8008C5E37 /* tileimpl.h */,
 				A00401E314BE3E4D00FE28CE /* 65c816.h */,
 				A00401E414BE3E4D00FE28CE /* apu */,
 				262B5B8822A9694E00BB3D52 /* bml.cpp */,
@@ -533,6 +529,10 @@
 				26B546B122BBEC6300A3A91D /* stream.h */,
 				A004035A14BE3E4D00FE28CE /* tile.cpp */,
 				A004035B14BE3E4D00FE28CE /* tile.h */,
+				260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */,
+				260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */,
+				260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */,
+				260B587522C6E1D8008C5E37 /* tileimpl.h */,
 				A004036714BE3E4D00FE28CE /* unzip */,
 			);
 			path = Snes9x;
