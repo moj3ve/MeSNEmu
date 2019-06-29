@@ -283,7 +283,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.Stereo = TRUE;
     Settings.ReverseStereo = TRUE;
     Settings.SoundPlaybackRate = 48000;
-    // Settings.SoundPlaybackRate = 32000;
     Settings.SoundInputRate = 31920;
     Settings.DynamicRateControl = TRUE;
     Settings.SeparateEchoBuffer = FALSE;
