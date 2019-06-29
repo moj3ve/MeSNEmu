@@ -295,10 +295,10 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.Transparency = TRUE;
     Settings.SupportHiRes = TRUE;
     Settings.MaxSpriteTilesPerLine = 34;
+    Settings.TurboSkipFrames = 19;
     Settings.DisplayFrameRate = SI_ShowFPS;
     Settings.AutoDisplayMessages = TRUE;
     Settings.InitialInfoStringTimeout = 200;
-    // Settings.InitialInfoStringTimeout = 120;
     Settings.DumpStreamsMaxFrames = -1;
     
     // Frame timings in 50hz and 60hz cpu mode
@@ -318,11 +318,9 @@ extern "C" int SIStartWithROM(char* rom_filename)
     else {
         Settings.SoundSync = TRUE;
         Settings.SkipFrames = SI_Frameskip;
-        // Settings.TurboSkipFrames = 15;
-        Settings.TurboSkipFrames = 19;
-        Settings.CartAName[0] = 0;
-        Settings.CartBName[0] = 0;
     }
+    Settings.CartAName[0] = 0;
+    Settings.CartBName[0] = 0;
     #ifdef NETPLAY_SUPPORT
         Settings.ServerName[0] = 0;
     #endif
