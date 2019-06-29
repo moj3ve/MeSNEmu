@@ -244,8 +244,8 @@ const char * S9xGetDirectory(enum s9x_getdirtype dirtype)
     static int index = 0;
     static char path[4][PATH_MAX + 1];
     
-    char    inExt[16];
-    char    drive[_MAX_DRIVE + 1], dir[_MAX_DIR + 1], fname[_MAX_FNAME + 1], ext[_MAX_EXT + 1];
+    char inExt[16];
+    char drive[_MAX_DRIVE + 1], dir[_MAX_DIR + 1], fname[_MAX_FNAME + 1], ext[_MAX_EXT + 1];
     
     index++;
     if (index > 3)
