@@ -35,33 +35,32 @@ static uint8 APUROM[64] =
 	0x5D, 0xD0, 0xDB, 0x1F, 0x00, 0x00, 0xC0, 0xFF
 };
 
-namespace spc
-{
-	static apu_callback	sa_callback     = NULL;
-	static void			*extra_data     = NULL;
-
-	static bool8		sound_in_sync   = TRUE;
-	static bool8		sound_enabled   = FALSE;
-
-	static int			buffer_size;
-	static int			lag_master      = 0;
-	static int			lag             = 0;
-
-	static uint8		*landing_buffer = NULL;
-	static uint8		*shrink_buffer  = NULL;
-
-	static Resampler	*resampler      = NULL;
-
-	static int32		reference_time;
-	static uint32		remainder;
-
-	static const int	timing_hack_numerator   = SNES_SPC::tempo_unit;
-	static int			timing_hack_denominator = SNES_SPC::tempo_unit;
-	/* Set these to NTSC for now. Will change to PAL in S9xAPUTimingSetSpeedup
-	   if necessary on game load. */
-	static uint32		ratio_numerator = APU_NUMERATOR_NTSC;
-	static uint32		ratio_denominator = APU_DENOMINATOR_NTSC;
-}
+namespace spc {
+    static apu_callback callback = NULL;
+    static void *callback_data = NULL;
+    
+    static bool8 sound_in_sync = TRUE;
+    static bool8 sound_enabled = FALSE;
+    
+    static int buffer_size;
+    static int lag_master = 0;
+    static int lag = 0;
+    
+    static uint8 *landing_buffer = NULL;
+	static uint8 *shrink_buffer  = NULL;
+    
+    static Resampler *resampler = NULL;
+    
+    static int32 reference_time;
+    static uint32 remainder;
+    
+    static const int timing_hack_numerator = 256;
+    static int timing_hack_denominator = 256;
+    /* Set these to NTSC for now. Will change to PAL in S9xAPUTimingSetSpeedup
+     if necessary on game load. */
+    static uint32 ratio_numerator = APU_NUMERATOR_NTSC;
+    static uint32 ratio_denominator = APU_DENOMINATOR_NTSC;
+} // namespace spc
 
 static void EightBitize (uint8 *, int);
 static void DeStereo (uint8 *, int);
@@ -209,8 +208,8 @@ void S9xFinalizeSamples (void)
 
 void S9xLandSamples (void)
 {
-	if (spc::sa_callback != NULL)
-		spc::sa_callback(spc::extra_data);
+	if (spc::callback != NULL)
+		spc::callback(spc::callback_data);
 	else
 		S9xFinalizeSamples();
 }
@@ -233,8 +232,8 @@ bool8 S9xSyncSound (void)
 
 void S9xSetSamplesAvailableCallback (apu_callback callback, void *data)
 {
-	spc::sa_callback = callback;
-	spc::extra_data  = data;
+	spc::callback = callback;
+	spc::callback_data  = data;
 }
 
 static void UpdatePlaybackRate (void)

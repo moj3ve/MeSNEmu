@@ -145,9 +145,6 @@ static int const FileOrganizationVersionNumber = 1;
 {
   if([[NSUserDefaults standardUserDefaults] integerForKey:FileOrganizationVersion] != FileOrganizationVersionNumber)
     [self moveLegacyFilesToDocumentsFolder];
-    
-  BOOL searching = self.searchDisplayController.isActive;
-  NSString* filterString = self.searchDisplayController.searchBar.text;
   
   NSFileManager* fm = [NSFileManager defaultManager];
   
@@ -229,8 +226,6 @@ static int const FileOrganizationVersionNumber = 1;
     unichar lastChar = '\0';
     for(FileListItem* file in proposedFileList)
     {
-      if(searching == YES && [file.fileName rangeOfString:filterString options:NSCaseInsensitiveSearch].location == NSNotFound)
-        continue;
       
       unichar firstLetter = [[file.displayName uppercaseString] characterAtIndex:0];
       if(firstLetter < 'A' || firstLetter > 'Z')
@@ -305,20 +300,14 @@ static int const FileOrganizationVersionNumber = 1;
   }
   
   BOOL different = NO;
-  if(searching == YES)
-    different = ([_filteredRomList count] != [tempItemList count]);
-  else
-    different = ([_romList count] != [tempItemList count]);
+  different = ([_romList count] != [tempItemList count]);
   
   if(different == NO)
   {
     for(int i=0; i<[tempItemList count]; i++)
     {
       FileListItem* romA = nil;
-      if(searching == YES)
-        romA = [_filteredRomList objectAtIndex:i];
-      else
-        romA = [_romList objectAtIndex:i];
+      romA = [_romList objectAtIndex:i];
       FileListItem* romB = [tempItemList objectAtIndex:i];
       if([romA.fileName isEqualToString:romB.fileName] == NO)
       {
@@ -334,17 +323,6 @@ static int const FileOrganizationVersionNumber = 1;
   }
   if(different)
   {
-    if(searching == YES)
-    {
-      [_filteredRomList release];
-      _filteredRomList = [tempItemList copy];
-      [_filteredSectionTitles release];
-      _filteredSectionTitles = [tempSectionTitles copy];
-      [_filteredSectionMarkers release];
-      _filteredSectionMarkers = [tempSectionMarkers copy];
-    }
-    else
-    {
       [_romList release];
       _romList = [tempItemList copy];
       [_sectionTitles release];
@@ -353,7 +331,6 @@ static int const FileOrganizationVersionNumber = 1;
       _sectionMarkers = [tempSectionMarkers copy];
       if(updateTable == YES)
         [self.tableView reloadData];
-    }
   }
 }
 - (void)reloadROMList
@@ -440,6 +417,7 @@ static int const FileOrganizationVersionNumber = 1;
         cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.detailTextLabel.textColor = [UIColor whiteColor];
+        tableView.separatorColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
     }
     cell.detailTextLabel.text = item.displayDetails;
     if(item.hasDetails) {
@@ -478,7 +456,6 @@ static int const FileOrganizationVersionNumber = 1;
       emulator.initialSaveFileName = item.fileName;
     }
   }
-  [self.searchDisplayController setActive:NO];
   [self.navigationController presentViewController:emulator animated:YES completion:nil];
   [emulator release];
 }
@@ -537,7 +514,7 @@ static int const FileOrganizationVersionNumber = 1;
         [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
         [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0]];
         [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
-        self.view.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.9];
+        self.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
     }
   }
   return self;
