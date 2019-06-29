@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260B587822C6E1D8008C5E37 /* tileimpl-h2x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */; };
+		260B587922C6E1D8008C5E37 /* tileimpl-n2x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */; };
+		260B587A22C6E1D8008C5E37 /* tileimpl-n1x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */; };
 		26210DA4223F26F0009708E9 /* YellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA0223F26F0009708E9 /* YellowButton.png */; };
 		26210DA5223F26F0009708E9 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA1223F26F0009708E9 /* RedButton.png */; };
 		26210DA6223F26F0009708E9 /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA2223F26F0009708E9 /* GreenButton.png */; };
@@ -142,6 +145,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-h2x1.cpp"; sourceTree = "<group>"; };
+		260B587522C6E1D8008C5E37 /* tileimpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileimpl.h; sourceTree = "<group>"; };
+		260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-n2x1.cpp"; sourceTree = "<group>"; };
+		260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-n1x1.cpp"; sourceTree = "<group>"; };
 		26210DA0223F26F0009708E9 /* YellowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowButton.png; sourceTree = "<group>"; };
 		26210DA1223F26F0009708E9 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
 		26210DA2223F26F0009708E9 /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButton.png; sourceTree = "<group>"; };
@@ -420,6 +427,10 @@
 		A00401E214BE3E4D00FE28CE /* Snes9x */ = {
 			isa = PBXGroup;
 			children = (
+				260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */,
+				260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */,
+				260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */,
+				260B587522C6E1D8008C5E37 /* tileimpl.h */,
 				A00401E314BE3E4D00FE28CE /* 65c816.h */,
 				A00401E414BE3E4D00FE28CE /* apu */,
 				262B5B8822A9694E00BB3D52 /* bml.cpp */,
@@ -901,6 +912,7 @@
 				A0995BD714B508AC00F7C44F /* iOSAudio.cpp in Sources */,
 				A0995C1214B525D200F7C44F /* Snes9xMain.cpp in Sources */,
 				A0995F8014B679FF00F7C44F /* Snes9xCallbacks.cpp in Sources */,
+				260B587822C6E1D8008C5E37 /* tileimpl-h2x1.cpp in Sources */,
 				A0995F8614B6884F00F7C44F /* SIScreenDelegate.m in Sources */,
 				A0B8687E14BE3B6800663EBE /* DPadView.m in Sources */,
 				A0B8687F14BE3B6800663EBE /* EmulatorController.m in Sources */,
@@ -918,6 +930,7 @@
 				A00403C714BE3E4D00FE28CE /* SPC_Filter.cpp in Sources */,
 				A00403C814BE3E4D00FE28CE /* bsx.cpp in Sources */,
 				A00403C914BE3E4D00FE28CE /* c4.cpp in Sources */,
+				260B587A22C6E1D8008C5E37 /* tileimpl-n1x1.cpp in Sources */,
 				A00403CA14BE3E4D00FE28CE /* c4emu.cpp in Sources */,
 				A00403CB14BE3E4D00FE28CE /* cheats.cpp in Sources */,
 				A00403CC14BE3E4D00FE28CE /* cheats2.cpp in Sources */,
@@ -935,6 +948,7 @@
 				A00403E214BE3E4D00FE28CE /* dsp2.cpp in Sources */,
 				A00403E314BE3E4D00FE28CE /* dsp3.cpp in Sources */,
 				A00403E414BE3E4D00FE28CE /* dsp4.cpp in Sources */,
+				260B587922C6E1D8008C5E37 /* tileimpl-n2x1.cpp in Sources */,
 				A00403E514BE3E4D00FE28CE /* 2xsai.cpp in Sources */,
 				A00403E614BE3E4D00FE28CE /* blit.cpp in Sources */,
 				A00403E714BE3E4D00FE28CE /* epx.cpp in Sources */,

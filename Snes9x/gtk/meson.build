@@ -350,6 +350,9 @@ srcs += [
  '../debug.cpp',
  '../sdd1.cpp',
  '../tile.cpp',
+ '../tileimpl-n1x1.cpp',
+ '../tileimpl-n2x1.cpp',
+ '../tileimpl-h2x1.cpp',
  '../srtc.cpp',
  '../gfx.cpp',
  '../memmap.cpp',
@@ -401,7 +404,7 @@ libjma = static_library('jma',
                         cpp_args: [args, '-fexceptions'],
                         include_directories: include_directories(includes))
 
-sourcify = executable('sourcify', 'src/sourcify.c')
+sourcify = executable('sourcify', 'src/sourcify.c', native: true)
 gtk_snes9x_ui_cpp = custom_target('sourcify', 
                                   input: 'src/snes9x.ui', 
                                   output: 'gtk_snes9x_ui.cpp',
