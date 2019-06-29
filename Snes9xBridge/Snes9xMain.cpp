@@ -326,11 +326,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
   
 	CPU.Flags = 0;
   
-	/* S9xLoadConfigFiles(argv, argc);
-	rom_filename = S9xParseArgs(argv, argc);
-  
-	make_snes9x_dirs();*/
-  
 	if (!Memory.Init() || !S9xInitAPU())
 	{
 		fprintf(stderr, "Snes9x: Memory allocation failure - not enough RAM/virtual memory available.\nExiting...\n");
@@ -348,7 +343,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
   
   S9xUnmapAllControls();
   S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
-  //S9xSetController(1, CTL_JOYPAD, 1, 0, 0, 0);
   
   s9xcommand_t	cmd;
   

@@ -14,10 +14,10 @@
 #include "../Snes9x/controls.h"
 #include "../Snes9x/display.h"
 
-#define MAX_MESSAGE_LEN (36 * 3)
-
 #include "Snes9xMain.h"
 #include "iOSAudio.h"
+
+#define MAX_MESSAGE_LEN (36 * 3)
 
 #pragma mark Defines
 
@@ -87,12 +87,10 @@ bool8 S9xOpenSoundDevice(void)
         return FALSE;
 }
 
-/* eke-eke */
 void S9xInitSync()
 {
+    
 }
-
-/*** Synchronisation ***/
 
 void S9xSyncSpeed() {
     struct timeval now;
