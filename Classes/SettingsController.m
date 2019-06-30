@@ -538,8 +538,7 @@ typedef enum _SettingsSections
             cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier] autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        int row = (int)indexPath.row;
-        if(row == 0)
+        if([indexPath compare:_aboutIndexPath] == NSOrderedSame)
         {
             cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);
             if (darkMode == YES) {
@@ -557,7 +556,7 @@ typedef enum _SettingsSections
                                          kEmulatorPortName,
                                          versionString];
         }
-        else if(row == 1)
+        else if([indexPath compare:_coreIndexPath] == NSOrderedSame)
         {
             cell.textLabel.text = NSLocalizedString(@"CORE", nil);
             if (darkMode == YES) {
@@ -567,7 +566,7 @@ typedef enum _SettingsSections
             }
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"CORE_NAME", nil), [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
         }
-        else if(row == 2)
+        else if([indexPath compare:_developerIndexPath] == NSOrderedSame)
         {
             cell.textLabel.text = NSLocalizedString(@"DEVELOPER", nil);
             if (darkMode == YES) {
@@ -587,7 +586,7 @@ typedef enum _SettingsSections
     NSInteger section = indexPath.section;
     if(section == SettingsSectionController)
     {
-        if(indexPath.row == 0)
+        if([indexPath compare:_controllerIndexPath] == NSOrderedSame)
         {
             MultipleChoicePicker* c = [[MultipleChoicePicker alloc] initWithStyle:UITableViewStyleGrouped];
             c.title = NSLocalizedString(@"CONTROLLER", nil);
@@ -661,6 +660,10 @@ typedef enum _SettingsSections
         
         _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
         _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionController] retain];
+        
+        _aboutIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionAbout] retain];
+        _coreIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionAbout] retain];
+        _developerIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
     }
     else
     {
@@ -672,6 +675,10 @@ typedef enum _SettingsSections
         _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
         
         _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
+        
+        _aboutIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionAbout] retain];
+        _coreIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionAbout] retain];
+        _developerIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
     }
 }
 

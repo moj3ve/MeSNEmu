@@ -4,8 +4,6 @@
 
 extern NSString* const kSettingsChangedNotification;
 
-extern NSString* const kSettingsBluetoothController;
-
 extern NSString* const kSettingsFullScreen;
 extern NSString* const kSettingsDarkMode;
 extern NSString* const kSettingsRYGBButtons;
@@ -14,9 +12,11 @@ extern NSString* const kSettingsSmoothScaling;
 extern NSString* const kSettingsShowFPS;
 
 extern NSString* const kSettingsSound;
-extern NSString* const kSettingsLRThree;
 extern NSString* const kSettingsAutoFrameskip;
 extern NSString* const kSettingsFrameskipValue;
+
+extern NSString* const kSettingsBluetoothController;
+extern NSString* const kSettingsLRThree;
 
 @class SettingsController;
 
@@ -30,22 +30,26 @@ extern NSString* const kSettingsFrameskipValue;
 
 @interface SettingsController : UITableViewController
 {
-  BOOL _hideSettingsThatRequireReset;
-  BOOL _changed;
+    BOOL _hideSettingsThatRequireReset;
+    BOOL _changed;
   
-  NSIndexPath* _fullScreenIndexPath;
-  NSIndexPath* _darkModeIndexPath;
-  NSIndexPath* _rygbButtonsIndexPath;
+    NSIndexPath* _fullScreenIndexPath;
+    NSIndexPath* _darkModeIndexPath;
+    NSIndexPath* _rygbButtonsIndexPath;
     
-  NSIndexPath* _smoothScalingIndexPath;
-  NSIndexPath* _showFPSIndexPath;
+    NSIndexPath* _smoothScalingIndexPath;
+    NSIndexPath* _showFPSIndexPath;
 
-  NSIndexPath* _soundIndexPath;
-  NSIndexPath* _autoFrameskipIndexPath;
-  NSIndexPath* _frameskipValueIndexPath;
+    NSIndexPath* _soundIndexPath;
+    NSIndexPath* _autoFrameskipIndexPath;
+    NSIndexPath* _frameskipValueIndexPath;
     
-  NSIndexPath* _controllerIndexPath;
-  NSIndexPath* _lrThreeIndexPath;
+    NSIndexPath* _controllerIndexPath;
+    NSIndexPath* _lrThreeIndexPath;
+    
+    NSIndexPath* _aboutIndexPath;
+    NSIndexPath* _coreIndexPath;
+    NSIndexPath* _developerIndexPath;
   
   id<SettingsControllerDelegate> _delegate;
 }
