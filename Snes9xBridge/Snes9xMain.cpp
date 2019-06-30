@@ -271,7 +271,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.SnapshotScreenshots = TRUE;
     Settings.StopEmulation = TRUE;
     Settings.WrongMovieStateProtection = TRUE;
-    Settings.OpenGLEnable = TRUE;
     
     Settings.HDMATimingHack = 100;
     Settings.BlockInvalidVRAMAccessMaster = TRUE;
@@ -282,8 +281,8 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
     Settings.ReverseStereo = TRUE;
-    Settings.SoundPlaybackRate = 48000;
-    Settings.SoundInputRate = 31920;
+    Settings.SoundPlaybackRate = 32040;
+    Settings.SoundInputRate = 31947;
     Settings.DynamicRateControl = TRUE;
     Settings.SeparateEchoBuffer = FALSE;
     
@@ -297,7 +296,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.TurboSkipFrames = 19;
     Settings.DisplayFrameRate = SI_ShowFPS;
     Settings.AutoDisplayMessages = TRUE;
-    Settings.InitialInfoStringTimeout = 200;
+    Settings.InitialInfoStringTimeout = 120;
     Settings.DumpStreamsMaxFrames = -1;
     
     // Frame timings in 50hz and 60hz cpu mode
@@ -360,10 +359,6 @@ extern "C" int SIStartWithROM(char* rom_filename)
 	ASSIGN_BUTTONf(SI_BUTTON_RIGHT,     "Joypad1 Right");
   
 	S9xReportControllers();
-  
-/* #ifdef GFX_MULTI_FORMAT
-	S9xSetRenderPixelFormat(RGB565);
-#endif */
   
 	uint32	saved_flags = CPU.Flags;
 	bool8	loaded = FALSE;
