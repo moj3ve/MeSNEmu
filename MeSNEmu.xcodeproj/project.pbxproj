@@ -183,10 +183,7 @@
 		A00401E814BE3E4D00FE28CE /* blargg_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_config.h; sourceTree = "<group>"; };
 		A00401E914BE3E4D00FE28CE /* blargg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_endian.h; sourceTree = "<group>"; };
 		A00401EA14BE3E4D00FE28CE /* blargg_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_source.h; sourceTree = "<group>"; };
-		A00401EB14BE3E4D00FE28CE /* hermite_resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hermite_resampler.h; sourceTree = "<group>"; };
-		A00401ED14BE3E4D00FE28CE /* linear_resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = linear_resampler.h; sourceTree = "<group>"; };
 		A00401EE14BE3E4D00FE28CE /* resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resampler.h; sourceTree = "<group>"; };
-		A00401EF14BE3E4D00FE28CE /* ring_buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ring_buffer.h; sourceTree = "<group>"; };
 		A00401F014BE3E4D00FE28CE /* SNES_SPC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC.cpp; sourceTree = "<group>"; };
 		A00401F114BE3E4D00FE28CE /* SNES_SPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNES_SPC.h; sourceTree = "<group>"; };
 		A00401F214BE3E4D00FE28CE /* SNES_SPC_misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC_misc.cpp; sourceTree = "<group>"; };
@@ -547,10 +544,7 @@
 				A00401E814BE3E4D00FE28CE /* blargg_config.h */,
 				A00401E914BE3E4D00FE28CE /* blargg_endian.h */,
 				A00401EA14BE3E4D00FE28CE /* blargg_source.h */,
-				A00401EB14BE3E4D00FE28CE /* hermite_resampler.h */,
-				A00401ED14BE3E4D00FE28CE /* linear_resampler.h */,
 				A00401EE14BE3E4D00FE28CE /* resampler.h */,
-				A00401EF14BE3E4D00FE28CE /* ring_buffer.h */,
 				A00401F014BE3E4D00FE28CE /* SNES_SPC.cpp */,
 				A00401F114BE3E4D00FE28CE /* SNES_SPC.h */,
 				A00401F214BE3E4D00FE28CE /* SNES_SPC_misc.cpp */,

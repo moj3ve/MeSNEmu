@@ -1,5 +1,7 @@
 // snes_spc 0.9.0. http://www.slack.net/~ant/
 
+#include "snes9x.h"
+
 #include "SPC_DSP.h"
 
 #include "blargg_endian.h"
@@ -74,7 +76,6 @@ static BOOST::uint8_t const initial_regs [SPC_DSP::register_count] =
 
 void SPC_DSP::set_output( sample_t* out, int size )
 {
-	require( (size & 1) == 0 ); // must be even
 	if ( !out )
 	{
 		out  = m.extra;
@@ -128,24 +129,43 @@ static short const gauss [512] =
 
 inline int SPC_DSP::interpolate( voice_t const* v )
 {
-	// Make pointers into gaussian based on fractional position between samples
-	int offset = v->interp_pos >> 4 & 0xFF;
-	short const* fwd = gauss + 255 - offset;
-	short const* rev = gauss       + offset; // mirror left half of gaussian
-	
-	int const* in = &v->buf [(v->interp_pos >> 12) + v->buf_pos];
-	int out;
-	out  = (fwd [  0] * in [0]) >> 11;
-	out += (fwd [256] * in [1]) >> 11;
-	out += (rev [256] * in [2]) >> 11;
-	out = (int16_t) out;
-	out += (rev [  0] * in [3]) >> 11;
-	
-	CLAMP16( out );
-	out &= ~1;
-	return out;
+    int out;
+    int const* in = &v->buf [(v->interp_pos >> 12) + v->buf_pos];
+    switch (Settings.InterpolationMethod)
+    {
+    case 0: // raw
+    {
+        out = v->buf [(v->interp_pos >> 12) + v->buf_pos] & ~1;
+        break;
+    }
+    case 1: // linear interpolation
+    {
+        int fract = v->interp_pos & 0xFFF;
+        out  = (0x1000 - fract) * in [0];
+        out +=           fract  * in [1];
+        out >>= 12;
+        break;
+    }
+    default:
+    case 2: // Original gaussian filter
+    {
+        // Make pointers into gaussian based on fractional position between samples
+        int offset = v->interp_pos >> 4 & 0xFF;
+        short const* fwd = gauss + 255 - offset;
+        short const* rev = gauss       + offset; // mirror left half of gaussian
+        int const* in = &v->buf [(v->interp_pos >> 12) + v->buf_pos];
+        out  = (fwd [  0] * in [0]) >> 11;
+        out += (fwd [256] * in [1]) >> 11;
+        out += (rev [256] * in [2]) >> 11;
+        out = (int16_t) out;
+        out += (rev [  0] * in [3]) >> 11;
+        CLAMP16( out );
+        out &= ~1;
+        break;
+    }
+    }
+    return out;
 }
-
 
 //// Counters
 
@@ -518,7 +538,6 @@ VOICE_CLOCK( V4 )
 		if ( (v->brr_offset += 2) >= brr_block_size )
 		{
 			// Start decoding next BRR block
-			assert( v->brr_offset == brr_block_size );
 			v->brr_addr = (v->brr_addr + brr_block_size) & 0xFFFF;
 			if ( m.t_brr_header & 1 )
 			{
@@ -593,7 +612,7 @@ VOICE_CLOCK(V9_V6_V3) { voice_V9(v); voice_V6(v+1); voice_V3(v+2); }
 //// Echo
 
 // Current echo buffer pointer for left/right channel
-#define ECHO_PTR( ch )      (&m.ram [m.t_echo_ptr + ch * 2])
+#define ECHO_PTR( ch )      ((Settings.SeparateEchoBuffer) ? (&m.separate_echo_buffer [m.t_echo_ptr + ch * 2]) : (&m.ram [m.t_echo_ptr + ch * 2]))
 
 // Sample in echo history buffer, where 0 is the oldest
 #define ECHO_FIR( i )       (m.echo_hist_pos [i])
@@ -605,7 +624,11 @@ VOICE_CLOCK(V9_V6_V3) { voice_V9(v); voice_V6(v+1); voice_V3(v+2); }
 
 inline void SPC_DSP::echo_read( int ch )
 {
-	int s = GET_LE16SA( ECHO_PTR( ch ) );
+	int s;
+	if ( m.t_echo_ptr >= 0xffc0 && rom_enabled )
+		s = GET_LE16SA( &hi_ram [m.t_echo_ptr + ch * 2 - 0xffc0] );
+	else
+		s = GET_LE16SA( ECHO_PTR( ch ) );
 	// second copy simplifies wrap-around handling
 	ECHO_FIR( 0 ) [ch] = ECHO_FIR( 8 ) [ch] = s >> 1;
 }
@@ -800,8 +823,6 @@ PHASE(31)  V(V4,0)       V(V1,2)\
 
 void SPC_DSP::run( int clocks_remain )
 {
-	require( clocks_remain > 0 );
-	
 	int const phase = m.phase;
 	m.phase = (phase + clocks_remain) & 31;
 	switch ( phase )
@@ -860,6 +881,8 @@ void SPC_DSP::soft_reset_common()
 	m.echo_offset        = 0;
 	m.phase              = 0;
 	
+	memset(m.separate_echo_buffer, 0, 0x10000);
+
 	init_counter();
 
 	for (int i = 0; i < voice_count; i++)
