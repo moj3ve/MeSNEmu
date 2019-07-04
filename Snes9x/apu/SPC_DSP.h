@@ -72,7 +72,7 @@ public:
 
 	int     stereo_switch;
 	int     take_spc_snapshot;
-    int     rom_enabled;
+	int     rom_enabled;
 	uint8_t *rom, *hi_ram;
 	void    (*spc_snapshot_callback) (void);
 
