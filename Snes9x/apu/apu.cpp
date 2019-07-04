@@ -4,7 +4,7 @@
    For further information, consult the LICENSE file in the root directory.
 \*****************************************************************************/
 
-#include <math.h>
+#include <cmath>
 #include "../snes9x.h"
 #include "apu.h"
 #include "../msu1.h"
