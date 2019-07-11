@@ -344,7 +344,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     S9xUnmapAllControls();
     S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
   
-    s9xcommand_t	cmd;
+    s9xcommand_t cmd;
   
 	ASSIGN_BUTTONf(SI_BUTTON_X,         "Joypad1 X");
 	ASSIGN_BUTTONf(SI_BUTTON_A,         "Joypad1 A");
