@@ -298,6 +298,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.AutoDisplayMessages = TRUE;
     Settings.InitialInfoStringTimeout = 120;
     Settings.DumpStreamsMaxFrames = -1;
+    Settings.DynamicRateControl = TRUE;
     
     // Frame timings in 50hz and 60hz cpu mode
     Settings.FrameTimePAL = 20000;
