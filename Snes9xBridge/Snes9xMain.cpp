@@ -334,17 +334,17 @@ extern "C" int SIStartWithROM(char* rom_filename)
 		exit(1);
 	}
   
-  int samplecount = Settings.SoundPlaybackRate/(Settings.PAL ? 50 : 60);
-  int soundBufferSize = samplecount<<(1+(Settings.Stereo?1:0));
-  S9xInitSound(soundBufferSize, 0);
-	S9xSetSoundMute(TRUE);
+    int samplecount = Settings.SoundPlaybackRate/(Settings.PAL ? 50 : 60);
+    int soundBufferSize = samplecount<<(1+(Settings.Stereo?1:0));
+    S9xInitSound(soundBufferSize, 0);
+    S9xSetSoundMute(TRUE);
   
-  S9xReset();
+    S9xReset();
   
-  S9xUnmapAllControls();
-  S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
+    S9xUnmapAllControls();
+    S9xSetController(0, CTL_JOYPAD, 0, 0, 0, 0);
   
-  s9xcommand_t	cmd;
+    s9xcommand_t	cmd;
   
 	ASSIGN_BUTTONf(SI_BUTTON_X,         "Joypad1 X");
 	ASSIGN_BUTTONf(SI_BUTTON_A,         "Joypad1 A");
