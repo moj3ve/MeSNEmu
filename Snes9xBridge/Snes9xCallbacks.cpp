@@ -253,20 +253,20 @@ const char * S9xGetDirectory(enum s9x_getdirtype dirtype)
     
     switch (dirtype)
     {
-        case SNAPSHOT_DIR:        strcpy(inExt, ".frz");    break;
-        case SRAM_DIR:            strcpy(inExt, ".srm");    break;
-        case SCREENSHOT_DIR:    strcpy(inExt, ".png");    break;
-        case SPC_DIR:            strcpy(inExt, ".spc");    break;
-        case CHEAT_DIR:            strcpy(inExt, ".cht");    break;
-        case BIOS_DIR:            strcpy(inExt, ".bio");    break;
-        case LOG_DIR:            strcpy(inExt, ".log");    break;
-        default:                strcpy(inExt, ".xxx");    break;
+        case SNAPSHOT_DIR: strcpy(inExt, ".frz"); break;
+        case SRAM_DIR: strcpy(inExt, ".srm"); break;
+        case SCREENSHOT_DIR: strcpy(inExt, ".png"); break;
+        case SPC_DIR: strcpy(inExt, ".spc"); break;
+        case CHEAT_DIR: strcpy(inExt, ".cht"); break;
+        case BIOS_DIR: strcpy(inExt, ".bio"); break;
+        case LOG_DIR: strcpy(inExt, ".log"); break;
+        default: strcpy(inExt, ".xxx"); break;
     }
     
     _splitpath(S9xGetFilename(inExt, dirtype), drive, dir, fname, ext);
     _makepath(path[index], drive, dir, "", "");
     
-    int    l = strlen(path[index]);
+    int l = strlen(path[index]);
     if (l > 1)
         path[index][l - 1] = 0;
     

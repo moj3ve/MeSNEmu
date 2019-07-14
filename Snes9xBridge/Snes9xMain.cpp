@@ -304,7 +304,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.FrameTimeNTSC = 16667;
     
     Settings.SuperFXClockMultiplier = 100;
-    Settings.OverclockMode = 0;
+    Settings.OverclockMode = 3; // 3 Maybe to high, might have to go down to 2 (0 - None, 1 - Min, 2 - Medium, 3 - Max)
     Settings.OneClockCycle = 6;
     Settings.OneSlowClockCycle = 8;
     Settings.TwoClockCycles = 12;
