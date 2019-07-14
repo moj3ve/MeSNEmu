@@ -67,78 +67,78 @@ static int const FileOrganizationVersionNumber = 1;
 
 - (void)moveLegacyFilesToDocumentsFolder
 {
-  NSFileManager* fm = [NSFileManager defaultManager];
-  // SRAM
-  NSString* sramPath = [_romPath stringByAppendingPathComponent:@"SRAM"];
-  if([sramPath compare:_romPath] != NSOrderedSame)
-  {
-    NSArray* sramList = [fm contentsOfDirectoryAtPath:sramPath error:nil];
-    for(NSString* file in sramList)
-      [fm moveItemAtPath:[sramPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:file] error:nil];
-    [fm removeItemAtPath:sramPath error:nil];
-  }
-  // Saves
-  NSString* savesPath = [SaveManager legacy_pathForSaveStates];
-  if([savesPath compare:_romPath] != NSOrderedSame)
-  {
-    NSArray* savesList = [fm contentsOfDirectoryAtPath:savesPath error:nil];
-    for(NSString* file in savesList)
-      [fm moveItemAtPath:[savesPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:file] error:nil];
-    [fm removeItemAtPath:savesPath error:nil];
-  }
-  
-  // Running Saves
-  NSString* runningSavesPath = [SaveManager legacy_pathForRunningStates];
-  if([runningSavesPath compare:_romPath] != NSOrderedSame)
-  {
-    NSArray* runningSavesList = [fm contentsOfDirectoryAtPath:runningSavesPath error:nil];
-    for(NSString* file in runningSavesList)
-      [fm moveItemAtPath:[runningSavesPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:file] error:nil];
-    [fm removeItemAtPath:runningSavesPath error:nil];
-  }
-  
-  // renaming saves .### to .###.frz
-  NSArray* fileList = [fm contentsOfDirectoryAtPath:_romPath error:nil];
-  for(NSString* file in fileList)
-  {
-    NSString* extension = [file pathExtension];
-    if([extension length] == 3)
+    NSFileManager* fm = [NSFileManager defaultManager];
+    // SRAM
+    NSString* sramPath = [_romPath stringByAppendingPathComponent:@"SRAM"];
+    if([sramPath compare:_romPath] != NSOrderedSame)
     {
-      unichar char0 = [extension characterAtIndex:0];
-      unichar char1 = [extension characterAtIndex:1];
-      unichar char2 = [extension characterAtIndex:2];
-      if(char0 >= '0' && char0 <= '9'
-         && char1 >= '0' && char1 <= '9'
-         && char2 >= '0' && char2 <= '9')
-      {
-        [fm moveItemAtPath:[_romPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:[file stringByAppendingPathExtension:@"frz"]] error:nil];
-      }
+        NSArray* sramList = [fm contentsOfDirectoryAtPath:sramPath error:nil];
+        for(NSString* file in sramList)
+            [fm moveItemAtPath:[sramPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:file] error:nil];
+        [fm removeItemAtPath:sramPath error:nil];
     }
-  }
-  
-  [[NSUserDefaults standardUserDefaults] setInteger:FileOrganizationVersionNumber forKey:FileOrganizationVersion];
+    // Saves
+    NSString* savesPath = [SaveManager legacy_pathForSaveStates];
+    if([savesPath compare:_romPath] != NSOrderedSame)
+    {
+        NSArray* savesList = [fm contentsOfDirectoryAtPath:savesPath error:nil];
+        for(NSString* file in savesList)
+            [fm moveItemAtPath:[savesPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:file] error:nil];
+        [fm removeItemAtPath:savesPath error:nil];
+    }
+    
+    // Running Saves
+    NSString* runningSavesPath = [SaveManager legacy_pathForRunningStates];
+    if([runningSavesPath compare:_romPath] != NSOrderedSame)
+    {
+        NSArray* runningSavesList = [fm contentsOfDirectoryAtPath:runningSavesPath error:nil];
+        for(NSString* file in runningSavesList)
+            [fm moveItemAtPath:[runningSavesPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:file] error:nil];
+        [fm removeItemAtPath:runningSavesPath error:nil];
+    }
+    
+    // renaming saves .### to .###.frz
+    NSArray* fileList = [fm contentsOfDirectoryAtPath:_romPath error:nil];
+    for(NSString* file in fileList)
+    {
+        NSString* extension = [file pathExtension];
+        if([extension length] == 3)
+        {
+            unichar char0 = [extension characterAtIndex:0];
+            unichar char1 = [extension characterAtIndex:1];
+            unichar char2 = [extension characterAtIndex:2];
+            if(char0 >= '0' && char0 <= '9'
+               && char1 >= '0' && char1 <= '9'
+               && char2 >= '0' && char2 <= '9')
+            {
+                [fm moveItemAtPath:[_romPath stringByAppendingPathComponent:file] toPath:[_romPath stringByAppendingPathComponent:[file stringByAppendingPathExtension:@"frz"]] error:nil];
+            }
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setInteger:FileOrganizationVersionNumber forKey:FileOrganizationVersion];
 }
 
 - (NSArray*)relatedFilesForROMNamed:(NSString*)romName
 {
-  NSFileManager* fm = [NSFileManager defaultManager];
-  NSArray* filesList = [fm contentsOfDirectoryAtPath:_romPath error:nil];
-  NSMutableArray* list = [NSMutableArray array];
-  NSString* romNameWithoutExtension = [romName stringByDeletingPathExtension];
-  for(NSString* file in filesList)
-  {
-    if([file rangeOfString:romNameWithoutExtension].location == 0)
+    NSFileManager* fm = [NSFileManager defaultManager];
+    NSArray* filesList = [fm contentsOfDirectoryAtPath:_romPath error:nil];
+    NSMutableArray* list = [NSMutableArray array];
+    NSString* romNameWithoutExtension = [romName stringByDeletingPathExtension];
+    for(NSString* file in filesList)
     {
-      NSString* extension = [[file pathExtension] lowercaseString];
-      if([FileListItem isROMExtension:extension] == YES)
-        [list addObject:file];
-      else if([extension compare:@"srm"] == NSOrderedSame)
-        [list addObject:file];
-      else if([extension compare:@"frz"] == NSOrderedSame)
-        [list addObject:file];
+        if([file rangeOfString:romNameWithoutExtension].location == 0)
+        {
+            NSString* extension = [[file pathExtension] lowercaseString];
+            if([FileListItem isROMExtension:extension] == YES)
+                [list addObject:file];
+            else if([extension compare:@"srm"] == NSOrderedSame)
+                [list addObject:file];
+            else if([extension compare:@"frz"] == NSOrderedSame)
+                [list addObject:file];
+        }
     }
-  }
-  return [[list copy] autorelease];
+    return [[list copy] autorelease];
 }
 
 - (void)reloadROMList:(BOOL)updateTable
