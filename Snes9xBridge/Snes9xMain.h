@@ -72,6 +72,7 @@ void SISaveSRAM();
 
 // Notifications to the emulator
 // =============================
+void SIMakeRomInfoText(char* rom_filename, char *romtext);
   
 // Updates the emulator structures with the new settings defined by the convenience functions
 void SIUpdateSettings();

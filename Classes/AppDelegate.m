@@ -52,7 +52,7 @@
         }
         
         UIAlertAction* okayButton = [UIAlertAction
-                                     actionWithTitle:@"Okay"
+                                     actionWithTitle:NSLocalizedString(@"OKAY", nil)
                                      style:UIAlertActionStyleDefault
                                      handler:^(UIAlertAction * action) {
                                          alertWindow.hidden = YES;

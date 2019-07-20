@@ -2,7 +2,7 @@
 
 @interface TableViewSwitchCell : UITableViewCell
 {
-  UISwitch* _switch;
+    UISwitch* _switch;
 }
 
 @property (readonly) UISwitch* switchView;

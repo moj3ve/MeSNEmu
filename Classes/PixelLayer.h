@@ -3,17 +3,17 @@
 
 @interface PixelLayer : CALayer
 {
-  unsigned char* _imageBuffer;
-  unsigned char* _imageBufferAlt;
-  unsigned int _bufferWidth;
-  unsigned int _bufferHeight;
-  unsigned short _bufferBitsPerComponent;
-  unsigned int _bufferBytesPerRow;
-  CGBitmapInfo _bufferBitmapInfo;
-  
-  CGContextRef _bitmapContext;
-  CGContextRef _bitmapContextAlt;
-  BOOL _displayMainBuffer;
+    unsigned char* _imageBuffer;
+    unsigned char* _imageBufferAlt;
+    unsigned int _bufferWidth;
+    unsigned int _bufferHeight;
+    unsigned short _bufferBitsPerComponent;
+    unsigned int _bufferBytesPerRow;
+    CGBitmapInfo _bufferBitmapInfo;
+    
+    CGContextRef _bitmapContext;
+    CGContextRef _bitmapContextAlt;
+    BOOL _displayMainBuffer;
 }
 
 @property (readonly) unsigned char* imageBuffer;

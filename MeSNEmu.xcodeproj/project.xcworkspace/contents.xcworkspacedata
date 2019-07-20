@@ -2,6 +2,91 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../Artwork/BlueButton.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/ButtonWide.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/DPadButton.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/GreenButton.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/LightPurpleButton.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/LRButton.png">
+   </FileRef>
+   <Group
+      location = "group:../Artwork/NumberControl"
+      name = "NumberControl">
+      <FileRef
+         location = "group:ButtonNumberDefault-7@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberPlusDown-7.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberDefaultDown-7@3x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberPlus-7.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberDefaultDown-7@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberDefault-7@3x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberDefaultDown-7.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberPlus-7@3x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberMinusDown-7.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberPlus-7@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberDefault-7.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberMinusDown-7@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberMinusDown-7@3x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberMinus-7@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberMinus-7.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberPlusDown-7@3x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberPlusDown-7@2x.png">
+      </FileRef>
+      <FileRef
+         location = "group:ButtonNumberMinus-7@3x.png">
+      </FileRef>
+   </Group>
+   <FileRef
+      location = "group:../Artwork/PurpleButton.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/RedButton.png">
+   </FileRef>
+   <FileRef
+      location = "group:../Artwork/YellowButton.png">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

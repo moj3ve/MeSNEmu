@@ -230,6 +230,26 @@ void SISaveSRAM()
 	}
 }
 
+#pragma mark - Rom info
+
+void SIMakeRomInfoText(char* rom_filename, char *romtext)
+{
+    char rom_path[1024] = {0};
+    sprintf(rom_path,"%s%s%s",SI_DocumentsPath,DIR_SEPERATOR,rom_filename);
+    
+    if (!Memory.Init() || !S9xInitAPU())
+    {
+        fprintf(stderr, "Snes9x: Memory allocation failure - not enough RAM/virtual memory available.\nExiting...\n");
+        Memory.Deinit();
+        S9xDeinitAPU();
+        exit(1);
+    }
+    S9xInitSound(0, 0);
+    Memory.LoadROM(rom_path);
+    
+    Memory.MakeRomInfoText(romtext);
+}
+
 #pragma mark - Notifications to the emulator
 
 extern "C" void SIUpdateSettings()

@@ -18,10 +18,10 @@
 
 typedef enum _EmulatorAlert
 {
-  EmulatorAlertReset,
-  EmulatorAlertSave,
-  EmulatorAlertLoad
-} EmulatorAlert;
+    EmulatorAlertReset,
+    EmulatorAlertSave,
+    EmulatorAlertLoad
+}   EmulatorAlert;
 
 #pragma mark -
 
@@ -43,7 +43,7 @@ typedef enum _EmulatorAlert
   char* romFileNameCString = (char*)calloc(strlen(originalString)+1, sizeof(char));
   strcpy(romFileNameCString, originalString);
   originalString = nil;
-
+  
   SISetEmulationPaused(0);
   SISetEmulationRunning(1);
   SIStartWithROM(romFileNameCString);
@@ -65,7 +65,7 @@ typedef enum _EmulatorAlert
     
     SISetScreenDelegate(self);
     [_customView setPrimaryBuffer];
-
+    
     [_externalEmulator release];
     _externalEmulator = nil;
   }
@@ -97,23 +97,11 @@ typedef enum _EmulatorAlert
 
 - (void)options:(UIButton*)sender
 {
-    /* int resetIndex = 1;
-    
-    #ifdef SI_ENABLE_SAVES
-        int loadIndex = 2;
-        int saveIndex = 3;
-        int settingsIndex = 4;
-    #else
-        int loadIndex = -1;
-        int saveIndex = -1;
-        int settingsIndex = 2;
-    #endif */
-    
     SISetEmulationPaused(1);
-  
+    
     _customView.iCadeControlView.active = NO;
     if([GameControllerManager gameControllersMightBeAvailable] == YES)
-      [_customView setControlsHidden:[GameControllerManager sharedInstance].gameControllerConnected animated:NO];
+        [_customView setControlsHidden:[GameControllerManager sharedInstance].gameControllerConnected animated:NO];
     else
         [_customView setControlsHidden:NO animated:YES];
     
@@ -130,7 +118,7 @@ typedef enum _EmulatorAlert
     }
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"BACK_TO_GAME", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-         SISetEmulationPaused(0);
+        SISetEmulationPaused(0);
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"EXIT_GAME", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
@@ -176,45 +164,6 @@ typedef enum _EmulatorAlert
         [self presentViewController:alert animated:YES completion:nil];
     }]];
     
-    [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"LOAD_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:NSLocalizedString(@"LOAD_SAVE?", nil)
-                                     message:NSLocalizedString(@"EXIT_CONSEQUENCES", nil)
-                                     preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIView *firstSubview = alert.view.subviews.firstObject;
-        
-        UIView *alertContentView = firstSubview.subviews.firstObject;
-        for (UIView *subSubView in alertContentView.subviews) {
-            BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
-            if (darkMode == YES) {
-                subSubView.backgroundColor = [UIColor colorWithRed:0.10 green:0.10 blue:0.10 alpha:0.3];
-            }
-        }
-        
-        UIAlertAction* noButton = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"CANCEL", nil)
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action) {
-                                       SISetEmulationPaused(0);
-                                   }];
-        
-        UIAlertAction* yesButton = [UIAlertAction
-                                    actionWithTitle:NSLocalizedString(@"LOAD", nil)
-                                    style:UIAlertActionStyleDefault
-                                    handler:^(UIAlertAction * action) {
-                                        SISetEmulationPaused(1);
-                                        SIWaitForPause();
-                                        [SaveManager loadStateForROMNamed:_romFileName slot:1];
-                                        SISetEmulationPaused(0);
-                                    }];
-        
-        [alert addAction:noButton];
-        [alert addAction:yesButton];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }]];
-    
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SAVE_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UIAlertController * alert = [UIAlertController
                                      alertControllerWithTitle:NSLocalizedString(@"SAVE_SAVE?", nil)
@@ -244,7 +193,7 @@ typedef enum _EmulatorAlert
                                     handler:^(UIAlertAction * action) {
                                         SISetEmulationPaused(1);
                                         SIWaitForPause();
-                                        [SaveManager saveStateForROMNamed:_romFileName slot:1];
+                                        [SaveManager saveStateForROMNamed:_romFileName slot:[[NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]] intValue] screenshot:[self getScreen]];
                                         SISetEmulationPaused(0);
                                     }];
         
@@ -281,6 +230,7 @@ typedef enum _EmulatorAlert
   }
   else
   {
+    // kind of hacky to figure out the slot number, but it suffices right now, since saves are always in a known place and I REALLY wanted to pass the path for the save, for some reason
     int slot = [[[_initialSaveFileName stringByDeletingPathExtension] pathExtension] intValue];
     if(slot == 0)
       [SaveManager loadRunningStateForROMNamed:_romFileName];
@@ -295,7 +245,7 @@ typedef enum _EmulatorAlert
 {
 #ifdef SI_ENABLE_RUNNING_SAVES
   NSLog(@"Saving running state...");
-  [SaveManager saveRunningStateForROMNamed:_romFileName];
+  [SaveManager saveRunningStateForROMNamed:_romFileName screenshot:[self getScreen]];
   NSLog(@"Saved!");
 #endif
 }
@@ -304,16 +254,13 @@ typedef enum _EmulatorAlert
 
 - (void)settingsDidDismiss:(SettingsController*)settingsController
 {
-    if(_actionSheet == nil)
-    {
-        [self options:nil];
-    }
+  [self options:nil];
 }
 
 #pragma mark iCadeEventDelegate
 
 - (void)buttonDown:(iCadeState)button
-{  
+{
   switch(button)
   {
     case iCadeJoystickRight:
@@ -360,7 +307,7 @@ typedef enum _EmulatorAlert
 }
 
 - (void)buttonUp:(iCadeState)button
-{  
+{
   switch(button)
   {
     case iCadeJoystickRight:
@@ -401,7 +348,7 @@ typedef enum _EmulatorAlert
       break;
     default:
       break;
-  } 
+  }
 }
 
 #pragma mark GameControllerManagerDelegate
@@ -456,10 +403,12 @@ typedef enum _EmulatorAlert
     if(_externalWindow == nil)
     {
       UIScreen* screen = [[UIScreen screens] objectAtIndex:1];
+      // TODO: pick the best display mode (lowest resolution preferred)
       UIWindow* window = [[UIWindow alloc] initWithFrame:screen.bounds];
       window.screen = screen;
       window.backgroundColor = [UIColor redColor];
       
+      // create our mirror controller
       _externalEmulator = [[EmulatorController alloc] initMirrorOf:self];
       window.rootViewController = _externalEmulator;
       
@@ -474,6 +423,7 @@ typedef enum _EmulatorAlert
   }
   else
   {
+    // switch back to us and dismantle
     [self dismantleExternalScreen];
   }
 }
@@ -482,7 +432,6 @@ typedef enum _EmulatorAlert
 {
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
   SISetSoundOn([defaults boolForKey:kSettingsSound]);
-  SISetShowFPS([defaults boolForKey:kSettingsShowFPS]);
   if([defaults boolForKey:kSettingsSmoothScaling] == YES)
     [_customView setMinMagFilter:kCAFilterLinear];
   else
@@ -491,6 +440,7 @@ typedef enum _EmulatorAlert
   SISetFrameskip([defaults integerForKey:kSettingsFrameskipValue]);
   
   _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
+  // TODO: support custom key layouts
   
   SIUpdateSettings();
   
@@ -535,6 +485,16 @@ typedef enum _EmulatorAlert
   return self;
 }
 
+- (UIImage*)getScreen
+{
+  UIImage *image = (_externalEmulator != nil)?[_externalEmulator getScreen]:[UIImage imageWithCGImage:(CGImageRef)_customView.screenView.layer.contents];
+  CGRect rect = CGRectMake(floor((image.size.width-256)/2), floor((image.size.height-224)/2), 256, 224);
+  CGImageRef clip = CGImageCreateWithImageInRect(image.CGImage,rect);
+  UIImage *image2 = [UIImage imageWithCGImage:clip];
+  CGImageRelease(clip);
+  return image2;
+}
+
 @end
 
 #pragma mark -
@@ -558,7 +518,7 @@ typedef enum _EmulatorAlert
 }
 
 - (void)viewWillAppear:(BOOL)animated
-{  
+{
   [super viewWillAppear:animated];
   
   [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -606,7 +566,7 @@ typedef enum _EmulatorAlert
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+  [super viewWillDisappear:animated];
   
   [UIApplication sharedApplication].idleTimerDisabled = NO;
   
@@ -627,6 +587,7 @@ typedef enum _EmulatorAlert
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+  // Return YES for supported orientations
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
   else
@@ -665,7 +626,8 @@ typedef enum _EmulatorAlert
     SISetScreenDelegate(nil);
     SISetSaveDelegate(nil);
   }
-    
+  
+  // this is released upon showing
   _actionSheet = nil;
   
   [self dismantleExternalScreen];

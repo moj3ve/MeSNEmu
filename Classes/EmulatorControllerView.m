@@ -144,62 +144,62 @@
 @synthesize viewMode = _viewMode;
 - (void)setViewMode:(EmulatorControllerViewMode)viewMode
 {
-  if(_viewMode != viewMode)
-  {
-    _viewMode = viewMode;
-    [self setNeedsLayout];
-  }
+    if(_viewMode != viewMode)
+    {
+        _viewMode = viewMode;
+        [self setNeedsLayout];
+    }
 }
 
 - (void)setControlsHidden:(BOOL)value animated:(BOOL)animated
 {
-  if(_hideUI != value)
-  {
-    _hideUI = value;
-    [self setNeedsLayout];
-    if(animated == YES)
-      [UIView animateWithDuration:0.3 animations:^{
-        [self layoutIfNeeded];
-      }];
-    else
-      [self layoutIfNeeded];
-  }
+    if(_hideUI != value)
+    {
+        _hideUI = value;
+        [self setNeedsLayout];
+        if(animated == YES)
+            [UIView animateWithDuration:0.3 animations:^{
+                [self layoutIfNeeded];
+            }];
+        else
+            [self layoutIfNeeded];
+    }
 }
 
 - (void)setMinMagFilter:(NSString*)filter
 {
-  _screenView.layer.minificationFilter = filter;
-  _screenView.layer.magnificationFilter = filter;
+    _screenView.layer.minificationFilter = filter;
+    _screenView.layer.magnificationFilter = filter;
 }
 
 - (void)setPrimaryBuffer
 {
-  SISetScreen(_imageBuffer);
+    SISetScreen(_imageBuffer);
 }
 
 - (void)flipFrontBufferWidth:(int)width height:(int)height
 {
-  if(_imageBuffer == nil || _565ImageBuffer == nil)
-    return;
-  
-  [_screenView updateBufferCropResWidth:width height:height];
-  
-  if(((PixelLayer*)_screenView.layer).displayMainBuffer == YES)
-  {
-    SISetScreen(_imageBufferAlt);
+    if(_imageBuffer == nil || _565ImageBuffer == nil)
+        return;
     
-    [_screenView setNeedsDisplay];
+    [_screenView updateBufferCropResWidth:width height:height];
     
-    ((PixelLayer*)_screenView.layer).displayMainBuffer = NO;
-  }
-  else
-  {
-    SISetScreen(_imageBuffer);
-    
-    [_screenView setNeedsDisplay];
-    
-    ((PixelLayer*)_screenView.layer).displayMainBuffer = YES;
-  }
+    if(((PixelLayer*)_screenView.layer).displayMainBuffer == YES)
+    {
+        SISetScreen(_imageBufferAlt);
+        
+        [_screenView setNeedsDisplay];
+        
+        ((PixelLayer*)_screenView.layer).displayMainBuffer = NO;
+    }
+    else
+    {
+        SISetScreen(_imageBuffer);
+        
+        [_screenView setNeedsDisplay];
+        
+        ((PixelLayer*)_screenView.layer).displayMainBuffer = YES;
+    }
 }
 
 @end
@@ -210,137 +210,137 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-  self = [super initWithFrame:frame];
-  if(self)
-  {
-    self.multipleTouchEnabled = YES;
-    _viewMode = EmulatorControllerViewModeNormal;
-    
-    // screen
-    _screenView = [[PixelView alloc] initWithFrame:(CGRect){0,0,10,10}];
-    _screenView.userInteractionEnabled = NO;
-    [self addSubview:_screenView];
-    
-    // start / select buttons
-    _startButton = [[self smallButtonWithButton:SI_BUTTON_START] retain];
-    [self addSubview:_startButton];
-    
-    _selectButton = [[self smallButtonWithButton:SI_BUTTON_SELECT] retain];
-    [self addSubview:_selectButton];
-    
-    // menu button
-    _optionsButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-    [_optionsButton setBackgroundImage:[UIImage imageNamed:@"ButtonWide.png"] forState:UIControlStateNormal];
-    [_optionsButton setTitle:NSLocalizedString(@"MENU", nil) forState:UIControlStateNormal];
-    [_optionsButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.75] forState:UIControlStateNormal];
-    [_optionsButton setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.35] forState:UIControlStateNormal];
-    _optionsButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
-    _optionsButton.titleLabel.font = [UIFont systemFontOfSize:10];
-    [self addSubview:_optionsButton];
-    
-    // ABXY buttons
-    _aButton = [[self buttonWithButton:SI_BUTTON_A] retain];
-    [self addSubview:_aButton];
-    
-    _bButton = [[self buttonWithButton:SI_BUTTON_B] retain];
-    [self addSubview:_bButton];
-    
-    _xButton = [[self buttonWithButton:SI_BUTTON_X] retain];
-    [self addSubview:_xButton];
-    
-    _yButton = [[self buttonWithButton:SI_BUTTON_Y] retain];
-    [self addSubview:_yButton];
-    
-    // L/R buttons
-    _lButton = [[self buttonWithButton:SI_BUTTON_L] retain];
-    [self addSubview:_lButton];
-    
-    _rButton = [[self buttonWithButton:SI_BUTTON_R] retain];
-    [self addSubview:_rButton];
-    
-    // d-pad
-    _dPadView = [[DPadView alloc] initWithFrame:(CGRect){0,0,10,10}];
-    [self addSubview:_dPadView];
-    
-    // iCade support
-    _iCadeControlView = [[BTControllerView alloc] initWithFrame:CGRectZero];
-    [self addSubview:_iCadeControlView];
-    _iCadeControlView.active = YES;
-    
-    // creating our buffers
-    _bufferWidth = 512;
-    _bufferHeight = 480;
-    _bufferHeightExtended = 480;
-    
-    // RGBA888 format
-    unsigned short defaultComponentCount = 4;
-    unsigned short bufferBitsPerComponent = 8;
-    unsigned int pixelSizeBytes = (_bufferWidth*bufferBitsPerComponent*defaultComponentCount)/8/_bufferWidth;
-    if(pixelSizeBytes == 0)
-      pixelSizeBytes = defaultComponentCount;
-    unsigned int bufferBytesPerRow = _bufferWidth*pixelSizeBytes;
-    CGBitmapInfo bufferBitmapInfo = kCGImageAlphaNoneSkipLast;
-    
-    // BGR 555 format (something weird)
-    defaultComponentCount = 3;
-    bufferBitsPerComponent = 5;
-    pixelSizeBytes = 2;
-    bufferBytesPerRow = _bufferWidth*pixelSizeBytes;
-    bufferBitmapInfo = kCGImageAlphaNoneSkipFirst|kCGBitmapByteOrder16Little;
-    
-    if(_imageBuffer == nil)
+    self = [super initWithFrame:frame];
+    if(self)
     {
-      _imageBuffer = (unsigned char*)calloc(_bufferWidth*_bufferHeightExtended, pixelSizeBytes);
+        self.multipleTouchEnabled = YES;
+        _viewMode = EmulatorControllerViewModeNormal;
+        
+        // screen
+        _screenView = [[PixelView alloc] initWithFrame:(CGRect){0,0,10,10}];
+        _screenView.userInteractionEnabled = NO;
+        [self addSubview:_screenView];
+        
+        // start / select buttons
+        _startButton = [[self smallButtonWithButton:SI_BUTTON_START] retain];
+        [self addSubview:_startButton];
+        
+        _selectButton = [[self smallButtonWithButton:SI_BUTTON_SELECT] retain];
+        [self addSubview:_selectButton];
+        
+        // menu button
+        _optionsButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        [_optionsButton setBackgroundImage:[UIImage imageNamed:@"ButtonWide.png"] forState:UIControlStateNormal];
+        [_optionsButton setTitle:NSLocalizedString(@"MENU", nil) forState:UIControlStateNormal];
+        [_optionsButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.75] forState:UIControlStateNormal];
+        [_optionsButton setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.35] forState:UIControlStateNormal];
+        _optionsButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
+        _optionsButton.titleLabel.font = [UIFont systemFontOfSize:10];
+        [self addSubview:_optionsButton];
+        
+        // ABXY buttons
+        _aButton = [[self buttonWithButton:SI_BUTTON_A] retain];
+        [self addSubview:_aButton];
+        
+        _bButton = [[self buttonWithButton:SI_BUTTON_B] retain];
+        [self addSubview:_bButton];
+        
+        _xButton = [[self buttonWithButton:SI_BUTTON_X] retain];
+        [self addSubview:_xButton];
+        
+        _yButton = [[self buttonWithButton:SI_BUTTON_Y] retain];
+        [self addSubview:_yButton];
+        
+        // L/R buttons
+        _lButton = [[self buttonWithButton:SI_BUTTON_L] retain];
+        [self addSubview:_lButton];
+        
+        _rButton = [[self buttonWithButton:SI_BUTTON_R] retain];
+        [self addSubview:_rButton];
+        
+        // d-pad
+        _dPadView = [[DPadView alloc] initWithFrame:(CGRect){0,0,10,10}];
+        [self addSubview:_dPadView];
+        
+        // iCade support
+        _iCadeControlView = [[BTControllerView alloc] initWithFrame:CGRectZero];
+        [self addSubview:_iCadeControlView];
+        _iCadeControlView.active = YES;
+        
+        // creating our buffers
+        _bufferWidth = 512;
+        _bufferHeight = 480;
+        _bufferHeightExtended = 480;
+        
+        // RGBA888 format
+        unsigned short defaultComponentCount = 4;
+        unsigned short bufferBitsPerComponent = 8;
+        unsigned int pixelSizeBytes = (_bufferWidth*bufferBitsPerComponent*defaultComponentCount)/8/_bufferWidth;
+        if(pixelSizeBytes == 0)
+            pixelSizeBytes = defaultComponentCount;
+        unsigned int bufferBytesPerRow = _bufferWidth*pixelSizeBytes;
+        CGBitmapInfo bufferBitmapInfo = kCGImageAlphaNoneSkipLast;
+        
+        // BGR 555 format (something weird)
+        defaultComponentCount = 3;
+        bufferBitsPerComponent = 5;
+        pixelSizeBytes = 2;
+        bufferBytesPerRow = _bufferWidth*pixelSizeBytes;
+        bufferBitmapInfo = kCGImageAlphaNoneSkipFirst|kCGBitmapByteOrder16Little;
+        
+        if(_imageBuffer == nil)
+        {
+            _imageBuffer = (unsigned char*)calloc(_bufferWidth*_bufferHeightExtended, pixelSizeBytes);
+        }
+        if(_imageBufferAlt == nil)
+        {
+            _imageBufferAlt = (unsigned char*)calloc(_bufferWidth*_bufferHeightExtended, pixelSizeBytes);
+        }
+        if(_565ImageBuffer == nil)
+            _565ImageBuffer = (unsigned char*)calloc(_bufferWidth*_bufferHeightExtended, 2);
+        
+        [(PixelLayer*)_screenView.layer setImageBuffer:_imageBuffer
+                                                 width:_bufferWidth
+                                                height:_bufferHeight
+                                      bitsPerComponent:bufferBitsPerComponent
+                                           bytesPerRow:bufferBytesPerRow
+                                            bitmapInfo:bufferBitmapInfo];
+        [(PixelLayer*)_screenView.layer addAltImageBuffer:_imageBufferAlt];
     }
-    if(_imageBufferAlt == nil)
-    {
-      _imageBufferAlt = (unsigned char*)calloc(_bufferWidth*_bufferHeightExtended, pixelSizeBytes);
-    }
-    if(_565ImageBuffer == nil)
-      _565ImageBuffer = (unsigned char*)calloc(_bufferWidth*_bufferHeightExtended, 2);
-    
-    [(PixelLayer*)_screenView.layer setImageBuffer:_imageBuffer
-                                               width:_bufferWidth
-                                              height:_bufferHeight
-                                    bitsPerComponent:bufferBitsPerComponent
-                                         bytesPerRow:bufferBytesPerRow
-                                          bitmapInfo:bufferBitmapInfo];
-    [(PixelLayer*)_screenView.layer addAltImageBuffer:_imageBufferAlt];
-  }
-  return self;
+    return self;
 }
 
 - (void)layoutSubviews
 {
-  [super layoutSubviews];
-  BOOL fullScreen = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsFullScreen];
-  BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
-  UIColor* plasticColor = [UIColor colorWithRed:195/255.0 green:198/255.0 blue:205/255.0 alpha:1];
-  UIColor* blackColor = [UIColor blackColor];
-  if(_viewMode == EmulatorControllerViewModeScreenOnly)
-    plasticColor = [UIColor blackColor];
-  else if(_viewMode == EmulatorControllerViewModeControllerOnly)
-    blackColor = plasticColor;
-  int originalWidth = 256;
-  int originalHeight = 224;
-  int width = originalWidth;
-  int height = originalHeight;
-  int screenOffsetY = 0;
-  CGSize size = self.bounds.size;
-  int screenBorderX = 5;
-  int screenBorderY = 30;
-  int buttonSpacing = 7;
-  int smallButtonsOriginX = 0;
-  int smallButtonsOriginY = 0;
-  int smallButtonsSpacing = 5;
-  BOOL smallButtonsVertical = YES;
-  float controlsAlpha = 1;
-  if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-  {
-    screenBorderX = 90;
-    screenBorderY = 90;
-  }
-  
+    [super layoutSubviews];
+    BOOL fullScreen = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsFullScreen];
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+    UIColor* plasticColor = [UIColor colorWithRed:195/255.0 green:198/255.0 blue:205/255.0 alpha:1];
+    UIColor* blackColor = [UIColor blackColor];
+    if(_viewMode == EmulatorControllerViewModeScreenOnly)
+        plasticColor = [UIColor blackColor];
+    else if(_viewMode == EmulatorControllerViewModeControllerOnly)
+        blackColor = plasticColor;
+    int originalWidth = 256;
+    int originalHeight = 224;
+    int width = originalWidth;
+    int height = originalHeight;
+    int screenOffsetY = 0;
+    CGSize size = self.bounds.size;
+    int screenBorderX = 5;
+    int screenBorderY = 30;
+    int buttonSpacing = 7;
+    int smallButtonsOriginX = 0;
+    int smallButtonsOriginY = 0;
+    int smallButtonsSpacing = 5;
+    BOOL smallButtonsVertical = YES;
+    float controlsAlpha = 1;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+    {
+        screenBorderX = 90;
+        screenBorderY = 90;
+    }
+    
     if(size.height > size.width)
     {
         // portrait
@@ -465,56 +465,56 @@
             }
         }
     }
-  
-  if(_viewMode == EmulatorControllerViewModeScreenOnly)
-    controlsAlpha = 0;
-  else if(_viewMode == EmulatorControllerViewModeControllerOnly)
-  {
-    controlsAlpha = 1;
     
+    if(_viewMode == EmulatorControllerViewModeScreenOnly)
+        controlsAlpha = 0;
+    else if(_viewMode == EmulatorControllerViewModeControllerOnly)
+    {
+        controlsAlpha = 1;
+        
+        
+    }
     
-  }
-  
-  // layout screen
-  int screenOffsetX = (size.width-width)/2;
-  if(screenOffsetY == -1)
-    screenOffsetY = screenOffsetX;
-  else if(screenOffsetY == -2)
-    screenOffsetY = (size.height-screenBorderY-_dPadView.image.size.height-height)/2;
-  if(_viewMode == EmulatorControllerViewModeScreenOnly)
-    // we're showing only the screen. center it
-    _screenView.frame = (CGRect){(int)((size.width-width)*0.5), (int)((size.height-height)*0.5), width,height};
-  else
-    // we're showing the controls + screen
-    _screenView.frame = (CGRect){screenOffsetX,screenOffsetY, width,height};
-  
-  if(_viewMode == EmulatorControllerViewModeControllerOnly)
-    _screenView.alpha = 0;
-  else
-    _screenView.alpha = 1;
-  
-  // start, select, menu buttons
-  int xOffset = 0;
-  int yOffset = 0;
-  if(smallButtonsVertical == YES)
-    yOffset = _startButton.frame.size.height+smallButtonsSpacing;
-  else
-    xOffset = _startButton.frame.size.width+smallButtonsSpacing;
-  
-  if(_viewMode == EmulatorControllerViewModeScreenOnly)
-  {
-    _startButton.alpha = 0;
-    _selectButton.alpha = 0;
-    _optionsButton.alpha = 0;
-  }
-  else
-  {
-    _startButton.alpha = 1;
-    _selectButton.alpha = 1;
-    _optionsButton.alpha = 1;
-  }
-  
-  // layout buttons
+    // layout screen
+    int screenOffsetX = (size.width-width)/2;
+    if(screenOffsetY == -1)
+        screenOffsetY = screenOffsetX;
+    else if(screenOffsetY == -2)
+        screenOffsetY = (size.height-screenBorderY-_dPadView.image.size.height-height)/2;
+    if(_viewMode == EmulatorControllerViewModeScreenOnly)
+        // we're showing only the screen. center it
+        _screenView.frame = (CGRect){(int)((size.width-width)*0.5), (int)((size.height-height)*0.5), width,height};
+    else
+        // we're showing the controls + screen
+        _screenView.frame = (CGRect){screenOffsetX,screenOffsetY, width,height};
+    
+    if(_viewMode == EmulatorControllerViewModeControllerOnly)
+        _screenView.alpha = 0;
+    else
+        _screenView.alpha = 1;
+    
+    // start, select, menu buttons
+    int xOffset = 0;
+    int yOffset = 0;
+    if(smallButtonsVertical == YES)
+        yOffset = _startButton.frame.size.height+smallButtonsSpacing;
+    else
+        xOffset = _startButton.frame.size.width+smallButtonsSpacing;
+    
+    if(_viewMode == EmulatorControllerViewModeScreenOnly)
+    {
+        _startButton.alpha = 0;
+        _selectButton.alpha = 0;
+        _optionsButton.alpha = 0;
+    }
+    else
+    {
+        _startButton.alpha = 1;
+        _selectButton.alpha = 1;
+        _optionsButton.alpha = 1;
+    }
+    
+    // layout buttons
     if(size.height > size.width)
     {
         // portrait
@@ -584,25 +584,25 @@
         _selectButton.frame = (CGRect){smallButtonsOriginX+xOffset,smallButtonsOriginY+yOffset, _selectButton.frame.size};
         _optionsButton.frame = (CGRect){smallButtonsOriginX+2*xOffset,smallButtonsOriginY+2*yOffset, _selectButton.frame.size};
     }
-  
-  // layout d-pad
+    
+    // layout d-pad
     // dPadView.frame = (CGRect){screenBorderX,size.height-_dPadView.image.size.height-screenBorderY, _dPadView.image.size};
     // _dPadView.alpha = controlsAlpha;
     if(size.height > size.width)
     {
         // portrait
         // portrait - screen or screen+controller mode
-            // portrait - full screen
-            if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-            {
-                _dPadView.frame = (CGRect){screenBorderX,size.height-210-screenBorderY, _dPadView.image.size};
-                _dPadView.alpha = controlsAlpha;
-            }
-            else
-            {
-                _dPadView.frame = (CGRect){screenBorderX,size.height-210-screenBorderY, _dPadView.image.size};
-                _dPadView.alpha = controlsAlpha;
-            }
+        // portrait - full screen
+        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        {
+            _dPadView.frame = (CGRect){screenBorderX,size.height-210-screenBorderY, _dPadView.image.size};
+            _dPadView.alpha = controlsAlpha;
+        }
+        else
+        {
+            _dPadView.frame = (CGRect){screenBorderX,size.height-210-screenBorderY, _dPadView.image.size};
+            _dPadView.alpha = controlsAlpha;
+        }
     }
     else
     {
@@ -620,47 +620,47 @@
 
 - (void)dealloc
 {
-  if(_imageBuffer != nil)
-    free(_imageBuffer);
-  _imageBuffer = nil;
-  
-  if(_imageBufferAlt != nil)
-    free(_imageBufferAlt);
-  _imageBufferAlt = nil;
-  
-  if(_565ImageBuffer != nil)
-    free(_565ImageBuffer);
-  _565ImageBuffer = nil;
-  
-  [_screenView release];
-  _screenView = nil;
-  
-  [_startButton release];
-  _startButton = nil;
-  [_selectButton release];
-  _selectButton = nil;
-  [_aButton release];
-  _aButton = nil;
-  [_bButton release];
-  _bButton = nil;
-  [_yButton release];
-  _yButton = nil;
-  [_xButton release];
-  _xButton = nil;
-  [_lButton release];
-  _lButton = nil;
-  [_rButton release];
-  _rButton = nil;
-  [_dPadView release];
-  _dPadView = nil;
-  
-  [_iCadeControlView release];
-  _iCadeControlView = nil;
-  
-  [_optionsButton release];
-  _optionsButton = nil;
-  
-  [super dealloc];
+    if(_imageBuffer != nil)
+        free(_imageBuffer);
+    _imageBuffer = nil;
+    
+    if(_imageBufferAlt != nil)
+        free(_imageBufferAlt);
+    _imageBufferAlt = nil;
+    
+    if(_565ImageBuffer != nil)
+        free(_565ImageBuffer);
+    _565ImageBuffer = nil;
+    
+    [_screenView release];
+    _screenView = nil;
+    
+    [_startButton release];
+    _startButton = nil;
+    [_selectButton release];
+    _selectButton = nil;
+    [_aButton release];
+    _aButton = nil;
+    [_bButton release];
+    _bButton = nil;
+    [_yButton release];
+    _yButton = nil;
+    [_xButton release];
+    _xButton = nil;
+    [_lButton release];
+    _lButton = nil;
+    [_rButton release];
+    _rButton = nil;
+    [_dPadView release];
+    _dPadView = nil;
+    
+    [_iCadeControlView release];
+    _iCadeControlView = nil;
+    
+    [_optionsButton release];
+    _optionsButton = nil;
+    
+    [super dealloc];
 }
 
 @end

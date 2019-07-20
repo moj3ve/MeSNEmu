@@ -5,19 +5,19 @@
 
 @interface TableViewNumberCell : UITableViewCell
 {
-  int _value;
-  int _minimumValue;
-  int _maximumValue;
-  NSString* _suffix;
-  BOOL _usesDefaultValue;
-  BOOL _allowsDefault;
-  
-  UIView* _plusMinusAccessoryView;
-  UIButton* _plusButton;
-  UIButton* _minusButton;
-  UIButton* _defaultButton;
-  
-  id<TableViewCellDelegate> _delegate;
+    int _value;
+    int _minimumValue;
+    int _maximumValue;
+    NSString* _suffix;
+    BOOL _usesDefaultValue;
+    BOOL _allowsDefault;
+    
+    UIView* _plusMinusAccessoryView;
+    UIButton* _plusButton;
+    UIButton* _minusButton;
+    UIButton* _defaultButton;
+    
+    id<TableViewCellDelegate> _delegate;
 }
 
 @property (readonly) UIView* plusMinusAccessoryView;

@@ -7,31 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		260B587822C6E1D8008C5E37 /* tileimpl-h2x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */; };
-		260B587922C6E1D8008C5E37 /* tileimpl-n2x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */; };
-		260B587A22C6E1D8008C5E37 /* tileimpl-n1x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */; };
-		26210DA4223F26F0009708E9 /* YellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA0223F26F0009708E9 /* YellowButton.png */; };
-		26210DA5223F26F0009708E9 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA1223F26F0009708E9 /* RedButton.png */; };
-		26210DA6223F26F0009708E9 /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA2223F26F0009708E9 /* GreenButton.png */; };
-		26210DA7223F26F0009708E9 /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26210DA3223F26F0009708E9 /* BlueButton.png */; };
-		262B5B8D22A9694F00BB3D52 /* bml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262B5B8822A9694E00BB3D52 /* bml.cpp */; };
-		262B5B8E22A9694F00BB3D52 /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 262B5B8B22A9694F00BB3D52 /* sha256.cpp */; };
-		267312242272283C00687228 /* TableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 267312232272283B00687228 /* TableViewSwitchCell.m */; };
-		26A6C59522AAD25400E06CB5 /* statemanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26A6C59322AAD25300E06CB5 /* statemanager.cpp */; };
-		26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78821F77DBC00E05B50 /* DPadButton.png */; };
-		26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AAB78921F77DBC00E05B50 /* LRButton.png */; };
-		26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B321F7622A00DD9D5E /* PurpleButton.png */; };
-		26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */; };
-		26B546B222BBEC6400A3A91D /* stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26B546B022BBEC6200A3A91D /* stream.cpp */; };
-		26B779FC22AC1D960027F221 /* msu1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26B779FB22AC1D960027F221 /* msu1.cpp */; };
+		26378EF122E1248900FC4A10 /* TableViewSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 26378EF022E1248900FC4A10 /* TableViewSwitchCell.m */; };
+		269901F222E3863B00BF312B /* ButtonNumberDefault-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E022E3863B00BF312B /* ButtonNumberDefault-7@2x.png */; };
+		269901F322E3863B00BF312B /* ButtonNumberPlusDown-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E122E3863B00BF312B /* ButtonNumberPlusDown-7.png */; };
+		269901F422E3863B00BF312B /* ButtonNumberDefaultDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E222E3863B00BF312B /* ButtonNumberDefaultDown-7@3x.png */; };
+		269901F522E3863B00BF312B /* ButtonNumberPlus-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E322E3863B00BF312B /* ButtonNumberPlus-7.png */; };
+		269901F622E3863B00BF312B /* ButtonNumberDefaultDown-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E422E3863B00BF312B /* ButtonNumberDefaultDown-7@2x.png */; };
+		269901F722E3863B00BF312B /* ButtonNumberDefault-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E522E3863B00BF312B /* ButtonNumberDefault-7@3x.png */; };
+		269901F822E3863B00BF312B /* ButtonNumberDefaultDown-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E622E3863B00BF312B /* ButtonNumberDefaultDown-7.png */; };
+		269901F922E3863B00BF312B /* ButtonNumberPlus-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E722E3863B00BF312B /* ButtonNumberPlus-7@3x.png */; };
+		269901FA22E3863B00BF312B /* ButtonNumberMinusDown-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E822E3863B00BF312B /* ButtonNumberMinusDown-7.png */; };
+		269901FB22E3863B00BF312B /* ButtonNumberPlus-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901E922E3863B00BF312B /* ButtonNumberPlus-7@2x.png */; };
+		269901FC22E3863B00BF312B /* ButtonNumberDefault-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901EA22E3863B00BF312B /* ButtonNumberDefault-7.png */; };
+		269901FD22E3863B00BF312B /* ButtonNumberMinusDown-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901EB22E3863B00BF312B /* ButtonNumberMinusDown-7@2x.png */; };
+		269901FE22E3863B00BF312B /* ButtonNumberMinusDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901EC22E3863B00BF312B /* ButtonNumberMinusDown-7@3x.png */; };
+		269901FF22E3863B00BF312B /* ButtonNumberMinus-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901ED22E3863B00BF312B /* ButtonNumberMinus-7@2x.png */; };
+		2699020022E3863B00BF312B /* ButtonNumberMinus-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901EE22E3863B00BF312B /* ButtonNumberMinus-7.png */; };
+		2699020122E3863B00BF312B /* ButtonNumberPlusDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901EF22E3863B00BF312B /* ButtonNumberPlusDown-7@3x.png */; };
+		2699020222E3863B00BF312B /* ButtonNumberPlusDown-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901F022E3863B00BF312B /* ButtonNumberPlusDown-7@2x.png */; };
+		2699020322E3863B00BF312B /* ButtonNumberMinus-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 269901F122E3863B00BF312B /* ButtonNumberMinus-7@3x.png */; };
+		2699020D22E3864D00BF312B /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020422E3864B00BF312B /* RedButton.png */; };
+		2699020E22E3864D00BF312B /* PurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020522E3864B00BF312B /* PurpleButton.png */; };
+		2699020F22E3864D00BF312B /* YellowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020622E3864B00BF312B /* YellowButton.png */; };
+		2699021022E3864D00BF312B /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020722E3864C00BF312B /* BlueButton.png */; };
+		2699021122E3864D00BF312B /* LightPurpleButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020822E3864C00BF312B /* LightPurpleButton.png */; };
+		2699021222E3864D00BF312B /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020922E3864C00BF312B /* GreenButton.png */; };
+		2699021322E3864D00BF312B /* DPadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020A22E3864C00BF312B /* DPadButton.png */; };
+		2699021422E3864D00BF312B /* ButtonWide.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020B22E3864C00BF312B /* ButtonWide.png */; };
+		2699021522E3864D00BF312B /* LRButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 2699020C22E3864D00BF312B /* LRButton.png */; };
+		26E407D022E113D700069A28 /* bml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407CB22E113D500069A28 /* bml.cpp */; };
+		26E407D122E113D700069A28 /* sha256.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407CD22E113D600069A28 /* sha256.cpp */; };
+		26E407D222E113D700069A28 /* msu1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407CE22E113D600069A28 /* msu1.cpp */; };
+		26E407DB22E113F400069A28 /* tileimpl-n1x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407D322E113F200069A28 /* tileimpl-n1x1.cpp */; };
+		26E407DC22E113F400069A28 /* statemanager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407D422E113F300069A28 /* statemanager.cpp */; };
+		26E407DD22E113F400069A28 /* tileimpl-h2x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407D622E113F300069A28 /* tileimpl-h2x1.cpp */; };
+		26E407DE22E113F400069A28 /* tileimpl-n2x1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407D722E113F300069A28 /* tileimpl-n2x1.cpp */; };
+		26E407DF22E113F400069A28 /* stream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407D822E113F400069A28 /* stream.cpp */; };
+		26E407F222E116B500069A28 /* SNES_SPC_misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407E122E116B400069A28 /* SNES_SPC_misc.cpp */; };
+		26E407F322E116B500069A28 /* SNES_SPC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407E422E116B400069A28 /* SNES_SPC.cpp */; };
+		26E407F422E116B500069A28 /* SNES_SPC_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407E722E116B400069A28 /* SNES_SPC_state.cpp */; };
+		26E407F522E116B500069A28 /* SPC_Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407E822E116B400069A28 /* SPC_Filter.cpp */; };
+		26E407F622E116B500069A28 /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407ED22E116B400069A28 /* apu.cpp */; };
+		26E407F722E116B500069A28 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 26E407EE22E116B400069A28 /* license.txt */; };
+		26E407F822E116B500069A28 /* SPC_DSP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407F022E116B400069A28 /* SPC_DSP.cpp */; };
+		26E407FF22E1214A00069A28 /* RomBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E407FE22E1214A00069A28 /* RomBrowserController.m */; };
 		66C1BD601866ACA800E5A833 /* GameControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C1BD5F1866ACA800E5A833 /* GameControllerManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		66C1BD621866AF9E00E5A833 /* GameController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66C1BD611866AF9E00E5A833 /* GameController.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		A00403C114BE3E4D00FE28CE /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401E514BE3E4D00FE28CE /* apu.cpp */; };
-		A00403C314BE3E4D00FE28CE /* SNES_SPC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401F014BE3E4D00FE28CE /* SNES_SPC.cpp */; };
-		A00403C414BE3E4D00FE28CE /* SNES_SPC_misc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401F214BE3E4D00FE28CE /* SNES_SPC_misc.cpp */; };
-		A00403C514BE3E4D00FE28CE /* SNES_SPC_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401F314BE3E4D00FE28CE /* SNES_SPC_state.cpp */; };
-		A00403C614BE3E4D00FE28CE /* SPC_DSP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401F514BE3E4D00FE28CE /* SPC_DSP.cpp */; };
-		A00403C714BE3E4D00FE28CE /* SPC_Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401F714BE3E4D00FE28CE /* SPC_Filter.cpp */; };
 		A00403C814BE3E4D00FE28CE /* bsx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401F914BE3E4D00FE28CE /* bsx.cpp */; };
 		A00403C914BE3E4D00FE28CE /* c4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401FB14BE3E4D00FE28CE /* c4.cpp */; };
 		A00403CA14BE3E4D00FE28CE /* c4emu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A00401FD14BE3E4D00FE28CE /* c4emu.cpp */; };
@@ -111,88 +132,88 @@
 		A0995F8614B6884F00F7C44F /* SIScreenDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0995F8514B6883E00F7C44F /* SIScreenDelegate.m */; };
 		A0A8A0FA14B25401003C5688 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A8A0F914B25401003C5688 /* AudioToolbox.framework */; };
 		A0A8A0FC14B25409003C5688 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A0A8A0FB14B25409003C5688 /* libz.dylib */; };
-		A0B8685E14BE25F900663EBE /* ButtonWide.png in Resources */ = {isa = PBXBuildFile; fileRef = A0B8685B14BE25F900663EBE /* ButtonWide.png */; };
 		A0B8686B14BE3B3100663EBE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686914BE3B3100663EBE /* main.m */; };
 		A0B8687E14BE3B6800663EBE /* DPadView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686E14BE3B6600663EBE /* DPadView.m */; };
 		A0B8687F14BE3B6800663EBE /* EmulatorController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8686F14BE3B6600663EBE /* EmulatorController.m */; };
 		A0B8688014BE3B6800663EBE /* ButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687014BE3B6600663EBE /* ButtonView.m */; };
-		A0B8688214BE3B6800663EBE /* RomBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687514BE3B6700663EBE /* RomBrowserController.m */; };
 		A0B8688314BE3B6800663EBE /* PixelView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687714BE3B6700663EBE /* PixelView.m */; };
 		A0B8688414BE3B6800663EBE /* PixelLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687914BE3B6700663EBE /* PixelLayer.m */; };
 		A0B8688514BE3B6800663EBE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A0B8687C14BE3B6800663EBE /* AppDelegate.m */; };
 		A0BB592614E84BC000D12F97 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0BB592814E84BC000D12F97 /* Localizable.strings */; };
 		A0D287B8172959A300CD6C6A /* iCadeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0D287B6172959A300CD6C6A /* iCadeReaderView.m */; };
 		A0DF88EA19EEBB580070326B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DF88E919EEBB580070326B /* Images.xcassets */; };
-		A0E0DC4419EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4319EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png */; };
-		A0E0DC4A19EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4519EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png */; };
-		A0E0DC4B19EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4619EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png */; };
-		A0E0DC4C19EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4719EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png */; };
-		A0E0DC4D19EF075D00D8EBF4 /* ButtonNumberPlus-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4819EF075D00D8EBF4 /* ButtonNumberPlus-7@3x.png */; };
-		A0E0DC4E19EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0E0DC4919EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png */; };
-		A0F1F118184D5A6B000D6CE9 /* ButtonNumberDefault-7.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F106184D5A6A000D6CE9 /* ButtonNumberDefault-7.png */; };
-		A0F1F119184D5A6B000D6CE9 /* ButtonNumberDefault-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F107184D5A6A000D6CE9 /* ButtonNumberDefault-7@2x.png */; };
-		A0F1F11C184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F10A184D5A6A000D6CE9 /* ButtonNumberDefaultDown-7.png */; };
-		A0F1F11D184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F10B184D5A6A000D6CE9 /* ButtonNumberDefaultDown-7@2x.png */; };
-		A0F1F11E184D5A6B000D6CE9 /* ButtonNumberMinus-7.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F10C184D5A6A000D6CE9 /* ButtonNumberMinus-7.png */; };
-		A0F1F11F184D5A6B000D6CE9 /* ButtonNumberMinus-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F10D184D5A6A000D6CE9 /* ButtonNumberMinus-7@2x.png */; };
-		A0F1F122184D5A6B000D6CE9 /* ButtonNumberMinusDown-7.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F110184D5A6A000D6CE9 /* ButtonNumberMinusDown-7.png */; };
-		A0F1F123184D5A6B000D6CE9 /* ButtonNumberMinusDown-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F111184D5A6A000D6CE9 /* ButtonNumberMinusDown-7@2x.png */; };
-		A0F1F124184D5A6B000D6CE9 /* ButtonNumberPlus-7.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F112184D5A6B000D6CE9 /* ButtonNumberPlus-7.png */; };
-		A0F1F125184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F113184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png */; };
-		A0F1F128184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F116184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png */; };
-		A0F1F129184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A0F1F117184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png */; };
 		A0FE5CB317A1EC5D0001EA30 /* BTControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A0FE5CB217A1EC5D0001EA30 /* BTControllerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-h2x1.cpp"; sourceTree = "<group>"; };
-		260B587522C6E1D8008C5E37 /* tileimpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileimpl.h; sourceTree = "<group>"; };
-		260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-n2x1.cpp"; sourceTree = "<group>"; };
-		260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-n1x1.cpp"; sourceTree = "<group>"; };
-		26210DA0223F26F0009708E9 /* YellowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowButton.png; sourceTree = "<group>"; };
-		26210DA1223F26F0009708E9 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
-		26210DA2223F26F0009708E9 /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButton.png; sourceTree = "<group>"; };
-		26210DA3223F26F0009708E9 /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
-		262B5B8722A9694E00BB3D52 /* sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
-		262B5B8822A9694E00BB3D52 /* bml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bml.cpp; sourceTree = "<group>"; };
-		262B5B8922A9694E00BB3D52 /* bml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bml.h; sourceTree = "<group>"; };
-		262B5B8B22A9694F00BB3D52 /* sha256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha256.cpp; sourceTree = "<group>"; };
-		267312232272283B00687228 /* TableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewSwitchCell.m; path = Classes/TableViewSwitchCell.m; sourceTree = SOURCE_ROOT; };
-		26A6C59322AAD25300E06CB5 /* statemanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = statemanager.cpp; sourceTree = "<group>"; };
-		26A6C59422AAD25300E06CB5 /* statemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statemanager.h; sourceTree = "<group>"; };
-		26AAB78821F77DBC00E05B50 /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
-		26AAB78921F77DBC00E05B50 /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
-		26AB9AA12279189E0037C01E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
-		26AEE2B321F7622A00DD9D5E /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
-		26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
-		26B546B022BBEC6200A3A91D /* stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stream.cpp; sourceTree = "<group>"; };
-		26B546B122BBEC6300A3A91D /* stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream.h; sourceTree = "<group>"; };
-		26B6C59422AC3DC500ADC916 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsController.h; path = Classes/SettingsController.h; sourceTree = SOURCE_ROOT; };
-		26B779FA22AC1D960027F221 /* msu1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msu1.h; sourceTree = "<group>"; };
-		26B779FB22AC1D960027F221 /* msu1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msu1.cpp; sourceTree = "<group>"; };
-		26FA6AA022BBF52B00E5C92F /* xbrz_tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz_tools.h; sourceTree = "<group>"; };
-		26FA6AA222BBF52C00E5C92F /* xbrz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz.h; sourceTree = "<group>"; };
-		26FA6AA322BBF52C00E5C92F /* xbrz_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz_config.h; sourceTree = "<group>"; };
+		26378EEF22E1247400FC4A10 /* TableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewSwitchCell.h; path = Classes/TableViewSwitchCell.h; sourceTree = SOURCE_ROOT; };
+		26378EF022E1248900FC4A10 /* TableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewSwitchCell.m; path = Classes/TableViewSwitchCell.m; sourceTree = SOURCE_ROOT; };
+		269901E022E3863B00BF312B /* ButtonNumberDefault-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7@2x.png"; sourceTree = "<group>"; };
+		269901E122E3863B00BF312B /* ButtonNumberPlusDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7.png"; sourceTree = "<group>"; };
+		269901E222E3863B00BF312B /* ButtonNumberDefaultDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7@3x.png"; sourceTree = "<group>"; };
+		269901E322E3863B00BF312B /* ButtonNumberPlus-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7.png"; sourceTree = "<group>"; };
+		269901E422E3863B00BF312B /* ButtonNumberDefaultDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7@2x.png"; sourceTree = "<group>"; };
+		269901E522E3863B00BF312B /* ButtonNumberDefault-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7@3x.png"; sourceTree = "<group>"; };
+		269901E622E3863B00BF312B /* ButtonNumberDefaultDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7.png"; sourceTree = "<group>"; };
+		269901E722E3863B00BF312B /* ButtonNumberPlus-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7@3x.png"; sourceTree = "<group>"; };
+		269901E822E3863B00BF312B /* ButtonNumberMinusDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinusDown-7.png"; sourceTree = "<group>"; };
+		269901E922E3863B00BF312B /* ButtonNumberPlus-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7@2x.png"; sourceTree = "<group>"; };
+		269901EA22E3863B00BF312B /* ButtonNumberDefault-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7.png"; sourceTree = "<group>"; };
+		269901EB22E3863B00BF312B /* ButtonNumberMinusDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinusDown-7@2x.png"; sourceTree = "<group>"; };
+		269901EC22E3863B00BF312B /* ButtonNumberMinusDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinusDown-7@3x.png"; sourceTree = "<group>"; };
+		269901ED22E3863B00BF312B /* ButtonNumberMinus-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7@2x.png"; sourceTree = "<group>"; };
+		269901EE22E3863B00BF312B /* ButtonNumberMinus-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7.png"; sourceTree = "<group>"; };
+		269901EF22E3863B00BF312B /* ButtonNumberPlusDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7@3x.png"; sourceTree = "<group>"; };
+		269901F022E3863B00BF312B /* ButtonNumberPlusDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7@2x.png"; sourceTree = "<group>"; };
+		269901F122E3863B00BF312B /* ButtonNumberMinus-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7@3x.png"; sourceTree = "<group>"; };
+		2699020422E3864B00BF312B /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
+		2699020522E3864B00BF312B /* PurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PurpleButton.png; sourceTree = "<group>"; };
+		2699020622E3864B00BF312B /* YellowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YellowButton.png; sourceTree = "<group>"; };
+		2699020722E3864C00BF312B /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
+		2699020822E3864C00BF312B /* LightPurpleButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LightPurpleButton.png; sourceTree = "<group>"; };
+		2699020922E3864C00BF312B /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButton.png; sourceTree = "<group>"; };
+		2699020A22E3864C00BF312B /* DPadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DPadButton.png; sourceTree = "<group>"; };
+		2699020B22E3864C00BF312B /* ButtonWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonWide.png; sourceTree = "<group>"; };
+		2699020C22E3864D00BF312B /* LRButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LRButton.png; sourceTree = "<group>"; };
+		26E407CA22E113D500069A28 /* sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
+		26E407CB22E113D500069A28 /* bml.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bml.cpp; sourceTree = "<group>"; };
+		26E407CC22E113D600069A28 /* msu1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = msu1.h; sourceTree = "<group>"; };
+		26E407CD22E113D600069A28 /* sha256.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sha256.cpp; sourceTree = "<group>"; };
+		26E407CE22E113D600069A28 /* msu1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = msu1.cpp; sourceTree = "<group>"; };
+		26E407CF22E113D600069A28 /* bml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bml.h; sourceTree = "<group>"; };
+		26E407D322E113F200069A28 /* tileimpl-n1x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-n1x1.cpp"; sourceTree = "<group>"; };
+		26E407D422E113F300069A28 /* statemanager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = statemanager.cpp; sourceTree = "<group>"; };
+		26E407D522E113F300069A28 /* stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stream.h; sourceTree = "<group>"; };
+		26E407D622E113F300069A28 /* tileimpl-h2x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-h2x1.cpp"; sourceTree = "<group>"; };
+		26E407D722E113F300069A28 /* tileimpl-n2x1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = "tileimpl-n2x1.cpp"; sourceTree = "<group>"; };
+		26E407D822E113F400069A28 /* stream.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stream.cpp; sourceTree = "<group>"; };
+		26E407D922E113F400069A28 /* statemanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = statemanager.h; sourceTree = "<group>"; };
+		26E407DA22E113F400069A28 /* tileimpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tileimpl.h; sourceTree = "<group>"; };
+		26E407E122E116B400069A28 /* SNES_SPC_misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC_misc.cpp; sourceTree = "<group>"; };
+		26E407E222E116B400069A28 /* blargg_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_common.h; sourceTree = "<group>"; };
+		26E407E322E116B400069A28 /* SPC_CPU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPC_CPU.h; sourceTree = "<group>"; };
+		26E407E422E116B400069A28 /* SNES_SPC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC.cpp; sourceTree = "<group>"; };
+		26E407E522E116B400069A28 /* SPC_Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPC_Filter.h; sourceTree = "<group>"; };
+		26E407E622E116B400069A28 /* SPC_DSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPC_DSP.h; sourceTree = "<group>"; };
+		26E407E722E116B400069A28 /* SNES_SPC_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC_state.cpp; sourceTree = "<group>"; };
+		26E407E822E116B400069A28 /* SPC_Filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SPC_Filter.cpp; sourceTree = "<group>"; };
+		26E407E922E116B400069A28 /* blargg_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_config.h; sourceTree = "<group>"; };
+		26E407EA22E116B400069A28 /* apu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apu.h; sourceTree = "<group>"; };
+		26E407EB22E116B400069A28 /* resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resampler.h; sourceTree = "<group>"; };
+		26E407EC22E116B400069A28 /* SNES_SPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNES_SPC.h; sourceTree = "<group>"; };
+		26E407ED22E116B400069A28 /* apu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apu.cpp; sourceTree = "<group>"; };
+		26E407EE22E116B400069A28 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
+		26E407EF22E116B400069A28 /* blargg_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_source.h; sourceTree = "<group>"; };
+		26E407F022E116B400069A28 /* SPC_DSP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SPC_DSP.cpp; sourceTree = "<group>"; };
+		26E407F122E116B400069A28 /* blargg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_endian.h; sourceTree = "<group>"; };
+		26E407F922E116C500069A28 /* xbrz_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz_config.h; sourceTree = "<group>"; };
+		26E407FA22E116C600069A28 /* xbrz_tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz_tools.h; sourceTree = "<group>"; };
+		26E407FB22E116C600069A28 /* xbrz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xbrz.h; sourceTree = "<group>"; };
+		26E407FE22E1214A00069A28 /* RomBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RomBrowserController.m; path = Classes/RomBrowserController.m; sourceTree = SOURCE_ROOT; };
 		66C1BD5E1866ACA800E5A833 /* GameControllerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = GameControllerManager.h; path = Classes/GameControllerManager.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		66C1BD5F1866ACA800E5A833 /* GameControllerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = GameControllerManager.m; path = Classes/GameControllerManager.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		66C1BD611866AF9E00E5A833 /* GameController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameController.framework; path = System/Library/Frameworks/GameController.framework; sourceTree = SDKROOT; };
 		A00401E314BE3E4D00FE28CE /* 65c816.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 65c816.h; sourceTree = "<group>"; };
-		A00401E514BE3E4D00FE28CE /* apu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apu.cpp; sourceTree = "<group>"; };
-		A00401E614BE3E4D00FE28CE /* apu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = apu.h; sourceTree = "<group>"; };
-		A00401E714BE3E4D00FE28CE /* blargg_common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_common.h; sourceTree = "<group>"; };
-		A00401E814BE3E4D00FE28CE /* blargg_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_config.h; sourceTree = "<group>"; };
-		A00401E914BE3E4D00FE28CE /* blargg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_endian.h; sourceTree = "<group>"; };
-		A00401EA14BE3E4D00FE28CE /* blargg_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_source.h; sourceTree = "<group>"; };
-		A00401EE14BE3E4D00FE28CE /* resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resampler.h; sourceTree = "<group>"; };
-		A00401F014BE3E4D00FE28CE /* SNES_SPC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC.cpp; sourceTree = "<group>"; };
-		A00401F114BE3E4D00FE28CE /* SNES_SPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNES_SPC.h; sourceTree = "<group>"; };
-		A00401F214BE3E4D00FE28CE /* SNES_SPC_misc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC_misc.cpp; sourceTree = "<group>"; };
-		A00401F314BE3E4D00FE28CE /* SNES_SPC_state.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SNES_SPC_state.cpp; sourceTree = "<group>"; };
-		A00401F414BE3E4D00FE28CE /* SPC_CPU.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPC_CPU.h; sourceTree = "<group>"; };
-		A00401F514BE3E4D00FE28CE /* SPC_DSP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SPC_DSP.cpp; sourceTree = "<group>"; };
-		A00401F614BE3E4D00FE28CE /* SPC_DSP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPC_DSP.h; sourceTree = "<group>"; };
-		A00401F714BE3E4D00FE28CE /* SPC_Filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SPC_Filter.cpp; sourceTree = "<group>"; };
-		A00401F814BE3E4D00FE28CE /* SPC_Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPC_Filter.h; sourceTree = "<group>"; };
 		A00401F914BE3E4D00FE28CE /* bsx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = bsx.cpp; sourceTree = "<group>"; };
 		A00401FA14BE3E4D00FE28CE /* bsx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bsx.h; sourceTree = "<group>"; };
 		A00401FB14BE3E4D00FE28CE /* c4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = c4.cpp; sourceTree = "<group>"; };
@@ -333,8 +354,8 @@
 		A027AC1814C78F3C00F177F7 /* SaveManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; name = SaveManager.mm; path = Classes/SaveManager.mm; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A027AC2D14C8456D00F177F7 /* SISaveDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SISaveDelegate.h; path = SNES9XBridge/SISaveDelegate.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A027AC2E14C8456D00F177F7 /* SISaveDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SISaveDelegate.m; path = SNES9XBridge/SISaveDelegate.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		A03C087314BF7AB2003FAEB9 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SettingsController.m; path = Classes/SettingsController.m; sourceTree = SOURCE_ROOT; };
-		A03C087614BF7E43003FAEB9 /* TableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TableViewSwitchCell.h; path = Classes/TableViewSwitchCell.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A03C087214BF7AB2003FAEB9 /* SettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = SettingsController.h; path = Classes/SettingsController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A03C087314BF7AB2003FAEB9 /* SettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SettingsController.m; path = Classes/SettingsController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A03C087914BF89CC003FAEB9 /* TableViewNumberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = TableViewNumberCell.m; path = Classes/TableViewNumberCell.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A03C087A14BF89CC003FAEB9 /* TableViewNumberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TableViewNumberCell.h; path = Classes/TableViewNumberCell.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A03C087C14BF89E3003FAEB9 /* TableViewCellDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = TableViewCellDelegate.h; path = Classes/TableViewCellDelegate.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -358,15 +379,13 @@
 		A0995F8514B6883E00F7C44F /* SIScreenDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SIScreenDelegate.m; path = SNES9XBridge/SIScreenDelegate.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0A8A0F914B25401003C5688 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A0A8A0FB14B25409003C5688 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A0B8685B14BE25F900663EBE /* ButtonWide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonWide.png; sourceTree = "<group>"; };
 		A0B8686914BE3B3100663EBE /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = main.m; path = Classes/main.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8686A14BE3B3100663EBE /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Prefix.pch; path = Classes/Prefix.pch; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8686E14BE3B6600663EBE /* DPadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = DPadView.m; path = Classes/DPadView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8686F14BE3B6600663EBE /* EmulatorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = EmulatorController.m; path = Classes/EmulatorController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8687014BE3B6600663EBE /* ButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ButtonView.m; path = Classes/ButtonView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		A0B8687114BE3B6600663EBE /* ButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ButtonView.h; path = Classes/ButtonView.h; sourceTree = SOURCE_ROOT; };
+		A0B8687114BE3B6600663EBE /* ButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = ButtonView.h; path = Classes/ButtonView.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A0B8687214BE3B6600663EBE /* EmulatorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = EmulatorController.h; path = Classes/EmulatorController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		A0B8687514BE3B6700663EBE /* RomBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = RomBrowserController.m; path = Classes/RomBrowserController.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8687614BE3B6700663EBE /* RomBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = RomBrowserController.h; path = Classes/RomBrowserController.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		A0B8687714BE3B6700663EBE /* PixelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = PixelView.m; path = Classes/PixelView.m; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A0B8687814BE3B6700663EBE /* PixelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = PixelView.h; path = Classes/PixelView.h; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -381,26 +400,8 @@
 		A0D287B6172959A300CD6C6A /* iCadeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCadeReaderView.m; sourceTree = "<group>"; };
 		A0D287B7172959A300CD6C6A /* iCadeState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCadeState.h; sourceTree = "<group>"; };
 		A0DF88E919EEBB580070326B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MeSNEmu/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		A0E0DC4319EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7@3x.png"; sourceTree = "<group>"; };
-		A0E0DC4519EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7@3x.png"; sourceTree = "<group>"; };
-		A0E0DC4619EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7@3x.png"; sourceTree = "<group>"; };
-		A0E0DC4719EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinusDown-7@3x.png"; sourceTree = "<group>"; };
-		A0E0DC4819EF075D00D8EBF4 /* ButtonNumberPlus-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7@3x.png"; sourceTree = "<group>"; };
-		A0E0DC4919EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7@3x.png"; sourceTree = "<group>"; };
-		A0F1F106184D5A6A000D6CE9 /* ButtonNumberDefault-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7.png"; sourceTree = "<group>"; };
-		A0F1F107184D5A6A000D6CE9 /* ButtonNumberDefault-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7@2x.png"; sourceTree = "<group>"; };
-		A0F1F10A184D5A6A000D6CE9 /* ButtonNumberDefaultDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7.png"; sourceTree = "<group>"; };
-		A0F1F10B184D5A6A000D6CE9 /* ButtonNumberDefaultDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7@2x.png"; sourceTree = "<group>"; };
-		A0F1F10C184D5A6A000D6CE9 /* ButtonNumberMinus-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7.png"; sourceTree = "<group>"; };
-		A0F1F10D184D5A6A000D6CE9 /* ButtonNumberMinus-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinus-7@2x.png"; sourceTree = "<group>"; };
-		A0F1F110184D5A6A000D6CE9 /* ButtonNumberMinusDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinusDown-7.png"; sourceTree = "<group>"; };
-		A0F1F111184D5A6A000D6CE9 /* ButtonNumberMinusDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberMinusDown-7@2x.png"; sourceTree = "<group>"; };
-		A0F1F112184D5A6B000D6CE9 /* ButtonNumberPlus-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7.png"; sourceTree = "<group>"; };
-		A0F1F113184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlus-7@2x.png"; sourceTree = "<group>"; };
-		A0F1F116184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7.png"; sourceTree = "<group>"; };
-		A0F1F117184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7@2x.png"; sourceTree = "<group>"; };
-		A0FE5CB117A1EC5D0001EA30 /* BTControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BTControllerView.h; sourceTree = "<group>"; };
-		A0FE5CB217A1EC5D0001EA30 /* BTControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BTControllerView.m; sourceTree = "<group>"; };
+		A0FE5CB117A1EC5D0001EA30 /* BTControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BTControllerView.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A0FE5CB217A1EC5D0001EA30 /* BTControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BTControllerView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,13 +422,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		269901DF22E3863B00BF312B /* NumberControl */ = {
+			isa = PBXGroup;
+			children = (
+				269901E022E3863B00BF312B /* ButtonNumberDefault-7@2x.png */,
+				269901E122E3863B00BF312B /* ButtonNumberPlusDown-7.png */,
+				269901E222E3863B00BF312B /* ButtonNumberDefaultDown-7@3x.png */,
+				269901E322E3863B00BF312B /* ButtonNumberPlus-7.png */,
+				269901E422E3863B00BF312B /* ButtonNumberDefaultDown-7@2x.png */,
+				269901E522E3863B00BF312B /* ButtonNumberDefault-7@3x.png */,
+				269901E622E3863B00BF312B /* ButtonNumberDefaultDown-7.png */,
+				269901E722E3863B00BF312B /* ButtonNumberPlus-7@3x.png */,
+				269901E822E3863B00BF312B /* ButtonNumberMinusDown-7.png */,
+				269901E922E3863B00BF312B /* ButtonNumberPlus-7@2x.png */,
+				269901EA22E3863B00BF312B /* ButtonNumberDefault-7.png */,
+				269901EB22E3863B00BF312B /* ButtonNumberMinusDown-7@2x.png */,
+				269901EC22E3863B00BF312B /* ButtonNumberMinusDown-7@3x.png */,
+				269901ED22E3863B00BF312B /* ButtonNumberMinus-7@2x.png */,
+				269901EE22E3863B00BF312B /* ButtonNumberMinus-7.png */,
+				269901EF22E3863B00BF312B /* ButtonNumberPlusDown-7@3x.png */,
+				269901F022E3863B00BF312B /* ButtonNumberPlusDown-7@2x.png */,
+				269901F122E3863B00BF312B /* ButtonNumberMinus-7@3x.png */,
+			);
+			path = NumberControl;
+			sourceTree = "<group>";
+		};
+		26E407E022E116B400069A28 /* apu */ = {
+			isa = PBXGroup;
+			children = (
+				26E407E122E116B400069A28 /* SNES_SPC_misc.cpp */,
+				26E407E222E116B400069A28 /* blargg_common.h */,
+				26E407E322E116B400069A28 /* SPC_CPU.h */,
+				26E407E422E116B400069A28 /* SNES_SPC.cpp */,
+				26E407E522E116B400069A28 /* SPC_Filter.h */,
+				26E407E622E116B400069A28 /* SPC_DSP.h */,
+				26E407E722E116B400069A28 /* SNES_SPC_state.cpp */,
+				26E407E822E116B400069A28 /* SPC_Filter.cpp */,
+				26E407E922E116B400069A28 /* blargg_config.h */,
+				26E407EA22E116B400069A28 /* apu.h */,
+				26E407EB22E116B400069A28 /* resampler.h */,
+				26E407EC22E116B400069A28 /* SNES_SPC.h */,
+				26E407ED22E116B400069A28 /* apu.cpp */,
+				26E407EE22E116B400069A28 /* license.txt */,
+				26E407EF22E116B400069A28 /* blargg_source.h */,
+				26E407F022E116B400069A28 /* SPC_DSP.cpp */,
+				26E407F122E116B400069A28 /* blargg_endian.h */,
+			);
+			path = apu;
+			sourceTree = "<group>";
+		};
 		A00401E214BE3E4D00FE28CE /* Snes9x */ = {
 			isa = PBXGroup;
 			children = (
 				A00401E314BE3E4D00FE28CE /* 65c816.h */,
-				A00401E414BE3E4D00FE28CE /* apu */,
-				262B5B8822A9694E00BB3D52 /* bml.cpp */,
-				262B5B8922A9694E00BB3D52 /* bml.h */,
+				26E407E022E116B400069A28 /* apu */,
+				26E407CB22E113D500069A28 /* bml.cpp */,
+				26E407CF22E113D600069A28 /* bml.h */,
 				A00401F914BE3E4D00FE28CE /* bsx.cpp */,
 				A00401FA14BE3E4D00FE28CE /* bsx.h */,
 				A00401FB14BE3E4D00FE28CE /* c4.cpp */,
@@ -483,8 +533,8 @@
 				A004032F14BE3E4D00FE28CE /* missing.h */,
 				A004033014BE3E4D00FE28CE /* movie.cpp */,
 				A004033114BE3E4D00FE28CE /* movie.h */,
-				26B779FB22AC1D960027F221 /* msu1.cpp */,
-				26B779FA22AC1D960027F221 /* msu1.h */,
+				26E407CE22E113D600069A28 /* msu1.cpp */,
+				26E407CC22E113D600069A28 /* msu1.h */,
 				A004033214BE3E4D00FE28CE /* netplay.cpp */,
 				A004033314BE3E4D00FE28CE /* netplay.h */,
 				A004033414BE3E4D00FE28CE /* obc1.cpp */,
@@ -507,8 +557,8 @@
 				A004034914BE3E4D00FE28CE /* seta010.cpp */,
 				A004034A14BE3E4D00FE28CE /* seta011.cpp */,
 				A004034B14BE3E4D00FE28CE /* seta018.cpp */,
-				262B5B8B22A9694F00BB3D52 /* sha256.cpp */,
-				262B5B8722A9694E00BB3D52 /* sha256.h */,
+				26E407CD22E113D600069A28 /* sha256.cpp */,
+				26E407CA22E113D500069A28 /* sha256.h */,
 				A004034C14BE3E4D00FE28CE /* snapshot.cpp */,
 				A004034D14BE3E4D00FE28CE /* snapshot.h */,
 				A004034E14BE3E4D00FE28CE /* snes9x.cpp */,
@@ -520,43 +570,20 @@
 				A00404DF14BE41ED00FE28CE /* srtc.cpp */,
 				A004035714BE3E4D00FE28CE /* srtc.h */,
 				A004035914BE3E4D00FE28CE /* srtcemu.h */,
-				26A6C59322AAD25300E06CB5 /* statemanager.cpp */,
-				26A6C59422AAD25300E06CB5 /* statemanager.h */,
-				26B546B022BBEC6200A3A91D /* stream.cpp */,
-				26B546B122BBEC6300A3A91D /* stream.h */,
+				26E407D422E113F300069A28 /* statemanager.cpp */,
+				26E407D922E113F400069A28 /* statemanager.h */,
+				26E407D822E113F400069A28 /* stream.cpp */,
+				26E407D522E113F300069A28 /* stream.h */,
 				A004035A14BE3E4D00FE28CE /* tile.cpp */,
 				A004035B14BE3E4D00FE28CE /* tile.h */,
-				260B587422C6E1D7008C5E37 /* tileimpl-h2x1.cpp */,
-				260B587722C6E1D8008C5E37 /* tileimpl-n1x1.cpp */,
-				260B587622C6E1D8008C5E37 /* tileimpl-n2x1.cpp */,
-				260B587522C6E1D8008C5E37 /* tileimpl.h */,
+				26E407D622E113F300069A28 /* tileimpl-h2x1.cpp */,
+				26E407D322E113F200069A28 /* tileimpl-n1x1.cpp */,
+				26E407D722E113F300069A28 /* tileimpl-n2x1.cpp */,
+				26E407DA22E113F400069A28 /* tileimpl.h */,
 				A004036714BE3E4D00FE28CE /* unzip */,
 			);
 			path = Snes9x;
 			sourceTree = SOURCE_ROOT;
-		};
-		A00401E414BE3E4D00FE28CE /* apu */ = {
-			isa = PBXGroup;
-			children = (
-				A00401E514BE3E4D00FE28CE /* apu.cpp */,
-				A00401E614BE3E4D00FE28CE /* apu.h */,
-				A00401E714BE3E4D00FE28CE /* blargg_common.h */,
-				A00401E814BE3E4D00FE28CE /* blargg_config.h */,
-				A00401E914BE3E4D00FE28CE /* blargg_endian.h */,
-				A00401EA14BE3E4D00FE28CE /* blargg_source.h */,
-				A00401EE14BE3E4D00FE28CE /* resampler.h */,
-				A00401F014BE3E4D00FE28CE /* SNES_SPC.cpp */,
-				A00401F114BE3E4D00FE28CE /* SNES_SPC.h */,
-				A00401F214BE3E4D00FE28CE /* SNES_SPC_misc.cpp */,
-				A00401F314BE3E4D00FE28CE /* SNES_SPC_state.cpp */,
-				A00401F414BE3E4D00FE28CE /* SPC_CPU.h */,
-				A00401F514BE3E4D00FE28CE /* SPC_DSP.cpp */,
-				A00401F614BE3E4D00FE28CE /* SPC_DSP.h */,
-				A00401F714BE3E4D00FE28CE /* SPC_Filter.cpp */,
-				A00401F814BE3E4D00FE28CE /* SPC_Filter.h */,
-			);
-			path = apu;
-			sourceTree = "<group>";
 		};
 		A004022514BE3E4D00FE28CE /* filter */ = {
 			isa = PBXGroup;
@@ -573,9 +600,9 @@
 				A004023014BE3E4D00FE28CE /* snes_ntsc.h */,
 				A004023114BE3E4D00FE28CE /* snes_ntsc_config.h */,
 				A004023214BE3E4D00FE28CE /* snes_ntsc_impl.h */,
-				26FA6AA222BBF52C00E5C92F /* xbrz.h */,
-				26FA6AA322BBF52C00E5C92F /* xbrz_config.h */,
-				26FA6AA022BBF52B00E5C92F /* xbrz_tools.h */,
+				26E407F922E116C500069A28 /* xbrz_config.h */,
+				26E407FA22E116C600069A28 /* xbrz_tools.h */,
+				26E407FB22E116C600069A28 /* xbrz.h */,
 			);
 			path = filter;
 			sourceTree = "<group>";
@@ -723,16 +750,16 @@
 		A0B8685814BE25F900663EBE /* Artwork */ = {
 			isa = PBXGroup;
 			children = (
-				26210DA3223F26F0009708E9 /* BlueButton.png */,
-				26210DA2223F26F0009708E9 /* GreenButton.png */,
-				26210DA1223F26F0009708E9 /* RedButton.png */,
-				26210DA0223F26F0009708E9 /* YellowButton.png */,
-				26AAB78821F77DBC00E05B50 /* DPadButton.png */,
-				26AAB78921F77DBC00E05B50 /* LRButton.png */,
-				26AEE2B721F7638800DD9D5E /* LightPurpleButton.png */,
-				26AEE2B321F7622A00DD9D5E /* PurpleButton.png */,
-				A0B8685B14BE25F900663EBE /* ButtonWide.png */,
-				A0F1F105184D5A6A000D6CE9 /* NumberControl */,
+				2699020722E3864C00BF312B /* BlueButton.png */,
+				2699020B22E3864C00BF312B /* ButtonWide.png */,
+				2699020A22E3864C00BF312B /* DPadButton.png */,
+				2699020922E3864C00BF312B /* GreenButton.png */,
+				2699020822E3864C00BF312B /* LightPurpleButton.png */,
+				2699020C22E3864D00BF312B /* LRButton.png */,
+				2699020522E3864B00BF312B /* PurpleButton.png */,
+				2699020422E3864B00BF312B /* RedButton.png */,
+				2699020622E3864B00BF312B /* YellowButton.png */,
+				269901DF22E3863B00BF312B /* NumberControl */,
 			);
 			path = Artwork;
 			sourceTree = SOURCE_ROOT;
@@ -751,8 +778,8 @@
 				A03C087C14BF89E3003FAEB9 /* TableViewCellDelegate.h */,
 				A03C087A14BF89CC003FAEB9 /* TableViewNumberCell.h */,
 				A03C087914BF89CC003FAEB9 /* TableViewNumberCell.m */,
-				A03C087614BF7E43003FAEB9 /* TableViewSwitchCell.h */,
-				267312232272283B00687228 /* TableViewSwitchCell.m */,
+				26378EEF22E1247400FC4A10 /* TableViewSwitchCell.h */,
+				26378EF022E1248900FC4A10 /* TableViewSwitchCell.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -761,9 +788,9 @@
 			isa = PBXGroup;
 			children = (
 				A093242A17CE6A4A00A93B6B /* EmulatorController */,
+				26E407FE22E1214A00069A28 /* RomBrowserController.m */,
 				A0B8687614BE3B6700663EBE /* RomBrowserController.h */,
-				A0B8687514BE3B6700663EBE /* RomBrowserController.m */,
-				26B6C59422AC3DC500ADC916 /* SettingsController.h */,
+				A03C087214BF7AB2003FAEB9 /* SettingsController.h */,
 				A03C087314BF7AB2003FAEB9 /* SettingsController.m */,
 				A093242617CE590200A93B6B /* MultipleChoicePicker.h */,
 				A093242717CE590200A93B6B /* MultipleChoicePicker.m */,
@@ -784,31 +811,6 @@
 				A0FE5CB217A1EC5D0001EA30 /* BTControllerView.m */,
 			);
 			path = iCade;
-			sourceTree = "<group>";
-		};
-		A0F1F105184D5A6A000D6CE9 /* NumberControl */ = {
-			isa = PBXGroup;
-			children = (
-				A0F1F106184D5A6A000D6CE9 /* ButtonNumberDefault-7.png */,
-				A0F1F107184D5A6A000D6CE9 /* ButtonNumberDefault-7@2x.png */,
-				A0E0DC4319EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png */,
-				A0F1F10A184D5A6A000D6CE9 /* ButtonNumberDefaultDown-7.png */,
-				A0F1F10B184D5A6A000D6CE9 /* ButtonNumberDefaultDown-7@2x.png */,
-				A0E0DC4519EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png */,
-				A0F1F10C184D5A6A000D6CE9 /* ButtonNumberMinus-7.png */,
-				A0F1F10D184D5A6A000D6CE9 /* ButtonNumberMinus-7@2x.png */,
-				A0E0DC4619EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png */,
-				A0F1F110184D5A6A000D6CE9 /* ButtonNumberMinusDown-7.png */,
-				A0F1F111184D5A6A000D6CE9 /* ButtonNumberMinusDown-7@2x.png */,
-				A0E0DC4719EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png */,
-				A0F1F112184D5A6B000D6CE9 /* ButtonNumberPlus-7.png */,
-				A0F1F113184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png */,
-				A0E0DC4819EF075D00D8EBF4 /* ButtonNumberPlus-7@3x.png */,
-				A0F1F116184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png */,
-				A0F1F117184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png */,
-				A0E0DC4919EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png */,
-			);
-			path = NumberControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -838,16 +840,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = SarahH12099;
+				ORGANIZATIONNAME = "Lucas Menge";
 			};
 			buildConfigurationList = A050660114B21C7E003E0C5E /* Build configuration list for PBXProject "MeSNEmu" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
-				es,
+				English,
+				pt,
 			);
 			mainGroup = A05065FC14B21C7E003E0C5E;
 			productRefGroup = A050660814B21C7F003E0C5E /* Products */;
@@ -864,35 +866,36 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0F1F123184D5A6B000D6CE9 /* ButtonNumberMinusDown-7@2x.png in Resources */,
+				269901FC22E3863B00BF312B /* ButtonNumberDefault-7.png in Resources */,
+				269901F822E3863B00BF312B /* ButtonNumberDefaultDown-7.png in Resources */,
+				269901FB22E3863B00BF312B /* ButtonNumberPlus-7@2x.png in Resources */,
+				269901F922E3863B00BF312B /* ButtonNumberPlus-7@3x.png in Resources */,
+				269901F322E3863B00BF312B /* ButtonNumberPlusDown-7.png in Resources */,
+				2699021522E3864D00BF312B /* LRButton.png in Resources */,
 				A0DF88EA19EEBB580070326B /* Images.xcassets in Resources */,
-				26AEE2B421F7622A00DD9D5E /* PurpleButton.png in Resources */,
-				26210DA6223F26F0009708E9 /* GreenButton.png in Resources */,
-				A0F1F125184D5A6B000D6CE9 /* ButtonNumberPlus-7@2x.png in Resources */,
-				A0E0DC4E19EF075D00D8EBF4 /* ButtonNumberPlusDown-7@3x.png in Resources */,
-				A0E0DC4419EF075600D8EBF4 /* ButtonNumberDefault-7@3x.png in Resources */,
-				A0B8685E14BE25F900663EBE /* ButtonWide.png in Resources */,
-				26AEE2B821F7638800DD9D5E /* LightPurpleButton.png in Resources */,
-				A0F1F122184D5A6B000D6CE9 /* ButtonNumberMinusDown-7.png in Resources */,
-				A0E0DC4A19EF075D00D8EBF4 /* ButtonNumberDefaultDown-7@3x.png in Resources */,
-				A0E0DC4D19EF075D00D8EBF4 /* ButtonNumberPlus-7@3x.png in Resources */,
-				A0F1F11F184D5A6B000D6CE9 /* ButtonNumberMinus-7@2x.png in Resources */,
-				A0F1F129184D5A6B000D6CE9 /* ButtonNumberPlusDown-7@2x.png in Resources */,
-				A0F1F119184D5A6B000D6CE9 /* ButtonNumberDefault-7@2x.png in Resources */,
-				26AAB78A21F77DBC00E05B50 /* DPadButton.png in Resources */,
-				26210DA4223F26F0009708E9 /* YellowButton.png in Resources */,
+				2699020E22E3864D00BF312B /* PurpleButton.png in Resources */,
+				2699021222E3864D00BF312B /* GreenButton.png in Resources */,
+				269901FD22E3863B00BF312B /* ButtonNumberMinusDown-7@2x.png in Resources */,
+				2699020122E3863B00BF312B /* ButtonNumberPlusDown-7@3x.png in Resources */,
+				2699020322E3863B00BF312B /* ButtonNumberMinus-7@3x.png in Resources */,
+				2699021022E3864D00BF312B /* BlueButton.png in Resources */,
+				2699020D22E3864D00BF312B /* RedButton.png in Resources */,
+				269901F422E3863B00BF312B /* ButtonNumberDefaultDown-7@3x.png in Resources */,
+				269901F522E3863B00BF312B /* ButtonNumberPlus-7.png in Resources */,
+				2699021122E3864D00BF312B /* LightPurpleButton.png in Resources */,
+				269901FE22E3863B00BF312B /* ButtonNumberMinusDown-7@3x.png in Resources */,
 				A0BB592614E84BC000D12F97 /* Localizable.strings in Resources */,
-				A0E0DC4C19EF075D00D8EBF4 /* ButtonNumberMinusDown-7@3x.png in Resources */,
-				A0F1F11D184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7@2x.png in Resources */,
-				A0F1F128184D5A6B000D6CE9 /* ButtonNumberPlusDown-7.png in Resources */,
-				A0F1F118184D5A6B000D6CE9 /* ButtonNumberDefault-7.png in Resources */,
-				26AAB78B21F77DBC00E05B50 /* LRButton.png in Resources */,
-				A0F1F11C184D5A6B000D6CE9 /* ButtonNumberDefaultDown-7.png in Resources */,
-				A0F1F124184D5A6B000D6CE9 /* ButtonNumberPlus-7.png in Resources */,
-				A0F1F11E184D5A6B000D6CE9 /* ButtonNumberMinus-7.png in Resources */,
-				26210DA7223F26F0009708E9 /* BlueButton.png in Resources */,
-				26210DA5223F26F0009708E9 /* RedButton.png in Resources */,
-				A0E0DC4B19EF075D00D8EBF4 /* ButtonNumberMinus-7@3x.png in Resources */,
+				2699021322E3864D00BF312B /* DPadButton.png in Resources */,
+				269901FF22E3863B00BF312B /* ButtonNumberMinus-7@2x.png in Resources */,
+				26E407F722E116B500069A28 /* license.txt in Resources */,
+				2699021422E3864D00BF312B /* ButtonWide.png in Resources */,
+				269901F622E3863B00BF312B /* ButtonNumberDefaultDown-7@2x.png in Resources */,
+				269901F722E3863B00BF312B /* ButtonNumberDefault-7@3x.png in Resources */,
+				2699020F22E3864D00BF312B /* YellowButton.png in Resources */,
+				2699020022E3863B00BF312B /* ButtonNumberMinus-7.png in Resources */,
+				269901F222E3863B00BF312B /* ButtonNumberDefault-7@2x.png in Resources */,
+				269901FA22E3863B00BF312B /* ButtonNumberMinusDown-7.png in Resources */,
+				2699020222E3863B00BF312B /* ButtonNumberPlusDown-7@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,36 +907,34 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0995BD714B508AC00F7C44F /* iOSAudio.cpp in Sources */,
+				26E407F422E116B500069A28 /* SNES_SPC_state.cpp in Sources */,
 				A0995C1214B525D200F7C44F /* Snes9xMain.cpp in Sources */,
 				A0995F8014B679FF00F7C44F /* Snes9xCallbacks.cpp in Sources */,
-				260B587822C6E1D8008C5E37 /* tileimpl-h2x1.cpp in Sources */,
+				26E407DD22E113F400069A28 /* tileimpl-h2x1.cpp in Sources */,
 				A0995F8614B6884F00F7C44F /* SIScreenDelegate.m in Sources */,
 				A0B8687E14BE3B6800663EBE /* DPadView.m in Sources */,
 				A0B8687F14BE3B6800663EBE /* EmulatorController.m in Sources */,
 				A0B8688014BE3B6800663EBE /* ButtonView.m in Sources */,
-				A0B8688214BE3B6800663EBE /* RomBrowserController.m in Sources */,
 				A0B8688314BE3B6800663EBE /* PixelView.m in Sources */,
 				A0B8688414BE3B6800663EBE /* PixelLayer.m in Sources */,
 				A0B8688514BE3B6800663EBE /* AppDelegate.m in Sources */,
-				A00403C114BE3E4D00FE28CE /* apu.cpp in Sources */,
-				A00403C314BE3E4D00FE28CE /* SNES_SPC.cpp in Sources */,
-				26A6C59522AAD25400E06CB5 /* statemanager.cpp in Sources */,
-				A00403C414BE3E4D00FE28CE /* SNES_SPC_misc.cpp in Sources */,
-				A00403C514BE3E4D00FE28CE /* SNES_SPC_state.cpp in Sources */,
-				A00403C614BE3E4D00FE28CE /* SPC_DSP.cpp in Sources */,
-				A00403C714BE3E4D00FE28CE /* SPC_Filter.cpp in Sources */,
+				26E407D022E113D700069A28 /* bml.cpp in Sources */,
 				A00403C814BE3E4D00FE28CE /* bsx.cpp in Sources */,
+				26E407F822E116B500069A28 /* SPC_DSP.cpp in Sources */,
+				26E407DF22E113F400069A28 /* stream.cpp in Sources */,
+				26E407F522E116B500069A28 /* SPC_Filter.cpp in Sources */,
 				A00403C914BE3E4D00FE28CE /* c4.cpp in Sources */,
-				260B587A22C6E1D8008C5E37 /* tileimpl-n1x1.cpp in Sources */,
 				A00403CA14BE3E4D00FE28CE /* c4emu.cpp in Sources */,
 				A00403CB14BE3E4D00FE28CE /* cheats.cpp in Sources */,
 				A00403CC14BE3E4D00FE28CE /* cheats2.cpp in Sources */,
 				A00403CD14BE3E4D00FE28CE /* clip.cpp in Sources */,
 				A00403CE14BE3E4D00FE28CE /* conffile.cpp in Sources */,
+				26378EF122E1248900FC4A10 /* TableViewSwitchCell.m in Sources */,
 				A00403CF14BE3E4D00FE28CE /* controls.cpp in Sources */,
 				A00403D014BE3E4D00FE28CE /* cpu.cpp in Sources */,
 				A00403D114BE3E4D00FE28CE /* cpuexec.cpp in Sources */,
 				A00403D214BE3E4D00FE28CE /* cpuops.cpp in Sources */,
+				26E407D222E113D700069A28 /* msu1.cpp in Sources */,
 				A00403D314BE3E4D00FE28CE /* crosshairs.cpp in Sources */,
 				A00403D414BE3E4D00FE28CE /* debug.cpp in Sources */,
 				A00403D514BE3E4D00FE28CE /* dma.cpp in Sources */,
@@ -941,43 +942,46 @@
 				A00403E114BE3E4D00FE28CE /* dsp1.cpp in Sources */,
 				A00403E214BE3E4D00FE28CE /* dsp2.cpp in Sources */,
 				A00403E314BE3E4D00FE28CE /* dsp3.cpp in Sources */,
+				26E407DE22E113F400069A28 /* tileimpl-n2x1.cpp in Sources */,
 				A00403E414BE3E4D00FE28CE /* dsp4.cpp in Sources */,
-				260B587922C6E1D8008C5E37 /* tileimpl-n2x1.cpp in Sources */,
 				A00403E514BE3E4D00FE28CE /* 2xsai.cpp in Sources */,
 				A00403E614BE3E4D00FE28CE /* blit.cpp in Sources */,
 				A00403E714BE3E4D00FE28CE /* epx.cpp in Sources */,
 				A00403E814BE3E4D00FE28CE /* hq2x.cpp in Sources */,
 				A00403EA14BE3E4D00FE28CE /* snes_ntsc.c in Sources */,
 				A00403EB14BE3E4D00FE28CE /* fxdbg.cpp in Sources */,
+				26E407F322E116B500069A28 /* SNES_SPC.cpp in Sources */,
 				A00403EC14BE3E4D00FE28CE /* fxemu.cpp in Sources */,
+				26E407DB22E113F400069A28 /* tileimpl-n1x1.cpp in Sources */,
 				A00403ED14BE3E4D00FE28CE /* fxinst.cpp in Sources */,
 				A00403EE14BE3E4D00FE28CE /* gfx.cpp in Sources */,
-				262B5B8D22A9694F00BB3D52 /* bml.cpp in Sources */,
 				A00403EF14BE3E4D00FE28CE /* globals.cpp in Sources */,
 				A004042914BE3E4E00FE28CE /* 7zlzma.cpp in Sources */,
 				A004042A14BE3E4E00FE28CE /* crc32.cpp in Sources */,
 				A004042B14BE3E4E00FE28CE /* iiostrm.cpp in Sources */,
-				267312242272283C00687228 /* TableViewSwitchCell.m in Sources */,
 				A004042C14BE3E4E00FE28CE /* inbyte.cpp in Sources */,
 				A004042D14BE3E4E00FE28CE /* jma.cpp in Sources */,
 				66C1BD601866ACA800E5A833 /* GameControllerManager.m in Sources */,
+				26E407FF22E1214A00069A28 /* RomBrowserController.m in Sources */,
 				A004042F14BE3E4E00FE28CE /* lzma.cpp in Sources */,
+				26E407F222E116B500069A28 /* SNES_SPC_misc.cpp in Sources */,
 				A004043014BE3E4E00FE28CE /* lzmadec.cpp in Sources */,
 				A004043114BE3E4E00FE28CE /* s9x-jma.cpp in Sources */,
 				A004043214BE3E4E00FE28CE /* winout.cpp in Sources */,
 				A004043314BE3E4E00FE28CE /* loadzip.cpp in Sources */,
 				A004043414BE3E4E00FE28CE /* logger.cpp in Sources */,
+				26E407F622E116B500069A28 /* apu.cpp in Sources */,
+				26E407DC22E113F400069A28 /* statemanager.cpp in Sources */,
 				A004047E14BE3E4E00FE28CE /* memmap.cpp in Sources */,
 				A004047F14BE3E4E00FE28CE /* movie.cpp in Sources */,
+				26E407D122E113D700069A28 /* sha256.cpp in Sources */,
 				A004048014BE3E4E00FE28CE /* netplay.cpp in Sources */,
 				A004048114BE3E4E00FE28CE /* obc1.cpp in Sources */,
 				A004048214BE3E4E00FE28CE /* ppu.cpp in Sources */,
-				262B5B8E22A9694F00BB3D52 /* sha256.cpp in Sources */,
 				A004048414BE3E4E00FE28CE /* sa1.cpp in Sources */,
 				A004048514BE3E4E00FE28CE /* sa1cpu.cpp in Sources */,
 				A004048714BE3E4E00FE28CE /* sdd1.cpp in Sources */,
 				A004048814BE3E4E00FE28CE /* sdd1emu.cpp in Sources */,
-				26B546B222BBEC6400A3A91D /* stream.cpp in Sources */,
 				A004048914BE3E4E00FE28CE /* server.cpp in Sources */,
 				A004048A14BE3E4E00FE28CE /* seta.cpp in Sources */,
 				A004048B14BE3E4E00FE28CE /* seta010.cpp in Sources */,
@@ -1001,7 +1005,6 @@
 				A0FE5CB317A1EC5D0001EA30 /* BTControllerView.m in Sources */,
 				A093242917CE590200A93B6B /* MultipleChoicePicker.m in Sources */,
 				A093243017CE6B3000A93B6B /* EmulatorControllerView.m in Sources */,
-				26B779FC22AC1D960027F221 /* msu1.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1012,7 +1015,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A0BB592714E84BC000D12F97 /* en */,
-				26AB9AA12279189E0037C01E /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;
@@ -1038,7 +1040,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "${SNES_CFLAGS}";
 				OTHER_CPLUSPLUSFLAGS = (
@@ -1048,7 +1050,7 @@
 				SDKROOT = iphoneos;
 				SNES_CFLAGS = "-D__IPHONE__ -DZLIB -DUNZIP_SUPPORT -DLSB_FIRST -funsigned-char -ffast-math -fexpensive-optimizations -mstructure-size-boundary=32 -falign-functions=32 -falign-loops -falign-labels -falign-jumps -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fpeel-loops -fstrength-reduce -funroll-loops -fstrict-aliasing";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1065,7 +1067,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = (
 					"${SNES_CFLAGS}",
 					"-DNS_BLOCK_ASSERTIONS=1",
@@ -1078,7 +1080,7 @@
 				SNES_CFLAGS = "-D__IPHONE__ -DZLIB -DUNZIP_SUPPORT -DLSB_FIRST -funsigned-char -ffast-math -fexpensive-optimizations -mstructure-size-boundary=32 -falign-functions=32 -falign-loops -falign-labels -falign-jumps -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fpeel-loops -fstrength-reduce -funroll-loops -fstrict-aliasing";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = arm64;
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -1087,7 +1089,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LIBRARY = "compiler-default";
 				DEVELOPMENT_TEAM = 883K4M2NLH;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Classes/Prefix.pch;
@@ -1101,6 +1102,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu;
 				PRODUCT_NAME = MeSNEmu;
 				SNES_CFLAGS = "-funsigned-char -ffast-math -fexpensive-optimizations -falign-functions=32 -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fstrength-reduce -funroll-loops -fstrict-aliasing";
+				VALID_ARCHS = "arm64 arm64e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1110,7 +1112,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CLANG_CXX_LIBRARY = "compiler-default";
 				DEVELOPMENT_TEAM = 883K4M2NLH;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Classes/Prefix.pch;
@@ -1123,6 +1124,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = net.sarahh12099.MeSNEmu;
 				PRODUCT_NAME = MeSNEmu;
 				SNES_CFLAGS = "-funsigned-char -ffast-math -fexpensive-optimizations -falign-functions=32 -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fstrength-reduce -funroll-loops -fstrict-aliasing";
+				VALID_ARCHS = "arm64 arm64e";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

@@ -40,15 +40,19 @@
 extern "C" volatile int SI_EmulationDidPause;
 extern "C" volatile int SI_AudioIsOnHold;
 
-+ (void)saveStateForROMName:(NSString*)romFileName inSlot:(int)slot
++ (void)saveStateForROMName:(NSString*)romFileName inSlot:(int)slot screenshot:(UIImage *)screenshot
 {
   NSLog(@"EmulationDidPause %i", SI_EmulationDidPause);
   NSLog(@"AudioIsOnHold %i", SI_AudioIsOnHold);
   
   NSString* savePath = [SaveManager pathForSaveOfROMName:romFileName slot:slot];
   
-  if(S9xFreezeGame([savePath UTF8String]))
+  if(S9xFreezeGame([savePath UTF8String])) {
+    NSString* imagePath = [[savePath stringByDeletingPathExtension] stringByAppendingPathExtension:@"png"];
+    NSData *data = UIImagePNGRepresentation(screenshot);
+    [data writeToFile:imagePath atomically:YES];
     NSLog(@"Saved to %@", savePath);
+  }
   else
     NSLog(@"Failed to save to %@", savePath);
 }
@@ -89,7 +93,7 @@ extern "C" volatile int SI_AudioIsOnHold;
 }
 
 + (NSString*)pathForSaveOfROMName:(NSString*)romFileName slot:(int)slot
-{  
+{
   NSString* saveFolderPath = nil;
   if(slot <= 0)
     saveFolderPath = [SaveManager pathForRunningStates];
@@ -110,21 +114,21 @@ extern "C" volatile int SI_AudioIsOnHold;
   return [[NSFileManager defaultManager] fileExistsAtPath:path];
 }
 
-+ (void)saveRunningStateForROMNamed:(NSString*)romFileName
++ (void)saveRunningStateForROMNamed:(NSString*)romFileName screenshot:(UIImage *)screenshot
 {
-  [SaveManager saveStateForROMName:romFileName inSlot:0];
+  [SaveManager saveStateForROMName:romFileName inSlot:0 screenshot:screenshot];
 }
 + (void)loadRunningStateForROMNamed:(NSString*)romFileName
 {
   [SaveManager loadStateForROMName:romFileName inSlot:0];
 }
 
-+ (void)saveStateForROMNamed:(NSString*)romFileName slot:(int)slot
++ (void)saveStateForROMNamed:(NSString*)romFileName slot:(int)slot screenshot:(UIImage *)screenshot
 {
   if(slot <= 0)
     return;
   
-  [SaveManager saveStateForROMName:romFileName inSlot:slot];
+  [SaveManager saveStateForROMName:romFileName inSlot:slot screenshot:screenshot];
 }
 + (void)loadStateForROMNamed:(NSString*)romFileName slot:(int)slot
 {

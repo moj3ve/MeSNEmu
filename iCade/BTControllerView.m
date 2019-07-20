@@ -4,7 +4,7 @@ NSArray* BTSupportedControllers = nil;
 
 @implementation BTControllerView(Privates)
 
-- (void)LMBT_setOnStateString:(const char*)onState offStateString:(const char*)offState
+- (void)BT_setOnStateString:(const char*)onState offStateString:(const char*)offState
 {
   int mapSize = 12*sizeof(char);
   memcpy(_on_states,  onState, mapSize);
@@ -22,7 +22,7 @@ NSArray* BTSupportedControllers = nil;
   @synchronized(self)
   {
     self.controllerType = BTControllerType_Custom;
-    [self LMBT_setOnStateString:onState offStateString:offState];
+    [self BT_setOnStateString:onState offStateString:offState];
   }
 }
 
@@ -71,7 +71,7 @@ NSArray* BTSupportedControllers = nil;
         }
         NSLog(@"rebuilt:  %@", rebuilt);*/
         
-        [self LMBT_setOnStateString:onString
+        [self BT_setOnStateString:onString
                      offStateString:offString];
         break;
       }
