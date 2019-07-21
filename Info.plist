@@ -50,20 +50,6 @@
 				<string>net.sarahh12099.mesnemu.sram</string>
 			</array>
 		</dict>
-		<dict>
-			<key>CFBundleTypeIconFiles</key>
-			<array/>
-			<key>CFBundleTypeName</key>
-			<string>Snes9x Cheat Files</string>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>LSHandlerRank</key>
-			<string>Owner</string>
-			<key>LSItemContentTypes</key>
-			<array>
-				<string>net.sarahh12099.mesnemu.cheat</string>
-			</array>
-		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
@@ -102,6 +88,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -169,29 +157,6 @@
 				<key>public.filename-extension</key>
 				<array>
 					<string>srm</string>
-				</array>
-				<key>public.mime-type</key>
-				<array>
-					<string>application/octet-stream</string>
-				</array>
-			</dict>
-		</dict>
-		<dict>
-			<key>UTTypeConformsTo</key>
-			<array>
-				<string>public.data</string>
-			</array>
-			<key>UTTypeDescription</key>
-			<string>Snes9x Cheat Files</string>
-			<key>UTTypeIconFiles</key>
-			<array/>
-			<key>UTTypeIdentifier</key>
-			<string>net.sarahh12099.mesnemu.cheat</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>cht</string>
 				</array>
 				<key>public.mime-type</key>
 				<array>
