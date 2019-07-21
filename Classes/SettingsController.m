@@ -358,9 +358,9 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionController)
     {
-         if(_lrThreeIndexPath == nil)
-             return 1;
-         else
+        if(_lrThreeIndexPath == nil)
+            return 1;
+        else
             return 2;
     }
     else if(section == SettingsSectionAbout)

@@ -34,63 +34,63 @@ typedef enum _EmulatorAlert
 
 - (void)emulationThreadMethod:(NSString*)romFileName;
 {
-  NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-  
-  if(_emulationThread == [NSThread mainThread])
-    _emulationThread = [NSThread currentThread];
-  
-  const char* originalString = [romFileName UTF8String];
-  char* romFileNameCString = (char*)calloc(strlen(originalString)+1, sizeof(char));
-  strcpy(romFileNameCString, originalString);
-  originalString = nil;
-  
-  SISetEmulationPaused(0);
-  SISetEmulationRunning(1);
-  SIStartWithROM(romFileNameCString);
-  SISetEmulationRunning(0);
-  
-  free(romFileNameCString);
-  
-  if(_emulationThread == [NSThread currentThread])
-    _emulationThread = nil;
-  
-  [pool release];
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    
+    if(_emulationThread == [NSThread mainThread])
+        _emulationThread = [NSThread currentThread];
+    
+    const char* originalString = [romFileName UTF8String];
+    char* romFileNameCString = (char*)calloc(strlen(originalString)+1, sizeof(char));
+    strcpy(romFileNameCString, originalString);
+    originalString = nil;
+    
+    SISetEmulationPaused(0);
+    SISetEmulationRunning(1);
+    SIStartWithROM(romFileNameCString);
+    SISetEmulationRunning(0);
+    
+    free(romFileNameCString);
+    
+    if(_emulationThread == [NSThread currentThread])
+        _emulationThread = nil;
+    
+    [pool release];
 }
 
 - (void)dismantleExternalScreen
 {
-  if(_externalEmulator != nil)
-  {
-    _customView.viewMode = EmulatorControllerViewModeNormal;
+    if(_externalEmulator != nil)
+    {
+        _customView.viewMode = EmulatorControllerViewModeNormal;
+        
+        SISetScreenDelegate(self);
+        [_customView setPrimaryBuffer];
+        
+        [_externalEmulator release];
+        _externalEmulator = nil;
+    }
     
-    SISetScreenDelegate(self);
-    [_customView setPrimaryBuffer];
+    [_externalWindow release];
+    _externalWindow = nil;
     
-    [_externalEmulator release];
-    _externalEmulator = nil;
-  }
-  
-  [_externalWindow release];
-  _externalWindow = nil;
-  
-  if(_customView.superview != nil)
-  {
-    [UIView animateWithDuration:0.3 animations:^{
-      [_customView layoutIfNeeded];
-    }];
-  }
+    if(_customView.superview != nil)
+    {
+        [UIView animateWithDuration:0.3 animations:^{
+            [_customView layoutIfNeeded];
+        }];
+    }
 }
 
 - (void)showSettings
 {
-  SettingsController* c = [[SettingsController alloc] init];
-  [c hideSettingsThatRequireReset];
-  c.delegate = self;
-  UINavigationController* n = [[UINavigationController alloc] initWithRootViewController:c];
-  n.modalPresentationStyle = UIModalPresentationFormSheet;
-  [self presentViewController:n animated:YES completion:nil];
-  [c release];
-  [n release];
+    SettingsController* c = [[SettingsController alloc] init];
+    [c hideSettingsThatRequireReset];
+    c.delegate = self;
+    UINavigationController* n = [[UINavigationController alloc] initWithRootViewController:c];
+    n.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentViewController:n animated:YES completion:nil];
+    [c release];
+    [n release];
 }
 
 #pragma mark UI Interaction Handling
@@ -184,11 +184,11 @@ typedef enum _EmulatorAlert
         }
         
         UIAlertAction* okayButton = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"OKAY", nil)
-                                   style:UIAlertActionStyleDefault
-                                   handler:^(UIAlertAction * action) {
-                                       SISetEmulationPaused(0);
-                                   }];
+                                     actionWithTitle:NSLocalizedString(@"OKAY", nil)
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         SISetEmulationPaused(0);
+                                     }];
         
         [alert addAction:okayButton];
         
@@ -207,7 +207,7 @@ typedef enum _EmulatorAlert
 
 - (void)flipFrontbuffer:(NSArray*)dimensions
 {
-  [_customView flipFrontBufferWidth:[[dimensions objectAtIndex:0] intValue] height:[[dimensions objectAtIndex:1] intValue]];
+    [_customView flipFrontBufferWidth:[[dimensions objectAtIndex:0] intValue] height:[[dimensions objectAtIndex:1] intValue]];
 }
 
 #pragma mark SISaveDelegate
@@ -215,29 +215,29 @@ typedef enum _EmulatorAlert
 - (void)loadROMRunningState
 {
 #ifdef SI_ENABLE_RUNNING_SAVES
-  NSLog(@"Loading running state...");
-  if(_initialSaveFileName == nil)
-  {
-    [SaveManager loadRunningStateForROMNamed:_romFileName];
-  }
-  else
-  {
-    int slot = [[[_initialSaveFileName stringByDeletingPathExtension] pathExtension] intValue];
-    if(slot == 0)
-      [SaveManager loadRunningStateForROMNamed:_romFileName];
+    NSLog(@"Loading running state...");
+    if(_initialSaveFileName == nil)
+    {
+        [SaveManager loadRunningStateForROMNamed:_romFileName];
+    }
     else
-      [SaveManager loadStateForROMNamed:_romFileName slot:slot];
-  }
-  NSLog(@"Loaded!");
+    {
+        int slot = [[[_initialSaveFileName stringByDeletingPathExtension] pathExtension] intValue];
+        if(slot == 0)
+            [SaveManager loadRunningStateForROMNamed:_romFileName];
+        else
+            [SaveManager loadStateForROMNamed:_romFileName slot:slot];
+    }
+    NSLog(@"Loaded!");
 #endif
 }
 
 - (void)saveROMRunningState
 {
 #ifdef SI_ENABLE_RUNNING_SAVES
-  NSLog(@"Saving running state...");
-  [SaveManager saveRunningStateForROMNamed:_romFileName screenshot:[self getScreen]];
-  NSLog(@"Saved!");
+    NSLog(@"Saving running state...");
+    [SaveManager saveRunningStateForROMNamed:_romFileName screenshot:[self getScreen]];
+    NSLog(@"Saved!");
 #endif
 }
 
@@ -255,118 +255,118 @@ typedef enum _EmulatorAlert
 
 - (void)buttonDown:(iCadeState)button
 {
-  switch(button)
-  {
-    case iCadeJoystickRight:
-      SISetControllerPushButton(SI_BUTTON_RIGHT);
-      break;
-    case iCadeJoystickUp:
-      SISetControllerPushButton(SI_BUTTON_UP);
-      break;
-    case iCadeJoystickLeft:
-      SISetControllerPushButton(SI_BUTTON_LEFT);
-      break;
-    case iCadeJoystickDown:
-      SISetControllerPushButton(SI_BUTTON_DOWN);
-      break;
-    case iCadeButtonA:
-      SISetControllerPushButton(SI_BUTTON_SELECT);
-      break;
-    case iCadeButtonB:
-      SISetControllerPushButton(SI_BUTTON_START);
-      break;
-    case iCadeButtonC:
-      SISetControllerPushButton(SI_BUTTON_Y);
-      break;
-    case iCadeButtonD:
-      SISetControllerPushButton(SI_BUTTON_B);
-      break;
-    case iCadeButtonE:
-      SISetControllerPushButton(SI_BUTTON_X);
-      break;
-    case iCadeButtonF:
-      SISetControllerPushButton(SI_BUTTON_A);
-      break;
-    case iCadeButtonG:
-      SISetControllerPushButton(SI_BUTTON_L);
-      break;
-    case iCadeButtonH:
-      SISetControllerPushButton(SI_BUTTON_R);
-      break;
-    default:
-      break;
-  }
-  
-  [_customView setControlsHidden:YES animated:YES];
+    switch(button)
+    {
+        case iCadeJoystickRight:
+            SISetControllerPushButton(SI_BUTTON_RIGHT);
+            break;
+        case iCadeJoystickUp:
+            SISetControllerPushButton(SI_BUTTON_UP);
+            break;
+        case iCadeJoystickLeft:
+            SISetControllerPushButton(SI_BUTTON_LEFT);
+            break;
+        case iCadeJoystickDown:
+            SISetControllerPushButton(SI_BUTTON_DOWN);
+            break;
+        case iCadeButtonA:
+            SISetControllerPushButton(SI_BUTTON_SELECT);
+            break;
+        case iCadeButtonB:
+            SISetControllerPushButton(SI_BUTTON_START);
+            break;
+        case iCadeButtonC:
+            SISetControllerPushButton(SI_BUTTON_Y);
+            break;
+        case iCadeButtonD:
+            SISetControllerPushButton(SI_BUTTON_B);
+            break;
+        case iCadeButtonE:
+            SISetControllerPushButton(SI_BUTTON_X);
+            break;
+        case iCadeButtonF:
+            SISetControllerPushButton(SI_BUTTON_A);
+            break;
+        case iCadeButtonG:
+            SISetControllerPushButton(SI_BUTTON_L);
+            break;
+        case iCadeButtonH:
+            SISetControllerPushButton(SI_BUTTON_R);
+            break;
+        default:
+            break;
+    }
+    
+    [_customView setControlsHidden:YES animated:YES];
 }
 
 - (void)buttonUp:(iCadeState)button
 {
-  switch(button)
-  {
-    case iCadeJoystickRight:
-      SISetControllerReleaseButton(SI_BUTTON_RIGHT);
-      break;
-    case iCadeJoystickUp:
-      SISetControllerReleaseButton(SI_BUTTON_UP);
-      break;
-    case iCadeJoystickLeft:
-      SISetControllerReleaseButton(SI_BUTTON_LEFT);
-      break;
-    case iCadeJoystickDown:
-      SISetControllerReleaseButton(SI_BUTTON_DOWN);
-      break;
-    case iCadeButtonA:
-      SISetControllerReleaseButton(SI_BUTTON_SELECT);
-      break;
-    case iCadeButtonB:
-      SISetControllerReleaseButton(SI_BUTTON_START);
-      break;
-    case iCadeButtonC:
-      SISetControllerReleaseButton(SI_BUTTON_Y);
-      break;
-    case iCadeButtonD:
-      SISetControllerReleaseButton(SI_BUTTON_B);
-      break;
-    case iCadeButtonE:
-      SISetControllerReleaseButton(SI_BUTTON_X);
-      break;
-    case iCadeButtonF:
-      SISetControllerReleaseButton(SI_BUTTON_A);
-      break;
-    case iCadeButtonG:
-      SISetControllerReleaseButton(SI_BUTTON_L);
-      break;
-    case iCadeButtonH:
-      SISetControllerReleaseButton(SI_BUTTON_R);
-      break;
-    default:
-      break;
-  }
+    switch(button)
+    {
+        case iCadeJoystickRight:
+            SISetControllerReleaseButton(SI_BUTTON_RIGHT);
+            break;
+        case iCadeJoystickUp:
+            SISetControllerReleaseButton(SI_BUTTON_UP);
+            break;
+        case iCadeJoystickLeft:
+            SISetControllerReleaseButton(SI_BUTTON_LEFT);
+            break;
+        case iCadeJoystickDown:
+            SISetControllerReleaseButton(SI_BUTTON_DOWN);
+            break;
+        case iCadeButtonA:
+            SISetControllerReleaseButton(SI_BUTTON_SELECT);
+            break;
+        case iCadeButtonB:
+            SISetControllerReleaseButton(SI_BUTTON_START);
+            break;
+        case iCadeButtonC:
+            SISetControllerReleaseButton(SI_BUTTON_Y);
+            break;
+        case iCadeButtonD:
+            SISetControllerReleaseButton(SI_BUTTON_B);
+            break;
+        case iCadeButtonE:
+            SISetControllerReleaseButton(SI_BUTTON_X);
+            break;
+        case iCadeButtonF:
+            SISetControllerReleaseButton(SI_BUTTON_A);
+            break;
+        case iCadeButtonG:
+            SISetControllerReleaseButton(SI_BUTTON_L);
+            break;
+        case iCadeButtonH:
+            SISetControllerReleaseButton(SI_BUTTON_R);
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark GameControllerManagerDelegate
 
 - (void)gameControllerManagerGamepadDidConnect:(GameControllerManager*)controllerManager
 {
-  [_customView setControlsHidden:YES animated:YES];
+    [_customView setControlsHidden:YES animated:YES];
 }
 
 - (void)gameControllerManagerGamepadDidDisconnect:(GameControllerManager*)controllerManager
 {
-  [_customView setControlsHidden:NO animated:YES];
+    [_customView setControlsHidden:NO animated:YES];
 }
 
 #pragma mark Notifications
 
 - (void)didBecomeInactive
 {
-  UIBackgroundTaskIdentifier identifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+    UIBackgroundTaskIdentifier identifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:identifier];
+    }];
+    SISetEmulationPaused(1);
+    SIWaitForPause();
     [[UIApplication sharedApplication] endBackgroundTask:identifier];
-  }];
-  SISetEmulationPaused(1);
-  SIWaitForPause();
-  [[UIApplication sharedApplication] endBackgroundTask:identifier];
 }
 
 - (void)didBecomeActive
@@ -381,64 +381,64 @@ typedef enum _EmulatorAlert
 - (void)screensChanged
 {
 #ifdef LOG_SCREENS
-  NSLog(@"Screens changed");
-  for(UIScreen* screen in [UIScreen screens])
-  {
-    NSLog(@"Screen: %@", screen);
-    for (UIScreenMode* mode in screen.availableModes)
+    NSLog(@"Screens changed");
+    for(UIScreen* screen in [UIScreen screens])
     {
-      NSLog(@"Mode: %@", mode);
+        NSLog(@"Screen: %@", screen);
+        for (UIScreenMode* mode in screen.availableModes)
+        {
+            NSLog(@"Mode: %@", mode);
+        }
     }
-  }
 #endif
-  
-  if([[UIScreen screens] count] > 1)
-  {
-    if(_externalWindow == nil)
+    
+    if([[UIScreen screens] count] > 1)
     {
-      UIScreen* screen = [[UIScreen screens] objectAtIndex:1];
-      UIWindow* window = [[UIWindow alloc] initWithFrame:screen.bounds];
-      window.screen = screen;
-      window.backgroundColor = [UIColor redColor];
-      
-      _externalEmulator = [[EmulatorController alloc] initMirrorOf:self];
-      window.rootViewController = _externalEmulator;
-      
-      window.hidden = NO;
-      _externalWindow = window;
-      
-      _customView.viewMode = EmulatorControllerViewModeControllerOnly;
-      [UIView animateWithDuration:0.3 animations:^{
-        [_customView layoutIfNeeded];
-      }];
+        if(_externalWindow == nil)
+        {
+            UIScreen* screen = [[UIScreen screens] objectAtIndex:1];
+            UIWindow* window = [[UIWindow alloc] initWithFrame:screen.bounds];
+            window.screen = screen;
+            window.backgroundColor = [UIColor redColor];
+            
+            _externalEmulator = [[EmulatorController alloc] initMirrorOf:self];
+            window.rootViewController = _externalEmulator;
+            
+            window.hidden = NO;
+            _externalWindow = window;
+            
+            _customView.viewMode = EmulatorControllerViewModeControllerOnly;
+            [UIView animateWithDuration:0.3 animations:^{
+                [_customView layoutIfNeeded];
+            }];
+        }
     }
-  }
-  else
-  {
-    [self dismantleExternalScreen];
-  }
+    else
+    {
+        [self dismantleExternalScreen];
+    }
 }
 
 - (void)settingsChanged
 {
-  NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-  SISetSoundOn([defaults boolForKey:kSettingsSound]);
-  SISetShowFPS([defaults boolForKey:kSettingsShowFPS]);
-  if([defaults boolForKey:kSettingsSmoothScaling] == YES)
-    [_customView setMinMagFilter:kCAFilterLinear];
-  else
-    [_customView setMinMagFilter:kCAFilterNearest];
-  SISetAutoFrameskip([defaults boolForKey:kSettingsAutoFrameskip]);
-  SISetFrameskip([defaults integerForKey:kSettingsFrameskipValue]);
-  
-  _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
-  
-  SIUpdateSettings();
-  
-  [_customView setNeedsLayout];
-  [UIView animateWithDuration:0.3 animations:^{
-    [_customView layoutIfNeeded];
-  }];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    SISetSoundOn([defaults boolForKey:kSettingsSound]);
+    SISetShowFPS([defaults boolForKey:kSettingsShowFPS]);
+    if([defaults boolForKey:kSettingsSmoothScaling] == YES)
+        [_customView setMinMagFilter:kCAFilterLinear];
+    else
+        [_customView setMinMagFilter:kCAFilterNearest];
+    SISetAutoFrameskip([defaults boolForKey:kSettingsAutoFrameskip]);
+    SISetFrameskip([defaults integerForKey:kSettingsFrameskipValue]);
+    
+    _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
+    
+    SIUpdateSettings();
+    
+    [_customView setNeedsLayout];
+    [UIView animateWithDuration:0.3 animations:^{
+        [_customView layoutIfNeeded];
+    }];
 }
 
 @end
@@ -452,38 +452,38 @@ typedef enum _EmulatorAlert
 
 - (void)startWithROM:(NSString*)romFileName
 {
-  if(_emulationThread != nil)
-    return;
-  
-  [SettingsController setDefaultsIfNotDefined];
-  
-  [self settingsChanged];
-  
-  _emulationThread = [NSThread mainThread];
-  [NSThread detachNewThreadSelector:@selector(emulationThreadMethod:) toTarget:self withObject:romFileName];
+    if(_emulationThread != nil)
+        return;
+    
+    [SettingsController setDefaultsIfNotDefined];
+    
+    [self settingsChanged];
+    
+    _emulationThread = [NSThread mainThread];
+    [NSThread detachNewThreadSelector:@selector(emulationThreadMethod:) toTarget:self withObject:romFileName];
 }
 
 - (id)initMirrorOf:(EmulatorController*)mainController
 {
-  self = [self init];
-  if(self)
-  {
-    _isMirror = YES;
-    [self view];
-    _customView.viewMode = EmulatorControllerViewModeScreenOnly;
-    _customView.iCadeControlView.active = NO;
-  }
-  return self;
+    self = [self init];
+    if(self)
+    {
+        _isMirror = YES;
+        [self view];
+        _customView.viewMode = EmulatorControllerViewModeScreenOnly;
+        _customView.iCadeControlView.active = NO;
+    }
+    return self;
 }
 
 - (UIImage*)getScreen
 {
-  UIImage *image = (_externalEmulator != nil)?[_externalEmulator getScreen]:[UIImage imageWithCGImage:(CGImageRef)_customView.screenView.layer.contents];
-  CGRect rect = CGRectMake(floor((image.size.width-256)/2), floor((image.size.height-224)/2), 256, 224);
-  CGImageRef clip = CGImageCreateWithImageInRect(image.CGImage,rect);
-  UIImage *image2 = [UIImage imageWithCGImage:clip];
-  CGImageRelease(clip);
-  return image2;
+    UIImage *image = (_externalEmulator != nil)?[_externalEmulator getScreen]:[UIImage imageWithCGImage:(CGImageRef)_customView.screenView.layer.contents];
+    CGRect rect = CGRectMake(floor((image.size.width-256)/2), floor((image.size.height-224)/2), 256, 224);
+    CGImageRef clip = CGImageCreateWithImageInRect(image.CGImage,rect);
+    UIImage *image2 = [UIImage imageWithCGImage:clip];
+    CGImageRelease(clip);
+    return image2;
 }
 
 @end
@@ -494,99 +494,99 @@ typedef enum _EmulatorAlert
 
 - (void)loadView
 {
-  _customView = [[EmulatorControllerView alloc] initWithFrame:CGRectZero];
-  _customView.iCadeControlView.delegate = self;
-  [_customView.optionsButton addTarget:self action:@selector(options:) forControlEvents:UIControlEventTouchUpInside];
-  self.view = _customView;
+    _customView = [[EmulatorControllerView alloc] initWithFrame:CGRectZero];
+    _customView.iCadeControlView.delegate = self;
+    [_customView.optionsButton addTarget:self action:@selector(options:) forControlEvents:UIControlEventTouchUpInside];
+    self.view = _customView;
 }
 
 - (void)viewDidUnload
 {
-  [super viewDidUnload];
-  
-  [_customView release];
-  _customView = nil;
+    [super viewDidUnload];
+    
+    [_customView release];
+    _customView = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  [super viewWillAppear:animated];
-  
-  [UIApplication sharedApplication].idleTimerDisabled = YES;
-  
-  if(_isMirror == NO)
-  {
-    [self screensChanged];
+    [super viewWillAppear:animated];
     
-    if([GameControllerManager gameControllersMightBeAvailable] == YES)
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    
+    if(_isMirror == NO)
     {
-      GameControllerManager* gameControllerManager = [GameControllerManager sharedInstance];
-      gameControllerManager.delegate = self;
-      [_customView setControlsHidden:gameControllerManager.gameControllerConnected animated:NO];
+        [self screensChanged];
+        
+        if([GameControllerManager gameControllersMightBeAvailable] == YES)
+        {
+            GameControllerManager* gameControllerManager = [GameControllerManager sharedInstance];
+            gameControllerManager.delegate = self;
+            [_customView setControlsHidden:gameControllerManager.gameControllerConnected animated:NO];
+        }
     }
-  }
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-  [super viewDidAppear:animated];
-  
-  if(_isMirror == NO)
-  {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeInactive) name:UIApplicationWillResignActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged) name:UIScreenDidConnectNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged) name:UIScreenDidDisconnectNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveROMRunningState:) name:SISaveRunningStateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadROMRunningState:) name:SILoadRunningStateNotification object:nil];
-  }
-  
-  if(_externalEmulator == nil)
-  {
-    SISetScreenDelegate(self);
-    [_customView setPrimaryBuffer];
-  }
-  
-  if(_isMirror == NO)
-  {
-    SISetSaveDelegate(self);
-    if(_emulationThread == nil)
-      [self startWithROM:_romFileName];
-  }
+    [super viewDidAppear:animated];
+    
+    if(_isMirror == NO)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeInactive) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive) name:UIApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged) name:UIScreenDidConnectNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screensChanged) name:UIScreenDidDisconnectNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveROMRunningState:) name:SISaveRunningStateNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadROMRunningState:) name:SILoadRunningStateNotification object:nil];
+    }
+    
+    if(_externalEmulator == nil)
+    {
+        SISetScreenDelegate(self);
+        [_customView setPrimaryBuffer];
+    }
+    
+    if(_isMirror == NO)
+    {
+        SISetSaveDelegate(self);
+        if(_emulationThread == nil)
+            [self startWithROM:_romFileName];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-  [super viewWillDisappear:animated];
-  
-  [UIApplication sharedApplication].idleTimerDisabled = NO;
-  
-  if([GameControllerManager gameControllersMightBeAvailable] == YES)
-  {
-    GameControllerManager* gameControllerManager = [GameControllerManager sharedInstance];
-    if(gameControllerManager.delegate == self)
-      gameControllerManager.delegate = nil;
-  }
-  
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIScreenDidConnectNotification object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIScreenDidDisconnectNotification object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:SISaveRunningStateNotification object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:SILoadRunningStateNotification object:nil];
+    [super viewWillDisappear:animated];
+    
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+    
+    if([GameControllerManager gameControllersMightBeAvailable] == YES)
+    {
+        GameControllerManager* gameControllerManager = [GameControllerManager sharedInstance];
+        if(gameControllerManager.delegate == self)
+            gameControllerManager.delegate = nil;
+    }
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIScreenDidConnectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIScreenDidDisconnectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SISaveRunningStateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SILoadRunningStateNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-  else
-    return YES;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    else
+        return YES;
 }
 
 - (BOOL)prefersStatusBarHidden
 {
-  return YES;
+    return YES;
 }
 
 @end
@@ -597,37 +597,37 @@ typedef enum _EmulatorAlert
 
 - (id)init
 {
-  self = [super init];
-  if(self)
-  {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged) name:kSettingsChangedNotification object:nil];
-  }
-  return self;
+    self = [super init];
+    if(self)
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingsChanged) name:kSettingsChangedNotification object:nil];
+    }
+    return self;
 }
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
-  if(_isMirror == NO)
-  {
-    SISetEmulationRunning(0);
-    SIWaitForEmulationEnd();
-    SISetScreenDelegate(nil);
-    SISetSaveDelegate(nil);
-  }
-  
-  _actionSheet = nil;
-  
-  [self dismantleExternalScreen];
-  
-  [_customView release];
-  _customView = nil;
-  
-  self.romFileName = nil;
-  self.initialSaveFileName = nil;
-  
-  [super dealloc];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    if(_isMirror == NO)
+    {
+        SISetEmulationRunning(0);
+        SIWaitForEmulationEnd();
+        SISetScreenDelegate(nil);
+        SISetSaveDelegate(nil);
+    }
+    
+    _actionSheet = nil;
+    
+    [self dismantleExternalScreen];
+    
+    [_customView release];
+    _customView = nil;
+    
+    self.romFileName = nil;
+    self.initialSaveFileName = nil;
+    
+    [super dealloc];
 }
 
 @end

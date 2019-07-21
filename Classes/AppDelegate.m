@@ -17,10 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    #if TARGET_IPHONE_SIMULATOR
-        NSLog(@"\nDocuments Directory:\n%@\n\n", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]);
-    #endif
-  
+#if TARGET_IPHONE_SIMULATOR
+    NSLog(@"\nDocuments Directory:\n%@\n\n", [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]);
+#endif
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.frame = [[UIScreen mainScreen] bounds];
     RomBrowserController* romBrowser = [[RomBrowserController alloc] init];
@@ -40,9 +40,9 @@
                                      alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
                                      message:NSLocalizedString(@"APPLAUNCH_NOTICE", nil)
                                      preferredStyle:UIAlertControllerStyleAlert];
-    
+        
         UIView *firstSubview = alert.view.subviews.firstObject;
-    
+        
         UIView *alertContentView = firstSubview.subviews.firstObject;
         for (UIView *subSubView in alertContentView.subviews) {
             BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];

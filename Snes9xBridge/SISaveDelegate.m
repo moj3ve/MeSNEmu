@@ -8,27 +8,27 @@ static NSObject<SISaveDelegate>* delegate = nil;
 
 void SISetSaveDelegate(id<SISaveDelegate> value)
 {
-  delegate = value;
+    delegate = value;
 }
 
 #pragma mark - Start and End Notifications
 
 void SILoadRunningStateForGameNamed(const char* romFileName)
 {
-  @autoreleasepool {
-  /*[[NSNotificationCenter defaultCenter] postNotificationName:SILoadRunningStateNotification
-                                                      object:nil
-                                                    userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithCString:romFileName encoding:NSUTF8StringEncoding] forKey:SIROMFileNameKey]];*/
-  [delegate loadROMRunningState];
-  }
+    @autoreleasepool {
+        /*[[NSNotificationCenter defaultCenter] postNotificationName:SILoadRunningStateNotification
+         object:nil
+         userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithCString:romFileName encoding:NSUTF8StringEncoding] forKey:SIROMFileNameKey]];*/
+        [delegate loadROMRunningState];
+    }
 }
-   
+
 void SISaveRunningStateForGameNamed(const char* romFileName)
 {
-  @autoreleasepool {
-  /*[[NSNotificationCenter defaultCenter] postNotificationName:SISaveRunningStateNotification
-                                                      object:nil
-                                                    userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithCString:romFileName encoding:NSUTF8StringEncoding] forKey:SIROMFileNameKey]];*/
-  [delegate saveROMRunningState];
-  }
+    @autoreleasepool {
+        /*[[NSNotificationCenter defaultCenter] postNotificationName:SISaveRunningStateNotification
+         object:nil
+         userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithCString:romFileName encoding:NSUTF8StringEncoding] forKey:SIROMFileNameKey]];*/
+        [delegate saveROMRunningState];
+    }
 }

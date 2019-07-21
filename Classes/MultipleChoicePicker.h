@@ -4,11 +4,11 @@
 
 @interface MultipleChoicePicker : UITableViewController
 {
-  NSArray* _optionNames;
-  NSArray* _optionValues;
-  int _pickedIndex;
-  
-  id<MultipleChoicePickerDelegate> _delegate;
+    NSArray* _optionNames;
+    NSArray* _optionValues;
+    int _pickedIndex;
+    
+    id<MultipleChoicePickerDelegate> _delegate;
 }
 
 @property (copy) NSArray* optionNames;

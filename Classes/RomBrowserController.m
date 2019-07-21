@@ -12,12 +12,12 @@ static int const FileOrganizationVersionNumber = 1;
 
 @interface FileListItem : NSObject
 {
-  BOOL _hasDetails;
-  NSString* _displayName;
-  NSString* _displayDetails;
-  NSString* _fileName;
-  NSMutableArray* _imageFilePaths;
-  NSDictionary* _romInfo;
+    BOOL _hasDetails;
+    NSString* _displayName;
+    NSString* _displayDetails;
+    NSString* _fileName;
+    NSMutableArray* _imageFilePaths;
+    NSDictionary* _romInfo;
 }
 
 @property BOOL hasDetails;
@@ -128,7 +128,7 @@ static int const FileOrganizationVersionNumber = 1;
 
 @interface RomImageView : UIImageView
 {
-  BOOL isFadeAnimating;
+    BOOL isFadeAnimating;
 }
 - (void)startFadeAnimating;
 - (void)stopFadeAnimating;
@@ -180,10 +180,10 @@ static int const FileOrganizationVersionNumber = 1;
 @synthesize detailsItem = _detailsItem;
 
 /*@end
-
-#pragma mark -
-
-@implementation RomBrowserController(Privates)*/
+ 
+ #pragma mark -
+ 
+ @implementation RomBrowserController(Privates)*/
 
 - (void)moveLegacyFilesToDocumentsFolder
 {
@@ -629,7 +629,7 @@ static int const FileOrganizationVersionNumber = 1;
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     else
         cell.accessoryType = UITableViewCellAccessoryNone;
-	
+    
     if([item.imageFilePaths count]>0) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             UIImage* image = [UIImage imageWithContentsOfFile:[item.imageFilePaths objectAtIndex:0]];

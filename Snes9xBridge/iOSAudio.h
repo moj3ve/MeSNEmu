@@ -4,14 +4,13 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  
-int SIAudioOffset();
-void SIDemuteSound(int buffersize);
-void SIMuteSound(void);
-
+    
+    int SIAudioOffset();
+    void SIDemuteSound(int buffersize);
+    void SIMuteSound(void);
+    
 #ifdef __cplusplus
 }
 #endif
 
 #endif
-

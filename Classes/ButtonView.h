@@ -2,8 +2,8 @@
 
 @interface ButtonView : UIImageView
 {
-  uint32_t _button;
-  UILabel* _label;
+    uint32_t _button;
+    UILabel* _label;
 }
 
 @property uint32_t button;

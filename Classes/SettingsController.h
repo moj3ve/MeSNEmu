@@ -32,14 +32,14 @@ extern NSString* const kSettingsLRThree;
 {
     BOOL _hideSettingsThatRequireReset;
     BOOL _changed;
-  
+    
     NSIndexPath* _fullScreenIndexPath;
     NSIndexPath* _darkModeIndexPath;
     NSIndexPath* _rygbButtonsIndexPath;
     
     NSIndexPath* _smoothScalingIndexPath;
     NSIndexPath* _showFPSIndexPath;
-
+    
     NSIndexPath* _soundIndexPath;
     NSIndexPath* _autoFrameskipIndexPath;
     NSIndexPath* _frameskipValueIndexPath;
@@ -50,8 +50,8 @@ extern NSString* const kSettingsLRThree;
     NSIndexPath* _aboutIndexPath;
     NSIndexPath* _coreIndexPath;
     NSIndexPath* _developerIndexPath;
-  
-  id<SettingsControllerDelegate> _delegate;
+    
+    id<SettingsControllerDelegate> _delegate;
 }
 
 @property (assign) id<SettingsControllerDelegate> delegate;

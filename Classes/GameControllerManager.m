@@ -9,39 +9,39 @@
 
 - (void)setupController
 {
-   if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f)
-   {
-      NSArray* controllers = [GCController controllers];
-      _gameController = [controllers firstObject];
-      _gameController.playerIndex = 0;
-      
-      if (_gameController) {
-          [self.delegate gameControllerManagerGamepadDidConnect:self];
-      } else {
-          [self.delegate gameControllerManagerGamepadDidDisconnect:self];
-      }
-    
-      __weak id weakSelf = self;
-    
-      _gameController.gamepad.valueChangedHandler = ^(GCGamepad* gamepad, GCControllerElement* element) {
-          [weakSelf getCurrentControllerInput];
-      };
-      _gameController.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad* gamepad, GCControllerElement* element) {
-          [weakSelf getCurrentControllerInput];
-      };
-   }
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f)
+    {
+        NSArray* controllers = [GCController controllers];
+        _gameController = [controllers firstObject];
+        _gameController.playerIndex = 0;
+        
+        if (_gameController) {
+            [self.delegate gameControllerManagerGamepadDidConnect:self];
+        } else {
+            [self.delegate gameControllerManagerGamepadDidDisconnect:self];
+        }
+        
+        __weak id weakSelf = self;
+        
+        _gameController.gamepad.valueChangedHandler = ^(GCGamepad* gamepad, GCControllerElement* element) {
+            [weakSelf getCurrentControllerInput];
+        };
+        _gameController.extendedGamepad.valueChangedHandler = ^(GCExtendedGamepad* gamepad, GCControllerElement* element) {
+            [weakSelf getCurrentControllerInput];
+        };
+    }
 }
 
 - (void)controllerConnected:(NSNotification*)notification
 {
-  [self setupController];
-  [self.delegate gameControllerManagerGamepadDidConnect:self];
+    [self setupController];
+    [self.delegate gameControllerManagerGamepadDidConnect:self];
 }
 
 - (void)controllerDisconnected:(NSNotification*)notification
 {
-  [self setupController];
-  [self.delegate gameControllerManagerGamepadDidDisconnect:self];
+    [self setupController];
+    [self.delegate gameControllerManagerGamepadDidDisconnect:self];
 }
 
 - (void)getCurrentControllerInput
@@ -284,15 +284,15 @@
 }
 
 + (instancetype)sharedInstance {
-  static dispatch_once_t p = 0;
-  
-  __strong static id _sharedInstance = nil;
-  
-  dispatch_once(&p, ^{
-    _sharedInstance = [[self alloc] init];
-  });
-  
-  return _sharedInstance;
+    static dispatch_once_t p = 0;
+    
+    __strong static id _sharedInstance = nil;
+    
+    dispatch_once(&p, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    
+    return _sharedInstance;
 }
 
 + (BOOL)gameControllersMightBeAvailable {

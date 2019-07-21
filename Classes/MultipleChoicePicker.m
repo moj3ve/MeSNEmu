@@ -19,43 +19,49 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-  return 1;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return [_optionNames count];
+    return [_optionNames count];
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  static NSString* CellIdentifier = @"Cell";
-  
-  UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-  if(cell == nil)
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-  
-  cell.textLabel.text = [_optionNames objectAtIndex:indexPath.row];
-  if(indexPath.row == _pickedIndex)
-    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  else
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  
-  return cell;
+    static NSString* CellIdentifier = @"Cell";
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+    
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(cell == nil)
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    if (darkMode == YES) {
+        self.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+        tableView.separatorColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+        cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
+        cell.textLabel.textColor = [UIColor whiteColor];
+    }
+    
+    cell.textLabel.text = [_optionNames objectAtIndex:indexPath.row];
+    if(indexPath.row == _pickedIndex)
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    else
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    
+    return cell;
 }
 
 #pragma mark UITableViewDelegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-  // Navigation logic may go here. Create and push another view controller.
-  [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_pickedIndex inSection:0]].accessoryType = UITableViewCellAccessoryNone;
-  _pickedIndex = indexPath.row;
-  UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
-  cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-  
-  [_delegate multipleChoice:self changedIndex:_pickedIndex];
+    [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_pickedIndex inSection:0]].accessoryType = UITableViewCellAccessoryNone;
+    _pickedIndex = indexPath.row;
+    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [_delegate multipleChoice:self changedIndex:_pickedIndex];
 }
 
 @end
@@ -66,18 +72,17 @@
 
 - (void)viewDidLoad
 {
-  [super viewDidLoad];
-  
-  [self.tableView reloadData];
+    [super viewDidLoad];
+    
+    [self.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  // Return YES for supported orientations
-  if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-  else
-    return YES;
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+    else
+        return YES;
 }
 
 @end
@@ -88,12 +93,12 @@
 
 - (void)dealloc
 {
-  [_optionNames release];
-  _optionNames = nil;
-  [_optionValues release];
-  _optionValues = nil;
-  
-  [super dealloc];
+    [_optionNames release];
+    _optionNames = nil;
+    [_optionValues release];
+    _optionValues = nil;
+    
+    [super dealloc];
 }
 
 @end

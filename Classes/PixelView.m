@@ -6,7 +6,7 @@
 
 - (void)updateBufferCropResWidth:(unsigned int)width height:(unsigned int)height
 {
-  [(PixelLayer*)self.layer updateBufferCropWidth:width height:height];
+    [(PixelLayer*)self.layer updateBufferCropWidth:width height:height];
 }
 
 @end
@@ -17,17 +17,17 @@
 
 - (void)drawRect:(CGRect)rect
 {
-  // override this to allow the CALayer to be invalidated and thus displaying the actual layer contents
+    // override this to allow the CALayer to be invalidated and thus displaying the actual layer contents
 }
 
 - (id)initWithFrame:(CGRect)frame
 {
-  self = [super initWithFrame:frame];
-  if(self)
-  {
-    // Initialization code
-  }
-  return self;
+    self = [super initWithFrame:frame];
+    if(self)
+    {
+        // Initialization code
+    }
+    return self;
 }
 
 /*
@@ -41,7 +41,7 @@
 
 + (Class)layerClass
 {
-  return [PixelLayer class];
+    return [PixelLayer class];
 }
 
 @end

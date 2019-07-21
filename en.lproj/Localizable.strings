@@ -45,7 +45,6 @@
 "BACK_TO_GAME" = "Back To Game";
 "EXIT_GAME" = "Exit Game";
 "RESET" = "Reset";
-"LOAD_STATE" = "Load State";
 "SAVE_STATE" = "Save State";
 "SAVE_STATE_MESSAGE" = "Save State successfuly saved";
 "SAVE" = "Save";

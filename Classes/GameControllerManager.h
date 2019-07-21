@@ -14,7 +14,7 @@
 
 @interface GameControllerManager : NSObject
 {
-  GCController* _gameController;
+    GCController* _gameController;
 }
 
 @property (nonatomic, readonly) BOOL gameControllerConnected;
