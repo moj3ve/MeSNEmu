@@ -254,7 +254,10 @@ typedef enum _EmulatorAlert
 
 - (void)settingsDidDismiss:(SettingsController*)settingsController
 {
-  [self options:nil];
+    if(_actionSheet == nil)
+    {
+        [self options:nil];
+    }
 }
 
 #pragma mark iCadeEventDelegate
@@ -403,12 +406,10 @@ typedef enum _EmulatorAlert
     if(_externalWindow == nil)
     {
       UIScreen* screen = [[UIScreen screens] objectAtIndex:1];
-      // TODO: pick the best display mode (lowest resolution preferred)
       UIWindow* window = [[UIWindow alloc] initWithFrame:screen.bounds];
       window.screen = screen;
       window.backgroundColor = [UIColor redColor];
       
-      // create our mirror controller
       _externalEmulator = [[EmulatorController alloc] initMirrorOf:self];
       window.rootViewController = _externalEmulator;
       
@@ -423,7 +424,6 @@ typedef enum _EmulatorAlert
   }
   else
   {
-    // switch back to us and dismantle
     [self dismantleExternalScreen];
   }
 }
@@ -432,6 +432,7 @@ typedef enum _EmulatorAlert
 {
   NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
   SISetSoundOn([defaults boolForKey:kSettingsSound]);
+  SISetShowFPS([defaults boolForKey:kSettingsShowFPS]);
   if([defaults boolForKey:kSettingsSmoothScaling] == YES)
     [_customView setMinMagFilter:kCAFilterLinear];
   else
@@ -440,7 +441,6 @@ typedef enum _EmulatorAlert
   SISetFrameskip([defaults integerForKey:kSettingsFrameskipValue]);
   
   _customView.iCadeControlView.controllerType = [[NSUserDefaults standardUserDefaults] integerForKey:kSettingsBluetoothController];
-  // TODO: support custom key layouts
   
   SIUpdateSettings();
   
@@ -587,7 +587,6 @@ typedef enum _EmulatorAlert
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-  // Return YES for supported orientations
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
   else
@@ -627,7 +626,6 @@ typedef enum _EmulatorAlert
     SISetSaveDelegate(nil);
   }
   
-  // this is released upon showing
   _actionSheet = nil;
   
   [self dismantleExternalScreen];
