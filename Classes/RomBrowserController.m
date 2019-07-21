@@ -637,13 +637,15 @@ static int const FileOrganizationVersionNumber = 1;
     FileListItem* item = [self romItemForTableView:tableView indexPath:indexPath];
     cell.textLabel.text = item.displayName;
     cell.detailTextLabel.text = item.displayDetails;
-    if(item.hasDetails)
+    if(item.hasDetails) {
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
         if (darkMode == YES) {
             cell.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
         }
-    else
+    }
+    else {
         cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     if([item.imageFilePaths count]>0) {
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -778,7 +780,7 @@ static int const FileOrganizationVersionNumber = 1;
         [label setFont:[UIFont boldSystemFontOfSize:14]];
         [label setTextColor:[UIColor grayColor]];
         if (darkMode == YES) {
-            [view setBackgroundColor:[UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0]];
+            [view setBackgroundColor:[UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0]];
         }
         else {
             [view setBackgroundColor:[UIColor colorWithWhite:250/255.0 alpha:0.98]];
@@ -850,8 +852,15 @@ static int const FileOrganizationVersionNumber = 1;
         [self.tableView registerClass:[RomBrowserListCell class] forCellReuseIdentifier:@"Cell"];
         [self.tableView setBackgroundView:[UIView new]];
         self.tableView.backgroundColor = [UIColor clearColor];
-        self.tableView.sectionIndexBackgroundColor = [UIColor colorWithWhite:255/255.0 alpha:0.5];
-        self.tableView.sectionIndexTrackingBackgroundColor = [UIColor colorWithWhite:245/255.0 alpha:1.0];
+        if (darkMode == YES) {
+            self.tableView.sectionIndexBackgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+            self.tableView.sectionIndexTrackingBackgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+            self.tableView.separatorColor = [UIColor colorWithWhite:255/255.0 alpha:0.5];
+        }
+        else {
+            self.tableView.sectionIndexBackgroundColor = [UIColor colorWithWhite:255/255.0 alpha:0.5];
+            self.tableView.sectionIndexTrackingBackgroundColor = [UIColor colorWithWhite:245/255.0 alpha:1.0];
+        }
         self.searchDisplayController.searchResultsTableView.separatorInset = UIEdgeInsetsZero;
         self.navigationController.view.backgroundColor = [UIColor whiteColor];
         
