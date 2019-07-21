@@ -165,9 +165,12 @@ typedef enum _EmulatorAlert
     }]];
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"SAVE_STATE", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        SISetEmulationPaused(1);
+        SIWaitForPause();
+        [SaveManager saveStateForROMNamed:_romFileName slot:[[NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]] intValue] screenshot:[self getScreen]];
         UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:NSLocalizedString(@"SAVE_SAVE?", nil)
-                                     message:NSLocalizedString(@"SAVE_CONSEQUENCES", nil)
+                                     alertControllerWithTitle:NSLocalizedString(@"NOTICE", nil)
+                                     message:NSLocalizedString(@"SAVE_STATE_MESSAGE", nil)
                                      preferredStyle:UIAlertControllerStyleAlert];
         
         UIView *firstSubview = alert.view.subviews.firstObject;
@@ -180,25 +183,14 @@ typedef enum _EmulatorAlert
             }
         }
         
-        UIAlertAction* noButton = [UIAlertAction
-                                   actionWithTitle:NSLocalizedString(@"CANCEL", nil)
+        UIAlertAction* okayButton = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"OKAY", nil)
                                    style:UIAlertActionStyleDefault
                                    handler:^(UIAlertAction * action) {
                                        SISetEmulationPaused(0);
                                    }];
         
-        UIAlertAction* yesButton = [UIAlertAction
-                                    actionWithTitle:NSLocalizedString(@"SAVE", nil)
-                                    style:UIAlertActionStyleDefault
-                                    handler:^(UIAlertAction * action) {
-                                        SISetEmulationPaused(1);
-                                        SIWaitForPause();
-                                        [SaveManager saveStateForROMNamed:_romFileName slot:[[NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]] intValue] screenshot:[self getScreen]];
-                                        SISetEmulationPaused(0);
-                                    }];
-        
-        [alert addAction:noButton];
-        [alert addAction:yesButton];
+        [alert addAction:okayButton];
         
         [self presentViewController:alert animated:YES completion:nil];
     }]];
@@ -230,7 +222,6 @@ typedef enum _EmulatorAlert
   }
   else
   {
-    // kind of hacky to figure out the slot number, but it suffices right now, since saves are always in a known place and I REALLY wanted to pass the path for the save, for some reason
     int slot = [[[_initialSaveFileName stringByDeletingPathExtension] pathExtension] intValue];
     if(slot == 0)
       [SaveManager loadRunningStateForROMNamed:_romFileName];

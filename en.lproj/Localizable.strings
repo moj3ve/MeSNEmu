@@ -47,10 +47,7 @@
 "RESET" = "Reset";
 "LOAD_STATE" = "Load State";
 "SAVE_STATE" = "Save State";
-"LOAD_SAVE?" = "Load State?";
-"LOAD" = "Load";
-"SAVE_SAVE?" = "Save State?";
-"SAVE_CONSEQUENCES" = "This will overwrite your previous state";
+"SAVE_STATE_MESSAGE" = "Save State successfuly saved";
 "SAVE" = "Save";
 "EXIT_CONSEQUENCES" = "Any unsaved progress will be lost";
 "RESET_GAME?" = "Reset Game?";
