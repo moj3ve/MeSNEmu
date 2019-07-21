@@ -105,11 +105,7 @@ extern "C" void SISetScreen(unsigned char* screen)
 
 extern "C" void SISetSoundOn(int value)
 {
-    if(value < 0)
-        value = 0;
-    else if(value > 1)
-        value = 1;
-    SI_SoundOn = value;
+    SI_SoundOn = 1;
 }
 
 extern "C" void SISetAutoFrameskip(int value)

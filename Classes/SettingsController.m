@@ -19,7 +19,6 @@ NSString* const kSettingsSmoothScaling = @"SmoothScaling";
 NSString* const kSettingsShowFPS = @"ShowFPS";
 
 // Core Settings
-NSString* const kSettingsSound = @"Sound";
 NSString* const kSettingsAutoFrameskip = @"AutoFrameskip";
 NSString* const kSettingsFrameskipValue = @"FrameskipValue";
 
@@ -131,12 +130,6 @@ typedef enum _SettingsSections
 // Emulator Settings End
 
 // Core Settings Start
-
-- (void)toggleSound:(UISwitch*)sender
-{
-    _changed = YES;
-    [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsSound];
-}
 
 - (void)toggleAutoFrameskip:(UISwitch*)sender
 {
@@ -299,9 +292,6 @@ typedef enum _SettingsSections
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsShowFPS];
     
     // Core Settings
-    if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsSound] == nil)
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kSettingsSound];
-    
     if([[NSUserDefaults standardUserDefaults] objectForKey:kSettingsAutoFrameskip] == nil)
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:kSettingsAutoFrameskip];
     
@@ -351,10 +341,10 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionCore)
     {
-        if(_soundIndexPath == nil && _autoFrameskipIndexPath == nil)
+        if(_autoFrameskipIndexPath == nil)
             return 1;
         else
-            return 3;
+            return 2;
     }
     else if(section == SettingsSectionController)
     {
@@ -457,17 +447,7 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionCore)
     {
-        if([indexPath compare:_soundIndexPath] == NSOrderedSame)
-        {
-            TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
-            c.textLabel.text = NSLocalizedString(@"SOUND", nil);
-            if (darkMode == YES) {
-                c.textLabel.textColor = [UIColor whiteColor];
-            }
-            c.switchView.on = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsSound];
-            [c.switchView addTarget:self action:@selector(toggleSound:) forControlEvents:UIControlEventValueChanged];
-        }
-        else if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
+        if([indexPath compare:_autoFrameskipIndexPath] == NSOrderedSame)
         {
             TableViewSwitchCell* c = (TableViewSwitchCell*)(cell = [self switchCell]);
             c.textLabel.text = NSLocalizedString(@"AUTO_FRAMESKIP_TITLE", nil);
@@ -654,9 +634,8 @@ typedef enum _SettingsSections
         _smoothScalingIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionEmulator] retain];
         _showFPSIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionEmulator] retain];
         
-        _soundIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
-        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
-        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionCore] retain];
+        _autoFrameskipIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionCore] retain];
+        _frameskipValueIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionCore] retain];
         
         _controllerIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionController] retain];
         _lrThreeIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionController] retain];
