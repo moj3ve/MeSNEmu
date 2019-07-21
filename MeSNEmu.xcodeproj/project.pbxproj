@@ -148,6 +148,7 @@
 /* Begin PBXFileReference section */
 		26378EEF22E1247400FC4A10 /* TableViewSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewSwitchCell.h; path = Classes/TableViewSwitchCell.h; sourceTree = SOURCE_ROOT; };
 		26378EF022E1248900FC4A10 /* TableViewSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewSwitchCell.m; path = Classes/TableViewSwitchCell.m; sourceTree = SOURCE_ROOT; };
+		2665755D22E3F56C00C5E820 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		269901E022E3863B00BF312B /* ButtonNumberDefault-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefault-7@2x.png"; sourceTree = "<group>"; };
 		269901E122E3863B00BF312B /* ButtonNumberPlusDown-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberPlusDown-7.png"; sourceTree = "<group>"; };
 		269901E222E3863B00BF312B /* ButtonNumberDefaultDown-7@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ButtonNumberDefaultDown-7@3x.png"; sourceTree = "<group>"; };
@@ -788,8 +789,8 @@
 			isa = PBXGroup;
 			children = (
 				A093242A17CE6A4A00A93B6B /* EmulatorController */,
-				26E407FE22E1214A00069A28 /* RomBrowserController.m */,
 				A0B8687614BE3B6700663EBE /* RomBrowserController.h */,
+				26E407FE22E1214A00069A28 /* RomBrowserController.m */,
 				A03C087214BF7AB2003FAEB9 /* SettingsController.h */,
 				A03C087314BF7AB2003FAEB9 /* SettingsController.m */,
 				A093242617CE590200A93B6B /* MultipleChoicePicker.h */,
@@ -849,7 +850,7 @@
 			knownRegions = (
 				en,
 				English,
-				pt,
+				es,
 			);
 			mainGroup = A05065FC14B21C7E003E0C5E;
 			productRefGroup = A050660814B21C7F003E0C5E /* Products */;
@@ -1015,6 +1016,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A0BB592714E84BC000D12F97 /* en */,
+				2665755D22E3F56C00C5E820 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = SOURCE_ROOT;

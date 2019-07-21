@@ -49,7 +49,7 @@
 "SAVE_STATE_MESSAGE" = "Save State successfuly saved";
 "SAVE" = "Save";
 "EXIT_CONSEQUENCES" = "Any unsaved progress will be lost";
-"RESET_GAME?" = "Reset Game?";
+"RESET_GAME" = "Reset Game?";
 "RESET_CONSEQUENCES" = "Any unsaved progress will be lost";
 "MENU" = "Menu";
 "A" = "A";

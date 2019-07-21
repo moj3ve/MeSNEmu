@@ -301,8 +301,8 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.SixteenBitSound = TRUE;
     Settings.Stereo = TRUE;
     Settings.ReverseStereo = TRUE;
-    Settings.SoundPlaybackRate = 32040;
-    Settings.SoundInputRate = 31947;
+    Settings.SoundPlaybackRate = 32000;
+    Settings.SoundInputRate = 32000;
     Settings.DynamicRateControl = TRUE;
     Settings.SeparateEchoBuffer = FALSE;
     

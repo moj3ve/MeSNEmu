@@ -130,7 +130,7 @@ typedef enum _EmulatorAlert
     
     [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"RESET", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UIAlertController * alert = [UIAlertController
-                                     alertControllerWithTitle:NSLocalizedString(@"RESET_GAME?", nil)
+                                     alertControllerWithTitle:NSLocalizedString(@"RESET_GAME", nil)
                                      message:NSLocalizedString(@"RESET_CONSEQUENCES", nil)
                                      preferredStyle:UIAlertControllerStyleAlert];
         
