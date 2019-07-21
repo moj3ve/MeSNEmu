@@ -856,6 +856,7 @@ static int const FileOrganizationVersionNumber = 1;
             self.tableView.sectionIndexBackgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
             self.tableView.sectionIndexTrackingBackgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
             self.tableView.separatorColor = [UIColor colorWithWhite:255/255.0 alpha:0.5];
+            self.searchDisplayController.searchResultsTableView.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
         }
         else {
             self.tableView.sectionIndexBackgroundColor = [UIColor colorWithWhite:255/255.0 alpha:0.5];
