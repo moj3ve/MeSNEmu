@@ -96,6 +96,8 @@ static int const FileOrganizationVersionNumber = 1;
     CGSize size = self.contentView.frame.size;
     UILabel* label = (UILabel*)[self viewWithTag:101];
     
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
+    
     int spacing = 10.0f;
     
     self.imageView.frame = CGRectMake(16, 10, 50, 50);
@@ -103,8 +105,12 @@ static int const FileOrganizationVersionNumber = 1;
     self.imageView.layer.cornerRadius = 24.5f;
     self.imageView.layer.masksToBounds = YES;
     [self.textLabel setFont:[UIFont systemFontOfSize:14]];
-    [self.textLabel setTextColor:[UIColor blackColor]];
-    
+    if (darkMode == YES) {
+        [self.textLabel setTextColor:[UIColor whiteColor]];
+    }
+    else {
+        [self.textLabel setTextColor:[UIColor blackColor]];
+    }
     [self.detailTextLabel setFont:[UIFont systemFontOfSize:12]];
     [self.detailTextLabel setTextColor:self.tintColor];
     [self.detailTextLabel setTextAlignment:NSTextAlignmentLeft];
@@ -113,7 +119,12 @@ static int const FileOrganizationVersionNumber = 1;
     label.frame = CGRectMake(self.textLabel.frame.origin.x, 40, label.frame.size.width, 16);
     self.detailTextLabel.frame = CGRectMake(self.textLabel.frame.origin.x+label.frame.size.width+(spacing/2), 40, self.textLabel.frame.size.width-(label.frame.size.width+(spacing/2)), 16);
     self.imageView.contentMode = UIViewContentModeScaleAspectFill;
-    self.backgroundColor = [UIColor clearColor];
+    if (darkMode == YES) {
+        self.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+    }
+    else {
+        self.backgroundColor = [UIColor clearColor];
+    }
     self.separatorInset = UIEdgeInsetsMake(0, 16, 0, 0);
 }
 
@@ -620,6 +631,7 @@ static int const FileOrganizationVersionNumber = 1;
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     FileListItem* item = [self romItemForTableView:tableView indexPath:indexPath];
@@ -627,6 +639,9 @@ static int const FileOrganizationVersionNumber = 1;
     cell.detailTextLabel.text = item.displayDetails;
     if(item.hasDetails)
         cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        if (darkMode == YES) {
+            cell.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
+        }
     else
         cell.accessoryType = UITableViewCellAccessoryNone;
     
@@ -641,7 +656,6 @@ static int const FileOrganizationVersionNumber = 1;
     } else {
         cell.imageView.image = nil;
     }
-    
     return cell;
 }
 
@@ -759,10 +773,16 @@ static int const FileOrganizationVersionNumber = 1;
     if(_detailsItem == nil) {
         UIView *view = [[[UIView alloc] init] autorelease];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(16, 0, 320, 34.0)];
+        BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
         [label setText:[self tableView: tableView titleForHeaderInSection: section]];
         [label setFont:[UIFont boldSystemFontOfSize:14]];
         [label setTextColor:[UIColor grayColor]];
-        [view setBackgroundColor:[UIColor colorWithWhite:250/255.0 alpha:0.98]];
+        if (darkMode == YES) {
+            [view setBackgroundColor:[UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0]];
+        }
+        else {
+            [view setBackgroundColor:[UIColor colorWithWhite:250/255.0 alpha:0.98]];
+        }
         [view addSubview:label];
         [label release];
         return view;
@@ -811,6 +831,8 @@ static int const FileOrganizationVersionNumber = 1;
     _tableView.dataSource = self;
     _tableView.delegate = self;
     [view addSubview:_tableView];
+    
+    BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     
     if(_detailsItem == nil)
     {
@@ -901,6 +923,12 @@ static int const FileOrganizationVersionNumber = 1;
     
     self.view = view;
     [view release];
+    
+    if (darkMode == YES) {
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+        self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
+        self.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+    }
     
     //self.clearsSelectionOnViewWillAppear = NO;
     

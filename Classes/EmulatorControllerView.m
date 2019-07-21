@@ -25,7 +25,7 @@
     int height = 24;
     ButtonView* button = [[ButtonView alloc] initWithFrame:(CGRect){0,0, width,height}];
     button.image = [UIImage imageNamed:@"ButtonWide.png"];
-    button.label.textColor = [UIColor colorWithWhite:1 alpha:0.75];
+    button.label.textColor = [UIColor colorWithRed:0.20 green:0.20 blue:0.20 alpha:1.0];;
     button.label.shadowColor = [UIColor colorWithWhite:0 alpha:0.35];
     button.label.shadowOffset = CGSizeMake(0, -1);
     button.label.font = [UIFont systemFontOfSize:10];
@@ -232,7 +232,7 @@
         _optionsButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
         [_optionsButton setBackgroundImage:[UIImage imageNamed:@"ButtonWide.png"] forState:UIControlStateNormal];
         [_optionsButton setTitle:NSLocalizedString(@"MENU", nil) forState:UIControlStateNormal];
-        [_optionsButton setTitleColor:[UIColor colorWithWhite:1 alpha:0.75] forState:UIControlStateNormal];
+        [_optionsButton setTitleColor:[UIColor colorWithRed:0.20 green:0.20 blue:0.20 alpha:1.0] forState:UIControlStateNormal];
         [_optionsButton setTitleShadowColor:[UIColor colorWithWhite:0 alpha:0.35] forState:UIControlStateNormal];
         _optionsButton.titleLabel.shadowOffset = CGSizeMake(0, -1);
         _optionsButton.titleLabel.font = [UIFont systemFontOfSize:10];

@@ -611,10 +611,8 @@ typedef enum _SettingsSections
     BOOL darkMode = [[NSUserDefaults standardUserDefaults] boolForKey:kSettingsDarkMode];
     UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done)];
     if (darkMode == YES) {
-        [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
-        [[UITabBar appearance] setBarStyle:UIBarStyleBlack];
-        [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0]];
-        [[UINavigationBar appearance] setBarStyle:UIBarStyleBlackTranslucent];
+        self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+        self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.28 green:0.63 blue:0.90 alpha:1.0];
     }
     self.navigationItem.rightBarButtonItem = doneButton;
     [doneButton release];
@@ -686,7 +684,6 @@ typedef enum _SettingsSections
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     else
