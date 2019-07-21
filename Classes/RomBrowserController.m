@@ -448,7 +448,6 @@ static int const FileOrganizationVersionNumber = 1;
                                    _detailsItem.romInfo[@"Region"]];
             [itemsList addObject:romData];
             [romData release];
-            
         }
         // sram
         NSString* sramPath = [_sramPath stringByAppendingPathComponent:[[_detailsItem.fileName stringByDeletingPathExtension] stringByAppendingPathExtension:@"srm"]];
@@ -780,7 +779,7 @@ static int const FileOrganizationVersionNumber = 1;
         [label setFont:[UIFont boldSystemFontOfSize:14]];
         [label setTextColor:[UIColor grayColor]];
         if (darkMode == YES) {
-            [view setBackgroundColor:[UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0]];
+            [view setBackgroundColor:[UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0]];
         }
         else {
             [view setBackgroundColor:[UIColor colorWithWhite:250/255.0 alpha:0.98]];
@@ -922,10 +921,13 @@ static int const FileOrganizationVersionNumber = 1;
         label.numberOfLines = 2;
         [navigationbar addSubview:label];
         [label release];
-        
         [view addSubview:navigationbar];
         [navigationbar release];
         
+        if (darkMode == YES) {
+            self.view.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+            self.tableView.backgroundColor = [UIColor colorWithRed:0.07 green:0.07 blue:0.08 alpha:1.0];
+        }
         self.tableView.contentInset = UIEdgeInsetsMake(100, 0, 0, 0);
         self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(100, 0, 0, 0);
         [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
