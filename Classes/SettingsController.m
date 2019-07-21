@@ -252,12 +252,6 @@ typedef enum _SettingsSections
         _rygbButtonsIndexPath = nil;
         [self.tableView reloadData];
     }
-    if(_soundIndexPath != nil)
-    {
-        [_soundIndexPath release];
-        _soundIndexPath = nil;
-        [self.tableView reloadData];
-    }
     if(_autoFrameskipIndexPath != nil)
     {
         [_autoFrameskipIndexPath release];
@@ -731,9 +725,7 @@ typedef enum _SettingsSections
     
     [_smoothScalingIndexPath release];
     _smoothScalingIndexPath = nil;
-    
-    [_soundIndexPath release];
-    _soundIndexPath = nil;
+
     [_lrThreeIndexPath release];
     _lrThreeIndexPath = nil;
     [_autoFrameskipIndexPath release];
