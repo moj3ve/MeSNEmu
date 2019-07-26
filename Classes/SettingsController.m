@@ -349,7 +349,7 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionAbout)
     {
-        return 3;
+        return 6;
     }
     return 0;
 }
@@ -540,15 +540,45 @@ typedef enum _SettingsSections
             }
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"CORE_NAME", nil), [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
         }
-        else if([indexPath compare:_developerIndexPath] == NSOrderedSame)
+        else if([indexPath compare:_developerTitleIndexPath] == NSOrderedSame)
         {
-            cell.textLabel.text = NSLocalizedString(@"DEVELOPER", nil);
+            cell.textLabel.text = NSLocalizedString(@"DEVELOPERS", nil);
             if (darkMode == YES) {
                 cell.detailTextLabel.textColor = [UIColor whiteColor];
                 cell.textLabel.textColor = [UIColor whiteColor];
                 cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
             }
-            cell.detailTextLabel.text = NSLocalizedString(@"DEVELOPER_NAME", nil);
+            cell.detailTextLabel.text = @"";
+        }
+        else if([indexPath compare:_developerOneIndexPath] == NSOrderedSame)
+        {
+            cell.textLabel.text = NSLocalizedString(@"DEVELOPERONE_NAME", nil);
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
+            }
+            cell.detailTextLabel.text = NSLocalizedString(@"DEVELOPERONE_YEAR", nil);
+        }
+        else if([indexPath compare:_developerTwoIndexPath] == NSOrderedSame)
+        {
+            cell.textLabel.text = NSLocalizedString(@"DEVELOPERTWO_NAME", nil);
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
+            }
+            cell.detailTextLabel.text = NSLocalizedString(@"DEVELOPERTWO_YEAR", nil);
+        }
+        else if([indexPath compare:_developerThreeIndexPath] == NSOrderedSame)
+        {
+            cell.textLabel.text = NSLocalizedString(@"DEVELOPERTHREE_NAME", nil);
+            if (darkMode == YES) {
+                cell.detailTextLabel.textColor = [UIColor whiteColor];
+                cell.textLabel.textColor = [UIColor whiteColor];
+                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
+            }
+            cell.detailTextLabel.text = NSLocalizedString(@"DEVELOPERTHREE_YEAR", nil);
         }
     }
     
@@ -634,7 +664,10 @@ typedef enum _SettingsSections
         
         _aboutIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionAbout] retain];
         _coreIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionAbout] retain];
-        _developerIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
+        _developerTitleIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
+        _developerOneIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionAbout] retain];
+        _developerTwoIndexPath = [[NSIndexPath indexPathForRow:4 inSection:SettingsSectionAbout] retain];
+        _developerThreeIndexPath = [[NSIndexPath indexPathForRow:5 inSection:SettingsSectionAbout] retain];
     }
     else
     {
@@ -649,7 +682,10 @@ typedef enum _SettingsSections
         
         _aboutIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionAbout] retain];
         _coreIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionAbout] retain];
-        _developerIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
+        _developerTitleIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
+        _developerOneIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionAbout] retain];
+        _developerTwoIndexPath = [[NSIndexPath indexPathForRow:4 inSection:SettingsSectionAbout] retain];
+        _developerThreeIndexPath = [[NSIndexPath indexPathForRow:5 inSection:SettingsSectionAbout] retain];
     }
 }
 

@@ -38,8 +38,13 @@
 "ABOUT" = "About";
 "CORE" = "Core";
 "CORE_NAME" = "Snes9x %@";
-"DEVELOPER" = "Developer";
-"DEVELOPER_NAME" = "Lucas M, Sarah H";
+"DEVELOPERS" = "Developers:";
+"DEVELOPERONE_NAME" = "Lucas Menges";
+"DEVELOPERONE_YEAR" = "2012-2015";
+"DEVELOPERTWO_NAME" = "nitoTV";
+"DEVELOPERTWO_YEAR" = "2019+";
+"DEVELOPERTHREE_NAME" = "SarahH12099";
+"DEVELOPERTHREE_YEAR" = "2019+";
 
 // EmulatorController
 "BACK_TO_GAME" = "Back To Game";
