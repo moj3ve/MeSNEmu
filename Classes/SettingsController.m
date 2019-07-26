@@ -34,7 +34,8 @@ typedef enum _SettingsSections
     SettingsSectionEmulator,
     SettingsSectionCore,
     SettingsSectionController,
-    SettingsSectionAbout
+    SettingsSectionAbout,
+    SettingsSectionDeveloper
 } SettingsSections;
 
 @interface SettingsController(Privates) <TableViewCellDelegate, MultipleChoicePickerDelegate>
@@ -317,7 +318,7 @@ typedef enum _SettingsSections
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView
 {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
@@ -349,7 +350,11 @@ typedef enum _SettingsSections
     }
     else if(section == SettingsSectionAbout)
     {
-        return 6;
+        return 2;
+    }
+    else if(section == SettingsSectionDeveloper)
+    {
+        return 3;
     }
     return 0;
 }
@@ -366,6 +371,8 @@ typedef enum _SettingsSections
         return NSLocalizedString(@"CONTROLLER_SETTINGS", nil);
     else if(section == SettingsSectionAbout)
         return NSLocalizedString(@"ABOUT_SETTINGS", nil);
+    else if(section == SettingsSectionDeveloper)
+        return NSLocalizedString(@"DEVELOPER_SETTINGS", nil);
     return nil;
 }
 
@@ -540,17 +547,16 @@ typedef enum _SettingsSections
             }
             cell.detailTextLabel.text = [NSString stringWithFormat:NSLocalizedString(@"CORE_NAME", nil), [NSString stringWithCString:VERSION encoding:NSUTF8StringEncoding]];
         }
-        else if([indexPath compare:_developerTitleIndexPath] == NSOrderedSame)
-        {
-            cell.textLabel.text = NSLocalizedString(@"DEVELOPERS", nil);
-            if (darkMode == YES) {
-                cell.detailTextLabel.textColor = [UIColor whiteColor];
-                cell.textLabel.textColor = [UIColor whiteColor];
-                cell.backgroundColor = [UIColor colorWithRed:0.11 green:0.11 blue:0.12 alpha:1.0];
-            }
-            cell.detailTextLabel.text = @"";
-        }
-        else if([indexPath compare:_developerOneIndexPath] == NSOrderedSame)
+    }
+    else if(section == SettingsSectionDeveloper)
+    {
+        static NSString* identifier = @"DeveloperCell";
+        cell = [self.tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell == nil)
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        if([indexPath compare:_developerOneIndexPath] == NSOrderedSame)
         {
             cell.textLabel.text = NSLocalizedString(@"DEVELOPERONE_NAME", nil);
             if (darkMode == YES) {
@@ -595,7 +601,6 @@ typedef enum _SettingsSections
             MultipleChoicePicker* c = [[MultipleChoicePicker alloc] initWithStyle:UITableViewStyleGrouped];
             c.title = NSLocalizedString(@"CONTROLLER", nil);
             
-            // building the option names and values for the controllers
             NSMutableArray* optionNames = [NSMutableArray array];
             NSMutableArray* optionValues = [NSMutableArray array];
             for(NSArray* controller in [BTControllerView supportedControllers])
@@ -664,10 +669,10 @@ typedef enum _SettingsSections
         
         _aboutIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionAbout] retain];
         _coreIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionAbout] retain];
-        _developerTitleIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
-        _developerOneIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionAbout] retain];
-        _developerTwoIndexPath = [[NSIndexPath indexPathForRow:4 inSection:SettingsSectionAbout] retain];
-        _developerThreeIndexPath = [[NSIndexPath indexPathForRow:5 inSection:SettingsSectionAbout] retain];
+        
+        _developerOneIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionDeveloper] retain];
+        _developerTwoIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionDeveloper] retain];
+        _developerThreeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionDeveloper] retain];
     }
     else
     {
@@ -682,10 +687,10 @@ typedef enum _SettingsSections
         
         _aboutIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionAbout] retain];
         _coreIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionAbout] retain];
-        _developerTitleIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionAbout] retain];
-        _developerOneIndexPath = [[NSIndexPath indexPathForRow:3 inSection:SettingsSectionAbout] retain];
-        _developerTwoIndexPath = [[NSIndexPath indexPathForRow:4 inSection:SettingsSectionAbout] retain];
-        _developerThreeIndexPath = [[NSIndexPath indexPathForRow:5 inSection:SettingsSectionAbout] retain];
+        
+        _developerOneIndexPath = [[NSIndexPath indexPathForRow:0 inSection:SettingsSectionDeveloper] retain];
+        _developerTwoIndexPath = [[NSIndexPath indexPathForRow:1 inSection:SettingsSectionDeveloper] retain];
+        _developerThreeIndexPath = [[NSIndexPath indexPathForRow:2 inSection:SettingsSectionDeveloper] retain];
     }
 }
 

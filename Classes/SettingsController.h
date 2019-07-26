@@ -49,7 +49,6 @@ extern NSString* const kSettingsLRThree;
     
     NSIndexPath* _aboutIndexPath;
     NSIndexPath* _coreIndexPath;
-    NSIndexPath* _developerTitleIndexPath;
     NSIndexPath* _developerOneIndexPath;
     NSIndexPath* _developerTwoIndexPath;
     NSIndexPath* _developerThreeIndexPath;

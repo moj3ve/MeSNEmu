@@ -1,5 +1,3 @@
-// English Translation By SarahH12099
-
 // UIAlertController
 "NOTICE" = "Notice";
 "CANCEL" = "Cancel";
@@ -23,6 +21,7 @@
 "CORE_SETTINGS" = "Core Settings";
 "CONTROLLER_SETTINGS" = "Controller Settings";
 "ABOUT_SETTINGS" = "About";
+"DEVELOPER_SETTINGS" = "Developers";
 "FULL_SCREEN" = "Full Screen";
 "DARK_MODE_TITLE" = "Dark Mode";
 "SMOOTH_SCALING" = "Smooth Scaling";
