@@ -48,7 +48,6 @@
 		26E407F422E116B500069A28 /* SNES_SPC_state.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407E722E116B400069A28 /* SNES_SPC_state.cpp */; };
 		26E407F522E116B500069A28 /* SPC_Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407E822E116B400069A28 /* SPC_Filter.cpp */; };
 		26E407F622E116B500069A28 /* apu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407ED22E116B400069A28 /* apu.cpp */; };
-		26E407F722E116B500069A28 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = 26E407EE22E116B400069A28 /* license.txt */; };
 		26E407F822E116B500069A28 /* SPC_DSP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 26E407F022E116B400069A28 /* SPC_DSP.cpp */; };
 		26E407FF22E1214A00069A28 /* RomBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E407FE22E1214A00069A28 /* RomBrowserController.m */; };
 		66C1BD601866ACA800E5A833 /* GameControllerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C1BD5F1866ACA800E5A833 /* GameControllerManager.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -202,7 +201,6 @@
 		26E407EB22E116B400069A28 /* resampler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = resampler.h; sourceTree = "<group>"; };
 		26E407EC22E116B400069A28 /* SNES_SPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNES_SPC.h; sourceTree = "<group>"; };
 		26E407ED22E116B400069A28 /* apu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = apu.cpp; sourceTree = "<group>"; };
-		26E407EE22E116B400069A28 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		26E407EF22E116B400069A28 /* blargg_source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_source.h; sourceTree = "<group>"; };
 		26E407F022E116B400069A28 /* SPC_DSP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SPC_DSP.cpp; sourceTree = "<group>"; };
 		26E407F122E116B400069A28 /* blargg_endian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blargg_endian.h; sourceTree = "<group>"; };
@@ -450,23 +448,22 @@
 		26E407E022E116B400069A28 /* apu */ = {
 			isa = PBXGroup;
 			children = (
-				26E407E122E116B400069A28 /* SNES_SPC_misc.cpp */,
-				26E407E222E116B400069A28 /* blargg_common.h */,
-				26E407E322E116B400069A28 /* SPC_CPU.h */,
 				26E407E422E116B400069A28 /* SNES_SPC.cpp */,
-				26E407E522E116B400069A28 /* SPC_Filter.h */,
-				26E407E622E116B400069A28 /* SPC_DSP.h */,
-				26E407E722E116B400069A28 /* SNES_SPC_state.cpp */,
-				26E407E822E116B400069A28 /* SPC_Filter.cpp */,
-				26E407E922E116B400069A28 /* blargg_config.h */,
-				26E407EA22E116B400069A28 /* apu.h */,
-				26E407EB22E116B400069A28 /* resampler.h */,
 				26E407EC22E116B400069A28 /* SNES_SPC.h */,
-				26E407ED22E116B400069A28 /* apu.cpp */,
-				26E407EE22E116B400069A28 /* license.txt */,
-				26E407EF22E116B400069A28 /* blargg_source.h */,
+				26E407E122E116B400069A28 /* SNES_SPC_misc.cpp */,
+				26E407E722E116B400069A28 /* SNES_SPC_state.cpp */,
+				26E407E322E116B400069A28 /* SPC_CPU.h */,
 				26E407F022E116B400069A28 /* SPC_DSP.cpp */,
+				26E407E622E116B400069A28 /* SPC_DSP.h */,
+				26E407E822E116B400069A28 /* SPC_Filter.cpp */,
+				26E407E522E116B400069A28 /* SPC_Filter.h */,
+				26E407ED22E116B400069A28 /* apu.cpp */,
+				26E407EA22E116B400069A28 /* apu.h */,
+				26E407E222E116B400069A28 /* blargg_common.h */,
+				26E407E922E116B400069A28 /* blargg_config.h */,
 				26E407F122E116B400069A28 /* blargg_endian.h */,
+				26E407EF22E116B400069A28 /* blargg_source.h */,
+				26E407EB22E116B400069A28 /* resampler.h */,
 			);
 			path = apu;
 			sourceTree = "<group>";
@@ -886,7 +883,6 @@
 				A0BB592614E84BC000D12F97 /* Localizable.strings in Resources */,
 				2699021322E3864D00BF312B /* DPadButton.png in Resources */,
 				269901FF22E3863B00BF312B /* ButtonNumberMinus-7@2x.png in Resources */,
-				26E407F722E116B500069A28 /* license.txt in Resources */,
 				2699021422E3864D00BF312B /* ButtonWide.png in Resources */,
 				269901F622E3863B00BF312B /* ButtonNumberDefaultDown-7@2x.png in Resources */,
 				269901F722E3863B00BF312B /* ButtonNumberDefault-7@3x.png in Resources */,
