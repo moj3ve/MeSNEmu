@@ -1,12 +1,11 @@
 # MeSNEmu
 
 Download: [Releases](https://github.com/SarahH12099/MeSNEmu/releases) <br>
-Developers Twitter: [SarahH12099](https://twitter.com/SarahH12099) <br>
 
 <br>
 
 How to import roms:<br>
-- Download rom via Safari or other app and then press the open in button and press open in MeSNEmu <br>
+- Download rom via Safari and then press the open in button and press open in MeSNEmu <br>
 - If jailbroken, you can use Filza to add roms, click the favourites (star shape) button, then click apps manager. Scroll till you see MeSNEmu, click on MeSNEmu and open Documents folder, you can import your roms in this folder <br>
 - Import via iTunes file sharing <br>
 - Import using the iOS Files App <br>
@@ -30,7 +29,6 @@ Features:<br>
 - MFI support <br>
 - nControl support <br>
 - Full screen/disable full screen <br>
-- Option to disable/enable sound <br>
 - Files app support <br>
 - iTunes file sharing <br>
 
