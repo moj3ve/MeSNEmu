@@ -240,7 +240,7 @@ void SIMakeRomInfoText(char* rom_filename, char *romtext)
         S9xDeinitAPU();
         exit(1);
     }
-    S9xInitSound(0, 0);
+    S9xInitSound(64, 0);
     Memory.LoadROM(rom_path);
     
     Memory.MakeRomInfoText(romtext);
@@ -288,7 +288,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.StopEmulation = TRUE;
     Settings.WrongMovieStateProtection = TRUE;
     
-    Settings.HDMATimingHack = 100;
+    Settings.HDMATimingHack = 200;
     Settings.BlockInvalidVRAMAccessMaster = TRUE;
     
     Settings.IsPatched = 0;
