@@ -12,13 +12,13 @@
 #include "../display.h"
 #include "resampler.h"
 
-#define APU_DEFAULT_INPUT_RATE		32040
-#define APU_MINIMUM_SAMPLE_COUNT	512
-#define APU_MINIMUM_SAMPLE_BLOCK	128
-#define APU_NUMERATOR_NTSC			15664
-#define APU_DENOMINATOR_NTSC		328125
-#define APU_NUMERATOR_PAL			34176
-#define APU_DENOMINATOR_PAL			709379
+static const int APU_DEFAULT_INPUT_RATE = 31950; // ~59.94Hz
+static const int APU_SAMPLE_COUNT       = 512;
+static const int APU_SAMPLE_BLOCK       = 48;
+static const int APU_NUMERATOR_NTSC     = 15664;
+static const int APU_DENOMINATOR_NTSC   = 328125;
+static const int APU_NUMERATOR_PAL      = 34176;
+static const int APU_DENOMINATOR_PAL    = 709379;
 
 SNES_SPC	*spc_core = NULL;
 
@@ -332,8 +332,8 @@ bool8 S9xInitSound (int buffer_ms, int lag_ms)
 		spc::lag_master <<= 1;
 	spc::lag = spc::lag_master;
 
-	if (sample_count < APU_MINIMUM_SAMPLE_COUNT)
-		sample_count = APU_MINIMUM_SAMPLE_COUNT;
+	if (sample_count < APU_SAMPLE_COUNT)
+		sample_count = APU_SAMPLE_COUNT;
 
 	spc::buffer_size = sample_count;
 	if (Settings.Stereo)
@@ -521,7 +521,7 @@ void S9xAPUEndScanline (void)
 {
 	S9xAPUExecute();
 
-	if (spc_core->sample_count() >= APU_MINIMUM_SAMPLE_BLOCK || !spc::sound_in_sync)
+	if (spc_core->sample_count() >= APU_SAMPLE_BLOCK || !spc::sound_in_sync)
 		S9xLandSamples();
 }
 
