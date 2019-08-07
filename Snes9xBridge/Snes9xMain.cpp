@@ -103,11 +103,6 @@ extern "C" void SISetScreen(unsigned char* screen)
     GFX.Screen = (uint16*)screen;
 }
 
-extern "C" void SISetSoundOn(int value)
-{
-    SI_SoundOn = 1;
-}
-
 extern "C" void SISetAutoFrameskip(int value)
 {
     if(value < 0)
@@ -168,7 +163,6 @@ extern "C" void SISetEmulationPaused(int value)
 extern "C" void SIWaitForPause()
 {
     if(SI_EmulationPaused == 1 && SI_EmulationIsRunning == 1)
-        // wait for the pause to conclude
         while((SI_EmulationDidPause == 0 || SI_AudioIsOnHold == 0) && SI_EmulationIsRunning == 1){}
 }
 
@@ -240,7 +234,9 @@ void SIMakeRomInfoText(char* rom_filename, char *romtext)
         S9xDeinitAPU();
         exit(1);
     }
-    S9xInitSound(64, 0);
+    int samplecount = Settings.SoundPlaybackRate/(Settings.PAL ? 50 : 60);
+    int soundBufferSize = samplecount<<(1+(Settings.Stereo?1:0));
+    S9xInitSound(soundBufferSize, 0);
     Memory.LoadROM(rom_path);
     
     Memory.MakeRomInfoText(romtext);
@@ -288,7 +284,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.StopEmulation = TRUE;
     Settings.WrongMovieStateProtection = TRUE;
     
-    Settings.HDMATimingHack = 200;
+    Settings.HDMATimingHack = 300;
     Settings.BlockInvalidVRAMAccessMaster = TRUE;
     
     Settings.IsPatched = 0;
@@ -319,8 +315,8 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.FrameTimePAL = 20000;
     Settings.FrameTimeNTSC = 16667;
     
-    Settings.SuperFXClockMultiplier = 200; // (0 - None, 100 - Default, 200 - Double)
-    Settings.OverclockMode = 3; // (0 - None, 1 - Min, 2 - Medium, 3 - Max)
+    Settings.SuperFXClockMultiplier = 300;
+    Settings.OverclockMode = 3;
     Settings.OneClockCycle = 6;
     Settings.OneSlowClockCycle = 8;
     Settings.TwoClockCycles = 12;
