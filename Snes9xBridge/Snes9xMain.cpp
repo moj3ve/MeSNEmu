@@ -20,6 +20,13 @@
 
 #pragma mark - External Forward Declarations
 
+#define ZLIB
+#define UNZIP_SUPPORT
+#define JMA_SUPPORT
+#define USE_OPENGL
+#define RIGHTSHIFT_IS_SAR
+#define HAVE_STDINT_H
+
 // client-implemented functions called up by the emulator
 extern "C" void SIFlipFramebufferClient(int width, int height);
 extern "C" void SILoadRunningStateForGameNamed(const char* romFileName);
