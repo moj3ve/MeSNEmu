@@ -270,10 +270,40 @@ extern "C" int SIStartWithROM(char* rom_filename)
     mkdir(SI_SRAMPath, dir_mode);
     
     // Default ALL to false
-    memset(&Settings, 0, sizeof(Settings));
+    // memset(&Settings, 0, sizeof(Settings));
+    bzero(&Settings, sizeof(Settings));
     
     // General
-    Settings.MouseMaster = TRUE;
+    Settings.MouseMaster = true;
+    Settings.SuperScopeMaster = true;
+    Settings.JustifierMaster = true;
+    Settings.MultiPlayer5Master = true;
+    Settings.FrameTimePAL = 20000;
+    Settings.FrameTimeNTSC = 16667;
+    Settings.SixteenBitSound = true;
+    Settings.Stereo = true;
+    Settings.SoundPlaybackRate = 32000;
+    Settings.SoundInputRate = 31950;
+    Settings.SupportHiRes = true;
+    Settings.Transparency = true;
+    Settings.AutoDisplayMessages = true;
+    Settings.InitialInfoStringTimeout = 120;
+    Settings.HDMATimingHack = 300;
+    Settings.BlockInvalidVRAMAccessMaster = true;
+    Settings.StopEmulation = true;
+    Settings.WrongMovieStateProtection = true;
+    Settings.DumpStreamsMaxFrames = -1;
+    Settings.StretchScreenshots = 1;
+    Settings.SnapshotScreenshots = true;
+    Settings.OpenGLEnable = true;
+    Settings.SuperFXClockMultiplier = 300;
+    Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN;
+    Settings.MaxSpriteTilesPerLine = 34;
+    Settings.OneClockCycle = 6;
+    Settings.OneSlowClockCycle = 8;
+    Settings.TwoClockCycles = 12;
+
+    /* Settings.MouseMaster = TRUE;
     Settings.SuperScopeMaster = TRUE;
     Settings.JustifierMaster = TRUE;
     Settings.MacsRifleMaster = TRUE;
@@ -328,7 +358,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     else {
         Settings.SoundSync = TRUE;
         Settings.SkipFrames = SI_Frameskip;
-    }
+    }*/
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 #ifdef NETPLAY_SUPPORT
