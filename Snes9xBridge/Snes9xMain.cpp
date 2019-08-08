@@ -275,8 +275,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     
     mode_t dir_mode = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
     mkdir(SI_SRAMPath, dir_mode);
-    
-    // Default ALL to false
+
     // memset(&Settings, 0, sizeof(Settings));
     bzero(&Settings, sizeof(Settings));
     
@@ -309,63 +308,24 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.OneClockCycle = 6;
     Settings.OneSlowClockCycle = 8;
     Settings.TwoClockCycles = 12;
-
-    /* Settings.MouseMaster = TRUE;
-    Settings.SuperScopeMaster = TRUE;
-    Settings.JustifierMaster = TRUE;
-    Settings.MacsRifleMaster = TRUE;
-    Settings.MultiPlayer5Master = TRUE;
-    Settings.DontSaveOopsSnapshot = TRUE;
-    Settings.StretchScreenshots = 1;
-    Settings.SnapshotScreenshots = TRUE;
-    Settings.StopEmulation = TRUE;
-    Settings.WrongMovieStateProtection = TRUE;
-    
-    Settings.HDMATimingHack = 300;
-    Settings.BlockInvalidVRAMAccessMaster = TRUE;
-    
-    Settings.IsPatched = 0;
-    
-    // Sound
-    Settings.SixteenBitSound = TRUE;
-    Settings.Stereo = TRUE;
-    Settings.ReverseStereo = TRUE;
-    Settings.SoundPlaybackRate = 32000;
-    Settings.SoundInputRate = 32000;
-    Settings.DynamicRateControl = TRUE;
-    Settings.SeparateEchoBuffer = FALSE;
-    
-    // Interpolation Method
-    Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN;
-    
-    // Graphics
-    Settings.Transparency = TRUE;
-    Settings.SupportHiRes = TRUE;
-    Settings.MaxSpriteTilesPerLine = 34;
-    Settings.TurboSkipFrames = 19;
     Settings.DisplayFrameRate = SI_ShowFPS;
-    Settings.AutoDisplayMessages = TRUE;
-    Settings.InitialInfoStringTimeout = 120;
-    Settings.DumpStreamsMaxFrames = -1;
-    
-    // Frame timings in 50hz and 60hz cpu mode
-    Settings.FrameTimePAL = 20000;
-    Settings.FrameTimeNTSC = 16667;
-    
-    Settings.SuperFXClockMultiplier = 300;
-    Settings.OverclockMode = 3;
-    Settings.OneClockCycle = 6;
-    Settings.OneSlowClockCycle = 8;
-    Settings.TwoClockCycles = 12;
-    
     if(SI_AutoFrameskip) {
-        Settings.SoundSync = FALSE;
         Settings.SkipFrames = AUTO_FRAMERATE;
     }
     else {
-        Settings.SoundSync = TRUE;
         Settings.SkipFrames = SI_Frameskip;
-    }*/
+    }
+    /*
+    Settings.DontSaveOopsSnapshot = TRUE;
+    Settings.StopEmulation = TRUE;
+    Settings.IsPatched = 0;
+    Settings.ReverseStereo = TRUE;
+    Settings.DynamicRateControl = TRUE;
+    Settings.SeparateEchoBuffer = FALSE;
+    Settings.TurboSkipFrames = 19;
+    Settings.OverclockMode = 3;
+    Settings.SoundSync = FALSE;
+    */
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 #ifdef NETPLAY_SUPPORT
