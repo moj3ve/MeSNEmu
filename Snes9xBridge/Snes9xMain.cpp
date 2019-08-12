@@ -14,9 +14,9 @@
 #pragma mark Defines
 
 #define MAX_PATH 255
-#define DIR_SEPERATOR    "/"
+#define DIR_SEPERATOR "/"
 
-#define    ASSIGN_BUTTONf(n, s)    S9xMapButton (n, cmd = S9xGetCommandT(s), false)
+#define ASSIGN_BUTTONf(n, s) S9xMapButton (n, cmd = S9xGetCommandT(s), false)
 
 #pragma mark - External Forward Declarations
 
@@ -294,14 +294,17 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.Transparency = true;
     Settings.AutoDisplayMessages = true;
     Settings.InitialInfoStringTimeout = 120;
-    Settings.HDMATimingHack = 300;
+    Settings.HDMATimingHack = 100;
     Settings.BlockInvalidVRAMAccessMaster = true;
     Settings.StopEmulation = true;
     Settings.WrongMovieStateProtection = true;
     Settings.DumpStreamsMaxFrames = -1;
     Settings.StretchScreenshots = 1;
     Settings.SnapshotScreenshots = true;
-    Settings.OpenGLEnable = true;
+    Settings.DontSaveOopsSnapshot = true;
+    #ifdef USE_OPENGL
+        Settings.OpenGLEnable = true;
+    #endif
     Settings.SuperFXClockMultiplier = 300;
     Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN;
     Settings.MaxSpriteTilesPerLine = 34;
@@ -315,8 +318,10 @@ extern "C" int SIStartWithROM(char* rom_filename)
     else {
         Settings.SkipFrames = SI_Frameskip;
     }
+    GFX.InfoString = NULL;
+    GFX.InfoStringTimeout = 0;
+    GFX.Pitch = 512 * 2;
     /*
-    Settings.DontSaveOopsSnapshot = TRUE;
     Settings.StopEmulation = TRUE;
     Settings.IsPatched = 0;
     Settings.ReverseStereo = TRUE;
