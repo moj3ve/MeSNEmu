@@ -97,7 +97,10 @@ typedef enum _SettingsSections
                                 handler:^(UIAlertAction * action) {
                                     _changed = YES;
                                     [[NSUserDefaults standardUserDefaults] setBool:sender.on forKey:kSettingsDarkMode];
-                                    [[NSThread mainThread] exit];
+                                    UIApplication *app = [UIApplication sharedApplication];
+                                    [app performSelector:@selector(suspend)];
+                                    [NSThread sleepForTimeInterval:2.0];
+                                    exit(0);
                                 }];
     
     [alert addAction:noButton];
