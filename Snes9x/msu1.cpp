@@ -9,7 +9,7 @@
 #include "display.h"
 #include "msu1.h"
 #include "apu/resampler.h"
-#include "apu/blargg_endian.h"
+#include "apu/bapu/dsp/blargg_endian.h"
 #include <fstream>
 #include <sys/stat.h>
 

@@ -294,7 +294,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.Transparency = true;
     Settings.AutoDisplayMessages = true;
     Settings.InitialInfoStringTimeout = 120;
-    Settings.HDMATimingHack = 100;
+    Settings.HDMATimingHack = 300;
     Settings.BlockInvalidVRAMAccessMaster = true;
     Settings.StopEmulation = true;
     Settings.WrongMovieStateProtection = true;
@@ -312,6 +312,12 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.OneSlowClockCycle = 8;
     Settings.TwoClockCycles = 12;
     Settings.DisplayFrameRate = SI_ShowFPS;
+    Settings.DynamicRateControl = true;
+    Settings.BilinearFilter = true;
+    Settings.SoundSync = false;
+    Settings.TurboSkipFrames = 19;
+    Settings.StopEmulation = true;
+    Settings.OverclockMode = 1;
     if(SI_AutoFrameskip) {
         Settings.SkipFrames = AUTO_FRAMERATE;
     }
@@ -321,16 +327,7 @@ extern "C" int SIStartWithROM(char* rom_filename)
     GFX.InfoString = NULL;
     GFX.InfoStringTimeout = 0;
     GFX.Pitch = 512 * 2;
-    /*
-    Settings.StopEmulation = TRUE;
-    Settings.IsPatched = 0;
-    Settings.ReverseStereo = TRUE;
-    Settings.DynamicRateControl = TRUE;
-    Settings.SeparateEchoBuffer = FALSE;
-    Settings.TurboSkipFrames = 19;
-    Settings.OverclockMode = 3;
-    Settings.SoundSync = FALSE;
-    */
+    
     Settings.CartAName[0] = 0;
     Settings.CartBName[0] = 0;
 #ifdef NETPLAY_SUPPORT
