@@ -457,12 +457,12 @@
 		26977B34230A38E2002EF591 /* dsp */ = {
 			isa = PBXGroup;
 			children = (
-				26977B35230A38E2002EF591 /* blargg_common.h */,
-				26977B36230A38E2002EF591 /* SPC_DSP.h */,
-				26977B37230A38E2002EF591 /* blargg_config.h */,
-				26977B38230A38E2002EF591 /* blargg_source.h */,
 				26977B39230A38E2002EF591 /* SPC_DSP.cpp */,
+				26977B36230A38E2002EF591 /* SPC_DSP.h */,
+				26977B35230A38E2002EF591 /* blargg_common.h */,
+				26977B37230A38E2002EF591 /* blargg_config.h */,
 				26977B3A230A38E2002EF591 /* blargg_endian.h */,
+				26977B38230A38E2002EF591 /* blargg_source.h */,
 			);
 			path = dsp;
 			sourceTree = "<group>";
