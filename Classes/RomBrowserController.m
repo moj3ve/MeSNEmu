@@ -341,8 +341,8 @@ static int const FileOrganizationVersionNumber = 1;
                             
                             BOOL(^isSameDay)(NSDate*,NSDate*) = ^BOOL(NSDate*date1,NSDate*date2){
                                 NSCalendar* calendar = [NSCalendar currentCalendar];
-                                NSDateComponents* c1 = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:date1];
-                                NSDateComponents* c2 = [calendar components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit) fromDate:date2];
+                                NSDateComponents* c1 = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date1];
+                                NSDateComponents* c2 = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:date2];
                                 return ([c1 year] == [c2 year] && [c1 month] == [c2 month] && [c1 day] == [c2 day]);
                             };
                             if(isSameDay([NSDate date],mdate) ||
