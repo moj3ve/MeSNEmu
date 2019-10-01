@@ -20,12 +20,7 @@
 
 #pragma mark - External Forward Declarations
 
-#define ZLIB
-#define UNZIP_SUPPORT
-#define JMA_SUPPORT
-#define USE_OPENGL
-#define RIGHTSHIFT_IS_SAR
-#define HAVE_STDINT_H
+// #define USE_OPENGL
 
 // client-implemented functions called up by the emulator
 extern "C" void SIFlipFramebufferClient(int width, int height);
@@ -276,35 +271,36 @@ extern "C" int SIStartWithROM(char* rom_filename)
     mode_t dir_mode = S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH;
     mkdir(SI_SRAMPath, dir_mode);
 
-    // memset(&Settings, 0, sizeof(Settings));
+    memset(&Settings, 0, sizeof(Settings));
     bzero(&Settings, sizeof(Settings));
     
     // General
-    Settings.MouseMaster = true;
-    Settings.SuperScopeMaster = true;
-    Settings.JustifierMaster = true;
+    Settings.MouseMaster = TRUE;
+    Settings.SuperScopeMaster = TRUE;
+    Settings.JustifierMaster = TRUE;
     Settings.MultiPlayer5Master = true;
     Settings.FrameTimePAL = 20000;
     Settings.FrameTimeNTSC = 16667;
-    Settings.SixteenBitSound = true;
-    Settings.Stereo = true;
-    Settings.SoundPlaybackRate = 32000;
-    Settings.SoundInputRate = 31950;
-    Settings.SupportHiRes = true;
-    Settings.Transparency = true;
-    Settings.AutoDisplayMessages = true;
+    Settings.SixteenBitSound = TRUE;
+    Settings.Stereo = TRUE;
+    Settings.SoundPlaybackRate = 32040;
+    Settings.SoundInputRate = 32040;
+    Settings.SupportHiRes = FALSE;
+    Settings.Transparency = TRUE;
+    Settings.AutoDisplayMessages = TRUE;
     Settings.InitialInfoStringTimeout = 120;
-    Settings.HDMATimingHack = 300;
-    Settings.BlockInvalidVRAMAccessMaster = true;
-    Settings.StopEmulation = true;
-    Settings.WrongMovieStateProtection = true;
+    Settings.HDMATimingHack = 100;
+    Settings.BlockInvalidVRAMAccessMaster = TRUE;
+    Settings.StopEmulation = TRUE;
+    Settings.WrongMovieStateProtection = TRUE;
     Settings.DumpStreamsMaxFrames = -1;
     Settings.StretchScreenshots = 1;
-    Settings.SnapshotScreenshots = true;
-    Settings.DontSaveOopsSnapshot = true;
-    #ifdef USE_OPENGL
-        Settings.OpenGLEnable = true;
-    #endif
+    Settings.SnapshotScreenshots = TRUE;
+    Settings.DontSaveOopsSnapshot = TRUE;
+    Settings.StopEmulation = TRUE;
+    /* #ifdef USE_OPENGL
+        Settings.OpenGLEnable = TRUE;
+    #endif */
     Settings.SuperFXClockMultiplier = 300;
     Settings.InterpolationMethod = DSP_INTERPOLATION_GAUSSIAN;
     Settings.MaxSpriteTilesPerLine = 34;
@@ -312,11 +308,12 @@ extern "C" int SIStartWithROM(char* rom_filename)
     Settings.OneSlowClockCycle = 8;
     Settings.TwoClockCycles = 12;
     Settings.DisplayFrameRate = SI_ShowFPS;
-    Settings.DynamicRateControl = true;
-    Settings.BilinearFilter = true;
-    Settings.SoundSync = false;
-    Settings.TurboSkipFrames = 19;
-    Settings.StopEmulation = true;
+    Settings.DynamicRateControl = TRUE;
+    Settings.BilinearFilter = TRUE;
+    Settings.SoundSync = FALSE;
+    Settings.TurboSkipFrames = 4;
+    Settings.AutoSaveDelay = 1;
+    Settings.StopEmulation = TRUE;
     Settings.OverclockMode = 1;
     if(SI_AutoFrameskip) {
         Settings.SkipFrames = AUTO_FRAMERATE;
